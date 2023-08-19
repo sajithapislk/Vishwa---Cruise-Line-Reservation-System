@@ -6,6 +6,7 @@ import project from "@/Assets/public/icon/project.png";
 import interstateTruck from "@/Assets/public/icon/interstate-truck.png";
 import commercialDevelopmentManagement from "@/Assets/public/icon/commercial-development-management.png";
 import cargoShip from "@/Assets/public/icon/cargo-ship--v1.png";
+import landingTop from "@/Assets/public/img/landing-top.jpeg";
 
 defineProps({
     canLogin: {
@@ -255,7 +256,7 @@ defineProps({
       min-height: calc(80vh - 5rem);
 }
 .hero--image {
-    background-image: url("https://images.unsplash.com/photo-1511578000813-99a40905e89f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
+    background-image: url("@/Assets/public/img/landing-top.jpeg");
 }
 
 .section--latest-news {
