@@ -268,11 +268,11 @@ defineProps({
 }
 
 .section--working__image {
-   background-image: url("https://images.unsplash.com/photo-1519756301029-33fef7098ba4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80");
+    background-image: url("@/Assets/public/img/work_with_us.jpeg");
 }
 
 .section--latest-news__image {
-    background-image: url("https://images.unsplash.com/photo-1530327501560-a27ccd4a4d43?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1310&q=80");
+    background-image: url("@/Assets/public/img/ship.jpeg");
 }
 
 .min-w-xl {
@@ -281,11 +281,7 @@ defineProps({
 
 .section--case-study {
     height: 500px;
-    background-image: url("https://images.unsplash.com/photo-1510681916233-314f497f3301?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
-}
-
-.section--latest-news__image-left {
-    background-image: url("https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80");
+    background-image: url("@/Assets/public/img/warehouse.jpeg");
 }
 
 @media (max-width: 640px) {
