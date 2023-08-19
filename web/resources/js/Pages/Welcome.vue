@@ -1,5 +1,11 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
+import registryEditor from "@/Assets/public/icon/registry-editor.png";
+import warehouse from "@/Assets/public/icon/warehouse-1.png";
+import project from "@/Assets/public/icon/project.png";
+import interstateTruck from "@/Assets/public/icon/interstate-truck.png";
+import commercialDevelopmentManagement from "@/Assets/public/icon/commercial-development-management.png";
+import cargoShip from "@/Assets/public/icon/cargo-ship--v1.png";
 
 defineProps({
     canLogin: {
@@ -91,34 +97,34 @@ defineProps({
                 <h2 class="mb-4 font-roboto font-semibold text-lg text-gray-700">OUR SERVICES</h2>
                 <div class="flex mb-4 flex-wrap shadow-2xl border-light-gray text-main-blue text-center">
                     <div class="w-1/2 lg:w-1/3 bg-white h-64 border-light-gray p-2 flex flex-col justify-center items-center scale-on-hover hover:shadow-md">
-                        <img src="https://img.icons8.com/ios-filled/75/2d3091/registry-editor.png">
+                        <img :src="registryEditor">
                         <h3 class="font-semibold mt-4 text-xl">DATA MONITORING</h3>
                        <a href="/"><p class="text-teal-400 hover:text-teal-500  font-semibold text-lg">See our solution</p></a>
                     </div>
                     <div class="w-1/2 lg:w-1/3 scale-on-hover hover:shadow-xl  bg-white h-64 border-light-gray p-2 flex flex-col justify-center items-center">
-                        <img src="https://img.icons8.com/ios-filled/75/2d3091/project.png">
+                        <img :src="project">
                         <h3 class="font-semibold mt-4 text-xl">PROJECT MANAGEMENT</h3>
                        <a href="/"><p class="text-teal-400 hover:text-teal-500  font-semibold text-lg">See our solution</p></a>
                     </div>
                     <div class="w-1/2 lg:w-1/3 scale-on-hover hover:shadow-xl  bg-white h-64 border-light-gray p-2 flex flex-col justify-center items-center">
-                        <img src="https://img.icons8.com/ios-filled/75/2d3091/warehouse-1.png">
+                        <img :src="warehouse">
                         <h3 class="font-semibold mt-4 text-xl">WAREHOUSING</h3>
                        <a href="/"><p class="text-teal-400 hover:text-teal-500  font-semibold text-lg">See our solution</p></a>
                     </div>
                     <div class="w-1/2 lg:w-1/3 scale-on-hover hover:shadow-xl  bg-main-blue h-64 border-light-gray p-2 flex flex-col justify-center items-center">
-                        <img src="https://img.icons8.com/ios-filled/75/ffffff/cargo-ship--v1.png">
+                        <img :src="cargoShip">
                         <h3 class="text-white font-semibold mt-4 text-xl">SHIPPING</h3>
                        <a href="/"><p class="text-teal-400 font-semibold text-lg hover:text-teal-500">See our solution</p></a>
                     </div>
                     <div class="w-1/2 lg:w-1/3 scale-on-hover hover:shadow-xl  bg-white h-64 border-light-gray p-2 flex flex-col justify-center items-center">
-                        <img src="https://img.icons8.com/ios-filled/75/2d3091/interstate-truck.png">
+                        <img :src="interstateTruck">
                         <h3 class="font-semibold mt-4 text-xl">LOGISTICS</h3>
                     <a href="/">
                         <p class="text-teal-400 hoer:text-teal-500 font-semibold text-lg">See our solution</p>
                     </a>
                     </div>
                     <div class="w-1/2 lg:w-1/3 scale-on-hover hover:shadow-xl  bg-white h-64 border-light-gray p-2 flex flex-col justify-center items-center">
-                        <img src="https://img.icons8.com/ios-filled/75/2d3091/commercial-development-management.png">
+                        <img :src="commercialDevelopmentManagement">
                         <h3 class="font-semibold mt-4 text-xl">PERSONNEL MANAGEMENT</h3>
                        <a href="/"><p class="text-teal-400 hover:text-teal-500  font-semibold text-lg">See our solution</p></a>
                     </div>
