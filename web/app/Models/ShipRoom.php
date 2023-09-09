@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class ShipRoom extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        's_id',
+        'room_view',
+        'img',
+        'flow',
+        'room_no',
+    ];
 }

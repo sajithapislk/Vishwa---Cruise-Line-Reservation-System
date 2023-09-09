@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class AvailableRoom extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'ud_id',
+        'is_booked',
+    ];
 }

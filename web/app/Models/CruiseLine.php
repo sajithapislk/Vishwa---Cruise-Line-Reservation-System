@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class CruiseLine extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'description',
+        'img',
+    ];
 }

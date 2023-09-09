@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class CruiseLinePayment extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'method',
+        'ref',
+        'amount',
+        'img',
+    ];
 }
