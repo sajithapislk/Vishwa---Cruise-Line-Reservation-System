@@ -25,6 +25,16 @@ Route::get('/', function () {
     ]);
 });
 
+
+Route::get('/admin', function () {
+    return Inertia::render('Admin/Dashboard', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

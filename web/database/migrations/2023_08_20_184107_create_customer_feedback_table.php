@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('cd_id');
             $table->unsignedBigInteger('user_id');
-            $table->string('method');
             $table->integer('rate');
             $table->timestamps();
             $table->foreign('cd_id')->references('id')->on('cruise_deals');

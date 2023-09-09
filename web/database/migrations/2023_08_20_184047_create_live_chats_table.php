@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('msg');
             $table->boolean('is_read')->default(false);
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('cs_id')->references('id')->on('customer_supporters');
         });
     }
 
