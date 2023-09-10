@@ -12,5 +12,6 @@ class CruiseLine extends Model
         'name',
         'description',
         'img',
+        'tp'
     ];
 }
