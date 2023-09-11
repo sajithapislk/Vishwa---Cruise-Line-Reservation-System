@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\CruiseLineController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ShipController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -25,16 +27,6 @@ Route::get('/', function () {
     ]);
 });
 
-
-Route::get('/admin', function () {
-    return Inertia::render('Admin/Dashboard', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -46,3 +38,14 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth/user.php';
+
+
+Route::controller(CruiseLineController::class)->group(function () {
+    Route::get('/cruise-lines','index')->name('cruise-lines.index');
+    Route::get('/cruise-lines/{cruiseLine}','show')->name('cruise-lines.show');
+});
+
+Route::controller(ShipController::class)->group(function () {
+    Route::get('/ship','index')->name('cruise-lines.index');
+    Route::get('/ship/{ship}','show')->name('cruise-lines.show');
+});

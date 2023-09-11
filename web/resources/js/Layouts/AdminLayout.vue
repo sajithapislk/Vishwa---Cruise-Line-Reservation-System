@@ -1,5 +1,16 @@
 <script setup>
 import { ref, onMounted } from "vue";
+
+const open = ref(true);
+const mobileMenuOpen = ref(false);
+
+const toggleSidebar = () => {
+  mobileMenuOpen.value = !mobileMenuOpen.value;
+};
+
+onMounted(() => {
+    // Additional logic to run after the component is mounted
+});
 </script>
 
 <template>
@@ -7,14 +18,10 @@ import { ref, onMounted } from "vue";
         <!-- sidebar -->
         <div
             class="sidebar max-h-screen top-0 h-screen bg-gray-800 text-blue-100 w-64 fixed inset-y-0 left-0 transform transition duration-200 ease-in-out z-50"
-            x-data="{ open: true }"
-            x-on:togglesidebar.window=" open = !open"
-            x-show="true"
-            :class="
-                open === true
-                    ? 'md:translate-x-0 md:sticky '
-                    : '-translate-x-full'
-            "
+            :class="{
+                'md:translate-x-0 md:sticky': open,
+                '-translate-x-full': !open,
+            }"
         >
             <header
                 class="h-[64px] py-2 shadow-lg px-4 md:sticky top-0 bg-gray-800 z-40"
@@ -48,10 +55,7 @@ import { ref, onMounted } from "vue";
             </header>
 
             <!-- nav -->
-            <nav
-                class="px-4 pt-4 scroller overflow-y-scroll max-h-[calc(100vh-64px)]"
-                x-data="{selected:'Tasks'}"
-            >
+            <nav class="px-4 pt-4 scroller overflow-y-scroll max-h-[calc(100vh-64px)]">
                 <ul class="flex flex-col space-y-2">
                     <!-- ITEM -->
                     <li class="text-sm text-gray-500">
@@ -421,20 +425,19 @@ import { ref, onMounted } from "vue";
             <!-- Top navbar -->
             <nav
                 class="bg-gray-800 shadow-xl sticky w-full top-0 text-black z-50"
-                x-data="{ mobilemenue: false }"
             >
                 <div class="mx-auto">
                     <div class="flex items-stretch justify-between h-16">
                         <div class="flex items-center md:hidden">
-                            <div class="-mr-2 flex" x-data>
+                            <div class="-mr-2 flex">
                                 <!-- Mobile menu button -->
                                 <button
-                                    type="button"
-                                    @click="$dispatch('togglesidebar')"
-                                    class="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                                    aria-controls="mobile-menu"
-                                    aria-expanded="false"
-                                >
+    type="button"
+    @click="toggleSidebar"
+    class="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+    aria-controls="mobile-menu"
+    :aria-expanded="mobileMenuOpen ? 'true' : 'false'"
+  >
                                     <span class="sr-only">Open main menu</span>
 
                                     <svg
@@ -590,9 +593,9 @@ import { ref, onMounted } from "vue";
 
                                 <!-- Profile dropdown -->
                                 <div
-                                    class="relative bg-gray-700 px-4 text-gray-400 hover:text-white text-sm cursor-pointer"
-                                    x-data="{open: false}"
-                                >
+                                class="relative bg-gray-700 px-4 text-gray-400 hover:text-white text-sm cursor-pointer"
+                                @click="open = !open"
+                              >
                                     <div
                                         class="flex items-center min-h-full"
                                         @click="open = !open"
@@ -620,19 +623,16 @@ import { ref, onMounted } from "vue";
                                     </div>
 
                                     <div
-                                        x-show="open"
-                                        @click.away="open = false"
-                                        class="origin-top-right absolute right-0 mt-0 min-w-full rounded-b-md shadow py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                                        x-transition:enter="transition ease-out duration-100"
-                                        x-transition:enter-start="transform opacity-0 scale-95"
-                                        x-transition:enter-end="transform opacity-100 scale-100"
-                                        x-transition:leave="transition ease-in duration-75"
-                                        x-transition:leave-start="transform opacity-100 scale-100"
-                                        x-transition:leave-end="transform opacity-0 scale-95"
-                                        role="menu"
-                                        aria-orientation="vertical"
-                                        aria-labelledby="user-menu-button"
-                                        tabindex="-1"
+                                        class="md:hidden absolute bg-gray-800 w-full"
+                                        id="mobile-menu"
+                                        :class="{
+                                            hidden: !mobileMenuOpen,
+                                            'transition ease-out duration-100 transform opacity-0 scale-95':
+                                                mobileMenuOpen,
+                                            'transition ease-in duration-75 transform opacity-100 scale-100':
+                                                !mobileMenuOpen,
+                                        }"
+                                        @click.away="mobileMenuOpen = false"
                                     >
                                         <a
                                             href="#"
@@ -715,14 +715,14 @@ import { ref, onMounted } from "vue";
                 <div
                     class="md:hidden absolute bg-gray-800 w-full"
                     id="mobile-menu"
-                    x-show="mobilemenue"
-                    x-transition:enter="transition ease-out duration-100"
-                    x-transition:enter-start="transform opacity-0 scale-95"
-                    x-transition:enter-end="transform opacity-100 scale-100"
-                    x-transition:leave="transition ease-in duration-75"
-                    x-transition:leave-start="transform opacity-100 scale-100"
-                    x-transition:leave-end="transform opacity-0 scale-95"
-                    @click.away="mobilemenue = false"
+                    :class="{
+                        hidden: !mobileMenuOpen,
+                        'transition ease-out duration-100 transform opacity-0 scale-95':
+                            mobileMenuOpen,
+                        'transition ease-in duration-75 transform opacity-100 scale-100':
+                            !mobileMenuOpen,
+                    }"
+                    @click.away="mobileMenuOpen = false"
                 >
                     <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                         <a
@@ -815,7 +815,9 @@ import { ref, onMounted } from "vue";
                 </div>
                 <div>
                     <!-- -->
-                    <div class="bg-gray-100 min-h-screen"></div>
+                    <div class="bg-gray-100 min-h-screen">
+                        <slot />
+                    </div>
                     <div class="bg-gray-100 min-h-screen"></div>
                 </div>
             </main>

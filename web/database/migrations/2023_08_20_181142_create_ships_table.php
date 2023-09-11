@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('type_id');
             $table->string('name');
             $table->string('img');
-            $table->integer('launch_at');
+            $table->dateTime('launch_at');
             $table->integer('gt');
             $table->double('length');
             $table->double('width');

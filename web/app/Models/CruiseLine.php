@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CruiseLine extends Model
 {
@@ -14,4 +15,9 @@ class CruiseLine extends Model
         'img',
         'tp'
     ];
+
+    public function ships(): HasMany
+    {
+        return $this->hasMany(Ship::class,'cl_id','id');
+    }
 }
