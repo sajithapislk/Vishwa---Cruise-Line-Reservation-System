@@ -40,6 +40,18 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+        'cruiseline_agent' => [
+            'driver' => 'session',
+            'provider' => 'cruiseline_agents',
+        ],
+        'customer_supporter' => [
+            'driver' => 'session',
+            'provider' => 'customer_supporters',
+        ],
     ],
 
     /*
@@ -63,6 +75,18 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
+        'cruiseline_agents' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\CruiseAgent::class,
+        ],
+        'customer_supporters' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\CustomerSupporter::class,
         ],
 
         // 'users' => [
@@ -93,6 +117,24 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'cruiseline_agent' => [
+            'provider' => 'cruiseline_agents',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'customer_supporter' => [
+            'provider' => 'customer_supporters',
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,

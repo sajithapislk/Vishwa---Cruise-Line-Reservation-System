@@ -20,7 +20,7 @@ class AuthController extends Controller
     public function create(): Response
     {
         return Inertia::render('Auth/Login', [
-            'canResetPassword' => Route::has('password.request'),
+            'canResetPassword' => Route::has('customer_supporter.password.request'),
             'status' => session('status'),
         ]);
     }
@@ -42,7 +42,7 @@ class AuthController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        Auth::guard('web')->logout();
+        Auth::guard('customer_supporter')->logout();
 
         $request->session()->invalidate();
 

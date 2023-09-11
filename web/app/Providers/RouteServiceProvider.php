@@ -18,6 +18,9 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/dashboard';
+    public const ADMIN_HOME = '/admin/dashboard';
+    public const CRUISELINE_AGENT_HOME = '/cruiseline-agent/dashboard';
+    public const CUSTOMER_SUPPORTER_HOME = '/customer-supporter/dashboard';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
@@ -36,18 +39,15 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web/web.php'));
 
-            Route::middleware('admin')
-                ->prefix('admin')
+            Route::prefix('admin')
                 ->name('admin.')
                 ->group(base_path('routes/web/admin.php'));
 
-            Route::middleware('cruiseline-agent')
-                ->prefix('cruiseline-agent')
+            Route::prefix('cruiseline-agent')
                 ->name('cruiseline-agent.')
                 ->group(base_path('routes/web/cruiseline-agent.php'));
 
-            Route::middleware('customer-supporter')
-                ->prefix('customer-supporter')
+            Route::prefix('customer-supporter')
                 ->name('customer-supporter.')
                 ->group(base_path('routes/web/customer-supporter.php'));
         });
