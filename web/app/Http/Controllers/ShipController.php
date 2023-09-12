@@ -14,7 +14,7 @@ class ShipController extends Controller
     public function index()
     {
         $ships = Ship::all();
-        return Inertia::render('Public/Ships', compact('ships'));
+        return Inertia::render('Public/Ship/Index', compact('ships'));
     }
 
 
@@ -24,6 +24,6 @@ class ShipController extends Controller
     public function show(Ship $ship)
     {
         $ship=$ship->with('packages')->first();
-        return Inertia::render('Public/Ship/Index', compact('ship'));
+        return Inertia::render('Public/Ship/View', compact('ship'));
     }
 }

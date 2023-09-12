@@ -6,14 +6,8 @@ import check_white from "@/assets/svg/check-white.svg";
 import arrow_right from "@/assets/svg/arrow-right.svg";
 
 defineProps({
-    ship: Array,
+    ships: Object,
 });
-const onSwiper = (swiper) => {
-    console.log(swiper);
-};
-const onSlideChange = () => {
-    console.log("slide change");
-};
 </script>
 <template>
     <div>
@@ -21,7 +15,7 @@ const onSlideChange = () => {
             <section class="relative block" style="height: 500px">
                 <div class="absolute top-0 w-full h-full">
                     <img
-                    src="./img/Carnival-Freedom-Cruise-Ship.jpg"
+                        src="./img/Carnival-Freedom-Cruise-Ship.jpg"
                         alt="Background Image"
                         class="w-full h-full object-cover"
                     />
@@ -50,135 +44,396 @@ const onSlideChange = () => {
                     </svg>
                 </div>
             </section>
-            <section class="relative py-16 bg-gray-300">
+            <section class="relative bg-gray-300">
                 <div class="container mx-auto px-4 max-w-screen-xl">
                     <div
-                        class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64"
+                        class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 pb-5"
+                        style="cursor: auto"
+                        v-for="row in ships"
                     >
-                        <div class="px-6">
-                            <div class="text-center mt-12">
-                                <h3
-                                    class="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2"
-                                >
-                                    {{ ship.name }}
-                                </h3>
-                            </div>
+                        <div class="max-w-lg mx-auto overflow-hidden rounded-lg shadow-lg lg:max-w-none">
                             <div
-                                class="mt-10 py-10 border-t border-gray-300 text-center"
+                                class="lg:flex"
                             >
-                                <div class="flex flex-wrap justify-center">
-                                    <div class="w-full lg:w-9/12 px-4">
-                                        <p
-                                            class="mb-4 text-lg leading-relaxed text-gray-800"
+                                <div
+                                    class="flex-1 px-6 py-8 bg-white lg:p-12"
+                                    style="cursor: auto"
+                                >
+                                    <h3
+                                        class="text-2xl font-extrabold text-gray-900 sm:text-3xl"
+                                        style="cursor: auto"
+                                    >
+                                        {{ row.name }}
+                                    </h3>
+                                    <div class="mt-8">
+                                        <div class="flex items-center">
+                                            <h4
+                                                class="flex-shrink-0 pr-4 text-sm font-semibold tracking-wider text-indigo-600 uppercase bg-white"
+                                            >
+                                                Specifications
+                                            </h4>
+                                            <div
+                                                class="flex-1 border-t-2 border-gray-200"
+                                            ></div>
+                                        </div>
+                                        <ul
+                                            class="mt-8 space-y-5 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:gap-y-5"
                                         >
-                                            An artist of considerable range,
-                                            Jenna the name taken by
-                                            Melbourne-raised, Brooklyn-based
-                                            Nick Murphy writes, performs and
-                                            records all of his own music, giving
-                                            it a warm, intimate feel with a
-                                            solid groove structure. An artist of
-                                            considerable range.
-                                        </p>
+                                            <li
+                                                class="flex items-start lg:col-span-1"
+                                            >
+                                                <div class="flex-shrink-0">
+                                                    <svg
+                                                        class="w-5 h-5 text-green-400"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 20 20"
+                                                        fill="currentColor"
+                                                        aria-hidden="true"
+                                                    >
+                                                        <path
+                                                            fill-rule="evenodd"
+                                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                            clip-rule="evenodd"
+                                                        ></path>
+                                                    </svg>
+                                                </div>
+                                                <p
+                                                    class="ml-3 text-sm text-gray-700"
+                                                >
+                                                    Size:{{ row.size }}
+                                                </p>
+                                            </li>
+                                            <li
+                                                class="flex items-start lg:col-span-1"
+                                            >
+                                                <div class="flex-shrink-0">
+                                                    <svg
+                                                        class="w-5 h-5 text-green-400"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 20 20"
+                                                        fill="currentColor"
+                                                        aria-hidden="true"
+                                                    >
+                                                        <path
+                                                            fill-rule="evenodd"
+                                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                            clip-rule="evenodd"
+                                                        ></path>
+                                                    </svg>
+                                                </div>
+                                                <p
+                                                    class="ml-3 text-sm text-gray-700"
+                                                >
+                                                    Style:{{ row.style }}
+                                                </p>
+                                            </li>
+                                            <li
+                                                class="flex items-start lg:col-span-1"
+                                            >
+                                                <div class="flex-shrink-0">
+                                                    <svg
+                                                        class="w-5 h-5 text-green-400"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 20 20"
+                                                        fill="currentColor"
+                                                        aria-hidden="true"
+                                                    >
+                                                        <path
+                                                            fill-rule="evenodd"
+                                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                            clip-rule="evenodd"
+                                                        ></path>
+                                                    </svg>
+                                                </div>
+                                                <p
+                                                    class="ml-3 text-sm text-gray-700"
+                                                >
+                                                    Type:{{ row.type }}
+                                                </p>
+                                            </li>
+                                            <li
+                                                class="flex items-start lg:col-span-1"
+                                            >
+                                                <div class="flex-shrink-0">
+                                                    <svg
+                                                        class="w-5 h-5 text-green-400"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 20 20"
+                                                        fill="currentColor"
+                                                        aria-hidden="true"
+                                                    >
+                                                        <path
+                                                            fill-rule="evenodd"
+                                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                            clip-rule="evenodd"
+                                                        ></path>
+                                                    </svg>
+                                                </div>
+                                                <p
+                                                    class="ml-3 text-sm text-gray-700"
+                                                >
+                                                    Year of launch:{{row.launch_at}}
+                                                </p>
+                                            </li>
+                                            <li
+                                                class="flex items-start lg:col-span-1"
+                                            >
+                                                <div class="flex-shrink-0">
+                                                    <svg
+                                                        class="w-5 h-5 text-green-400"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 20 20"
+                                                        fill="currentColor"
+                                                        aria-hidden="true"
+                                                    >
+                                                        <path
+                                                            fill-rule="evenodd"
+                                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                            clip-rule="evenodd"
+                                                        ></path>
+                                                    </svg>
+                                                </div>
+                                                <p
+                                                    class="ml-3 text-sm text-gray-700"
+                                                >
+                                                    Year of last refit:2015
+                                                </p>
+                                            </li>
+                                            <li
+                                                class="flex items-start lg:col-span-1"
+                                            >
+                                                <div class="flex-shrink-0">
+                                                    <svg
+                                                        class="w-5 h-5 text-green-400"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 20 20"
+                                                        fill="currentColor"
+                                                        aria-hidden="true"
+                                                    >
+                                                        <path
+                                                            fill-rule="evenodd"
+                                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                            clip-rule="evenodd"
+                                                        ></path>
+                                                    </svg>
+                                                </div>
+                                                <p
+                                                    class="ml-3 text-sm text-gray-700"
+                                                >
+                                                    Gross tonnage:{{row.gt}}
+                                                </p>
+                                            </li>
+                                            <li
+                                                class="flex items-start lg:col-span-1"
+                                            >
+                                                <div class="flex-shrink-0">
+                                                    <svg
+                                                        class="w-5 h-5 text-green-400"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 20 20"
+                                                        fill="currentColor"
+                                                        aria-hidden="true"
+                                                    >
+                                                        <path
+                                                            fill-rule="evenodd"
+                                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                            clip-rule="evenodd"
+                                                        ></path>
+                                                    </svg>
+                                                </div>
+                                                <p
+                                                    class="ml-3 text-sm text-gray-700"
+                                                >
+                                                    Length:{{row.length}}m
+                                                </p>
+                                            </li>
+                                            <li
+                                                class="flex items-start lg:col-span-1"
+                                            >
+                                                <div class="flex-shrink-0">
+                                                    <svg
+                                                        class="w-5 h-5 text-green-400"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 20 20"
+                                                        fill="currentColor"
+                                                        aria-hidden="true"
+                                                    >
+                                                        <path
+                                                            fill-rule="evenodd"
+                                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                            clip-rule="evenodd"
+                                                        ></path>
+                                                    </svg>
+                                                </div>
+                                                <p
+                                                    class="ml-3 text-sm text-gray-700"
+                                                >
+                                                    Width:{{row.width}}m
+                                                </p>
+                                            </li>
+                                            <li
+                                                class="flex items-start lg:col-span-1"
+                                            >
+                                                <div class="flex-shrink-0">
+                                                    <svg
+                                                        class="w-5 h-5 text-green-400"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 20 20"
+                                                        fill="currentColor"
+                                                        aria-hidden="true"
+                                                    >
+                                                        <path
+                                                            fill-rule="evenodd"
+                                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                            clip-rule="evenodd"
+                                                        ></path>
+                                                    </svg>
+                                                </div>
+                                                <p
+                                                    class="ml-3 text-sm text-gray-700"
+                                                >
+                                                    Speed:{{row.speed}}kts
+                                                </p>
+                                            </li>
+                                            <li
+                                                class="flex items-start lg:col-span-1"
+                                            >
+                                                <div class="flex-shrink-0">
+                                                    <svg
+                                                        class="w-5 h-5 text-green-400"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 20 20"
+                                                        fill="currentColor"
+                                                        aria-hidden="true"
+                                                    >
+                                                        <path
+                                                            fill-rule="evenodd"
+                                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                            clip-rule="evenodd"
+                                                        ></path>
+                                                    </svg>
+                                                </div>
+                                                <p
+                                                    class="ml-3 text-sm text-gray-700"
+                                                >
+                                                    Decks:{{row.decks}}
+                                                </p>
+                                            </li>
+                                            <li
+                                                class="flex items-start lg:col-span-1"
+                                            >
+                                                <div class="flex-shrink-0">
+                                                    <svg
+                                                        class="w-5 h-5 text-green-400"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 20 20"
+                                                        fill="currentColor"
+                                                        aria-hidden="true"
+                                                    >
+                                                        <path
+                                                            fill-rule="evenodd"
+                                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                            clip-rule="evenodd"
+                                                        ></path>
+                                                    </svg>
+                                                </div>
+                                                <p
+                                                    class="ml-3 text-sm text-gray-700"
+                                                >
+                                                    No. of passengers:{{row.nop}}
+                                                </p>
+                                            </li>
+                                            <li
+                                                class="flex items-start lg:col-span-1"
+                                            >
+                                                <div class="flex-shrink-0">
+                                                    <svg
+                                                        class="w-5 h-5 text-green-400"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 20 20"
+                                                        fill="currentColor"
+                                                        aria-hidden="true"
+                                                    >
+                                                        <path
+                                                            fill-rule="evenodd"
+                                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                            clip-rule="evenodd"
+                                                        ></path>
+                                                    </svg>
+                                                </div>
+                                                <p
+                                                    class="ml-3 text-sm text-gray-700"
+                                                >
+                                                    No. of crew:{{row.no_crew}}
+                                                </p>
+                                            </li>
+                                            <li
+                                                class="flex items-start lg:col-span-1"
+                                            >
+                                                <div class="flex-shrink-0">
+                                                    <svg
+                                                        class="w-5 h-5 text-green-400"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 20 20"
+                                                        fill="currentColor"
+                                                        aria-hidden="true"
+                                                    >
+                                                        <path
+                                                            fill-rule="evenodd"
+                                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                            clip-rule="evenodd"
+                                                        ></path>
+                                                    </svg>
+                                                </div>
+                                                <p
+                                                    class="ml-3 text-sm text-gray-700"
+                                                >
+                                                    No. of cabins:{{row.no_cabins}}
+                                                </p>
+                                            </li>
+                                            <li
+                                                class="flex items-start lg:col-span-1"
+                                            >
+                                                <div class="flex-shrink-0">
+                                                    <svg
+                                                        class="w-5 h-5 text-green-400"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 20 20"
+                                                        fill="currentColor"
+                                                        aria-hidden="true"
+                                                    >
+                                                        <path
+                                                            fill-rule="evenodd"
+                                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                            clip-rule="evenodd"
+                                                        ></path>
+                                                    </svg>
+                                                </div>
+                                                <p
+                                                    class="ml-3 text-sm text-gray-700"
+                                                >
+                                                    wheelchair access:{{row.wa}}
+                                                </p>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="mt-10 py-10 border-t border-gray-300">
-                                <Swiper
-                                    :slides-per-view="3"
-                                    :space-between="50"
-                                    @swiper="onSwiper"
-                                    @slideChange="onSlideChange"
+                                <div
+                                    class="px-6 py-8 text-center bg-gray-50 lg:flex-shrink-0 lg:flex lg:flex-col lg:justify-center lg:p-12"
+                                    style="cursor: auto"
                                 >
-                                    <SwiperSlide
-                                        v-for="row in ship.packages"
-                                        :key="row.id"
-                                    >
-                                        <div
-                                            class="w-full flex-1 p-8 order-1 shadow-xl rounded-3xl bg-gray-900 text-gray-400 sm:w-96 lg:w-full lg:order-2 lg:mt-0"
-                                        >
-                                            <div
-                                                class="mb-8 pb-8 flex items-center border-b border-gray-600"
-                                            >
-                                                <div class="ml-5">
-                                                    <span
-                                                        class="block text-xl font-semibold text-white"
-                                                        >Startup</span
-                                                    >
-                                                </div>
-                                            </div>
-                                            <ul
-                                                class="mb-10 font-medium text-lg"
-                                            >
-                                                <li class="flex mb-6" v-if="row.is_d">
-                                                    <img :src="check_white" />
-                                                    <span class="ml-3"
-                                                        >Dining
-                                                    </span>
-                                                </li>
-                                                <li class="flex mb-6" v-if="row.is_bl">
-                                                    <img :src="check_white" />
-                                                    <span class="ml-3"
-                                                        >Bars & Lounges
-                                                    </span>
-                                                </li>
-                                                <li class="flex" v-if="row.is_en">
-                                                    <img :src="check_white" />
-                                                    <span class="ml-3"
-                                                        >Entertainment &
-                                                        Nightlife</span
-                                                    >
-                                                </li>
-                                                <li class="flex" v-if="row.is_c">
-                                                    <img :src="check_white" />
-                                                    <span class="ml-3"
-                                                        >Casino</span
-                                                    >
-                                                </li>
-                                                <li class="flex" v-if="row.is_ona">
-                                                    <img :src="check_white" />
-                                                    <span class="ml-3"
-                                                        >Onboard Activities</span
-                                                    >
-                                                </li>
-                                                <li class="flex" v-if="row.is_ona">
-                                                    <img :src="check_white" />
-                                                    <span class="ml-3"
-                                                        >Outdoor Activities</span
-                                                    >
-                                                </li>
-                                                <li class="flex" v-if="row.is_kt">
-                                                    <img :src="check_white" />
-                                                    <span class="ml-3"
-                                                        >Kids & Teens</span
-                                                    >
-                                                </li>
-                                                <li class="flex" v-if="row.is_kt">
-                                                    <img :src="check_white" />
-                                                    <span class="ml-3"
-                                                        >Wellness</span
-                                                    >
-                                                </li>
-                                                <li class="flex" v-if="row.is_s">
-                                                    <img :src="check_white" />
-                                                    <span class="ml-3"
-                                                        >Shopping</span
-                                                    >
-                                                </li>
-                                            </ul>
-                                            <a
-                                                href="#/"
-                                                class="flex justify-center items-center bg-indigo-600 rounded-xl p-4 text-center text-white text-xl"
-                                            >
-                                                Choose Plan
-                                                <img
-                                                    :src="arrow_right"
-                                                    class="ml-2"
-                                                />
-                                            </a>
-                                        </div>
-                                    </SwiperSlide>
-                                </Swiper>
+                                    <img
+                                        alt="..."
+                                        src="./img/Carnival-Freedom-Cruise-Ship.jpg"
+                                        class="rounded-lg w-auto align-middle border-none"
+                                        style="max-height: 350px"
+                                    />
+                                </div>
+                            </div>
+                            <div class="border-t border-gray-300 px-6 py-8 bg-white lg:p-12">
+                                <p class=" text-base text-gray-500">
+                                    {{ row.description }}
+                                </p>
                             </div>
                         </div>
                     </div>

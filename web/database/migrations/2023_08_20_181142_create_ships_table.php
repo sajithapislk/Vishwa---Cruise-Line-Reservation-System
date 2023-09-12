@@ -16,8 +16,13 @@ return new class extends Migration
             $table->unsignedBigInteger('cl_id');
             $table->unsignedBigInteger('type_id');
             $table->string('name');
+            $table->text('description');
             $table->string('img');
-            $table->dateTime('launch_at');
+            $table->string('style',10);
+            $table->string('size',10);
+            $table->string('type',10);
+            $table->year('launch_at');
+            $table->year('last_refit_at');
             $table->integer('gt');
             $table->double('length');
             $table->double('width');
