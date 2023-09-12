@@ -3,19 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\CruiseLine;
+use App\Models\Ship;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class CruiseLineController extends Controller
+class ShipController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $list = CruiseLine::all();
-        return Inertia::render('Admin/CruiseLine',compact('list'));
+        $list = Ship::all();
+        return Inertia::render('Admin/Ship',compact('list'));
     }
 
     /**
@@ -31,17 +31,13 @@ class CruiseLineController extends Controller
      */
     public function store(Request $request)
     {
-        return CruiseLine::create([
-            'name'=>$request->name,
-            'tp'=>$request->tp,
-            'description'=>$request->description
-        ]);
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(CruiseLine $cruiseLine)
+    public function show(Ship $ship)
     {
         //
     }
@@ -49,7 +45,7 @@ class CruiseLineController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CruiseLine $cruiseLine)
+    public function edit(Ship $ship)
     {
         //
     }
@@ -57,21 +53,16 @@ class CruiseLineController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CruiseLine $cruiseLine)
+    public function update(Request $request, Ship $ship)
     {
-        return $cruiseLine->update([
-            'name'=>$request->name,
-            'tp'=>$request->tp,
-            'description'=>$request->description
-        ]);
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CruiseLine $cruiseLine)
+    public function destroy(Ship $ship)
     {
-        $cruiseLine->delete();
+        //
     }
 }
-
