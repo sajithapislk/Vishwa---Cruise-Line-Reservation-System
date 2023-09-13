@@ -1,7 +1,7 @@
 <template>
     <CruiseLineLayout>
       <template #header>
-          <div class="relative bg-pink-600 md:pt-32 pb-32 pt-12">
+          <div class="relative bg-green-600 md:pt-32 pb-32 pt-12">
               <div class="px-4 md:px-10 mx-auto w-full">
                 <div>
                   <!-- Card stats -->
@@ -77,7 +77,7 @@
                               </span>
                             </div>
                             <div class="relative w-auto pl-4 flex-initial">
-                              <div class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-pink-500">
+                              <div class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-green-500">
                                 <i class="fas fa-users"></i>
                               </div>
                             </div>

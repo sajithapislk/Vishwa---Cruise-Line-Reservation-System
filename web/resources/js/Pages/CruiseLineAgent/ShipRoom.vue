@@ -11,7 +11,7 @@ defineProps({
 <template>
     <CruiseLineLayout>
         <template #header>
-            <div class="relative bg-blue-800 md:pt-32 pb-32 pt-12">
+            <div class="relative bg-green-800 md:pt-32 pb-32 pt-12">
                 <div class="px-4 md:px-10 mx-auto w-full">
                     <div>
                     </div>
@@ -38,7 +38,7 @@ defineProps({
                             class="relative w-full px-4 max-w-full flex-grow flex-1 text-right"
                         >
                             <button
-                                class="bg-blue-500 text-white active:bg-blue-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1"
+                                class="bg-green-500 text-white active:bg-green-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1"
                                 type="button"
                                 style="transition: all 0.15s ease"
                             >

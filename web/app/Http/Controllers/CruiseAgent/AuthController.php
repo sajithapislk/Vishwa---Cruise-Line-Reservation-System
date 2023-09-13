@@ -20,7 +20,7 @@ class AuthController extends Controller
      */
     public function create(): Response
     {
-        return Inertia::render('CruiseLine/Login', [
+        return Inertia::render('CruiseLineAgent/Login', [
             'canResetPassword' => Route::has('cruiseline_agent.password.request'),
             'status' => session('status'),
         ]);
