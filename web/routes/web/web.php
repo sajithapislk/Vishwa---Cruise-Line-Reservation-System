@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\NewMessage;
 use App\Http\Controllers\CruiseLineController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShipController;
@@ -27,6 +28,9 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/a', function () {
+    event(new NewMessage('abc'));
+});
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
