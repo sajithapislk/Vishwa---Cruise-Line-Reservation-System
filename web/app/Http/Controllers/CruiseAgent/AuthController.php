@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CruiseAgent;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\CruiseLineLoginRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
@@ -19,7 +20,7 @@ class AuthController extends Controller
      */
     public function create(): Response
     {
-        return Inertia::render('Auth/Login', [
+        return Inertia::render('CruiseLine/Login', [
             'canResetPassword' => Route::has('cruiseline_agent.password.request'),
             'status' => session('status'),
         ]);
@@ -28,13 +29,13 @@ class AuthController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(CruiseLineLoginRequest $request): RedirectResponse
     {
         $request->authenticate('cruiseline_agent');
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect()->intended(RouteServiceProvider::CRUISELINE_AGENT_HOME);
     }
 
     /**
