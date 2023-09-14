@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('room_view');
             $table->string('img');
             $table->integer('flow');
-            $table->integer('room_no');
+            $table->integer('room_count');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('s_id')->references('id')->on('ships');

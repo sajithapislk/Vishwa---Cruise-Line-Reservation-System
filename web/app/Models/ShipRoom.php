@@ -13,6 +13,6 @@ class ShipRoom extends Model
         'room_view',
         'img',
         'flow',
-        'room_no',
+        'room_count',
     ];
 }

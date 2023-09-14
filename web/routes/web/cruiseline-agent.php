@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\CruiseAgent\PackageController;
+use App\Http\Controllers\CruiseLineAgent\PackageController;
+use App\Http\Controllers\CruiseLineAgent\ShipRoomController;
+use App\Http\Controllers\CruiseLineAgent\UpcomingDealController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -15,6 +17,10 @@ Route::middleware('auth:cruiseline_agent')->group(function () {
     })->name('dashboard');
 
     Route::resources([
-        'package' => PackageController::class
+        'package' => PackageController::class,
+        'upcoming-deal' => UpcomingDealController::class,
+        'ship-room' => ShipRoomController::class
     ]);
+
+    Route::get('/select-ship/{ship}',[ShipRoomController::class,'select_ship'])->name('ship-room.select-ship');
 });

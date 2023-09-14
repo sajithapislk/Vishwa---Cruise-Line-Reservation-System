@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CruiseAgent\AuthController;
+use App\Http\Controllers\CruiseLineAgent\AuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest:cruiseline_agent')->group(function () {

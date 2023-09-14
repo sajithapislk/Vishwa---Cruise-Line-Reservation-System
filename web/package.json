@@ -21,7 +21,6 @@
         "@ckeditor/ckeditor5-build-classic": "^39.0.2",
         "@ckeditor/ckeditor5-vue": "^5.1.0",
         "@popperjs/core": "^2.11.8",
-        "@vueup/vue-quill": "^1.2.0",
         "chart.js": "^4.4.0",
         "laravel-echo": "^1.15.3",
         "pusher-js": "^8.3.0",

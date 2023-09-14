@@ -1,10 +1,31 @@
 <script setup>
 import { ref } from "vue";
+import { useForm } from "@inertiajs/vue3";
 import CruiseLineLayout from "@/Layouts/CruiseLineLayout.vue";
 const date = new Date().getFullYear();
+import Modal from "@/Components/Modal.vue";
+import CheckBoxColor from "@/Components/CheckBoxColor.vue";
 
 defineProps({
     list: Array,
+    ships: Array,
+});
+
+const insertModal = ref(false);
+
+const saveform = useForm({
+    id: null,
+    id: "",
+    s_id: "",
+    dp_id: "",
+    p_id: "",
+    name: "",
+    description: "",
+    img : null,
+    tax: "",
+    depart_at: "",
+    arrive_at : "",
+    created_at: "",
 });
 </script>
 
@@ -13,8 +34,7 @@ defineProps({
         <template #header>
             <div class="relative bg-green-800 md:pt-32 pb-32 pt-12">
                 <div class="px-4 md:px-10 mx-auto w-full">
-                    <div>
-                    </div>
+                    <div></div>
                 </div>
             </div>
         </template>
@@ -41,6 +61,7 @@ defineProps({
                                 class="bg-green-500 text-white active:bg-green-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1"
                                 type="button"
                                 style="transition: all 0.15s ease"
+
                             >
                                 Create
                             </button>
@@ -57,32 +78,57 @@ defineProps({
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                                 >
-                                    ID
+                                    id
                                 </th>
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                                 >
-                                    Name
+                                    s_id
                                 </th>
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                                 >
-                                    Description
+                                    dp_id
                                 </th>
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                                 >
-                                    Img
+                                    p_id
                                 </th>
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                                 >
-                                    TP
+                                    name
                                 </th>
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                                 >
-                                    Created At
+                                    description
+                                </th>
+                                <th
+                                    class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                                >
+                                    img
+                                </th>
+                                <th
+                                    class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                                >
+                                    tax
+                                </th>
+                                <th
+                                    class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                                >
+                                    depart_at
+                                </th>
+                                <th
+                                    class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                                >
+                                    arrive_at
+                                </th>
+                                <th
+                                    class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                                >
+                                    created_at
                                 </th>
                             </tr>
                         </thead>
@@ -91,32 +137,57 @@ defineProps({
                                 <th
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
                                 >
-                                    {{row.id}}
+                                    {{ row.id }}
                                 </th>
                                 <td
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                                 >
-                                {{row.name}}
+                                    {{ row.s_id }}
                                 </td>
                                 <td
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                                 >
-                                {{row.description}}
+                                    {{ row.dp_id }}
                                 </td>
                                 <td
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                                 >
-                                {{row.img}}
+                                    {{ row.p_id }}
                                 </td>
                                 <td
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                                 >
-                                {{row.tp}}
+                                    {{ row.name }}
                                 </td>
                                 <td
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                                 >
-                                {{row.created_at}}
+                                    {{ row.description }}
+                                </td>
+                                <td
+                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                                >
+                                    {{ row.img }}
+                                </td>
+                                <td
+                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                                >
+                                    {{ row.tax }}
+                                </td>
+                                <td
+                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                                >
+                                    {{ row.depart_at }}
+                                </td>
+                                <td
+                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                                >
+                                    {{ row.arrive_at }}
+                                </td>
+                                <td
+                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                                >
+                                    {{ row.created_at }}
                                 </td>
                             </tr>
                         </tbody>
@@ -126,4 +197,5 @@ defineProps({
         </div>
         <div class="w-full xl:w-4/12 px-4"></div>
     </CruiseLineLayout>
+
 </template>
