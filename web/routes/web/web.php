@@ -33,15 +33,10 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/a', function () {
-    event(new NewMessage('abc'));
-});
-
 Route::controller(CruiseLineController::class)->group(function () {
     Route::get('/cruise-lines','index')->name('cruise-lines.index');
     Route::get('/cruise-lines/{cruiseLine}','show')->name('cruise-lines.show');
 });
-
 Route::controller(ShipController::class)->group(function () {
     Route::get('/ship','index')->name('cruise-lines.index');
     Route::get('/ship/{ship}','show')->name('cruise-lines.show');
@@ -50,15 +45,14 @@ Route::controller(UpcomingDealController::class)->group(function () {
     Route::get('/upcoming-deal','index')->name('cruise-lines.index');
     Route::get('/upcoming-deal/{upcomingDeal}','show')->name('cruise-lines.show');
 });
-Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::post('process-transaction', [PayPalController::class, 'processTransaction'])->name('processTransaction');
+Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
+Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');
+
+Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-Route::get('create-transaction', [PayPalController::class, 'createTransaction'])->name('createTransaction');
-Route::post('process-transaction', [PayPalController::class, 'processTransaction'])->name('processTransaction');
-Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
-Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');
