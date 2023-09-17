@@ -3,6 +3,7 @@
 use App\Events\NewMessage;
 use App\Http\Controllers\User\CruiseLineController;
 use App\Http\Controllers\User\DashboardController;
+use App\Http\Controllers\User\PaypalController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\ShipController;
 use App\Http\Controllers\User\UpcomingDealController;
@@ -57,3 +58,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('create-transaction', [PayPalController::class, 'createTransaction'])->name('createTransaction');
+Route::post('process-transaction', [PayPalController::class, 'processTransaction'])->name('processTransaction');
+Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
+Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');

@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
-import { useForm } from "@inertiajs/vue3";
 import treasure_map from "@/assets/svg/treasure_map.svg";
+import { Head, Link, useForm } from "@inertiajs/vue3";
 
 import "swiper/css";
 defineProps({
@@ -19,6 +19,13 @@ const filterForm = useForm({
     arrive_at: "",
 });
 
+const submit = (id) => {
+    useForm({
+        id: id,
+    }).post(route("processTransaction"), {
+        onFinish: () => paymentForm.reset("password"),
+    });
+};
 const filter = () => {
     filterForm.delete(route("profile.destroy"), {
         preserveScroll: true,
@@ -454,7 +461,7 @@ const filter = () => {
                                         >
                                             <div class="flex-shrink-0">
                                                 <svg
-                                                width="23"
+                                                    width="23"
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
                                                     viewBox="0 0 48 48"
@@ -484,7 +491,12 @@ const filter = () => {
                                             <p
                                                 class="ml-3 text-sm text-gray-700"
                                             >
-                                            Departure Port : {{ row.departure_port.name }} Arrival Port. : {{ row.arrival_port.name }}
+                                                Departure Port :
+                                                {{
+                                                    row.departure_port.name
+                                                }}
+                                                Arrival Port. :
+                                                {{ row.arrival_port.name }}
                                             </p>
                                         </div>
                                     </div>
@@ -528,15 +540,16 @@ const filter = () => {
                                             text-decoration-style: solid;
                                         "
                                     >
-                                    TAX : ${{row.tax}}
+                                        TAX : ${{ row.tax }}
                                     </p>
                                     <div
                                         class="flex items-center justify-center mt-4 text-5xl font-extrabold text-gray-900"
                                     >
-                                        <span>${{row.price}}</span>
+                                        <span>${{ row.price }}</span>
                                     </div>
                                 </div>
                                 <button
+                                    @click="submit(row.id)"
                                     class="mt-3 sm:mt-0 py-2 px-5 md:py-3 md:px-6 bg-indigo-700 hover:bg-indigo-600 font-bold text-white md:text-lg rounded-lg shadow-md"
                                 >
                                     Book now
