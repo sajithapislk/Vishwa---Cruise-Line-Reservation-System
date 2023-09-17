@@ -21,7 +21,18 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                if($guard === 'admin'){
+                    return redirect(RouteServiceProvider::ADMIN_HOME);
+                }
+                else if($guard === 'cruiseline_agent'){
+                    return redirect(RouteServiceProvider::CRUISELINE_AGENT_HOME);
+                }
+                else if($guard === 'customer_supporter'){
+                    return redirect(RouteServiceProvider::CUSTOMER_SUPPORTER_HOME);
+                }
+                else {
+                    return redirect(RouteServiceProvider::HOME);
+                }
             }
         }
 
