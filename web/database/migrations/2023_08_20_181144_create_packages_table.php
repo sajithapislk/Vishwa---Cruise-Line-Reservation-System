@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('s_id');
+            $table->string('name');
             $table->boolean('is_d');
             $table->boolean('is_bl');
             $table->boolean('is_en');

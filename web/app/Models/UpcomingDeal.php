@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class UpcomingDeal extends Model
 {
@@ -19,4 +20,20 @@ class UpcomingDeal extends Model
         'depart_at',
         'arrive_at',
     ];
+    public function ship(): HasOne
+    {
+        return $this->hasOne(Ship::class,'id','s_id');
+    }
+    public function package(): HasOne
+    {
+        return $this->hasOne(Package::class,'id','p_id');
+    }
+    public function departure_port(): HasOne
+    {
+        return $this->hasOne(Port::class,'id','dp_id');
+    }
+    public function arrival_port(): HasOne
+    {
+        return $this->hasOne(Port::class,'id','ap_id');
+    }
 }

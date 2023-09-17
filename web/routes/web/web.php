@@ -1,9 +1,11 @@
 <?php
 
 use App\Events\NewMessage;
-use App\Http\Controllers\CruiseLineController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ShipController;
+use App\Http\Controllers\User\CruiseLineController;
+use App\Http\Controllers\User\DashboardController;
+use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\ShipController;
+use App\Http\Controllers\User\UpcomingDealController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -19,6 +21,8 @@ use Inertia\Inertia;
 |
 */
 
+require __DIR__.'/auth/user.php';
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -31,18 +35,6 @@ Route::get('/', function () {
 Route::get('/a', function () {
     event(new NewMessage('abc'));
 });
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-require __DIR__.'/auth/user.php';
-
 
 Route::controller(CruiseLineController::class)->group(function () {
     Route::get('/cruise-lines','index')->name('cruise-lines.index');
@@ -53,3 +45,15 @@ Route::controller(ShipController::class)->group(function () {
     Route::get('/ship','index')->name('cruise-lines.index');
     Route::get('/ship/{ship}','show')->name('cruise-lines.show');
 });
+Route::controller(UpcomingDealController::class)->group(function () {
+    Route::get('/upcoming-deal','index')->name('cruise-lines.index');
+    Route::get('/upcoming-deal/{upcomingDeal}','show')->name('cruise-lines.show');
+});
+Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
