@@ -42,14 +42,10 @@ const form = {
     message: "",
 };
 
-const pusher = new Pusher(import.meta.env.VITE_PUSHER_APP_KEY, {
-    cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
-});
-
-const channel = pusher.subscribe("mychannel");
-channel.bind("myevent", function (data) {
-    console.log("Received event:", data);
-});
+window.Echo.channel('mychannel')
+    .listen('.myevent', (data) => {
+        console.log("Received event:", data);
+    });
 </script>
 
 <template>
