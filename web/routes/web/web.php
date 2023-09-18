@@ -25,12 +25,7 @@ use Inertia\Inertia;
 require __DIR__.'/auth/user.php';
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return Inertia::render('Welcome');
 });
 
 Route::controller(CruiseLineController::class)->group(function () {

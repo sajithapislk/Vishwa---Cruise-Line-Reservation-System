@@ -43,49 +43,48 @@ defineProps({
             </section>
             <section class="relative bg-gray-300">
                 <div class="container mx-auto px-4 max-w-screen-xl">
-
                     <div
                         class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 pb-5"
                         style="cursor: auto"
                         v-for="row in list"
                     >
-
-                    <Link :href="route('cruise-lines.show',row.id)">
-                        <div class="max-w-lg mx-auto overflow-hidden rounded-lg shadow-lg lg:max-w-none">
+                        <Link :href="route('cruise-lines.show', row.id)">
                             <div
-                                class="lg:flex"
+                                class="max-w-lg mx-auto overflow-hidden rounded-lg shadow-lg lg:max-w-none"
                             >
-                                <div
-                                    class="flex-1 px-6 py-8 bg-white lg:p-12"
-                                    style="cursor: auto"
-                                >
-                                    <h3
-                                        class="text-2xl font-extrabold text-gray-900 sm:text-3xl"
+                                <div class="lg:flex">
+                                    <div
+                                        class="flex-1 px-6 py-8 bg-white lg:p-12"
                                         style="cursor: auto"
                                     >
-                                        {{ row.name }}
-                                    </h3>
-                                    <p class=" text-base text-gray-500">
-                                        {{ row.description }}
-                                    </p>
-                                </div>
-                                <div
-                                    class="px-6 py-8 text-center bg-gray-50 lg:flex-shrink-0 lg:flex lg:flex-col lg:justify-center lg:p-12"
-                                    style="cursor: auto"
-                                >
-                                    <img
-                                        alt="..."
-                                        src="./img/train-travel-srilanka-848x440.jpg"
-                                        class="rounded-lg w-auto align-middle border-none"
-                                        style="max-height: 350px; max-width: 350px;"
-                                    />
+                                        <h3
+                                            class="text-2xl font-extrabold text-gray-900 sm:text-3xl"
+                                            style="cursor: auto"
+                                        >
+                                            {{ row.name }}
+                                        </h3>
+                                        <p class="text-base text-gray-500">
+                                            {{ row.description }}
+                                        </p>
+                                    </div>
+                                    <div
+                                        class="px-6 py-8 text-center bg-gray-50 lg:flex-shrink-0 lg:flex lg:flex-col lg:justify-center lg:p-12"
+                                        style="cursor: auto"
+                                    >
+                                        <img
+                                            alt="..."
+                                            src="./img/train-travel-srilanka-848x440.jpg"
+                                            class="rounded-lg w-auto align-middle border-none"
+                                            style="
+                                                max-height: 350px;
+                                                max-width: 350px;
+                                            "
+                                        />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                </Link>
+                        </Link>
                     </div>
-
                 </div>
             </section>
         </main>
