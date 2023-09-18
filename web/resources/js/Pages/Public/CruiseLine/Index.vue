@@ -1,17 +1,10 @@
 <script setup>
 import { ref } from "vue";
-import { Swiper, SwiperSlide } from "swiper/vue";
-import "swiper/css";
-defineProps({
-    cruiseLine: Array,
-});
+import { Head, Link, useForm } from "@inertiajs/vue3";
 
-const onSwiper = (swiper) => {
-    console.log(swiper);
-};
-const onSlideChange = () => {
-    console.log("slide change");
-};
+defineProps({
+    list: Array,
+});
 </script>
 <template>
     <div>
@@ -19,7 +12,7 @@ const onSlideChange = () => {
             <section class="relative block" style="height: 500px">
                 <div class="absolute top-0 w-full h-full">
                     <img
-                        src="./img/photo-1499336315816-097655dcfbda.jpeg"
+                        src="./img/train-travel-srilanka-848x440.jpg"
                         alt="Background Image"
                         class="w-full h-full object-cover"
                     />
@@ -48,96 +41,51 @@ const onSlideChange = () => {
                     </svg>
                 </div>
             </section>
-            <section class="relative py-16 bg-gray-300">
-                <div class="container mx-auto px-4 max-w-5xl">
+            <section class="relative bg-gray-300">
+                <div class="container mx-auto px-4 max-w-screen-xl">
+
                     <div
-                        class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64"
+                        class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 pb-5"
+                        style="cursor: auto"
+                        v-for="row in list"
                     >
-                        <div class="px-6">
-                            <div class="flex flex-wrap justify-center">
-                                <div
-                                    class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center"
-                                >
-                                    <div class="relative">
-                                        <img
-                                            alt="..."
-                                            src="./img/team-2-800x800.jpg"
-                                            class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16"
-                                            style="max-width: 150px"
-                                        />
-                                    </div>
-                                </div>
-                                <div
-                                    class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center"
-                                ></div>
-                                <div class="w-full lg:w-4/12 px-4 lg:order-1">
-                                    <div
-                                        class="flex justify-center py-4 lg:pt-4 pt-8"
-                                    ></div>
-                                </div>
-                            </div>
-                            <div class="text-center mt-12">
-                                <h3
-                                    class="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2"
-                                >
-                                    {{ cruiseLine.name }}
-                                </h3>
-                            </div>
+
+                    <Link :href="route('cruise-lines.show',row.id)">
+                        <div class="max-w-lg mx-auto overflow-hidden rounded-lg shadow-lg lg:max-w-none">
                             <div
-                                class="mt-10 py-10 border-t border-gray-300 text-center"
+                                class="lg:flex"
                             >
-                                <div class="flex flex-wrap justify-center">
-                                    <div class="w-full lg:w-9/12 px-4">
-                                        <p
-                                            class="mb-4 text-lg leading-relaxed text-gray-800"
-                                        >
-                                            An artist of considerable range,
-                                            Jenna the name taken by
-                                            Melbourne-raised, Brooklyn-based
-                                            Nick Murphy writes, performs and
-                                            records all of his own music, giving
-                                            it a warm, intimate feel with a
-                                            solid groove structure. An artist of
-                                            considerable range.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mt-10 py-10 border-t border-gray-300">
-                                <Swiper
-                                    :slides-per-view="3"
-                                    :space-between="50"
-                                    @swiper="onSwiper"
-                                    @slideChange="onSlideChange"
+                                <div
+                                    class="flex-1 px-6 py-8 bg-white lg:p-12"
+                                    style="cursor: auto"
                                 >
-                                    <SwiperSlide
-                                        v-for="row in cruiseLine.ships"
-                                        :key="row.id"
+                                    <h3
+                                        class="text-2xl font-extrabold text-gray-900 sm:text-3xl"
+                                        style="cursor: auto"
                                     >
-                                        <div
-                                            class="group inline-block pb-4 bg-gradient-to-tr from-purple-600 to-orange-400 text-white overflow-hidden rounded-2xl shadow hover:shadow-md transition"
-                                        >
-                                            <figure
-                                                class="max-h-64 aspect-square overflow-hidden"
-                                            >
-                                                <img
-                                                    class="w-full h-full object-cover transition group-hover:scale-125"
-                                                    src="./img/team-2-800x800.jpg"
-                                                />
-                                            </figure>
-                                            <div class="p-4">
-                                                <h3 class="text-xl font-bold">
-                                                   {{ row.name }}
-                                                </h3>
-                                            </div>
-
-                                        </div>
-                                    </SwiperSlide>
-                                </Swiper>
+                                        {{ row.name }}
+                                    </h3>
+                                    <p class=" text-base text-gray-500">
+                                        {{ row.description }}
+                                    </p>
+                                </div>
+                                <div
+                                    class="px-6 py-8 text-center bg-gray-50 lg:flex-shrink-0 lg:flex lg:flex-col lg:justify-center lg:p-12"
+                                    style="cursor: auto"
+                                >
+                                    <img
+                                        alt="..."
+                                        src="./img/train-travel-srilanka-848x440.jpg"
+                                        class="rounded-lg w-auto align-middle border-none"
+                                        style="max-height: 350px; max-width: 350px;"
+                                    />
+                                </div>
                             </div>
                         </div>
+
+                </Link>
                     </div>
+
                 </div>
             </section>
         </main>

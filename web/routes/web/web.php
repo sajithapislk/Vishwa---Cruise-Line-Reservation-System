@@ -38,12 +38,12 @@ Route::controller(CruiseLineController::class)->group(function () {
     Route::get('/cruise-lines/{cruiseLine}','show')->name('cruise-lines.show');
 });
 Route::controller(ShipController::class)->group(function () {
-    Route::get('/ship','index')->name('cruise-lines.index');
-    Route::get('/ship/{ship}','show')->name('cruise-lines.show');
+    Route::get('/ship','index')->name('ship.index');
+    Route::get('/ship/{ship}','show')->name('ship.show');
 });
 Route::controller(UpcomingDealController::class)->group(function () {
-    Route::get('/upcoming-deal','index')->name('cruise-lines.index');
-    Route::get('/upcoming-deal/{upcomingDeal}','show')->name('cruise-lines.show');
+    Route::get('/upcoming-deal','index')->name('upcoming-deal.index');
+    Route::get('/upcoming-deal/{upcomingDeal}','show')->name('upcoming-deal.show');
 });
 
 Route::post('process-transaction', [PayPalController::class, 'processTransaction'])->name('processTransaction');

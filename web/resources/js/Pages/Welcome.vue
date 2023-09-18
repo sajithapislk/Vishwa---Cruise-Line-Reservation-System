@@ -12,6 +12,7 @@ import axios from "axios";
 import { ref, onMounted } from "vue";
 import Pusher from "pusher-js";
 
+
 defineProps({
     canLogin: {
         type: Boolean,
@@ -28,6 +29,19 @@ defineProps({
         required: true,
     },
 });
+
+const btn = ref(null);
+const menu = ref(null);
+const isMenuHidden = ref(true);
+
+onMounted(() => {
+  btn.value = document.querySelector("button.mobile-menu-button");
+  menu.value = document.querySelector(".mobile-menu");
+});
+
+const toggleMenu = () => {
+  menu.value.classList.toggle("hidden");
+};
 
 const chat = ref([]);
 const chatBox = ref(true);
@@ -51,92 +65,82 @@ window.Echo.channel('mychannel')
 <template>
     <Head title="Welcome" />
     <header>
-        <nav
-            class="bg-gray-200 container mx-auto sm:px-4 px-3 flex justify-between items-center"
-        >
-            <div class="nav--logo">
-                <img
-                    src="https://www.tote-m.com/wp-content/uploads/2014/04/company-logo.jpg"
-                    width="150px"
-                    alt=""
-                />
-            </div>
-            <div class="nav--menu hidden lg:block">
-                <a
-                    class="mx-2 font-semibold text-gray-700 hover:text-teal-600"
-                    href="/"
-                    >Our Services</a
-                >
-                <a
-                    class="mx-2 font-semibold text-gray-700 hover:text-teal-600"
-                    href="/"
-                    >About</a
-                >
-                <a
-                    class="mx-2 font-semibold text-gray-700 hover:text-teal-600"
-                    href="/"
-                    >News & Events</a
-                >
-                <a
-                    class="mx-2 font-semibold text-gray-700 hover:text-teal-600"
-                    href="/"
-                    >Contact</a
-                >
-            </div>
-            <div class="nav--cta hidden lg:block">
-                <button
-                    class="rounded-full bg-main-blue text-white font-semibold text-md hover:text-white py-2 px-4 hover:shadow-2xl hover:border-transparent rounded"
-                >
-                    +44 744 857321
-                </button>
-            </div>
-            <div class="block lg:hidden">
-                <button
-                    id="nav-toggle"
-                    class="flex items-center px-3 py-2 border rounded text-gray-500 border-blue-500"
-                >
-                    <svg
-                        class="fill-current h-3 w-3"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <title>Menu</title>
-                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+        <nav class="bg-gray-100">
+            <div class="max-w-6xl mx-auto px-4">
+              <div class="flex justify-between">
+
+                <div class="flex space-x-4">
+                  <!-- logo -->
+                  <div>
+                    <Link href="#" class="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900">
+                      <span class="font-bold">Cruise Line Reservation System</span>
+                    </Link>
+                  </div>
+
+                  <!-- primary nav -->
+                  <div class="hidden md:flex items-center space-x-1">
+                    <Link :href="route('ship.index')" class="py-5 px-3 text-gray-700 hover:text-gray-900">Ship</Link>
+                    <Link :href="route('cruise-lines.index')" class="py-5 px-3 text-gray-700 hover:text-gray-900">Cruise Line</Link>
+                    <Link :href="route('upcoming-deal.index')" class="py-5 px-3 text-gray-700 hover:text-gray-900">Search</Link>
+                  </div>
+                </div>
+
+                <!-- secondary nav -->
+                <div class="hidden md:flex items-center space-x-1">
+                  <Link :href="route('login')" class="py-5 px-3">Login</Link>
+                  <Link :href="route('register')" class="py-2 px-3 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300">Signup</Link>
+                </div>
+
+                <!-- mobile button goes here -->
+                <div class="md:hidden flex items-center">
+                  <button class="mobile-menu-button" @click="toggleMenu">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
-                </button>
+                  </button>
+                </div>
+
+              </div>
             </div>
-        </nav>
+
+            <!-- mobile menu -->
+            <div class="mobile-menu md:hidden" :class="{ hidden: isMenuHidden }">
+                <Link href="#" class="block py-2 px-4 text-sm hover:bg-gray-200">Ship</Link>
+              <Link href="#" class="block py-2 px-4 text-sm hover:bg-gray-200">Cruise Line</Link>
+              <Link href="#" class="block py-2 px-4 text-sm hover:bg-gray-200">Search</Link>
+            </div>
+          </nav>
         <div
             class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:hidden pt-0 lg:pt-0 bg-gray-200"
             id="nav-content"
         >
             <ul class="list-reset lg:flex justify-end flex-1 items-center">
                 <li class="mr-3 my-3">
-                    <a
+                    <Link
                         class="mx-2 font-semibold text-gray-700 hover:text-teal-600"
                         href="/"
-                        >Our Services</a
+                        >Our Services</Link
                     >
                 </li>
                 <li class="mr-3 my-3">
-                    <a
+                    <Link
                         class="mx-2 font-semibold text-gray-700 hover:text-teal-600"
                         href="/"
-                        >About</a
+                        >About</Link
                     >
                 </li>
                 <li class="mr-3 my-3">
-                    <a
+                    <Link
                         class="mx-2 font-semibold text-gray-700 hover:text-teal-600"
                         href="/"
-                        >News & Events</a
+                        >News & Events</Link
                     >
                 </li>
                 <li class="mr-3 mt-3">
-                    <a
+                    <Link
                         class="mx-2 font-semibold text-gray-700 hover:text-teal-600"
                         href="/"
-                        >Contact</a
+                        >Contact</Link
                     >
                 </li>
             </ul>
@@ -156,7 +160,7 @@ window.Echo.channel('mychannel')
                     ></div>
                 </div>
             </div>
-            <div class="absolute top-0 left-0 h-full w-full z-2">
+            <div class="absolute top-0 left-0 h-full w-full z-2 ">
                 <div class="container mx-auto h-full sm:px-4 px-3">
                     <div class="flex mb-4 h-full items-center">
                         <div class="w-full lg:w-1/2 text-white font-roboto">
@@ -196,12 +200,12 @@ window.Echo.channel('mychannel')
                         <h3 class="font-semibold mt-4 text-xl">
                             DATA MONITORING
                         </h3>
-                        <a href="/"
+                        <Link href="/"
                             ><p
                                 class="text-teal-400 hover:text-teal-500 font-semibold text-lg"
                             >
                                 See our solution
-                            </p></a
+                            </p></Link
                         >
                     </div>
                     <div
@@ -211,12 +215,12 @@ window.Echo.channel('mychannel')
                         <h3 class="font-semibold mt-4 text-xl">
                             PROJECT MANAGEMENT
                         </h3>
-                        <a href="/"
+                        <Link href="/"
                             ><p
                                 class="text-teal-400 hover:text-teal-500 font-semibold text-lg"
                             >
                                 See our solution
-                            </p></a
+                            </p></Link
                         >
                     </div>
                     <div
@@ -224,12 +228,12 @@ window.Echo.channel('mychannel')
                     >
                         <img :src="warehouse" />
                         <h3 class="font-semibold mt-4 text-xl">WAREHOUSING</h3>
-                        <a href="/"
+                        <Link href="/"
                             ><p
                                 class="text-teal-400 hover:text-teal-500 font-semibold text-lg"
                             >
                                 See our solution
-                            </p></a
+                            </p></Link
                         >
                     </div>
                     <div
@@ -239,12 +243,12 @@ window.Echo.channel('mychannel')
                         <h3 class="text-white font-semibold mt-4 text-xl">
                             SHIPPING
                         </h3>
-                        <a href="/"
+                        <Link href="/"
                             ><p
                                 class="text-teal-400 font-semibold text-lg hover:text-teal-500"
                             >
                                 See our solution
-                            </p></a
+                            </p></Link
                         >
                     </div>
                     <div
@@ -252,13 +256,13 @@ window.Echo.channel('mychannel')
                     >
                         <img :src="interstateTruck" />
                         <h3 class="font-semibold mt-4 text-xl">LOGISTICS</h3>
-                        <a href="/">
+                        <Link href="/">
                             <p
                                 class="text-teal-400 hoer:text-teal-500 font-semibold text-lg"
                             >
                                 See our solution
                             </p>
-                        </a>
+                        </Link>
                     </div>
                     <div
                         class="w-1/2 lg:w-1/3 scale-on-hover hover:shadow-xl bg-white h-64 border-light-gray p-2 flex flex-col justify-center items-center"
@@ -267,12 +271,12 @@ window.Echo.channel('mychannel')
                         <h3 class="font-semibold mt-4 text-xl">
                             PERSONNEL MANAGEMENT
                         </h3>
-                        <a href="/"
+                        <Link href="/"
                             ><p
                                 class="text-teal-400 hover:text-teal-500 font-semibold text-lg"
                             >
                                 See our solution
-                            </p></a
+                            </p></Link
                         >
                     </div>
                 </div>
@@ -285,7 +289,7 @@ window.Echo.channel('mychannel')
                         class="w-full md:w-7/12 section--latest-news__image h-full bg-cover relative bg-center"
                     ></div>
                     <div class="w-full md:w-4/12 relative">
-                        <a href="">
+                        <Link href="">
                             <div
                                 class="bg-white absolute bottom-0 left--4 shadow-full px-6 py-8 max-w-sm min-w-xl font-roboto scale-on-hover"
                             >
@@ -308,7 +312,7 @@ window.Echo.channel('mychannel')
                                     (LCT).
                                 </p>
                             </div>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -317,7 +321,7 @@ window.Echo.channel('mychannel')
             <div class="container mx-auto px-3 sm:px-4 h-full">
                 <div class="flex mb-4 h-full flex-col md:flex-row">
                     <div class="w-full md:w-1/2 relative order-2 md:order-2">
-                        <a href="">
+                        <Link href="">
                             <div
                                 class="bg-white absolute bottom-0 right--4 shadow-full px-6 py-8 max-w-xl min-w-xl font-roboto scale-on-hover"
                             >
@@ -341,7 +345,7 @@ window.Echo.channel('mychannel')
                                     See open vacancies
                                 </p>
                             </div>
-                        </a>
+                        </Link>
                     </div>
                     <div
                         class="w-full md:w-1/2 section--working__image h-full bg-cover order-1 md:order-2"
@@ -356,7 +360,7 @@ window.Echo.channel('mychannel')
                 <div
                     class="container mx-auto h-full w-full relative px-3 sm:px-4"
                 >
-                    <a href="">
+                    <Link href="">
                         <div
                             class="bg-white absolute sm:bottom-0 mt-8 sm:mt-0 right-0 mx-3 sm:mx-0 px-6 py-8 max-w-xl min-w-xl font-roboto scale-on-hover"
                         >
@@ -380,7 +384,7 @@ window.Echo.channel('mychannel')
                                 More information
                             </p>
                         </div>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </section>
@@ -407,7 +411,7 @@ window.Echo.channel('mychannel')
                         />
                         <div class="pl-2">
                             <div class="font-semibold">
-                                <a class="hover:underline" href="#">asds</a>
+                                <Link class="hover:underline" href="#">asds</Link>
                             </div>
                             <div class="text-xs text-gray-600">Online</div>
                         </div>
@@ -415,7 +419,7 @@ window.Echo.channel('mychannel')
                     <!-- end user info -->
                     <!-- chat box action -->
                     <div>
-                        <a
+                        <Link
                             class="inline-flex hover:bg-indigo-50 rounded-full p-2"
                             href="#"
                         >
@@ -433,7 +437,7 @@ window.Echo.channel('mychannel')
                                     d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
                                 />
                             </svg>
-                        </a>
+                        </Link>
 
                         <button
                             class="inline-flex hover:bg-indigo-50 rounded-full p-2"

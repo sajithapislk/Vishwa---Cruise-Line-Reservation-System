@@ -25,6 +25,6 @@ class ShipController extends Controller
     public function show(Ship $ship)
     {
         $ship=$ship->with('packages')->first();
-        return Inertia::render('Public/Ship/View', compact('ship'));
+        return Inertia::render('Public/Ship/Show', compact('ship'));
     }
 }
