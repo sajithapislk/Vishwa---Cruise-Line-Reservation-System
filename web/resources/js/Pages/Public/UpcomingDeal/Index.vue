@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import treasure_map from "@/assets/svg/treasure_map.svg";
 import { Head, Link, useForm } from "@inertiajs/vue3";
+import GuestLayout from "@/Layouts/GuestLayout.vue";
 
 import "swiper/css";
 defineProps({
@@ -36,7 +37,7 @@ const filter = () => {
 };
 </script>
 <template>
-    <div>
+    <GuestLayout>
         <main class="profile-page">
             <section class="relative block" style="height: 500px">
                 <div class="absolute top-0 w-full h-full">
@@ -560,5 +561,5 @@ const filter = () => {
                 </div>
             </section>
         </main>
-    </div>
+    </GuestLayout>
 </template>

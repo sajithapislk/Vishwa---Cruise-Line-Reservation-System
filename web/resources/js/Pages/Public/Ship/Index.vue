@@ -4,13 +4,14 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import check_white from "@/assets/svg/check-white.svg";
 import arrow_right from "@/assets/svg/arrow-right.svg";
+import GuestLayout from "@/Layouts/GuestLayout.vue";
 
 defineProps({
     ships: Object,
 });
 </script>
 <template>
-    <div>
+    <GuestLayout>
         <main class="profile-page">
             <section class="relative block" style="height: 500px">
                 <div class="absolute top-0 w-full h-full">
@@ -440,5 +441,5 @@ defineProps({
                 </div>
             </section>
         </main>
-    </div>
+    </GuestLayout>
 </template>

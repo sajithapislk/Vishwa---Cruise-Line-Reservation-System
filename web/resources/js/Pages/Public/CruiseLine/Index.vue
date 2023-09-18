@@ -1,13 +1,14 @@
 <script setup>
 import { ref } from "vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
+import GuestLayout from "@/Layouts/GuestLayout.vue";
 
 defineProps({
     list: Array,
 });
 </script>
 <template>
-    <div>
+    <GuestLayout>
         <main class="profile-page">
             <section class="relative block" style="height: 500px">
                 <div class="absolute top-0 w-full h-full">
@@ -88,5 +89,5 @@ defineProps({
                 </div>
             </section>
         </main>
-    </div>
+    </GuestLayout>
 </template>

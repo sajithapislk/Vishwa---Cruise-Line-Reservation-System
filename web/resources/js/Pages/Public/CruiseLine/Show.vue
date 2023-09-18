@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
+import GuestLayout from "@/Layouts/GuestLayout.vue";
 defineProps({
     cruiseLine: Array,
 });
@@ -14,7 +15,7 @@ const onSlideChange = () => {
 };
 </script>
 <template>
-    <div>
+    <GuestLayout>
         <main class="profile-page">
             <section class="relative block" style="height: 500px">
                 <div class="absolute top-0 w-full h-full">
@@ -141,5 +142,5 @@ const onSlideChange = () => {
                 </div>
             </section>
         </main>
-    </div>
+    </GuestLayout>
 </template>
