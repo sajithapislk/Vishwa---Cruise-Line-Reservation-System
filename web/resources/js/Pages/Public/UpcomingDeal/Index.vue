@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import treasure_map from "@/assets/svg/treasure_map.svg";
 import { Head, Link, useForm } from "@inertiajs/vue3";
-import GuestLayout from "@/Layouts/GuestLayout.vue";
+import GuestLayout from "@/Layouts/GuestLayout2.vue";
 
 import "swiper/css";
 defineProps({
@@ -20,15 +20,8 @@ const filterForm = useForm({
     arrive_at: "",
 });
 
-const submit = (id) => {
-    useForm({
-        id: id,
-    }).post(route("processTransaction"), {
-        onFinish: () => paymentForm.reset("password"),
-    });
-};
 const filter = () => {
-    filterForm.delete(route("profile.destroy"), {
+    filterForm.post(route("upcoming-deal.filter"), {
         preserveScroll: true,
         onSuccess: () => {},
         onError: () => {},

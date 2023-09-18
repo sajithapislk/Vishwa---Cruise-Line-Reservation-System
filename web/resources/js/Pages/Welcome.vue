@@ -11,7 +11,7 @@ import ReceiverMessage from "@/Components/ReceiverMessage.vue";
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import Pusher from "pusher-js";
-import GuestLayout from "@/Layouts/GuestLayout.vue";
+import GuestLayout from "@/Layouts/GuestLayout2.vue";
 
 defineProps({
     props: Array,

@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
-import GuestLayout from "@/Layouts/GuestLayout.vue";
+import GuestLayout from "@/Layouts/GuestLayout2.vue";
 defineProps({
     cruiseLine: Array,
 });

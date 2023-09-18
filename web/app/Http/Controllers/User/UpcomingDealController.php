@@ -34,4 +34,15 @@ class UpcomingDealController extends Controller
     {
         //
     }
+
+    public function filter(Request $request) {
+        dd($request);
+        return UpcomingDeal::where('ship_id',$request->ship_id)
+        ->orWhere('ship_id',$request->ship_id)
+        ->orWhere('dp_id',$request->dp_id)
+        ->orWhere('p_id',$request->p_id)
+        ->orWhere('depart_at',$request->depart_at)
+        ->orWhere('arrive_at',$request->arrive_at)
+        ->get();
+    }
 }

@@ -39,6 +39,7 @@ Route::controller(ShipController::class)->group(function () {
 Route::controller(UpcomingDealController::class)->group(function () {
     Route::get('/upcoming-deal','index')->name('upcoming-deal.index');
     Route::get('/upcoming-deal/{upcomingDeal}','show')->name('upcoming-deal.show');
+    Route::post('/upcoming-deal','filter')->name('upcoming-deal.filter');
 });
 
 Route::post('process-transaction', [PayPalController::class, 'processTransaction'])->name('processTransaction');

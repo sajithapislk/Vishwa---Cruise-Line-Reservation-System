@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
-import GuestLayout from "@/Layouts/GuestLayout.vue";
+import GuestLayout from "@/Layouts/GuestLayout2.vue";
 
 defineProps({
     list: Array,
