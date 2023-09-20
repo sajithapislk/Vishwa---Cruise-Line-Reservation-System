@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\NewMessage;
+use App\Http\Controllers\User\CruiseDealController;
 use App\Http\Controllers\User\CruiseLineController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\PaypalController;
@@ -41,11 +42,14 @@ Route::controller(UpcomingDealController::class)->group(function () {
     Route::get('/upcoming-deal/{upcomingDeal}','show')->name('upcoming-deal.show');
     Route::post('/upcoming-deal','filter')->name('upcoming-deal.filter');
 });
-
-Route::post('process-transaction', [PayPalController::class, 'processTransaction'])->name('processTransaction');
-Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
-Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');
-
+Route::controller(PayPalController::class)->middleware(['auth'])->group(function () {
+    Route::post('process-transaction', 'processTransaction')->name('processTransaction');
+    Route::get('success-transaction', 'successTransaction')->name('successTransaction');
+    Route::get('cancel-transaction', 'cancelTransaction')->name('cancelTransaction');
+});
+Route::controller(CruiseDealController::class)->middleware('auth')->group(function () {
+    Route::get('cruise-deal', 'index');
+});
 Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

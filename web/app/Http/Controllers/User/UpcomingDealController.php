@@ -21,9 +21,9 @@ class UpcomingDealController extends Controller
         $departurePorts = Port::all();
         $packages = Package::all();
 
-        $list = UpcomingDeal::with('package','ship','arrival_port','departure_port')->get();
+        $upcomingDeals = UpcomingDeal::with('package','ship','arrival_port','departure_port')->get();
 
-        return Inertia::render('Public/UpcomingDeal/Index',compact('ships','departurePorts','packages','list'));
+        return Inertia::render('Public/UpcomingDeal/Index',compact('ships','departurePorts','packages','upcomingDeals'));
     }
 
 
@@ -36,13 +36,31 @@ class UpcomingDealController extends Controller
     }
 
     public function filter(Request $request) {
-        dd($request);
-        return UpcomingDeal::where('ship_id',$request->ship_id)
-        ->orWhere('ship_id',$request->ship_id)
-        ->orWhere('dp_id',$request->dp_id)
-        ->orWhere('p_id',$request->p_id)
-        ->orWhere('depart_at',$request->depart_at)
-        ->orWhere('arrive_at',$request->arrive_at)
+        // dd($request);
+        $list = UpcomingDeal::with('package','ship','arrival_port','departure_port')
+        ->when($request->ship_id, function ($query) use ($request) {
+            return $query->Where('s_id', $request->ship_id);
+        })
+        ->when($request->dp_id, function ($query) use ($request) {
+            return $query->Where('dp_id', $request->dp_id);
+        })
+        ->when($request->p_id, function ($query) use ($request) {
+            return $query->Where('p_id', $request->p_id);
+        })
+        ->when($request->depart_at, function ($query) use ($request) {
+            return $query->WhereDate('depart_at', $request->depart_at);
+        })
+        ->when($request->arrive_at, function ($query) use ($request) {
+            return $query->WhereDate('arrive_at', $request->arrive_at);
+        })
         ->get();
+
+        return response()->json($list);
+
+        // $ships = Ship::all();
+        // $departurePorts = Port::all();
+        // $packages = Package::all();
+
+        // return Inertia::render('Public/UpcomingDeal/Filter',compact('ships','departurePorts','packages','list','request'));
     }
 }

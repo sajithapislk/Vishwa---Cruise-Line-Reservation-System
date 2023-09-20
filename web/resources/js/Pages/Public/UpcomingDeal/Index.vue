@@ -2,15 +2,17 @@
 import { ref } from "vue";
 import treasure_map from "@/assets/svg/treasure_map.svg";
 import { Head, Link, useForm } from "@inertiajs/vue3";
+import axios from "axios";
 import GuestLayout from "@/Layouts/GuestLayout2.vue";
 
 import "swiper/css";
-defineProps({
-    list: Array,
+const props = defineProps({
+    upcomingDeals: Array,
     ships: Array,
     departurePorts: Array,
     packages: Array,
 });
+const list = ref(props.upcomingDeals);
 
 const filterForm = useForm({
     ship_id: "",
@@ -21,11 +23,17 @@ const filterForm = useForm({
 });
 
 const filter = () => {
-    filterForm.post(route("upcoming-deal.filter"), {
-        preserveScroll: true,
-        onSuccess: () => {},
-        onError: () => {},
-        onFinish: () => {},
+    axios
+        .post(route("upcoming-deal.filter") , filterForm)
+        .then((res) => list.value = res.data)
+        .catch((error) => console.log(error));
+};
+
+const submit = (id) => {
+    useForm({
+        id: id,
+    }).post(route("processTransaction"), {
+        onFinish: () => filterForm.reset(),
     });
 };
 </script>
@@ -71,7 +79,7 @@ const filter = () => {
                     >
                         <div class="flex flex-col">
                             <div class="bg-white p-6 rounded-xl shadow-lg">
-                                <form @submit="filter">
+                                <form @submit.prevent="filter">
                                     <div
                                         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
                                     >

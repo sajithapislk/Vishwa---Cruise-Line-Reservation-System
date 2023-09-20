@@ -5,34 +5,33 @@ import { Head, Link, useForm } from "@inertiajs/vue3";
 import GuestLayout from "@/Layouts/GuestLayout2.vue";
 
 import "swiper/css";
-defineProps({
+const props = defineProps({
     list: Array,
     ships: Array,
     departurePorts: Array,
     packages: Array,
+    request:Array
 });
 
+const list = ref([]);
+
 const filterForm = useForm({
-    ship_id: "",
-    dp_id: "",
-    p_id: "",
-    depart_at: "",
-    arrive_at: "",
+    ship_id: props.request.ship_id,
+    dp_id: props.request.dp_id,
+    p_id: props.request.p_id,
+    depart_at: props.request.depart_at,
+    arrive_at: props.request.arrive_at
 });
+
+const filter = () => {
+    filterForm.post(route("upcoming-deal.filter"));
+};
 
 const submit = (id) => {
     useForm({
         id: id,
     }).post(route("processTransaction"), {
-        onFinish: () => paymentForm.reset("password"),
-    });
-};
-const filter = () => {
-    filterForm.delete(route("profile.destroy"), {
-        preserveScroll: true,
-        onSuccess: () => {},
-        onError: () => {},
-        onFinish: () => {},
+        onFinish: () => filterForm.reset(),
     });
 };
 </script>
