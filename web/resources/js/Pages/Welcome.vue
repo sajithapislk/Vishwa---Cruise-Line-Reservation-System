@@ -294,13 +294,6 @@ window.Echo.channel("mychannel").listen(".myevent", (data) => {
                 </div>
             </div>
         </section>
-        <footer class="h-4 pb-8 pt-32">
-            <p
-                class="text-center font-roboto text-sm font-regular text-gray-700"
-            >
-                2019 Landing Page
-            </p>
-        </footer>
     </main>
     <div class="fixed bottom-0 right-0">
         <div class="flex space-x-4">
