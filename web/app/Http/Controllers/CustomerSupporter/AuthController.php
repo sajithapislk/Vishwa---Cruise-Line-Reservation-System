@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\CustomerSupporter;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\CustomerSupporterLoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,7 +19,7 @@ class AuthController extends Controller
      */
     public function create(): Response
     {
-        return Inertia::render('Auth/Login', [
+        return Inertia::render('CustomerSupporter/Login', [
             'canResetPassword' => Route::has('customer_supporter.password.request'),
             'status' => session('status'),
         ]);
@@ -28,13 +28,13 @@ class AuthController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(CustomerSupporterLoginRequest $request): RedirectResponse
     {
         $request->authenticate();
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect()->intended(RouteServiceProvider::CUSTOMER_SUPPORTER_HOME);
     }
 
     /**

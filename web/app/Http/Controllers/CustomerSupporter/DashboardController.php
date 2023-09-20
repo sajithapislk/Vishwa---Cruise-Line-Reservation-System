@@ -11,7 +11,7 @@ class DashboardController extends Controller
 {
     public function __invoke()
     {
-        $users = LiveChat::select('user_id')->with('user')->groupBy('user_id')->get();
+        $users = LiveChat::select('user_id')->with('user')->groupBy(['user_id'])->get();
         // return  $users;
         return Inertia::render('CustomerSupporter/Dashboard',compact('users'));
     }

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('cs_id');
+            $table->string('who_inserted');
             $table->string('msg');
             $table->boolean('is_read')->default(false);
             $table->timestamps();

@@ -16,6 +16,11 @@ const list = ref([]);
 
 const connect=(id)=>{
     console.log(`chat`);
+    axios
+        .get(route('customer_supporter.chat'))
+        .then((res) => (list.value = res.data))
+        .catch((error) => console.log(error));
+
     window.Echo.channel(`chat`)
     .listen('.user-new-message', (data) => {
         const audio = new Audio(clickSound);
@@ -63,6 +68,7 @@ const connect=(id)=>{
                 <button
                   class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2"
                   v-for="row in users"
+                  @click="connect(row.user_id)"
                 >
                   <div
                     class="flex items-center justify-center h-8 w-8 bg-indigo-200 rounded-full"

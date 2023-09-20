@@ -1,17 +1,21 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, defineProps, computed } from "vue";
 
 const props = defineProps({
-    list: Array
+    list: Array,
 });
-
-
+const auth_id = ref("null");
 </script>
 
 <template>
     <div class="grid grid-cols-12 gap-y-2">
-        <div class="col-start-6 col-end-13 p-3 rounded-lg">
-            <div class="flex items-center justify-start flex-row-reverse">
+        <div
+            v-for="row in list"
+
+            class="col-start-6 col-end-13 p-3 rounded-lg"
+        >
+            <h1>{{ row.who_inserted }}</h1>
+            <div v-if="row.who_inserted === 'USER'" class="flex items-center justify-start flex-row-reverse">
                 <div
                     class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
                 >
@@ -31,7 +35,7 @@ const props = defineProps({
                 </div>
             </div>
         </div>
-        <div class="col-start-1 col-end-8 p-3 rounded-lg">
+        <!-- <div v-else class="col-start-1 col-end-8 p-3 rounded-lg">
             <div class="flex flex-row items-center">
                 <div
                     class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
@@ -47,6 +51,6 @@ const props = defineProps({
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
