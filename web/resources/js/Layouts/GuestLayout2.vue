@@ -143,52 +143,28 @@ import { Link } from "@inertiajs/vue3";
         >
             <nav class="flex flex-wrap justify-center -mx-5 -my-2">
                 <div class="px-5 py-2">
-                    <a
-                        href="#"
+                    <Link
+                        :href="route('admin.login')"
                         class="text-base leading-6 text-gray-500 hover:text-gray-900"
                     >
-                        About
-                    </a>
+                        Admin Login
+                    </Link>
                 </div>
                 <div class="px-5 py-2">
-                    <a
-                        href="#"
+                    <Link
+                        :href="route('cruiseline_agent.login')"
                         class="text-base leading-6 text-gray-500 hover:text-gray-900"
                     >
-                        Blog
-                    </a>
+                    Cruise Line Agent Login
+                    </Link>
                 </div>
                 <div class="px-5 py-2">
-                    <a
-                        href="#"
+                    <Link
+                        :href="route('customer_supporter.login')"
                         class="text-base leading-6 text-gray-500 hover:text-gray-900"
                     >
-                        Team
-                    </a>
-                </div>
-                <div class="px-5 py-2">
-                    <a
-                        href="#"
-                        class="text-base leading-6 text-gray-500 hover:text-gray-900"
-                    >
-                        Pricing
-                    </a>
-                </div>
-                <div class="px-5 py-2">
-                    <a
-                        href="#"
-                        class="text-base leading-6 text-gray-500 hover:text-gray-900"
-                    >
-                        Contact
-                    </a>
-                </div>
-                <div class="px-5 py-2">
-                    <a
-                        href="#"
-                        class="text-base leading-6 text-gray-500 hover:text-gray-900"
-                    >
-                        Terms
-                    </a>
+                        customer Support Login
+                    </Link>
                 </div>
             </nav>
             <div class="flex justify-center mt-8 space-x-6">
