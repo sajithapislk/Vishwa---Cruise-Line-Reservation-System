@@ -15,7 +15,7 @@ class CruiseLineController extends Controller
     public function index()
     {
         $list = CruiseLine::all();
-        return Inertia::render('Admin/CruiseLine',compact('list'));
+        return Inertia::render('Admin/CruiseLine/Index',compact('list'));
     }
 
     /**
@@ -23,7 +23,7 @@ class CruiseLineController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/CruiseLineInsert');
+        return Inertia::render('Admin/CruiseLine/Insert');
     }
 
     /**

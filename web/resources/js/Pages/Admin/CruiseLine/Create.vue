@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import { Head, Link, useForm } from "@inertiajs/vue3";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 const date = new Date().getFullYear();
 
@@ -37,13 +38,13 @@ defineProps({
                         <div
                             class="relative w-full px-4 max-w-full flex-grow flex-1 text-right"
                         >
-                            <button
+                            <Link
                                 class="bg-blue-500 text-white active:bg-blue-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1"
-                                type="button"
+                                :href="route('admin.cruise-line.create')"
                                 style="transition: all 0.15s ease"
                             >
                                 Create
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
