@@ -425,7 +425,7 @@ defineProps({
                                 >
                                     <img
                                         alt="..."
-                                        src="./img/Carnival-Freedom-Cruise-Ship.jpg"
+                                        :src="route('ship.img',row.img)"
                                         class="rounded-lg w-auto align-middle border-none"
                                         style="max-height: 350px"
                                     />

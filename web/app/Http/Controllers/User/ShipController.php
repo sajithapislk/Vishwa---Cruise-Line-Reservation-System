@@ -27,4 +27,14 @@ class ShipController extends Controller
         $ship=$ship->with('packages')->first();
         return Inertia::render('Public/Ship/Show', compact('ship'));
     }
+
+    public function img($name){
+        try {
+            $path = "app/ship/$name";
+            return response()->file(storage_path($path));
+        } catch (\Throwable $th) {
+            return "error";
+        }
+
+    }
 }
