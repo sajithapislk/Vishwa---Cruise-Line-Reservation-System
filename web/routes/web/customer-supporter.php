@@ -13,6 +13,6 @@ Route::middleware('auth:customer_supporter')->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
     Route::controller(LiveChatController::class)->group(function () {
-        Route::get('chat', 'index')->name('chat');
+        Route::get('chat/{id}', 'index')->name('chat');
     });
 });

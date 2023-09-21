@@ -17,7 +17,7 @@ const list = ref([]);
 const connect=(id)=>{
     console.log(`chat`);
     axios
-        .get(route('customer_supporter.chat'))
+        .get(route('customer_supporter.chat',id))
         .then((res) => (list.value = res.data))
         .catch((error) => console.log(error));
 

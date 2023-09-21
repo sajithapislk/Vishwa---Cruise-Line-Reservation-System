@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 
 class LiveChatController extends Controller
 {
-    public function index() {
-        $list = LiveChat::all();
+    public function index($id) {
+        $list = LiveChat::where('user_id',$id)->get();
         return response()->json($list);
     }
 }
