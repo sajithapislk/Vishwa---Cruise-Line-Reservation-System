@@ -74,7 +74,7 @@ defineProps({
                                     >
                                         <img
                                             alt="..."
-                                            src="./img/train-travel-srilanka-848x440.jpg"
+                                            :src="route('cruise-lines.img',row.img)"
                                             class="rounded-lg w-auto align-middle border-none"
                                             style="
                                                 max-height: 350px;

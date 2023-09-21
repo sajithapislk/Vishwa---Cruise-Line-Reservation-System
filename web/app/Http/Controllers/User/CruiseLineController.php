@@ -27,4 +27,13 @@ class CruiseLineController extends Controller
         $cruiseLine = $cruiseLine->with('ships')->first();
         return Inertia::render('Public/CruiseLine/Show', compact('cruiseLine'));
     }
+    public function img($name){
+        try {
+            $path = "app/cruise-lines/$name";
+            return response()->file(storage_path($path));
+        } catch (\Throwable $th) {
+            return "error";
+        }
+
+    }
 }

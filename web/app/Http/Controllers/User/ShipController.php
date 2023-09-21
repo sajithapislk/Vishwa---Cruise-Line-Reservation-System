@@ -30,7 +30,7 @@ class ShipController extends Controller
 
     public function img($name){
         try {
-            $path = "app/ship/$name";
+            $path = "app/ships/$name";
             return response()->file(storage_path($path));
         } catch (\Throwable $th) {
             return "error";

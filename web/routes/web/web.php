@@ -32,6 +32,7 @@ Route::get('/', function () {
 Route::controller(CruiseLineController::class)->group(function () {
     Route::get('/cruise-lines','index')->name('cruise-lines.index');
     Route::get('/cruise-lines/{cruiseLine}','show')->name('cruise-lines.show');
+    Route::get('/cruise-lines-img/{name}', 'img')->name('cruise-lines.img');
 });
 Route::controller(ShipController::class)->group(function () {
     Route::get('/ship','index')->name('ship.index');
