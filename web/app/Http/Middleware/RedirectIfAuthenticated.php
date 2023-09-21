@@ -24,10 +24,10 @@ class RedirectIfAuthenticated
                 if($guard === 'admin'){
                     return redirect(RouteServiceProvider::ADMIN_HOME);
                 }
-                else if($guard === 'cruiseline_agent'){
+                else if($guard === 'cruise-line-agent'){
                     return redirect(RouteServiceProvider::CRUISELINE_AGENT_HOME);
                 }
-                else if($guard === 'customer_supporter'){
+                else if($guard === 'customer-supporter'){
                     return redirect(RouteServiceProvider::CUSTOMER_SUPPORTER_HOME);
                 }
                 else {

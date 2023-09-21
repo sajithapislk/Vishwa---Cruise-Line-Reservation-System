@@ -45,7 +45,7 @@ defineProps({
                 >
                     <CardLink
                     v-for="row in ships"
-                    :href="route('cruiseline_agent.ship-room.select-ship',row.id)"
+                    :href="route('cruise-line-agent.ship-room.select-ship',row.id)"
                     :title="row.name"
                     >
                     <img :src="img1" />

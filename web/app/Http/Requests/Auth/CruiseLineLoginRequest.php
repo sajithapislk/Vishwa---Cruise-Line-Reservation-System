@@ -41,7 +41,7 @@ class CruiseLineLoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::guard('cruiseline_agent')->attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        if (! Auth::guard('cruise-line-agent')->attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
@@ -68,7 +68,7 @@ class CruiseLineLoginRequest extends FormRequest
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
         throw ValidationException::withMessages([
-            'email' => trans('cruiseline_agent.auth.throttle', [
+            'email' => trans('cruise-line-agent.auth.throttle', [
                 'seconds' => $seconds,
                 'minutes' => ceil($seconds / 60),
             ]),

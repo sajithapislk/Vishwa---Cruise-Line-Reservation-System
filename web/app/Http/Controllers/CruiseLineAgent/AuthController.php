@@ -21,7 +21,7 @@ class AuthController extends Controller
     public function create(): Response
     {
         return Inertia::render('CruiseLineAgent/Login', [
-            'canResetPassword' => Route::has('cruiseline_agent.password.request'),
+            'canResetPassword' => Route::has('cruise-line-agent.password.request'),
             'status' => session('status'),
         ]);
     }
@@ -31,7 +31,7 @@ class AuthController extends Controller
      */
     public function store(CruiseLineLoginRequest $request): RedirectResponse
     {
-        $request->authenticate('cruiseline_agent');
+        $request->authenticate('cruise-line-agent');
 
         $request->session()->regenerate();
 
@@ -43,7 +43,7 @@ class AuthController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        Auth::guard('cruiseline_agent')->logout();
+        Auth::guard('cruise-line-agent')->logout();
 
         $request->session()->invalidate();
 

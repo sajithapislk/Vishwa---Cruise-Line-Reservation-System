@@ -46,12 +46,12 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->prefix('cruiseline-agent')
-                ->name('cruiseline_agent.')
+                ->name('cruise-line-agent.')
                 ->group(base_path('routes/web/cruiseline-agent.php'));
 
             Route::middleware('web')
                 ->prefix('customer-supporter')
-                ->name('customer_supporter.')
+                ->name('customer-supporter.')
                 ->group(base_path('routes/web/customer-supporter.php'));
         });
     }

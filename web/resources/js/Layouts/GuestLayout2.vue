@@ -152,7 +152,7 @@ import { Link } from "@inertiajs/vue3";
                 </div>
                 <div class="px-5 py-2">
                     <Link
-                        :href="route('cruiseline_agent.login')"
+                        :href="route('cruise-line-agent.login')"
                         class="text-base leading-6 text-gray-500 hover:text-gray-900"
                     >
                     Cruise Line Agent Login
@@ -160,7 +160,7 @@ import { Link } from "@inertiajs/vue3";
                 </div>
                 <div class="px-5 py-2">
                     <Link
-                        :href="route('customer_supporter.login')"
+                        :href="route('customer-supporter.login')"
                         class="text-base leading-6 text-gray-500 hover:text-gray-900"
                     >
                         customer Support Login

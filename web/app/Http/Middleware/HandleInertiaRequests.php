@@ -34,8 +34,8 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             'auth' => [
                 'user' => Auth::guard('web')->user(),
-                'customer_supporter' => Auth::guard('customer_supporter')->user(),
-                'cruiseline_agent' => Auth::guard('cruiseline_agent')->user(),
+                'customer-supporter' => Auth::guard('customer-supporter')->user(),
+                'cruise-line-agent' => Auth::guard('cruise-line-agent')->user(),
                 'admin' => Auth::guard('admin')->user(),
             ],
             'ziggy' => function () use ($request) {

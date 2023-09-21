@@ -41,7 +41,7 @@ class CustomerSupporterLoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::guard('customer_supporter')->attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        if (! Auth::guard('customer-supporter')->attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([

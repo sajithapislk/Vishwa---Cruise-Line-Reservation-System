@@ -23,7 +23,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('customer_supporter.login'), {
+    form.post(route('customer-supporter.login'), {
         onFinish: () => form.reset('password'),
     });
 };

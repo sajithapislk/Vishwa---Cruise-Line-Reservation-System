@@ -44,11 +44,11 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
-        'cruiseline_agent' => [
+        'cruise-line-agent' => [
             'driver' => 'session',
             'provider' => 'cruiseline_agents',
         ],
-        'customer_supporter' => [
+        'customer-supporter' => [
             'driver' => 'session',
             'provider' => 'customer_supporters',
         ],
@@ -127,13 +127,13 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
-        'cruiseline_agent' => [
+        'cruise-line-agent' => [
             'provider' => 'cruiseline_agents',
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,
         ],
-        'customer_supporter' => [
+        'customer-supporter' => [
             'provider' => 'customer_supporters',
             'table' => 'password_reset_tokens',
             'expire' => 60,
