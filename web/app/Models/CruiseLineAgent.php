@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class CruiseAgent extends Authenticatable
+class CruiseLineAgent extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -17,6 +17,7 @@ class CruiseAgent extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'cl_id',
         'name',
         'email',
         'password',

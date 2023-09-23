@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\CruiseAgent;
+use App\Models\CruiseLineAgent;
 use Illuminate\Http\Request;
 
-class CruiseAgentController extends Controller
+class CruiseLineAgentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,7 +29,8 @@ class CruiseAgentController extends Controller
      */
     public function store(Request $request)
     {
-        return CruiseAgent::create([
+        return CruiseLineAgent::create([
+            'cl_id'=>$request->cl_id,
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>$request->password,
@@ -39,7 +40,7 @@ class CruiseAgentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CruiseAgent $cruiseAgent)
+    public function show(CruiseLineAgent $cruiseLineAgent)
     {
         //
     }
@@ -47,7 +48,7 @@ class CruiseAgentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CruiseAgent $cruiseAgent)
+    public function edit(CruiseLineAgent $cruiseLineAgent)
     {
         //
     }
@@ -55,9 +56,9 @@ class CruiseAgentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CruiseAgent $cruiseAgent)
+    public function update(Request $request, CruiseLineAgent $cruiseLineAgent)
     {
-        return $cruiseAgent->update([
+        return $cruiseLineAgent->update([
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>$request->password,
@@ -67,8 +68,8 @@ class CruiseAgentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CruiseAgent $cruiseAgent)
+    public function destroy(CruiseLineAgent $cruiseLineAgent)
     {
-        $cruiseAgent->delete();
+        $cruiseLineAgent->delete();
     }
 }

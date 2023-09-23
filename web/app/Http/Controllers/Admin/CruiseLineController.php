@@ -23,7 +23,7 @@ class CruiseLineController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/CruiseLine/Insert');
+        return Inertia::render('Admin/CruiseLine/Create');
     }
 
     /**
@@ -31,11 +31,21 @@ class CruiseLineController extends Controller
      */
     public function store(Request $request)
     {
-        return CruiseLine::create([
+        $cruiseLine = CruiseLine::create([
             'name'=>$request->name,
             'tp'=>$request->tp,
-            'description'=>$request->description
+            'description'=>$request->description,
+            'img'=>''
         ]);
+
+        if (!is_null($request->img)) {
+            $image = time() . '-l' . '.' . $request->img->extension();
+            $request->file('img')->storeAs('cruise-lines/', $image);
+
+            $cruiseLine->img = $image;
+            $cruiseLine->save();
+        }
+        return $cruiseLine;
     }
 
     /**

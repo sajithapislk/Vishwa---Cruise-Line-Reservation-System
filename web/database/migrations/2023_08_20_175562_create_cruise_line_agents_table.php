@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cruise_agents', function (Blueprint $table) {
+        Schema::create('cruise_line_agents', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('cl_id');
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -20,6 +21,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('cl_id')->references('id')->on('cruise_lines');
         });
     }
 
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cruise_agents');
+        Schema::dropIfExists('cruise_line_agents');
     }
 };
