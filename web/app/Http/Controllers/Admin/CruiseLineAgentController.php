@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\CruiseLineAgent;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class CruiseLineAgentController extends Controller
 {
@@ -13,7 +14,8 @@ class CruiseLineAgentController extends Controller
      */
     public function index()
     {
-        //
+        $list = CruiseLineAgent::all();
+        return Inertia::render('Admin/CruiseLineAgent',compact('list'));
     }
 
     /**

@@ -2,7 +2,6 @@
 import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import CruiseLineLayout from "@/Layouts/CruiseLineLayout.vue";
-const date = new Date().getFullYear();
 import Modal from "@/Components/Modal.vue";
 import CheckBoxColor from "@/Components/CheckBoxColor.vue";
 
