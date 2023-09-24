@@ -15,8 +15,7 @@ defineProps({
 const insertModal = ref(false);
 
 const saveform = useForm({
-    id: null,
-    name:'',
+    name:'test',
     s_id: false,
     is_d: false,
     is_bl: false,
@@ -30,9 +29,9 @@ const saveform = useForm({
 
 });
 const save = () => {
-    saveform.post(route("tutor.request-task.accept"), {
+    saveform.post(route("cruise-line-agent.package.store"), {
         preserveScroll: true,
-        onSuccess: () => closeModalAccept(),
+        onSuccess: () => ModalFun(),
         onFinish: () => saveform.reset(),
     });
 };

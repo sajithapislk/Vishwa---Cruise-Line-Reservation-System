@@ -84,7 +84,7 @@ const selectedFile = (e) => {
                                 <h1
                                     class="inline text-lg font-semibold leading-none"
                                 >
-                                    Cruise Line Information
+                                    Cruise Room Create
                                 </h1>
                             </div>
                         </div>

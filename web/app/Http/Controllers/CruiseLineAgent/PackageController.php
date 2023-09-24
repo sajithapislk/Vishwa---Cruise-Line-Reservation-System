@@ -33,7 +33,20 @@ class PackageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $package = Package::create([
+            'name'=>$request->name,
+            's_id'=>$request->s_id,
+            'is_d'=>$request->is_d,
+            'is_bl'=>$request->is_bl,
+            'is_en'=>$request->is_en,
+            'is_c'=>$request->is_c,
+            'is_ona'=>$request->is_ona,
+            'is_outa'=>$request->is_outa,
+            'is_kt'=>$request->is_kt,
+            'is_w'=>$request->is_w,
+            'is_s'=>$request->is_s,
+        ]);
+        return back()->with('status', 'verification-link-sent');
     }
 
     /**

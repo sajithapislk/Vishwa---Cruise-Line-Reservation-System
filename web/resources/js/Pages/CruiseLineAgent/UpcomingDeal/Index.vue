@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import { useForm } from "@inertiajs/vue3";
+import { useForm,Link } from "@inertiajs/vue3";
 import CruiseLineLayout from "@/Layouts/CruiseLineLayout.vue";
 const date = new Date().getFullYear();
 import Modal from "@/Components/Modal.vue";
@@ -9,23 +9,6 @@ import CheckBoxColor from "@/Components/CheckBoxColor.vue";
 defineProps({
     list: Array,
     ships: Array,
-});
-
-const insertModal = ref(false);
-
-const saveform = useForm({
-    id: null,
-    id: "",
-    s_id: "",
-    dp_id: "",
-    p_id: "",
-    name: "",
-    description: "",
-    img : null,
-    tax: "",
-    depart_at: "",
-    arrive_at : "",
-    created_at: "",
 });
 </script>
 
@@ -51,20 +34,20 @@ const saveform = useForm({
                             <h3
                                 class="font-semibold text-base text-blueGray-700"
                             >
-                                Cruise Line
+                                Upcoming Deal
                             </h3>
                         </div>
                         <div
                             class="relative w-full px-4 max-w-full flex-grow flex-1 text-right"
                         >
-                            <button
+                            <Link
                                 class="bg-green-500 text-white active:bg-green-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1"
                                 type="button"
                                 style="transition: all 0.15s ease"
-
+                                :href="route('cruise-line-agent.upcoming-deal.create')"
                             >
                                 Create
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

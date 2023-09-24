@@ -11,6 +11,7 @@ class Package extends Model
     use HasFactory;
 
     protected $fillable = [
+        'name',
         's_id',
         'is_d',
         'is_bl',
@@ -22,5 +23,5 @@ class Package extends Model
         'is_w',
         'is_s',
     ];
-    
+
 }
