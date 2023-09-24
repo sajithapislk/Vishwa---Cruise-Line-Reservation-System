@@ -46,7 +46,7 @@ return [
         ],
         'cruise-line-agent' => [
             'driver' => 'session',
-            'provider' => 'cruiseline_agents',
+            'provider' => 'cruise_line_agents',
         ],
         'customer-supporter' => [
             'driver' => 'session',
@@ -80,9 +80,9 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],
-        'cruiseline_agents' => [
+        'cruise_line_agents' => [
             'driver' => 'eloquent',
-            'model' => App\Models\CruiseAgent::class,
+            'model' => App\Models\CruiseLineAgent::class,
         ],
         'customer_supporters' => [
             'driver' => 'eloquent',
@@ -128,7 +128,7 @@ return [
             'throttle' => 60,
         ],
         'cruise-line-agent' => [
-            'provider' => 'cruiseline_agents',
+            'provider' => 'cruise_line_agents',
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,
