@@ -4,6 +4,8 @@ import { useForm } from "@inertiajs/vue3";
 import CruiseLineLayout from "@/Layouts/CruiseLineLayout.vue";
 import Modal from "@/Components/Modal.vue";
 import CheckBoxColor from "@/Components/CheckBoxColor.vue";
+import SecondaryButton from '@/Components/SecondaryButton.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 
 defineProps({
     list: Array,

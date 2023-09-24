@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\CruiseLine;
 use App\Models\CruiseLineAgent;
+use App\Models\Ship;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -15,7 +17,8 @@ class CruiseLineAgentController extends Controller
     public function index()
     {
         $list = CruiseLineAgent::all();
-        return Inertia::render('Admin/CruiseLineAgent',compact('list'));
+        $cruiseLines = CruiseLine::all();
+        return Inertia::render('Admin/CruiseLineAgent',compact('list','cruiseLines'));
     }
 
     /**
@@ -31,12 +34,14 @@ class CruiseLineAgentController extends Controller
      */
     public function store(Request $request)
     {
-        return CruiseLineAgent::create([
+        $cruiseLineAgent = CruiseLineAgent::create([
             'cl_id'=>$request->cl_id,
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>$request->password,
         ]);
+
+        return back()->with('status', 'verification-link-sent');
     }
 
     /**

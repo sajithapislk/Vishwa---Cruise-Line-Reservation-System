@@ -31,7 +31,7 @@ defineProps({
                             <h3
                                 class="font-semibold text-base text-blueGray-700"
                             >
-                                Cruise Line
+                                Cruise
                             </h3>
                         </div>
                         <div

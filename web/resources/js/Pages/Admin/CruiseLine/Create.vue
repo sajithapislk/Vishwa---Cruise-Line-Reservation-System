@@ -96,7 +96,7 @@ const agentSubmit = () => {
                                 <h3
                                     class="font-semibold text-2xl text-blueGray-700"
                                 >
-                                    Cruise Line Insert
+                                    Cruise Line Create
                                 </h3>
                             </div>
                             <div

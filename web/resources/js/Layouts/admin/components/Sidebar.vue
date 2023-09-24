@@ -101,12 +101,12 @@
                 <li class="items-center">
                     <Link
                         :href="
-                            route('cruise-line-agent.upcoming-deal.index')
+                            route('admin.cruise-line-agent.index')
                         "
                         class="text-blueGray-500 hover:text-blue-600 text-xs uppercase py-3 font-bold block"
                     >
                         <i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
-                        #Cruise Line Agent
+                        Cruise Line Agent
                     </Link>
                 </li>
                 <li class="items-center">
@@ -117,7 +117,7 @@
                         class="text-blueGray-500 hover:text-blue-600 text-xs uppercase py-3 font-bold block"
                     >
                         <i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
-                        Ship
+                        Cruise
                     </Link>
                 </li>
             </ul>

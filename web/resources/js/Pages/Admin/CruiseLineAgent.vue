@@ -3,31 +3,26 @@ import { ref } from "vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import Modal from "@/Components/Modal.vue";
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
 
 defineProps({
     list: Array,
+    cruiseLines : Array
 });
 
 const insertModal = ref(false);
 
 const saveform = useForm({
-    id: null,
+    cl_id: "",
     name: "",
-    s_id: false,
-    is_d: false,
-    is_bl: false,
-    is_en: false,
-    is_c: false,
-    is_ona: false,
-    is_outa: false,
-    is_kt: false,
-    is_w: false,
-    is_s: false,
+    email: "",
+    password: "",
 });
 const save = () => {
-    saveform.post(route("tutor.request-task.accept"), {
+    saveform.post(route("admin.cruise-line-agent.store"), {
         preserveScroll: true,
-        onSuccess: () => closeModalAccept(),
+        onSuccess: () =>  ModalFun(),
         onFinish: () => saveform.reset(),
     });
 };
@@ -61,7 +56,7 @@ const ModalFun = () => {
                             <h3
                                 class="font-semibold text-base text-blueGray-700"
                             >
-                                Cruise Line
+                                Cruise Line Agent
                             </h3>
                         </div>
                         <div
@@ -158,33 +153,18 @@ const ModalFun = () => {
     </AdminLayout>
     <Modal :show="insertModal" @close="ModalFun">
         <div class="p-6">
-            <form action="#">
-                <div class="w-full px-3">
-                    <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-password"
-                    >
-                        Name
-                    </label>
-
-                    <input
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        id="grid-email"
-                        type="boolean"
-                        v-model="saveform.name"
-                    />
-                </div>
+            <form @submit="save">
                 <div class="w-full px-3">
                     <div class="xl:w-full">
                         <label
                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                             for="grid-password"
                         >
-                            Ship
+                            Cruise Line
                         </label>
                         <select
-                            name="s_id"
-                            v-model="saveform.s_id"
+                            name="cl_id"
+                            v-model="saveform.cl_id"
                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             aria-label="Default select example"
                             required
@@ -192,60 +172,57 @@ const ModalFun = () => {
                             <option selected disabled>
                                 Open this select field
                             </option>
-                            <option v-for="ship in ships" :value="ship.id">
-                                {{ ship.name }}
+                            <option v-for="cruiseLine in cruiseLines" :value="cruiseLine.id">
+                                {{ cruiseLine.name }}
                             </option>
                         </select>
                     </div>
                 </div>
+
                 <div class="w-full px-3">
-                    <ul>
-                        <CheckBoxColor
-                            id="is_d"
-                            name="Dining"
-                            v-model:checked="saveform.is_d"
-                        />
-                        <CheckBoxColor
-                            id="is_bl"
-                            name="Bars & Lounges"
-                            v-model:checked="saveform.is_bl"
-                        />
-                        <CheckBoxColor
-                            id="is_en"
-                            name="Entertainment & Nightlife"
-                            v-model:checked="saveform.is_en"
-                        />
-                        <CheckBoxColor
-                            id="is_c"
-                            name="Casino"
-                            v-model:checked="saveform.is_c"
-                        />
-                        <CheckBoxColor
-                            id="is_ona"
-                            name="Onboard Activities"
-                            v-model:checked="saveform.is_ona"
-                        />
-                        <CheckBoxColor
-                            id="is_outa"
-                            name="Outdoor Activities"
-                            v-model:checked="saveform.is_outa"
-                        />
-                        <CheckBoxColor
-                            id="is_kt"
-                            name="Kids & Teens"
-                            v-model:checked="saveform.is_kt"
-                        />
-                        <CheckBoxColor
-                            id="is_w"
-                            name="Wellness"
-                            v-model:checked="saveform.is_w"
-                        />
-                        <CheckBoxColor
-                            id="is_s"
-                            name="Shopping"
-                            v-model:checked="saveform.is_s"
-                        />
-                    </ul>
+                    <label
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                        for="name"
+                    >
+                        Name
+                    </label>
+
+                    <input
+                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        id="name"
+                        type="text"
+                        v-model="saveform.name"
+                    />
+                </div>
+                <div class="w-full px-3">
+                    <label
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                        for="email"
+                    >
+                        Email
+                    </label>
+
+                    <input
+                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        id="email"
+                        type="email"
+                        v-model="saveform.email"
+                    />
+                </div>
+                <div class="w-full px-3">
+                    <label
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                        for="password"
+                    >
+                        Password
+                    </label>
+
+                    <input
+                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        id="password"
+                        type="password"
+                        v-model="saveform.password"
+                    />
                 </div>
             </form>
 
