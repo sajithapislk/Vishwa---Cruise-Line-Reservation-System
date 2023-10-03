@@ -16,7 +16,6 @@ return new class extends Migration
             $table->unsignedBigInteger('s_id');
             $table->string('room_view');
             $table->string('img');
-            $table->integer('flow');
             $table->integer('room_count');
             $table->timestamps();
             $table->softDeletes();

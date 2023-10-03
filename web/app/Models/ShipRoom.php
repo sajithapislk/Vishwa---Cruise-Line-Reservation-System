@@ -12,7 +12,6 @@ class ShipRoom extends Model
         's_id',
         'room_view',
         'img',
-        'flow',
         'room_count',
     ];
 }

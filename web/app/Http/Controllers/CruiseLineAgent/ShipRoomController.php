@@ -71,4 +71,9 @@ class ShipRoomController extends Controller
     function select_ship(Ship $ship) {
         return Inertia::render('CruiseLineAgent/ShipRoom/Insert',compact('ship'));
     }
+
+    function cruiseRoom($cruise_id) {
+        return ShipRoom::where('s_id',$cruise_id)->get();
+    }
+
 }

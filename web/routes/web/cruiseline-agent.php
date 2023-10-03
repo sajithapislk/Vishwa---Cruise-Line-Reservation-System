@@ -23,4 +23,6 @@ Route::middleware('auth:cruise-line-agent')->group(function () {
     ]);
 
     Route::get('/select-ship/{ship}',[ShipRoomController::class,'select_ship'])->name('ship-room.select-ship');
+    Route::get('/cruise-room-list/{cruise_id}',[ShipRoomController::class,'cruiseRoom'])->name('cruise-room.list');
+    Route::get('/cruise-package-list/{cruise_id}',[PackageController::class,'cruisePackage'])->name('cruise-package.list');
 });

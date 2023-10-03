@@ -18,12 +18,12 @@ class UpcomingDealController extends Controller
     public function index()
     {
         $ships = Ship::all();
-        $departurePorts = Port::all();
+        $ports = Port::all();
         $packages = Package::all();
 
         $upcomingDeals = UpcomingDeal::with('package','ship','arrival_port','departure_port')->get();
 
-        return Inertia::render('Public/UpcomingDeal/Index',compact('ships','departurePorts','packages','upcomingDeals'));
+        return Inertia::render('Public/UpcomingDeal/Index',compact('ships','ports','packages','upcomingDeals'));
     }
 
 
@@ -58,7 +58,7 @@ class UpcomingDealController extends Controller
         return response()->json($list);
 
         // $ships = Ship::all();
-        // $departurePorts = Port::all();
+        // $ports = Port::all();
         // $packages = Package::all();
 
         // return Inertia::render('Public/UpcomingDeal/Filter',compact('ships','departurePorts','packages','list','request'));

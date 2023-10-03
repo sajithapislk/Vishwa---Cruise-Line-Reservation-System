@@ -9,7 +9,7 @@ import "swiper/css";
 const props = defineProps({
     upcomingDeals: Array,
     ships: Array,
-    departurePorts: Array,
+    ports: Array,
     packages: Array,
 });
 const list = ref(props.upcomingDeals);
@@ -119,7 +119,7 @@ const submit = (id) => {
                                             >
                                                 <option value="*">All</option>
                                                 <option
-                                                    v-for="row in departurePorts"
+                                                    v-for="row in ports"
                                                     :value="row.id"
                                                 >
                                                     {{ row.name }}

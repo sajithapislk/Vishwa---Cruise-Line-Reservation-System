@@ -7,8 +7,7 @@ import Modal from "@/Components/Modal.vue";
 import CheckBoxColor from "@/Components/CheckBoxColor.vue";
 
 defineProps({
-    list: Array,
-    ships: Array,
+    list: Array
 });
 </script>
 

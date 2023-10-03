@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CruiseLineAgent;
 
 use App\Http\Controllers\Controller;
+use App\Models\Port;
 use App\Models\Ship;
 use App\Models\UpcomingDeal;
 use Illuminate\Http\Request;
@@ -24,7 +25,9 @@ class UpcomingDealController extends Controller
      */
     public function create()
     {
-        return Inertia::render('CruiseLineAgent/UpcomingDeal/Insert');
+        $cruises = Ship::all();
+        $ports = Port::all();
+        return Inertia::render('CruiseLineAgent/UpcomingDeal/Insert',compact('cruises','ports'));
     }
 
     /**
@@ -32,7 +35,27 @@ class UpcomingDealController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $upcomingDeal = UpcomingDeal::create([
+            's_id'=>$request->s_id,
+            'sr_id'=>$request->sr_id,
+            'dp_id'=>$request->dp_id,
+            'ap_id'=>$request->ap_id,
+            'p_id'=>$request->p_id,
+            'name'=>$request->name,
+            'description'=>$request->description,
+            'img'=>'_',
+            'tax'=>$request->tax,
+            'price'=>$request->price,
+            'depart_at'=>$request->depart_at,
+            'arrive_at'=>$request->arrive_at,
+        ]);
+        if (!is_null($request->img)) {
+            $image = time() . '-l' . '.' . $request->img->extension();
+            $request->file('img')->storeAs('upcoming-deal/', $image);
+
+            $upcomingDeal->img = $image;
+            $upcomingDeal->save();
+        }
     }
 
     /**

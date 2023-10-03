@@ -80,4 +80,8 @@ class PackageController extends Controller
     {
         //
     }
+
+    function cruisePackage($cruise_id) {
+        return Package::where('s_id',$cruise_id)->get();
+    }
 }

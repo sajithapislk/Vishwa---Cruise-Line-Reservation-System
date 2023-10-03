@@ -11,12 +11,15 @@ class UpcomingDeal extends Model
     use HasFactory;
     protected $fillable = [
         's_id',
+        'sr_id',
         'dp_id',
+        'ap_id',
         'p_id',
         'name',
         'description',
         'img',
         'tax',
+        'price',
         'depart_at',
         'arrive_at',
     ];

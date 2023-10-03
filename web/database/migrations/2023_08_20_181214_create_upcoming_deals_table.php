@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('name');
             $table->longText('description');
             $table->string('img');
-            $table->double('tax');
-            $table->double('price');
+            $table->double('tax',8,2);
+            $table->double('price',8,2);
             $table->dateTime('depart_at');
             $table->dateTime('arrive_at');
             $table->timestamps();

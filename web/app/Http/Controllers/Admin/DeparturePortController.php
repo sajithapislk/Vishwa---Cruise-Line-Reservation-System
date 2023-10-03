@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\DeparturePort;
+use App\Models\Port;
 use Illuminate\Http\Request;
 
-class DeparturePortController extends Controller
+class PortController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,7 +29,7 @@ class DeparturePortController extends Controller
      */
     public function store(Request $request)
     {
-        return DeparturePort::create([
+        return Port::create([
             'name'=>$request->name,
             'description'=>$request->description,
             'img'=>$request->img,
@@ -39,7 +39,7 @@ class DeparturePortController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DeparturePort $departurePort)
+    public function show(Port $port)
     {
         //
     }
@@ -47,7 +47,7 @@ class DeparturePortController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(DeparturePort $departurePort)
+    public function edit(Port $port)
     {
         //
     }
@@ -55,9 +55,9 @@ class DeparturePortController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, DeparturePort $departurePort)
+    public function update(Request $request, Port $port)
     {
-        return $departurePort->update([
+        return $port->update([
             'name'=>$request->name,
             'description'=>$request->description,
             'img'=>$request->img,
@@ -67,8 +67,8 @@ class DeparturePortController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DeparturePort $departurePort)
+    public function destroy(Port $port)
     {
-        $departurePort->delete();
+        $port->delete();
     }
 }
