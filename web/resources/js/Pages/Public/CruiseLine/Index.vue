@@ -49,6 +49,7 @@ defineProps({
                         style="cursor: auto"
                         v-for="row in list"
                     >
+                    
                         <Link :href="route('cruise-lines.show', row.id)">
                             <div
                                 class="max-w-lg mx-auto overflow-hidden rounded-lg shadow-lg lg:max-w-none"

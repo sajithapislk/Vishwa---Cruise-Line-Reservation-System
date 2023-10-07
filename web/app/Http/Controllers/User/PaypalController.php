@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\CruiseDeal;
 use App\Models\Payment;
 use App\Models\UpcomingDeal;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PaypalController extends Controller
 {
@@ -107,5 +109,24 @@ class PaypalController extends Controller
         return redirect()
             ->route('createTransaction')
             ->with('error', $response['message'] ?? 'You have canceled the transaction.');
+    }
+
+    function pdf($id) {
+        $cruiseDeal = CruiseDeal::with(['deal','available_room','user','payment'])->find($id);
+        // return $cruiseDeal;
+        return view('PDF.invoice',compact('cruiseDeal'));
+    }
+    function pdf_download($id) {
+        $cruiseDeal = CruiseDeal::with(['deal','available_room','user','payment'])->find($id);
+        // return $cruiseDeal;
+        // return view('PDF.invoice',compact('cruiseDeal'));
+        $pdf = Pdf::loadview('pdf.invoice', [
+            'cruiseDeal' => $cruiseDeal
+        ]);
+        $orientation = 'landscape';
+        $customPaper = array(0,0,950,950);
+        $pdf->setPaper($customPaper, $orientation);
+        return $pdf->stream();
+
     }
 }
