@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class UpcomingDeal extends Model
@@ -38,5 +39,14 @@ class UpcomingDeal extends Model
     public function arrival_port(): HasOne
     {
         return $this->hasOne(Port::class,'id','ap_id');
+    }
+    public function room(): HasOne
+    {
+        return $this->hasOne(ShipRoom::class,'id','sr_id');
+    }
+
+    public function deals(): HasMany
+    {
+        return $this->hasMany(CruiseDeal::class,'ud_id','id');
     }
 }

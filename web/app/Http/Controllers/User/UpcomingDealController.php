@@ -21,7 +21,7 @@ class UpcomingDealController extends Controller
         $ports = Port::all();
         $packages = Package::all();
 
-        $upcomingDeals = UpcomingDeal::with('package','ship','arrival_port','departure_port')->get();
+        $upcomingDeals = UpcomingDeal::with('package','ship','arrival_port','departure_port','room','deals')->get();
 
         return Inertia::render('Public/UpcomingDeal/Index',compact('ships','ports','packages','upcomingDeals'));
     }

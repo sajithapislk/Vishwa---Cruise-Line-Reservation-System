@@ -18,7 +18,6 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('payment_id')->nullable();
             $table->string('status');
-            $table->double('price',8,2);
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('ud_id')->references('id')->on('upcoming_deals');

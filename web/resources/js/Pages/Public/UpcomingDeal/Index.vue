@@ -4,6 +4,9 @@ import treasure_map from "@/assets/svg/treasure_map.svg";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import axios from "axios";
 import GuestLayout from "@/Layouts/GuestLayout2.vue";
+import Modal from "@/Components/Modal.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 import "swiper/css";
 const props = defineProps({
@@ -24,16 +27,58 @@ const filterForm = useForm({
 
 const filter = () => {
     axios
-        .post(route("upcoming-deal.filter") , filterForm)
-        .then((res) => list.value = res.data)
+        .post(route("upcoming-deal.filter"), filterForm)
+        .then((res) => (list.value = res.data))
         .catch((error) => console.log(error));
 };
 
-const submit = (id) => {
-    useForm({
-        id: id,
-    }).post(route("processTransaction"), {
-        onFinish: () => filterForm.reset(),
+
+const paypalFrom = useForm({
+    id: "",
+    qty: 0,
+    processing: false,
+});
+
+const submit = () => {
+    paypalFrom.post(route("processTransaction"), {
+        preserveScroll: true,
+        onSuccess: () => ModalBook(),
+        onFinish: () => paypalFrom.reset(),
+    });
+};
+
+const bookModal = ref(false);
+const roomModal = ref(false);
+
+const roomImg = ref('');
+const total = ref(0);
+
+const bookFrom = useForm({
+    cd_id: "",
+    rate: 0,
+    processing: false,
+});
+
+const ModalBook = (data) => {
+    bookFrom.reset();
+    if (typeof data !== "undefined" && !(data instanceof PointerEvent)) {
+        bookFrom.cd_id = data.id;
+        console.log(bookFrom.cd_id);
+    }
+    bookModal.value = !bookModal.value;
+};
+const ModalRoom = (img) => {
+    if (typeof img !== "undefined" && !(img instanceof PointerEvent)) {
+        roomImg.value = img;
+    }
+    roomModal.value = !roomModal.value;
+};
+
+const bookPayment = () => {
+    bookFrom.post(route("cruise-line-agent.package.store"), {
+        preserveScroll: true,
+        onSuccess: () => ModalBook(),
+        onFinish: () => bookFrom.reset(),
     });
 };
 </script>
@@ -466,6 +511,67 @@ const submit = (id) => {
                                                     width="23"
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                    viewBox="0 0 40 40"
+                                                >
+                                                    <path
+                                                        fill="#fff"
+                                                        d="M8.5 2.5H31.5V37.5H8.5z"
+                                                    />
+                                                    <path
+                                                        fill="#4788c7"
+                                                        d="M31,3v34H9V3H31 M32,2H8v36h24V2L32,2z"
+                                                    />
+                                                    <path
+                                                        fill="#98ccfd"
+                                                        d="M8 5H32V35H8z"
+                                                    />
+                                                    <path
+                                                        fill="#fff"
+                                                        d="M28.5 34.581L28.5 5.419 38.5 1.718 38.5 38.282z"
+                                                    />
+                                                    <path
+                                                        fill="#4788c7"
+                                                        d="M38,2.436v35.127l-9-3.331V5.768L38,2.436 M39,1L28,5.071v29.857L39,39V1L39,1z"
+                                                    />
+                                                    <path
+                                                        fill="#b6dcfe"
+                                                        d="M36 16L36 5.309 31 7.16 31 16zM31 18L31 32.84 36 34.691 36 18z"
+                                                    />
+                                                    <g>
+                                                        <path
+                                                            fill="#fff"
+                                                            d="M1.5 1.718L11.5 5.419 11.5 34.581 1.5 38.282z"
+                                                        />
+                                                        <path
+                                                            fill="#4788c7"
+                                                            d="M2,2.436l9,3.331v28.465l-9,3.331V2.436 M1,1v38l11-4.071V5.071L1,1L1,1z"
+                                                        />
+                                                    </g>
+                                                    <g>
+                                                        <path
+                                                            fill="#b6dcfe"
+                                                            d="M4 16L4 5.309 9 7.16 9 16zM9 18L9 32.84 4 34.691 4 18z"
+                                                        />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                            <p
+                                                class="ml-3 text-sm text-gray-700"
+                                            >
+                                                Room Details :
+                                                {{ row.room.room_view }}
+                                                <PrimaryButton @click="ModalRoom(row.room.img)">View</PrimaryButton>
+                                            </p>
+                                        </div>
+
+                                        <div
+                                            class="flex items-start lg:col-span-1 mt-10"
+                                        >
+                                            <div class="flex-shrink-0">
+                                                <svg
+                                                    width="23"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
                                                     viewBox="0 0 48 48"
                                                 >
                                                     <path
@@ -494,9 +600,7 @@ const submit = (id) => {
                                                 class="ml-3 text-sm text-gray-700"
                                             >
                                                 Departure Port :
-                                                {{
-                                                    row.departure_port.name
-                                                }}
+                                                {{ row.departure_port.name }}
                                                 Arrival Port. :
                                                 {{ row.arrival_port.name }}
                                             </p>
@@ -551,7 +655,7 @@ const submit = (id) => {
                                     </div>
                                 </div>
                                 <button
-                                    @click="submit(row.id)"
+                                    @click="ModalBook(row.id)"
                                     class="mt-3 sm:mt-0 py-2 px-5 md:py-3 md:px-6 bg-indigo-700 hover:bg-indigo-600 font-bold text-white md:text-lg rounded-lg shadow-md"
                                 >
                                     Book now
@@ -563,4 +667,52 @@ const submit = (id) => {
             </section>
         </main>
     </GuestLayout>
+    <Modal :show="bookModal" @close="ModalBook">
+        <div class="p-6">
+            <form action="#">
+                <div class="w-full px-3">
+                    <label
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                        for="grid-password"
+                    >
+                        Rate
+                    </label>
+
+                    <input
+                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        id="grid-email"
+                        type="boolean"
+                        @input="
+                            () => {
+                                if (value > 5 || value < 0) {
+                                    value = 5;
+                                }
+                            }
+                        "
+                        v-model="paypalFrom.cd_id"
+                    />
+                </div>
+            </form>
+
+            <div class="mt-6 flex justify-end">
+                <SecondaryButton @click="ModalBook"> Cancel </SecondaryButton>
+
+                <PrimaryButton
+                    class="ml-3"
+                    :class="{ 'opacity-25': paypalFrom.processing }"
+                    :disabled="paypalFrom.processing"
+                    @click="bookPayment"
+                >
+                    Payment
+                </PrimaryButton>
+            </div>
+        </div>
+    </Modal>
+    <Modal :show="roomModal" @close="ModalRoom">
+        <img
+                alt="..."
+                :src="route('ship.img', roomImg)"
+                class="rounded-lg h-auto max-w-full align-middle border-none"
+            />
+    </Modal>
 </template>

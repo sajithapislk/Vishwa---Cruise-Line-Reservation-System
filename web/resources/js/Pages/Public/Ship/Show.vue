@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import check_white from "@/assets/svg/check-white.svg";
 import arrow_right from "@/assets/svg/arrow-right.svg";
-import GuestLayout from "@/Layouts/GuestLayout.vue";
+import GuestLayout from "@/Layouts/GuestLayout2.vue";
 
 defineProps({
     ship: Array,
