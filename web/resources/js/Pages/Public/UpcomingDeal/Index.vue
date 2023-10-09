@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import treasure_map from "@/assets/svg/treasure_map.svg";
-import { Head, Link, useForm } from "@inertiajs/vue3";
+import { Head, Link, useForm  } from "@inertiajs/vue3";
 import axios from "axios";
 import GuestLayout from "@/Layouts/GuestLayout2.vue";
 import Modal from "@/Components/Modal.vue";
@@ -9,6 +9,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 import "swiper/css";
+
 const props = defineProps({
     upcomingDeals: Array,
     ships: Array,
@@ -16,6 +17,13 @@ const props = defineProps({
     packages: Array,
 });
 const list = ref(props.upcomingDeals);
+
+const bookModal = ref(false);
+const roomModal = ref(false);
+
+const roomImg = ref("");
+const total = ref(0.0);
+const price = ref(0.0);
 
 const filterForm = useForm({
     ship_id: "",
@@ -32,38 +40,18 @@ const filter = () => {
         .catch((error) => console.log(error));
 };
 
-
 const paypalFrom = useForm({
     id: "",
-    qty: 0,
-    processing: false,
-});
-
-const submit = () => {
-    paypalFrom.post(route("processTransaction"), {
-        preserveScroll: true,
-        onSuccess: () => ModalBook(),
-        onFinish: () => paypalFrom.reset(),
-    });
-};
-
-const bookModal = ref(false);
-const roomModal = ref(false);
-
-const roomImg = ref('');
-const total = ref(0);
-
-const bookFrom = useForm({
-    cd_id: "",
-    rate: 0,
+    qty: 1,
     processing: false,
 });
 
 const ModalBook = (data) => {
-    bookFrom.reset();
+    paypalFrom.reset();
     if (typeof data !== "undefined" && !(data instanceof PointerEvent)) {
-        bookFrom.cd_id = data.id;
-        console.log(bookFrom.cd_id);
+        paypalFrom.id = data.id;
+        price.value = data.price;
+        console.log(paypalFrom.cd_id);
     }
     bookModal.value = !bookModal.value;
 };
@@ -73,13 +61,14 @@ const ModalRoom = (img) => {
     }
     roomModal.value = !roomModal.value;
 };
-
-const bookPayment = () => {
-    bookFrom.post(route("cruise-line-agent.package.store"), {
-        preserveScroll: true,
-        onSuccess: () => ModalBook(),
-        onFinish: () => bookFrom.reset(),
-    });
+function bookPayment(){
+    axios.get(route("processTransaction",paypalFrom)).then(response => {
+          // Redirect the user to the PayPal payment page
+          window.location.href = response.data.redirect_url;
+        })
+        .catch(error => {
+          console.error(error);
+        });
 };
 </script>
 <template>
@@ -560,7 +549,12 @@ const bookPayment = () => {
                                             >
                                                 Room Details :
                                                 {{ row.room.room_view }}
-                                                <PrimaryButton @click="ModalRoom(row.room.img)">View</PrimaryButton>
+                                                <PrimaryButton
+                                                    @click="
+                                                        ModalRoom(row.room.img)
+                                                    "
+                                                    >View</PrimaryButton
+                                                >
                                             </p>
                                         </div>
 
@@ -655,7 +649,7 @@ const bookPayment = () => {
                                     </div>
                                 </div>
                                 <button
-                                    @click="ModalBook(row.id)"
+                                    @click="ModalBook(row)"
                                     class="mt-3 sm:mt-0 py-2 px-5 md:py-3 md:px-6 bg-indigo-700 hover:bg-indigo-600 font-bold text-white md:text-lg rounded-lg shadow-md"
                                 >
                                     Book now
@@ -669,13 +663,13 @@ const bookPayment = () => {
     </GuestLayout>
     <Modal :show="bookModal" @close="ModalBook">
         <div class="p-6">
-            <form action="#">
+            <form @submit.prevent="bookPayment">
                 <div class="w-full px-3">
                     <label
                         class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                         for="grid-password"
                     >
-                        Rate
+                        Qty
                     </label>
 
                     <input
@@ -684,35 +678,45 @@ const bookPayment = () => {
                         type="boolean"
                         @input="
                             () => {
-                                if (value > 5 || value < 0) {
-                                    value = 5;
+                                if (paypalFrom.qty > 5 || paypalFrom.qty < 0) {
+                                    paypalFrom.qty = 5;
                                 }
+                                total = price * paypalFrom.qty;
+                                console.log(total);
                             }
                         "
-                        v-model="paypalFrom.cd_id"
+                        v-model="paypalFrom.qty"
                     />
+                    <label
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                        for="grid-password"
+                    >
+                        Total: {{ total }}
+                    </label>
+                </div>
+
+                <div class="mt-6 flex justify-end">
+                    <SecondaryButton @click="ModalBook">
+                        Cancel
+                    </SecondaryButton>
+
+                    <PrimaryButton
+                        class="ml-3"
+                        :class="{ 'opacity-25': paypalFrom.processing }"
+                        :disabled="paypalFrom.processing"
+                        @click="bookPayment"
+                    >
+                        Payment
+                    </PrimaryButton>
                 </div>
             </form>
-
-            <div class="mt-6 flex justify-end">
-                <SecondaryButton @click="ModalBook"> Cancel </SecondaryButton>
-
-                <PrimaryButton
-                    class="ml-3"
-                    :class="{ 'opacity-25': paypalFrom.processing }"
-                    :disabled="paypalFrom.processing"
-                    @click="bookPayment"
-                >
-                    Payment
-                </PrimaryButton>
-            </div>
         </div>
     </Modal>
     <Modal :show="roomModal" @close="ModalRoom">
         <img
-                alt="..."
-                :src="route('ship.img', roomImg)"
-                class="rounded-lg h-auto max-w-full align-middle border-none"
-            />
+            alt="..."
+            :src="route('ship.img', roomImg)"
+            class="rounded-lg h-auto max-w-full align-middle border-none"
+        />
     </Modal>
 </template>

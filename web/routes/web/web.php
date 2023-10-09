@@ -45,7 +45,7 @@ Route::controller(UpcomingDealController::class)->group(function () {
     Route::post('/upcoming-deal','filter')->name('upcoming-deal.filter');
 });
 Route::controller(PayPalController::class)->middleware(['auth'])->group(function () {
-    Route::post('process-transaction', 'processTransaction')->name('processTransaction');
+    Route::get('process-transaction', 'processTransaction')->name('processTransaction');
     Route::get('success-transaction', 'successTransaction')->name('successTransaction');
     Route::get('cancel-transaction', 'cancelTransaction')->name('cancelTransaction');
 });

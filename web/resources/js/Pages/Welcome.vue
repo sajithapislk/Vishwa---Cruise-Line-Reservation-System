@@ -12,6 +12,7 @@ import axios from "axios";
 import { ref, onMounted } from "vue";
 import Pusher from "pusher-js";
 import GuestLayout from "@/Layouts/GuestLayout2.vue";
+import clickSound from "@/Assets/sound/new_message.wav";
 
 defineProps({
     props: Array,
@@ -43,8 +44,13 @@ const form = {
     message: "",
 };
 
-window.Echo.channel("mychannel").listen(".myevent", (data) => {
-    console.log("Received event:", data);
+window.Echo.channel(`chat.1`).listen(".customer-supporter-new-message", (data) => {
+
+    const audio = new Audio(clickSound);
+    audio.play();
+
+    console.log(data);
+    chat.value.push(data.chat);
 });
 </script>
 
@@ -371,10 +377,10 @@ window.Echo.channel("mychannel").listen(".myevent", (data) => {
                     <!-- chat message -->
                     <template v-for="(row, index) in chat">
                         <template v-if="row.who_inserted === 'User'">
-                            <SenderMessage :value="row.message" />
+                            <SenderMessage :value="row.msg" />
                         </template>
                         <template v-else>
-                            <ReceiverMessage :value="row.message" />
+                            <ReceiverMessage :value="row.msg" />
                         </template>
                     </template>
                     <!-- end chat message -->

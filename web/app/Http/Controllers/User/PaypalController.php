@@ -9,6 +9,7 @@ use App\Models\UpcomingDeal;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Inertia\Inertia;
 
 class PaypalController extends Controller
 {
@@ -30,14 +31,16 @@ class PaypalController extends Controller
     {
         $upcomingDeal = UpcomingDeal::find($request->id);
 
+        $price = $request->qty * $upcomingDeal->price;
+
         $provider = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
-        $paypalToken = $provider->getAccessToken();
+        $paypalToken = $provider->getAccessToken()['access_token'];
 
         Payment::create([
             'method'=>'paypal',
             'status'=>'PENDING',
-            'amount'=>$upcomingDeal->price,
+            'amount'=>$price,
             'token'=>$paypalToken,
         ]);
 
@@ -52,25 +55,34 @@ class PaypalController extends Controller
                     "reference_id" => $paypalToken,
                     "amount" => [
                         "currency_code" => "USD",
-                        "value" => $upcomingDeal->price
+                        "value" => $price
                     ]
                 ]
             ]
         ]);
+        // dd($response);
         if (isset($response['id']) && $response['id'] != null) {
+
             // redirect to approve href
             foreach ($response['links'] as $links) {
                 if ($links['rel'] == 'approve') {
                     return redirect()->away($links['href']);
                 }
             }
-            return redirect()
-                ->route('cruise-lines.index')
-                ->with('error', 'Something went wrong.');
+
+            // return redirect()
+            //     ->route('patient.booking.paypal.cancel_transaction')
+            //     ->with('error', 'Something went wrong.');
+
+
+            return Inertia::render('ErrorPage', ['error' => 'Something went wrong.']);
         } else {
-            return redirect()
-                ->route('cruise-lines.index')
-                ->with('error', $response['message'] ?? 'Something went wrong.');
+            // return redirect()
+            //     ->route('patient.booking.paypal.cancel_transaction')
+            //     ->with('error', $response['message'] ?? 'Something went wrong.');
+
+
+            return Inertia::render('ErrorPage', ['error' => 'Something went wrong.']);
         }
     }
     /**

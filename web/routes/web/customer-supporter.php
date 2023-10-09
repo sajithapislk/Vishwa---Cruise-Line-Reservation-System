@@ -14,5 +14,6 @@ Route::middleware('auth:customer-supporter')->group(function () {
 
     Route::controller(LiveChatController::class)->group(function () {
         Route::get('chat/{id}', 'index')->name('chat');
+        Route::post('chat', 'store')->name('chat.store');
     });
 });
