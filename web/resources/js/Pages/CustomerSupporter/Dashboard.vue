@@ -5,16 +5,13 @@ import clickSound from "./sound/new_message.wav";
 import Chat from "./Components/Chat.vue";
 
 defineProps({
-    users: {
-        type: Array,
-    },
+    users: Array,
 });
 
 const list = ref([]);
-const uid = ref("");
 
 const connect = (id) => {
-    uid.value = id;
+    form.id = id;
     console.log(`chat.${id}`);
     axios
         .get(route("customer-supporter.chat", id))
@@ -31,7 +28,7 @@ const connect = (id) => {
 };
 
 const form = {
-    id: 1,
+    id: null,
     message: "",
 };
 

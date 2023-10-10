@@ -33,7 +33,6 @@ const toggleMenu = () => {
 
 const chat = ref([]);
 const chatBox = ref(true);
-const scrollContainer = ref(null);
 
 const ChatBot = () => {
     chatBox.value = !chatBox.value;
@@ -44,208 +43,273 @@ const form = {
     message: "",
 };
 
-window.Echo.channel(`chat.1`).listen(".customer-supporter-new-message", (data) => {
 
-    const audio = new Audio(clickSound);
-    audio.play();
+window.Echo.channel(`chat.1`).listen(
+    ".customer-supporter-new-message",
+    (data) => {
+        const audio = new Audio(clickSound);
+        audio.play();
 
-    console.log(data);
-    chat.value.push(data.chat);
-});
+        console.log(data);
+        chat.value.push(data.chat);
+    }
+);
+
+function submitForm() {
+    axios
+        .post(route("customer-supporter.chat.store"), form)
+        .then((response) => {
+            chat.value.push(response.data);
+            form.message = "";
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
 </script>
 
 <template>
     <Head title="Welcome" />
 
     <GuestLayout>
-    <main class="bg-gray">
-        <section class="section--hero relative">
-            <div class="flex mb-4 absolute top-0 left-0 h-full w-full z-1">
-                <div
-                    class="w-1/3 hidden lg:block bg-main-blue section--hero__height"
-                ></div>
-                <div
-                    class="hero--image w-full lg:w-2/3 bg-gray-500 section--hero__height bg-cover relative"
-                >
+        <main class="bg-gray">
+            <section class="section--hero relative">
+                <div class="flex mb-4 absolute top-0 left-0 h-full w-full z-1">
                     <div
-                        class="absolute top-0 left-0 w-full h-full bg-hero-gradient"
+                        class="w-1/3 hidden lg:block bg-main-blue section--hero__height"
                     ></div>
+                    <div
+                        class="hero--image w-full lg:w-2/3 bg-gray-500 section--hero__height bg-cover relative"
+                    >
+                        <div
+                            class="absolute top-0 left-0 w-full h-full bg-hero-gradient"
+                        ></div>
+                    </div>
                 </div>
-            </div>
-            <div class="absolute top-0 left-0 h-full w-full z-2">
-                <div class="container mx-auto h-full sm:px-4 px-3">
-                    <div class="flex mb-4 h-full items-center">
-                        <div class="w-full lg:w-1/2 text-white font-roboto">
-                            <h1
-                                class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-wide leading-tight mb-12"
-                            >
-                                The South Coast's leading port terminal
-                                operators
-                            </h1>
-                            <p class="font-light text-lg">
-                                SCH is the most experienced stevedore in the
-                                Port of Southampton and our cargo operations are
-                                further enhanced by our own dedicated warehouse
-                                close to the Port, providing secure storage
-                                supplemented by efficient stock management and
-                                distribution.
-                            </p>
+                <div class="absolute top-0 left-0 h-full w-full z-2">
+                    <div class="container mx-auto h-full sm:px-4 px-3">
+                        <div class="flex mb-4 h-full items-center">
+                            <div class="w-full lg:w-1/2 text-white font-roboto">
+                                <h1
+                                    class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-wide leading-tight mb-12"
+                                >
+                                    The South Coast's leading port terminal
+                                    operators
+                                </h1>
+                                <p class="font-light text-lg">
+                                    SCH is the most experienced stevedore in the
+                                    Port of Southampton and our cargo operations
+                                    are further enhanced by our own dedicated
+                                    warehouse close to the Port, providing
+                                    secure storage supplemented by efficient
+                                    stock management and distribution.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <section class="section--services py-16 sm:my-8">
-            <div class="container mx-auto h-full px-3 sm:px-4">
-                <h2
-                    class="mb-4 font-roboto font-semibold text-lg text-gray-700"
-                >
-                    OUR SERVICES
-                </h2>
-                <div
-                    class="flex mb-4 flex-wrap shadow-2xl border-light-gray text-main-blue text-center"
-                >
-                    <div
-                        class="w-1/2 lg:w-1/3 bg-white h-64 border-light-gray p-2 flex flex-col justify-center items-center scale-on-hover hover:shadow-md"
+            </section>
+            <section class="section--services py-16 sm:my-8">
+                <div class="container mx-auto h-full px-3 sm:px-4">
+                    <h2
+                        class="mb-4 font-roboto font-semibold text-lg text-gray-700"
                     >
-                        <img :src="registryEditor" />
-                        <h3 class="font-semibold mt-4 text-xl">
-                            DATA MONITORING
-                        </h3>
-                        <Link href="/"
-                            ><p
-                                class="text-teal-400 hover:text-teal-500 font-semibold text-lg"
-                            >
-                                See our solution
-                            </p></Link
+                        OUR SERVICES
+                    </h2>
+                    <div
+                        class="flex mb-4 flex-wrap shadow-2xl border-light-gray text-main-blue text-center"
+                    >
+                        <div
+                            class="w-1/2 lg:w-1/3 bg-white h-64 border-light-gray p-2 flex flex-col justify-center items-center scale-on-hover hover:shadow-md"
                         >
-                    </div>
-                    <div
-                        class="w-1/2 lg:w-1/3 scale-on-hover hover:shadow-xl bg-white h-64 border-light-gray p-2 flex flex-col justify-center items-center"
-                    >
-                        <img :src="project" />
-                        <h3 class="font-semibold mt-4 text-xl">
-                            PROJECT MANAGEMENT
-                        </h3>
-                        <Link href="/"
-                            ><p
-                                class="text-teal-400 hover:text-teal-500 font-semibold text-lg"
-                            >
-                                See our solution
-                            </p></Link
-                        >
-                    </div>
-                    <div
-                        class="w-1/2 lg:w-1/3 scale-on-hover hover:shadow-xl bg-white h-64 border-light-gray p-2 flex flex-col justify-center items-center"
-                    >
-                        <img :src="warehouse" />
-                        <h3 class="font-semibold mt-4 text-xl">WAREHOUSING</h3>
-                        <Link href="/"
-                            ><p
-                                class="text-teal-400 hover:text-teal-500 font-semibold text-lg"
-                            >
-                                See our solution
-                            </p></Link
-                        >
-                    </div>
-                    <div
-                        class="w-1/2 lg:w-1/3 scale-on-hover hover:shadow-xl bg-main-blue h-64 border-light-gray p-2 flex flex-col justify-center items-center"
-                    >
-                        <img :src="cargoShip" />
-                        <h3 class="text-white font-semibold mt-4 text-xl">
-                            SHIPPING
-                        </h3>
-                        <Link href="/"
-                            ><p
-                                class="text-teal-400 font-semibold text-lg hover:text-teal-500"
-                            >
-                                See our solution
-                            </p></Link
-                        >
-                    </div>
-                    <div
-                        class="w-1/2 lg:w-1/3 scale-on-hover hover:shadow-xl bg-white h-64 border-light-gray p-2 flex flex-col justify-center items-center"
-                    >
-                        <img :src="interstateTruck" />
-                        <h3 class="font-semibold mt-4 text-xl">LOGISTICS</h3>
-                        <Link href="/">
-                            <p
-                                class="text-teal-400 hoer:text-teal-500 font-semibold text-lg"
-                            >
-                                See our solution
-                            </p>
-                        </Link>
-                    </div>
-                    <div
-                        class="w-1/2 lg:w-1/3 scale-on-hover hover:shadow-xl bg-white h-64 border-light-gray p-2 flex flex-col justify-center items-center"
-                    >
-                        <img :src="commercialDevelopmentManagement" />
-                        <h3 class="font-semibold mt-4 text-xl">
-                            PERSONNEL MANAGEMENT
-                        </h3>
-                        <Link href="/"
-                            ><p
-                                class="text-teal-400 hover:text-teal-500 font-semibold text-lg"
-                            >
-                                See our solution
-                            </p></Link
-                        >
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="section--latest-news w-full py-8 sm:my-8">
-            <div class="container mx-auto px-3 sm:px-4 h-full">
-                <div class="flex mb-4 h-full w-full flex-col sm:flex-row">
-                    <div
-                        class="w-full md:w-7/12 section--latest-news__image h-full bg-cover relative bg-center"
-                    ></div>
-                    <div class="w-full md:w-4/12 relative">
-                        <Link href="">
-                            <div
-                                class="bg-white absolute bottom-0 left--4 shadow-full px-6 py-8 max-w-sm min-w-xl font-roboto scale-on-hover"
-                            >
-                                <h3
-                                    class="font-semibold text-main-blue text-lg mb-4 font-regular"
+                            <img :src="registryEditor" />
+                            <h3 class="font-semibold mt-4 text-xl">
+                                DATA MONITORING
+                            </h3>
+                            <Link href="/"
+                                ><p
+                                    class="text-teal-400 hover:text-teal-500 font-semibold text-lg"
                                 >
-                                    LATEST NEWS
-                                </h3>
-                                <h4
-                                    class="text-2xl font-semibold tracking-tight text-gray-900 mb-4"
+                                    See our solution
+                                </p></Link
+                            >
+                        </div>
+                        <div
+                            class="w-1/2 lg:w-1/3 scale-on-hover hover:shadow-xl bg-white h-64 border-light-gray p-2 flex flex-col justify-center items-center"
+                        >
+                            <img :src="project" />
+                            <h3 class="font-semibold mt-4 text-xl">
+                                PROJECT MANAGEMENT
+                            </h3>
+                            <Link href="/"
+                                ><p
+                                    class="text-teal-400 hover:text-teal-500 font-semibold text-lg"
                                 >
-                                    SUMMER OF CRUISE SHIP FIRSTS AT LIVERPOOL
-                                </h4>
-                                <p class="text-gray-700">
-                                    Stevedores and port terminal management
-                                    specialists SCH have been awarded the
-                                    contract for a further three years with
-                                    Liverpool City Council to handle all cruise
-                                    ships calling at Liverpool Cruise Terminal
-                                    (LCT).
+                                    See our solution
+                                </p></Link
+                            >
+                        </div>
+                        <div
+                            class="w-1/2 lg:w-1/3 scale-on-hover hover:shadow-xl bg-white h-64 border-light-gray p-2 flex flex-col justify-center items-center"
+                        >
+                            <img :src="warehouse" />
+                            <h3 class="font-semibold mt-4 text-xl">
+                                WAREHOUSING
+                            </h3>
+                            <Link href="/"
+                                ><p
+                                    class="text-teal-400 hover:text-teal-500 font-semibold text-lg"
+                                >
+                                    See our solution
+                                </p></Link
+                            >
+                        </div>
+                        <div
+                            class="w-1/2 lg:w-1/3 scale-on-hover hover:shadow-xl bg-main-blue h-64 border-light-gray p-2 flex flex-col justify-center items-center"
+                        >
+                            <img :src="cargoShip" />
+                            <h3 class="text-white font-semibold mt-4 text-xl">
+                                SHIPPING
+                            </h3>
+                            <Link href="/"
+                                ><p
+                                    class="text-teal-400 font-semibold text-lg hover:text-teal-500"
+                                >
+                                    See our solution
+                                </p></Link
+                            >
+                        </div>
+                        <div
+                            class="w-1/2 lg:w-1/3 scale-on-hover hover:shadow-xl bg-white h-64 border-light-gray p-2 flex flex-col justify-center items-center"
+                        >
+                            <img :src="interstateTruck" />
+                            <h3 class="font-semibold mt-4 text-xl">
+                                LOGISTICS
+                            </h3>
+                            <Link href="/">
+                                <p
+                                    class="text-teal-400 hoer:text-teal-500 font-semibold text-lg"
+                                >
+                                    See our solution
                                 </p>
-                            </div>
-                        </Link>
+                            </Link>
+                        </div>
+                        <div
+                            class="w-1/2 lg:w-1/3 scale-on-hover hover:shadow-xl bg-white h-64 border-light-gray p-2 flex flex-col justify-center items-center"
+                        >
+                            <img :src="commercialDevelopmentManagement" />
+                            <h3 class="font-semibold mt-4 text-xl">
+                                PERSONNEL MANAGEMENT
+                            </h3>
+                            <Link href="/"
+                                ><p
+                                    class="text-teal-400 hover:text-teal-500 font-semibold text-lg"
+                                >
+                                    See our solution
+                                </p></Link
+                            >
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <section class="section--working w-full my-8 py-16">
-            <div class="container mx-auto px-3 sm:px-4 h-full">
-                <div class="flex mb-4 h-full flex-col md:flex-row">
-                    <div class="w-full md:w-1/2 relative order-2 md:order-2">
+            </section>
+            <section class="section--latest-news w-full py-8 sm:my-8">
+                <div class="container mx-auto px-3 sm:px-4 h-full">
+                    <div class="flex mb-4 h-full w-full flex-col sm:flex-row">
+                        <div
+                            class="w-full md:w-7/12 section--latest-news__image h-full bg-cover relative bg-center"
+                        ></div>
+                        <div class="w-full md:w-4/12 relative">
+                            <Link href="">
+                                <div
+                                    class="bg-white absolute bottom-0 left--4 shadow-full px-6 py-8 max-w-sm min-w-xl font-roboto scale-on-hover"
+                                >
+                                    <h3
+                                        class="font-semibold text-main-blue text-lg mb-4 font-regular"
+                                    >
+                                        LATEST NEWS
+                                    </h3>
+                                    <h4
+                                        class="text-2xl font-semibold tracking-tight text-gray-900 mb-4"
+                                    >
+                                        SUMMER OF CRUISE SHIP FIRSTS AT
+                                        LIVERPOOL
+                                    </h4>
+                                    <p class="text-gray-700">
+                                        Stevedores and port terminal management
+                                        specialists SCH have been awarded the
+                                        contract for a further three years with
+                                        Liverpool City Council to handle all
+                                        cruise ships calling at Liverpool Cruise
+                                        Terminal (LCT).
+                                    </p>
+                                </div>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="section--working w-full my-8 py-16">
+                <div class="container mx-auto px-3 sm:px-4 h-full">
+                    <div class="flex mb-4 h-full flex-col md:flex-row">
+                        <div
+                            class="w-full md:w-1/2 relative order-2 md:order-2"
+                        >
+                            <Link href="">
+                                <div
+                                    class="bg-white absolute bottom-0 right--4 shadow-full px-6 py-8 max-w-xl min-w-xl font-roboto scale-on-hover"
+                                >
+                                    <h3
+                                        class="font-semibold text-main-blue text-lg mb-4 font-regular"
+                                    >
+                                        OPPORTUNITIES
+                                    </h3>
+                                    <h4
+                                        class="text-3xl font-semibold tracking-tight text-gray-900 mb-4"
+                                    >
+                                        Working with us
+                                    </h4>
+                                    <p class="text-gray-700 mb-4">
+                                        Our expertise extends from receiving and
+                                        managing cargo at the quayside to ship
+                                        planning and the subsequent loading,
+                                        discharge and distribution of cargoes.
+                                    </p>
+                                    <p
+                                        class="text-teal-400 font-semibold text-lg"
+                                    >
+                                        See open vacancies
+                                    </p>
+                                </div>
+                            </Link>
+                        </div>
+                        <div
+                            class="w-full md:w-1/2 section--working__image h-full bg-cover order-1 md:order-2"
+                        ></div>
+                    </div>
+                </div>
+            </section>
+            <section
+                class="section--case-study w-full py-16 relative shadow-full"
+            >
+                <div
+                    class="absolute h-full w-full top-0 left-0 bg-hero-gradient z-1"
+                >
+                    <div
+                        class="container mx-auto h-full w-full relative px-3 sm:px-4"
+                    >
                         <Link href="">
                             <div
-                                class="bg-white absolute bottom-0 right--4 shadow-full px-6 py-8 max-w-xl min-w-xl font-roboto scale-on-hover"
+                                class="bg-white absolute sm:bottom-0 mt-8 sm:mt-0 right-0 mx-3 sm:mx-0 px-6 py-8 max-w-xl min-w-xl font-roboto scale-on-hover"
                             >
                                 <h3
                                     class="font-semibold text-main-blue text-lg mb-4 font-regular"
                                 >
-                                    OPPORTUNITIES
+                                    CASE STUDY
                                 </h3>
                                 <h4
                                     class="text-3xl font-semibold tracking-tight text-gray-900 mb-4"
                                 >
-                                    Working with us
+                                    Warehouse peak season
                                 </h4>
                                 <p class="text-gray-700 mb-4">
                                     Our expertise extends from receiving and
@@ -254,205 +318,83 @@ window.Echo.channel(`chat.1`).listen(".customer-supporter-new-message", (data) =
                                     discharge and distribution of cargoes.
                                 </p>
                                 <p class="text-teal-400 font-semibold text-lg">
-                                    See open vacancies
+                                    More information
                                 </p>
                             </div>
                         </Link>
                     </div>
-                    <div
-                        class="w-full md:w-1/2 section--working__image h-full bg-cover order-1 md:order-2"
-                    ></div>
                 </div>
-            </div>
-        </section>
-        <section class="section--case-study w-full py-16 relative shadow-full">
-            <div
-                class="absolute h-full w-full top-0 left-0 bg-hero-gradient z-1"
+            </section>
+        </main>
+        <button
+            class="fixed bottom-4 right-4 inline-flex items-center justify-center text-sm font-medium disabled:pointer-events-none disabled:opacity-50 border rounded-full w-16 h-16 bg-black hover:bg-gray-700 m-0 cursor-pointer border-gray-200 bg-none p-0 normal-case leading-5 hover:text-gray-900"
+            type="button"
+            aria-haspopup="dialog"
+            aria-expanded="false"
+            data-state="closed"
+            @click="ChatBot"
+        >
+            <svg
+                xmlns=" http://www.w3.org/2000/svg"
+                width="30"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-white block border-gray-200 align-middle"
             >
-                <div
-                    class="container mx-auto h-full w-full relative px-3 sm:px-4"
-                >
-                    <Link href="">
-                        <div
-                            class="bg-white absolute sm:bottom-0 mt-8 sm:mt-0 right-0 mx-3 sm:mx-0 px-6 py-8 max-w-xl min-w-xl font-roboto scale-on-hover"
-                        >
-                            <h3
-                                class="font-semibold text-main-blue text-lg mb-4 font-regular"
-                            >
-                                CASE STUDY
-                            </h3>
-                            <h4
-                                class="text-3xl font-semibold tracking-tight text-gray-900 mb-4"
-                            >
-                                Warehouse peak season
-                            </h4>
-                            <p class="text-gray-700 mb-4">
-                                Our expertise extends from receiving and
-                                managing cargo at the quayside to ship planning
-                                and the subsequent loading, discharge and
-                                distribution of cargoes.
-                            </p>
-                            <p class="text-teal-400 font-semibold text-lg">
-                                More information
-                            </p>
-                        </div>
-                    </Link>
-                </div>
+                <path
+                    d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"
+                    class="border-gray-200"
+                ></path>
+            </svg>
+        </button>
+
+        <div
+            v-if="chatBox"
+            style="
+                box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            "
+            class="fixed bottom-[calc(4rem+1.5rem)] right-0 mr-4 bg-white p-6 rounded-lg border border-[#e5e7eb] w-[440px] h-[634px]"
+        >
+            <!-- Heading -->
+            <div class="flex flex-col space-y-1.5 pb-6">
+                <h2 class="font-semibold text-lg tracking-tight">Customer Support</h2>
             </div>
-        </section>
-    </main>
-    <div class="fixed bottom-0 right-0">
-        <div class="flex space-x-4">
-            <div
-                v-if="chatBox"
-                class="w-80 h-96 flex flex-col border shadow-md bg-white"
-            >
-                <div class="flex items-center justify-between border-b p-2">
-                    <!-- user info -->
-                    <div class="flex items-center">
-                        <img
-                            class="rounded-full w-10 h-10"
-                            src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        />
-                        <div class="pl-2">
-                            <div class="font-semibold">
-                                <Link class="hover:underline" href="#"
-                                    >asds</Link
-                                >
-                            </div>
-                            <div class="text-xs text-gray-600">Online</div>
-                        </div>
-                    </div>
-                    <!-- end user info -->
-                    <!-- chat box action -->
-                    <div>
-                        <Link
-                            class="inline-flex hover:bg-indigo-50 rounded-full p-2"
-                            href="#"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-6 w-6"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
-                                />
-                            </svg>
-                        </Link>
 
-                        <button
-                            class="inline-flex hover:bg-indigo-50 rounded-full p-2"
-                            type="button"
-                            @click="ChatBot"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-6 w-6"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12"
-                                />
-                            </svg>
-                        </button>
-                    </div>
-                    <!-- end chat box action -->
-                </div>
+            <!-- Chat Container -->
+            <div class="pr-4 h-[474px]" style="min-width: 100%; display: table">
+                <h1  v-if="!$page.props.auth.user">Sign in first</h1>
 
-                <div
-                    class="flex-1 px-4 py-4 overflow-y-auto"
-                    ref="scrollContainer"
-                >
-                    <!-- chat message -->
-                    <template v-for="(row, index) in chat">
-                        <template v-if="row.who_inserted === 'User'">
-                            <SenderMessage :value="row.msg" />
-                        </template>
-                        <template v-else>
-                            <ReceiverMessage :value="row.msg" />
-                        </template>
+                <template  v-for="(row, index) in chat">
+                    <template v-if="row.who_inserted === 'User'">
+                        <SenderMessage :value="row.msg" />
                     </template>
-                    <!-- end chat message -->
-                </div>
-
-                <div class="flex items-center border-t p-2">
-                    <!-- chat input action -->
-                    <div>
-                        <button
-                            class="inline-flex hover:bg-indigo-50 rounded-full p-2"
-                            type="button"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-6 w-6"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                                />
-                            </svg>
-                        </button>
-                    </div>
-                    <!-- end chat input action -->
-
-                    <div class="w-full mx-2">
-                        <input
-                            class="w-full rounded-full border border-gray-200"
-                            type="text"
-                            placeholder="Aa"
-                            autofocus
-                            v-model="form.message"
-                        />
-                    </div>
-
-                    <!-- chat send action -->
-
-                    <div>
-                        <button
-                            class="inline-flex hover:bg-indigo-50 rounded-full p-2"
-                            type="button"
-                            @click="submitForm"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-6 w-6"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                                />
-                            </svg>
-                        </button>
-                    </div>
-
-                    <!-- end chat send action -->
-                </div>
+                    <template v-else>
+                        <ReceiverMessage :value="row.msg" />
+                    </template>
+                </template>
+            </div>
+            <!-- Input box  -->
+            <div  v-if="$page.props.auth.user" class="flex items-center pt-0">
+                <form class="flex items-center justify-center w-full space-x-2">
+                    <input
+                        class="flex h-10 w-full rounded-md border border-[#e5e7eb] px-3 py-2 text-sm placeholder-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[#9ca3af] disabled:cursor-not-allowed disabled:opacity-50 text-[#030712] focus-visible:ring-offset-2"
+                        placeholder="Type your message"
+                        value=""
+                    />
+                    <button
+                        class="inline-flex items-center justify-center rounded-md text-sm font-medium text-[#f9fafb] disabled:pointer-events-none disabled:opacity-50 bg-black hover:bg-[#111827E6] h-10 px-4 py-2"
+                    >
+                        Send
+                    </button>
+                </form>
             </div>
         </div>
-    </div>
     </GuestLayout>
-
 </template>
 
 <style>
