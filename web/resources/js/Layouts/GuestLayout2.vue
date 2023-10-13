@@ -57,7 +57,7 @@ import { Link } from "@inertiajs/vue3";
                     </div>
                     <template v-else>
                         <Link :href="route('dashboard')" class="py-5 px-3"
-                            >Dashboard</Link
+                            >Booked</Link
                         >
                     </template>
 

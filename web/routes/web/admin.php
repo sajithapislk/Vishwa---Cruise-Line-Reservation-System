@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CompanyWalletController;
 use App\Http\Controllers\Admin\CruiseLineAgentController;
 use App\Http\Controllers\Admin\CruiseLineController;
 use App\Http\Controllers\Admin\ShipController;
@@ -20,5 +21,6 @@ Route::middleware('auth:admin')->group(function () {
         'cruise-line' => CruiseLineController::class,
         'ship' => ShipController::class,
         'cruise-line-agent' => CruiseLineAgentController::class,
+        'company-wallet' => CompanyWalletController::class,
     ]);
 });

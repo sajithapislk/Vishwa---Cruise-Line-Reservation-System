@@ -120,6 +120,17 @@
                         Cruise
                     </Link>
                 </li>
+                <li class="items-center">
+                    <Link
+                        :href="
+                            route('admin.company-wallet.index')
+                        "
+                        class="text-blueGray-500 hover:text-blue-600 text-xs uppercase py-3 font-bold block"
+                    >
+                        <i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
+                        company wallet
+                    </Link>
+                </li>
             </ul>
         </div>
     </div>
