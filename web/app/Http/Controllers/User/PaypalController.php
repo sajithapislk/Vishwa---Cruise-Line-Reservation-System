@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\CompanyWallet;
 use App\Models\CruiseDeal;
+use App\Models\CruiseLineWallet;
 use App\Models\Payment;
+use App\Models\TempDeal;
 use App\Models\UpcomingDeal;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class PaypalController extends Controller
@@ -22,6 +26,16 @@ class PaypalController extends Controller
     {
         return view('transaction');
     }
+    public  function generateRandomString($length = 20)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
     /**
      * process transaction.
      *
@@ -29,6 +43,7 @@ class PaypalController extends Controller
      */
     public function processTransaction(Request $request)
     {
+        $uniqueCode = $this->generateRandomString();
         $upcomingDeal = UpcomingDeal::find($request->id);
 
         $price = $request->qty * $upcomingDeal->price;
@@ -37,11 +52,15 @@ class PaypalController extends Controller
         $provider->setApiCredentials(config('paypal'));
         $paypalToken = $provider->getAccessToken()['access_token'];
 
-        Payment::create([
+        $payment = Payment::create([
             'method'=>'paypal',
             'status'=>'PENDING',
             'amount'=>$price,
-            'token'=>$paypalToken,
+            'token'=>$uniqueCode,
+        ]);
+        TempDeal::create([
+            'ud_id'=>$upcomingDeal->id,
+            'payment_id'=>$payment->id
         ]);
 
         $response = $provider->createOrder([
@@ -52,7 +71,7 @@ class PaypalController extends Controller
             ],
             "purchase_units" => [
                 0 => [
-                    "reference_id" => $paypalToken,
+                    "reference_id" => $uniqueCode,
                     "amount" => [
                         "currency_code" => "USD",
                         "value" => $price
@@ -92,23 +111,45 @@ class PaypalController extends Controller
      */
     public function successTransaction(Request $request)
     {
+        $userId = Auth::id();
+
         $provider = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
         $paypalToken = $provider->getAccessToken();
         $response = $provider->capturePaymentOrder($request['token']);
+        $token = $response['purchase_units'][0]['reference_id'];
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
-            $payment = Payment::where('token',$paypalToken)->first();
+            $payment = Payment::where('token',$token)->first();
+
             $payment->update([
                 'status'=>'SUCCESS',
                 'response'=>$response
             ]);
-            return redirect()
-                ->route('createTransaction')
-                ->with('success', 'Transaction complete.');
+
+            $tempDeal = TempDeal::where('payment_id', $payment->id)->first();
+
+            $cruiseLine = CruiseDeal::create([
+                'ud_id'=>$tempDeal->ud_id,
+                'user_id'=>$userId,
+                'payment_id'=> $payment->id,
+                'status'=>"PAYMENT DONE"
+            ]);
+
+            CompanyWallet::create([
+                'ref' => $cruiseLine->id,
+                'name' => 'cruise_deals',
+                'debit' => $payment->amount,
+            ]);
+
+            CruiseLineWallet::create([
+                'ref' => $cruiseLine->id,
+                'name' => 'cruise_deals',
+                'credit' => $payment->amount,
+            ]);
+
+            return "done";
         } else {
-            return redirect()
-                ->route('createTransaction')
-                ->with('error', $response['message'] ?? 'Something went wrong.');
+            return "error";
         }
     }
     /**

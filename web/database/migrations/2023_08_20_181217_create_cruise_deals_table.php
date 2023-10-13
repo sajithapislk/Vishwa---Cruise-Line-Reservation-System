@@ -14,14 +14,12 @@ return new class extends Migration
         Schema::create('cruise_deals', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('ud_id');
-            $table->unsignedBigInteger('ar_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('payment_id')->nullable();
             $table->string('status');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('ud_id')->references('id')->on('upcoming_deals');
-            $table->foreign('ar_id')->references('id')->on('available_rooms');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

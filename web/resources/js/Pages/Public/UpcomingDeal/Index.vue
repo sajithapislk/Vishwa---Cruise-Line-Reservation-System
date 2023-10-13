@@ -27,16 +27,19 @@ const price = ref(0.0);
 
 const filterForm = useForm({
     ship_id: "",
-    dp_id: "",
     p_id: "",
+    depart_id: "",
+    arrive_id: "",
     depart_at: "",
-    arrive_at: "",
 });
 
 const filter = () => {
     axios
         .post(route("upcoming-deal.filter"), filterForm)
-        .then((res) => (list.value = res.data))
+        .then((res) => {
+            list.value = res.data;
+            console.log(res.data);
+        })
         .catch((error) => console.log(error));
 };
 
@@ -129,7 +132,7 @@ function bookPayment(){
                                                 id="status"
                                                 class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
                                             >
-                                                <option value="*">All</option>
+                                                <option value="">All</option>
                                                 <option
                                                     v-for="row in ships"
                                                     :value="row.id"
@@ -138,20 +141,19 @@ function bookPayment(){
                                                 </option>
                                             </select>
                                         </div>
-
                                         <div class="flex flex-col">
                                             <label
                                                 for="status"
                                                 class="font-medium text-sm text-stone-600"
-                                                >ports</label
+                                                >Departure port</label
                                             >
 
                                             <select
-                                                v-model="filterForm.dp_id"
+                                                v-model="filterForm.depart_id"
                                                 id="status"
                                                 class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
                                             >
-                                                <option value="*">All</option>
+                                                <option value="">All</option>
                                                 <option
                                                     v-for="row in ports"
                                                     :value="row.id"
@@ -160,7 +162,27 @@ function bookPayment(){
                                                 </option>
                                             </select>
                                         </div>
+                                        <div class="flex flex-col">
+                                            <label
+                                                for="status"
+                                                class="font-medium text-sm text-stone-600"
+                                                >arrive port</label
+                                            >
 
+                                            <select
+                                                v-model="filterForm.arrive_id"
+                                                id="status"
+                                                class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+                                            >
+                                                <option>All</option>
+                                                <option
+                                                    v-for="row in ports"
+                                                    :value="row.id"
+                                                >
+                                                    {{ row.name }}
+                                                </option>
+                                            </select>
+                                        </div>
                                         <div class="flex flex-col">
                                             <label
                                                 for="status"
@@ -173,7 +195,7 @@ function bookPayment(){
                                                 id="status"
                                                 class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
                                             >
-                                                <option value="*">All</option>
+                                                <option value="">All</option>
                                                 <option
                                                     v-for="row in packages"
                                                     :value="row.id"
@@ -185,28 +207,14 @@ function bookPayment(){
 
                                         <div class="flex flex-col">
                                             <label
-                                                for="date"
+                                                for="depart_at"
                                                 class="font-medium text-sm text-stone-600"
-                                                >depart_at</label
+                                                >date</label
                                             >
                                             <input
                                                 v-model="filterForm.depart_at"
                                                 type="date"
-                                                id="date"
-                                                class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-                                            />
-                                        </div>
-
-                                        <div class="flex flex-col">
-                                            <label
-                                                for="date"
-                                                class="font-medium text-sm text-stone-600"
-                                                >arrive_at</label
-                                            >
-                                            <input
-                                                v-model="filterForm.arrive_at"
-                                                type="date"
-                                                id="date"
+                                                id="depart_at"
                                                 class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
                                             />
                                         </div>
@@ -595,8 +603,45 @@ function bookPayment(){
                                             >
                                                 Departure Port :
                                                 {{ row.departure_port.name }}
-                                                Arrival Port. :
-                                                {{ row.arrival_port.name }}
+                                            </p>
+                                        </div>
+                                        <div
+                                            class="flex items-start lg:col-span-1"
+                                        >
+                                            <div class="flex-shrink-0">
+                                                <svg
+                                                    width="23"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                    viewBox="0 0 48 48"
+                                                >
+                                                    <path
+                                                        fill="#ffecb3"
+                                                        d="M30,10L18,6L6,10v32l12-4l12,4l12-4V6L30,10z"
+                                                    />
+                                                    <path
+                                                        fill="#ffe082"
+                                                        d="M18,6v32l12,4V10L18,6z"
+                                                    />
+                                                    <path
+                                                        fill="#8d6e63"
+                                                        d="M26.9 15.5c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5.7-1.5 1.5-1.5S26.9 14.7 26.9 15.5zM22.5 18.4c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5c0-.8.7-1.5 1.5-1.5S22.5 17.6 22.5 18.4zM18.1 19.9c0 .8-.7 1.5-1.5 1.5-.8 0-1.5-.7-1.5-1.5 0-.8.7-1.5 1.5-1.5C17.4 18.4 18.1 19.1 18.1 19.9zM31.4 15.5c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5S29 14 29.9 14 31.4 14.7 31.4 15.5zM35.8 17c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5.7-1.5 1.5-1.5S35.8 16.1 35.8 17zM38.7 19.9c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5c0-.8.7-1.5 1.5-1.5S38.7 19.1 38.7 19.9zM38.7 24.3c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5c0-.8.7-1.5 1.5-1.5S38.7 23.5 38.7 24.3zM38.7 28.8c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5.7-1.5 1.5-1.5S38.7 27.9 38.7 28.8zM35.8 31.7c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5.7-1.5 1.5-1.5S35.8 30.9 35.8 31.7zM31.4 31.7c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5.7-1.5 1.5-1.5S31.4 30.9 31.4 31.7zM26.9 30.2c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5.7-1.5 1.5-1.5S26.9 29.4 26.9 30.2zM22.5 31.7c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5.7-1.5 1.5-1.5S22.5 30.9 22.5 31.7zM13.7 18.4c0 .8-.7 1.5-1.5 1.5-.8 0-1.5-.7-1.5-1.5 0-.8.7-1.5 1.5-1.5C13 16.9 13.7 17.6 13.7 18.4z"
+                                                    />
+                                                    <path
+                                                        fill="#f44336"
+                                                        d="M16.6,35.7c-0.3,0-0.5-0.1-0.7-0.3l-4.4-4.4c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l4.4,4.4 c0.4,0.4,0.4,1,0,1.4C17.1,35.6,16.8,35.7,16.6,35.7z"
+                                                    />
+                                                    <path
+                                                        fill="#f44336"
+                                                        d="M12.2,35.7c-0.3,0-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4l4.4-4.4c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4 l-4.4,4.4C12.7,35.6,12.4,35.7,12.2,35.7z"
+                                                    />
+                                                </svg>
+                                            </div>
+                                            <p
+                                                class="ml-3 text-sm text-gray-700"
+                                            >
+                                            Arrival Port :
+                                            {{ row.arrival_port.name }}
                                             </p>
                                         </div>
                                     </div>

@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('available_rooms', function (Blueprint $table) {
+        Schema::create('temp_deals', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('ud_id');
-            $table->boolean('is_booked')->default(false);
+            $table->unsignedBigInteger('payment_id');
             $table->timestamps();
-            $table->softDeletes();
             $table->foreign('ud_id')->references('id')->on('upcoming_deals');
+            $table->foreign('payment_id')->references('id')->on('payments');
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('available_rooms');
+        Schema::dropIfExists('temp_deals');
     }
 };

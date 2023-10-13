@@ -38,25 +38,25 @@ class UpcomingDealController extends Controller
 
     public function filter(Request $request) {
         // dd($request);
-        $list = UpcomingDeal::with('package','ship','arrival_port','departure_port')
+        $list = UpcomingDeal::with('package','ship','arrival_port','departure_port','room','deals')
         ->when($request->ship_id, function ($query) use ($request) {
             return $query->Where('s_id', $request->ship_id);
         })
         ->when($request->dp_id, function ($query) use ($request) {
             return $query->Where('dp_id', $request->dp_id);
         })
-        ->when($request->p_id, function ($query) use ($request) {
-            return $query->Where('p_id', $request->p_id);
+        ->when($request->dp_id, function ($query) use ($request) {
+            return $query->Where('dp_id', $request->depart_id);
+        })
+        ->when($request->ap_id, function ($query) use ($request) {
+            return $query->Where('ap_id', $request->arrive_id);
         })
         ->when($request->depart_at, function ($query) use ($request) {
             return $query->WhereDate('depart_at', $request->depart_at);
         })
-        ->when($request->arrive_at, function ($query) use ($request) {
-            return $query->WhereDate('arrive_at', $request->arrive_at);
-        })
         ->get();
 
-        return response()->json($list);
+        return $list;
 
         // $ships = Ship::all();
         // $ports = Port::all();
