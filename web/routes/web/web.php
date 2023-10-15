@@ -4,11 +4,13 @@ use App\Events\NewMessage;
 use App\Http\Controllers\User\CruiseDealController;
 use App\Http\Controllers\User\CruiseLineController;
 use App\Http\Controllers\User\DashboardController;
+use App\Http\Controllers\User\LiveChatController;
 use App\Http\Controllers\User\PaypalController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\ShipController;
 use App\Http\Controllers\User\UpcomingDealController;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -26,7 +28,9 @@ use Inertia\Inertia;
 require __DIR__.'/auth/user.php';
 
 Route::get('/', function () {
-    return Inertia::render('Welcome');
+    $user_id = Auth::id();
+    // return $user_id ;
+    return Inertia::render('Welcome',compact('user_id'));
 });
 
 Route::controller(CruiseLineController::class)->group(function () {
@@ -51,6 +55,9 @@ Route::controller(PayPalController::class)->middleware(['auth'])->group(function
 });
 Route::controller(CruiseDealController::class)->middleware('auth')->group(function () {
     Route::get('cruise-deal', 'index');
+});
+Route::controller(LiveChatController::class)->middleware('auth')->group(function () {
+    Route::post('chat', 'store')->name('chat.store');
 });
 Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
 Route::middleware('auth')->group(function () {

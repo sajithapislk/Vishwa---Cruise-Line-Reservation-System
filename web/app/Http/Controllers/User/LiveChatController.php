@@ -6,6 +6,7 @@ use App\Events\UserNewMessage;
 use App\Http\Controllers\Controller;
 use App\Models\LiveChat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LiveChatController extends Controller
 {
@@ -19,8 +20,7 @@ class LiveChatController extends Controller
         $chat = new LiveChat;
 
         $chat->msg = $request->message;
-        $chat->cs_id = $request->id;
-        $chat->user_id = 1;
+        $chat->user_id = Auth::id();
         $chat->who_inserted = 'USER';
         $chat->save();
 

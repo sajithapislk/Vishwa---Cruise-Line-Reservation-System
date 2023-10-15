@@ -12,7 +12,6 @@ class LiveChat extends Model
 
     protected $fillable = [
         'user_id',
-        'cs_id',
         'who_inserted',
         'msg',
         'is_read'

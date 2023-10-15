@@ -20,8 +20,7 @@ class LiveChatController extends Controller
         $chat = new LiveChat;
 
         $chat->msg = $request->message;
-        $chat->cs_id = $request->id;
-        $chat->user_id = 1;
+        $chat->user_id = $request->id;
         $chat->who_inserted = 'CUSTOMER_SUPPORTER';
         $chat->save();
 

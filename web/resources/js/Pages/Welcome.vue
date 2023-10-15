@@ -14,8 +14,8 @@ import Pusher from "pusher-js";
 import GuestLayout from "@/Layouts/GuestLayout2.vue";
 import clickSound from "@/Assets/sound/new_message.wav";
 
-defineProps({
-    props: Array,
+const props = defineProps({
+    user_id:String
 });
 
 const btn = ref(null);
@@ -39,25 +39,24 @@ const ChatBot = () => {
 };
 
 const form = {
-    id: "",
     message: "",
 };
 
+if(props.user_id){
+    window.Echo.channel(`chat.${props.user_id}`).listen(
+        ".customer-supporter-new-message",
+        (data) => {
+            const audio = new Audio(clickSound);
+            audio.play();
 
-window.Echo.channel(`chat.1`).listen(
-    ".customer-supporter-new-message",
-    (data) => {
-        const audio = new Audio(clickSound);
-        audio.play();
-
-        console.log(data);
-        chat.value.push(data.chat);
-    }
-);
-
+            console.log(data);
+            chat.value.push(data.chat);
+        }
+    );
+}
 function submitForm() {
     axios
-        .post(route("customer-supporter.chat.store"), form)
+        .post(route("chat.store"), form)
         .then((response) => {
             chat.value.push(response.data);
             form.message = "";
@@ -380,13 +379,14 @@ function submitForm() {
             </div>
             <!-- Input box  -->
             <div  v-if="$page.props.auth.user" class="flex items-center pt-0">
-                <form class="flex items-center justify-center w-full space-x-2">
+                <form @submit.prevent="submitForm" class="flex items-center justify-center w-full space-x-2">
                     <input
                         class="flex h-10 w-full rounded-md border border-[#e5e7eb] px-3 py-2 text-sm placeholder-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[#9ca3af] disabled:cursor-not-allowed disabled:opacity-50 text-[#030712] focus-visible:ring-offset-2"
                         placeholder="Type your message"
-                        value=""
+                        v-model="form.message"
                     />
                     <button
+
                         class="inline-flex items-center justify-center rounded-md text-sm font-medium text-[#f9fafb] disabled:pointer-events-none disabled:opacity-50 bg-black hover:bg-[#111827E6] h-10 px-4 py-2"
                     >
                         Send
