@@ -32,7 +32,7 @@ const form = {
     message: "",
 };
 
-function submitForm() {
+const submitForm = ()=> {
     axios
         .post(route("customer-supporter.chat.store"), form)
         .then((response) => {
