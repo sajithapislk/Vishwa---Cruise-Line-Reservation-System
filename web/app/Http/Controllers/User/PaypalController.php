@@ -88,7 +88,6 @@ class PaypalController extends Controller
                     return $links['href'];
                 }
             }
-
             return redirect()
                 ->route('patient.booking.paypal.cancel_transaction')
                 ->with('error', 'Something went wrong.');

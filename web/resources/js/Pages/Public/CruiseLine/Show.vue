@@ -92,14 +92,7 @@ const onSlideChange = () => {
                                         <p
                                             class="mb-4 text-lg leading-relaxed text-gray-800"
                                         >
-                                            An artist of considerable range,
-                                            Jenna the name taken by
-                                            Melbourne-raised, Brooklyn-based
-                                            Nick Murphy writes, performs and
-                                            records all of his own music, giving
-                                            it a warm, intimate feel with a
-                                            solid groove structure. An artist of
-                                            considerable range.
+                                        {{ cruiseLine.description }}
                                         </p>
                                     </div>
                                 </div>
@@ -124,7 +117,7 @@ const onSlideChange = () => {
                                             >
                                                 <img
                                                     class="w-full h-full object-cover transition group-hover:scale-125"
-                                                    src="./img/team-2-800x800.jpg"
+                                                    :src="route('ship.img',row.img)"
                                                 />
                                             </figure>
                                             <div class="p-4">
