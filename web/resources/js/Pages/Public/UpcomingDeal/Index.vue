@@ -1,15 +1,15 @@
 <script setup>
 import { ref } from "vue";
 import treasure_map from "@/assets/svg/treasure_map.svg";
-import { Head, Link, useForm  } from "@inertiajs/vue3";
+import { Head, Link, useForm } from "@inertiajs/vue3";
 import axios from "axios";
 import GuestLayout from "@/Layouts/GuestLayout2.vue";
 import Modal from "@/Components/Modal.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
+import { useRouter } from 'vue-router';
 
 import "swiper/css";
-
 const props = defineProps({
     upcomingDeals: Array,
     ships: Array,
@@ -64,15 +64,20 @@ const ModalRoom = (img) => {
     }
     roomModal.value = !roomModal.value;
 };
-function bookPayment(){
-    axios.get(route("processTransaction",paypalFrom)).then(response => {
-          // Redirect the user to the PayPal payment page
-          window.location.href = response.data.redirect_url;
+const router = useRouter();
+function bookPayment() {
+    axios
+        .get(route("processTransaction", paypalFrom))
+        .then((response) => {
+            // Redirect the user to the PayPal payment page
+            window.location.href = response.data;
+            // window.location.href = response.data;
         })
-        .catch(error => {
-          console.error(error);
+        .catch((error) => {
+            console.error(error);
         });
-};
+
+}
 </script>
 <template>
     <GuestLayout>
@@ -640,8 +645,8 @@ function bookPayment(){
                                             <p
                                                 class="ml-3 text-sm text-gray-700"
                                             >
-                                            Arrival Port :
-                                            {{ row.arrival_port.name }}
+                                                Arrival Port :
+                                                {{ row.arrival_port.name }}
                                             </p>
                                         </div>
                                     </div>

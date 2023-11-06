@@ -85,23 +85,17 @@ class PaypalController extends Controller
             // redirect to approve href
             foreach ($response['links'] as $links) {
                 if ($links['rel'] == 'approve') {
-                    return redirect()->away($links['href']);
+                    return $links['href'];
                 }
             }
 
-            // return redirect()
-            //     ->route('patient.booking.paypal.cancel_transaction')
-            //     ->with('error', 'Something went wrong.');
-
-
-            return Inertia::render('ErrorPage', ['error' => 'Something went wrong.']);
+            return redirect()
+                ->route('patient.booking.paypal.cancel_transaction')
+                ->with('error', 'Something went wrong.');
         } else {
-            // return redirect()
-            //     ->route('patient.booking.paypal.cancel_transaction')
-            //     ->with('error', $response['message'] ?? 'Something went wrong.');
-
-
-            return Inertia::render('ErrorPage', ['error' => 'Something went wrong.']);
+            return redirect()
+                ->route('patient.booking.paypal.cancel_transaction')
+                ->with('error', $response['message'] ?? 'Something went wrong.');
         }
     }
     /**
