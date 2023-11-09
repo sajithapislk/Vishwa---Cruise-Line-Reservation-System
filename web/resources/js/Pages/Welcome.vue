@@ -280,7 +280,7 @@ function submitForm() {
                                 <h3
                                     class="font-semibold text-main-blue text-2xl mb-4 font-regular"
                                 >
-                                    CASE STUDY
+                                SPECIAL OFFERS AND DISCOUNTS
                                 </h3>
 
                                 <p class="text-gray-700 mb-4">
