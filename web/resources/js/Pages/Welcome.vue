@@ -371,7 +371,7 @@ function submitForm() {
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 
 :root {
-    --main-blue: #2d3091;
+    --main-blue: #f9c805;
 }
 
 .bg-gray {
@@ -411,13 +411,13 @@ function submitForm() {
 }
 
 .bg-hero-gradient {
-    background: #c4c4c4; /* fallback for old browsers */
-    background: -webkit-linear-gradient(
+    /*background: #c4c4c4; /* fallback for old browsers */
+   /* background: -webkit-linear-gradient(
         to right,
         rgba(2, 28, 121, 0.8),
         rgba(5, 118, 230, 0.5)
     ); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(
+    /*background: linear-gradient(
         to right,
         rgba(2, 28, 121, 0.8),
         rgba(5, 118, 230, 0.5)
@@ -425,7 +425,7 @@ function submitForm() {
 }
 
 .bg-gray-200 {
-    background-color: #ffffff;
+   background-color: #ffffff;/* */
 }
 
 .border-light-gray {
