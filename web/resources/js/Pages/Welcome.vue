@@ -92,16 +92,11 @@ function submitForm() {
                                 <h1
                                     class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-wide leading-tight mb-12"
                                 >
-                                    The South Coast's leading port terminal
-                                    operators
+                                    World Largest Online Cruise Reservation
+                                                    <br>Enjoy Your Vacation With Best Deals
                                 </h1>
                                 <p class="font-light text-lg">
-                                    SCH is the most experienced stevedore in the
-                                    Port of Southampton and our cargo operations
-                                    are further enhanced by our own dedicated
-                                    warehouse close to the Port, providing
-                                    secure storage supplemented by efficient
-                                    stock management and distribution.
+                                    Cruiselinereservation.com provides a diverse range of cruise options to cater to a wide variety of travelers with varying preferences and financial constraints. Their offerings are suitable for solo adventurers, families, and those interested in both luxurious and more budget-friendly cruise experiences. With over 20 different cruise lines to choose from, including Carnival Cruises, Royal Caribbean Cruises, MSC Cruises, Celebrity Cruises, Disney Cruises, and more, they offer a comprehensive selection.
                                 </p>
                             </div>
                         </div>
@@ -113,7 +108,7 @@ function submitForm() {
                     <h2
                         class="mb-4 font-roboto font-semibold text-lg text-gray-700"
                     >
-                        OUR SERVICES
+                    CRUISE DESTINATIONS
                     </h2>
                     <div
                         class="flex mb-4 flex-wrap shadow-2xl border-light-gray text-main-blue text-center"
@@ -123,7 +118,7 @@ function submitForm() {
                         >
                             <img :src="registryEditor" />
                             <h3 class="font-semibold mt-4 text-xl">
-                                DATA MONITORING
+                                CRUISE LINES
                             </h3>
                             <Link href="/"
                                 ><p
@@ -138,7 +133,7 @@ function submitForm() {
                         >
                             <img :src="project" />
                             <h3 class="font-semibold mt-4 text-xl">
-                                PROJECT MANAGEMENT
+                                CRUISE SHIPS
                             </h3>
                             <Link href="/"
                                 ><p
@@ -153,7 +148,7 @@ function submitForm() {
                         >
                             <img :src="warehouse" />
                             <h3 class="font-semibold mt-4 text-xl">
-                                WAREHOUSING
+                                DEPARTURE PORTS
                             </h3>
                             <Link href="/"
                                 ><p
@@ -183,7 +178,7 @@ function submitForm() {
                         >
                             <img :src="interstateTruck" />
                             <h3 class="font-semibold mt-4 text-xl">
-                                LOGISTICS
+                                TODAY'S TOP
                             </h3>
                             <Link href="/">
                                 <p
@@ -198,7 +193,7 @@ function submitForm() {
                         >
                             <img :src="commercialDevelopmentManagement" />
                             <h3 class="font-semibold mt-4 text-xl">
-                                PERSONNEL MANAGEMENT
+                                CRUISE DEALS
                             </h3>
                             <Link href="/"
                                 ><p
@@ -223,24 +218,13 @@ function submitForm() {
                                     class="bg-white absolute bottom-0 left--4 shadow-full px-6 py-8 max-w-sm min-w-xl font-roboto scale-on-hover"
                                 >
                                     <h3
-                                        class="font-semibold text-main-blue text-lg mb-4 font-regular"
+                                        class="font-semibold text-main-blue text-2xl mb-4 font-regular"
                                     >
-                                        LATEST NEWS
+                                    TOP CRUISE LINES
                                     </h3>
-                                    <h4
-                                        class="text-2xl font-semibold tracking-tight text-gray-900 mb-4"
-                                    >
-                                        SUMMER OF CRUISE SHIP FIRSTS AT
-                                        LIVERPOOL
-                                    </h4>
+
                                     <p class="text-gray-700">
-                                        Stevedores and port terminal management
-                                        specialists SCH have been awarded the
-                                        contract for a further three years with
-                                        Liverpool City Council to handle all
-                                        cruise ships calling at Liverpool Cruise
-                                        Terminal (LCT).
-                                    </p>
+                                        Experience the pinnacle of cruise travel with our top cruise lines. From the elegance of luxury liners to the family-friendly fun of well-known names, our curated selection ensures the perfect cruise for every traveler. Unwind in opulent staterooms, savor gourmet cuisine, and enjoy world-class entertainment as you embark on a journey with cruise lines renowned for exceptional service and unforgettable experiences.                                  </p>
                                 </div>
                             </Link>
                         </div>
@@ -258,20 +242,13 @@ function submitForm() {
                                     class="bg-white absolute bottom-0 right--4 shadow-full px-6 py-8 max-w-xl min-w-xl font-roboto scale-on-hover"
                                 >
                                     <h3
-                                        class="font-semibold text-main-blue text-lg mb-4 font-regular"
+                                        class="font-semibold text-main-blue text-2xl mb-4 font-regular"
                                     >
-                                        OPPORTUNITIES
+                                    TOP CRUISE DESTINATIONS
                                     </h3>
-                                    <h4
-                                        class="text-3xl font-semibold tracking-tight text-gray-900 mb-4"
-                                    >
-                                        Working with us
-                                    </h4>
+
                                     <p class="text-gray-700 mb-4">
-                                        Our expertise extends from receiving and
-                                        managing cargo at the quayside to ship
-                                        planning and the subsequent loading,
-                                        discharge and distribution of cargoes.
+                                        Explore the world's most enticing cruise destinations with us. From the idyllic Caribbean beaches and breathtaking Alaskan wilderness to the historic charm of the Mediterranean and the exotic allure of the South Pacific, our cruises offer an unforgettable blend of adventure and relaxation. Discover stunning landscapes, vibrant cultures, and unique experiences on every voyage. Join us as we set sail to these top cruise destinations, where your dream vacation becomes a reality.
                                     </p>
                                     <p
                                         class="text-teal-400 font-semibold text-lg"
@@ -301,20 +278,13 @@ function submitForm() {
                                 class="bg-white absolute sm:bottom-0 mt-8 sm:mt-0 right-0 mx-3 sm:mx-0 px-6 py-8 max-w-xl min-w-xl font-roboto scale-on-hover"
                             >
                                 <h3
-                                    class="font-semibold text-main-blue text-lg mb-4 font-regular"
+                                    class="font-semibold text-main-blue text-2xl mb-4 font-regular"
                                 >
-                                    CASE STUDY
+                                SPECIAL OFFERS AND DISCOUNTS
                                 </h3>
-                                <h4
-                                    class="text-3xl font-semibold tracking-tight text-gray-900 mb-4"
-                                >
-                                    Warehouse peak season
-                                </h4>
+
                                 <p class="text-gray-700 mb-4">
-                                    Our expertise extends from receiving and
-                                    managing cargo at the quayside to ship
-                                    planning and the subsequent loading,
-                                    discharge and distribution of cargoes.
+                                    Unlock incredible savings on special cruise deals with our exclusive offers and discounts. Whether you're seeking a romantic getaway, a family adventure, or a luxurious escape, our special cruise deals cater to every traveler. From last-minute offers to early booking discounts, we make dream cruises more accessible than ever. Don't miss the chance to embark on an extraordinary journey while keeping your budget in check. Explore our special cruise offers today and set sail on an unforgettable voyage at an unbeatable value.
                                 </p>
                                 <p class="text-teal-400 font-semibold text-lg">
                                     More information
@@ -401,7 +371,7 @@ function submitForm() {
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 
 :root {
-    --main-blue: #2d3091;
+    --main-blue: #f9c805;
 }
 
 .bg-gray {
@@ -441,13 +411,13 @@ function submitForm() {
 }
 
 .bg-hero-gradient {
-    background: #0575e6; /* fallback for old browsers */
-    background: -webkit-linear-gradient(
+    /*background: #c4c4c4; /* fallback for old browsers */
+   /* background: -webkit-linear-gradient(
         to right,
         rgba(2, 28, 121, 0.8),
         rgba(5, 118, 230, 0.5)
     ); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(
+    /*background: linear-gradient(
         to right,
         rgba(2, 28, 121, 0.8),
         rgba(5, 118, 230, 0.5)
@@ -455,7 +425,7 @@ function submitForm() {
 }
 
 .bg-gray-200 {
-    background-color: #ffffff;
+   background-color: #ffffff;/* */
 }
 
 .border-light-gray {
