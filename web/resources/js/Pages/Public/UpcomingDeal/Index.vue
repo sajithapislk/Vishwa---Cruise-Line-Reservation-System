@@ -7,7 +7,6 @@ import GuestLayout from "@/Layouts/GuestLayout2.vue";
 import Modal from "@/Components/Modal.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
-import { useRouter } from 'vue-router';
 
 import "swiper/css";
 const props = defineProps({
@@ -64,7 +63,6 @@ const ModalRoom = (img) => {
     }
     roomModal.value = !roomModal.value;
 };
-const router = useRouter();
 function bookPayment() {
     axios
         .get(route("processTransaction", paypalFrom))
