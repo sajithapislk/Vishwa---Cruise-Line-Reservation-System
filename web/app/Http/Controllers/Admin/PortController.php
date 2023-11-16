@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Port;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class PortController extends Controller
 {
@@ -13,7 +14,8 @@ class PortController extends Controller
      */
     public function index()
     {
-        //
+        $list = Port::all();
+        return Inertia::render('Admin/Port/Index',compact('list'));
     }
 
     /**
@@ -21,7 +23,8 @@ class PortController extends Controller
      */
     public function create()
     {
-        //
+
+        return Inertia::render('Admin/Port/Create');
     }
 
     /**

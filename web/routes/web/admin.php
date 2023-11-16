@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CompanyWalletController;
 use App\Http\Controllers\Admin\CruiseLineAgentController;
 use App\Http\Controllers\Admin\CruiseLineController;
+use App\Http\Controllers\Admin\PortController;
 use App\Http\Controllers\Admin\ShipController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -22,5 +23,6 @@ Route::middleware('auth:admin')->group(function () {
         'ship' => ShipController::class,
         'cruise-line-agent' => CruiseLineAgentController::class,
         'company-wallet' => CompanyWalletController::class,
+        'port' => PortController::class,
     ]);
 });
