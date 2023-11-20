@@ -32,6 +32,7 @@ class PortController extends Controller
      */
     public function store(Request $request)
     {
+        // imge store doesnt have code
         return Port::create([
             'name'=>$request->name,
             'description'=>$request->description,

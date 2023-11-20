@@ -72,7 +72,7 @@ const submit = () => {
                                 <h3
                                     class="font-semibold text-2xl text-blueGray-700"
                                 >
-                                    Cruise Line Create
+                                    Cruise Ship Insert
                                 </h3>
                             </div>
                             <div
@@ -87,15 +87,115 @@ const submit = () => {
                                     <h1
                                         class="inline text-lg font-semibold leading-none"
                                     >
-                                        Cruise Line Information
+                                        Cruise Ship Information
                                     </h1>
                                 </div>
                             </div>
                             <div class="px-5 pb-5">
+
                                 <div class="flex">
                                     <div class="flex-grow w-1/4 mr-2">
                                         <input
-                                            v-model="submitForm.name"
+                                            v-model="form.style"
+                                            placeholder="Style"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                        />
+                                    </div>
+                                    <div class="flex-grow w-1/4">
+                                        <input
+                                            v-model="form.size"
+                                            placeholder="Size"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                        />
+                                    </div>
+
+                                </div>
+                                <div class="flex">
+                                    <div class="flex-grow w-1/4 mr-2">
+                                        <input
+                                            v-model="form.type"
+                                            placeholder="Type"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                        />
+                                    </div>
+                                    <div class="flex-grow w-1/4">
+                                        <input
+                                            v-model="form.gt"
+                                            placeholder="Gt"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                        />
+                                    </div>
+
+                                </div>
+                                <div class="flex">
+                                    <div class="flex-grow w-1/4 mr-2">
+                                        <input
+                                            v-model="form.length"
+                                            placeholder="Length"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                        />
+                                    </div>
+                                    <div class="flex-grow w-1/4">
+                                        <input
+                                            v-model="form.width"
+                                            placeholder="Width"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                        />
+                                    </div>
+
+                                </div>
+                                <div class="flex">
+                                    <div class="flex-grow w-1/4 mr-2">
+                                        <input
+                                            v-model="form.speed"
+                                            placeholder="Speed"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                        />
+                                    </div>
+                                    <div class="flex-grow w-1/4">
+                                        <input
+                                            v-model="form.decks"
+                                            placeholder="Decks"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                        />
+                                    </div>
+
+                                </div>
+                                <div class="flex">
+                                    <div class="flex-grow w-1/4 mr-2">
+                                        <input
+                                            v-model="form.nop"
+                                            placeholder="Nop"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                        />
+                                    </div>
+                                    <div class="flex-grow w-1/4">
+                                        <input
+                                            v-model="form.no_crew"
+                                            placeholder="No_crew"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                        />
+                                    </div>
+
+                                </div>
+                                <div class="flex">
+                                    <div class="flex-grow w-1/4 mr-2">
+                                        <input
+                                            v-model="form.wa"
+                                            placeholder="Wa"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                        />
+                                    </div>
+
+
+                                </div>
+
+
+
+                                <div class="flex">
+                                    <div class="flex-grow w-1/4 mr-2">
+                                        <input
+                                            v-model="length.name"
                                             placeholder="Name"
                                             class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
                                         />

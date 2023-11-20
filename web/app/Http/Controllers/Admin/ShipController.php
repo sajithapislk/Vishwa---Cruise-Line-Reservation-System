@@ -15,7 +15,7 @@ class ShipController extends Controller
     public function index()
     {
         $list = Ship::all();
-        return Inertia::render('Admin/Ship',compact('list'));
+        return Inertia::render('Admin/Ship/Index',compact('list'));
     }
 
     /**
@@ -23,15 +23,40 @@ class ShipController extends Controller
      */
     public function create()
     {
-        //
+
+        return Inertia::render('Admin/Ship/Create');
     }
+
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $ship=Ship::create([
+            'name'=>$request->name,
+            'description'=>$request->description,
+            'img'=>$request->img,
+            'style'=>$request->style,
+            'size'=>$request->size,
+            'type'=>$request->type,
+             'size'=>$request->size,
+            'launch_at'=>$request->launch_at,
+            'last_refit_at'=>$request->last_refit_at,
+            'gt'=>$request->gt,
+            'length'=>$request->length,
+            'speed'=>$request->speed,
+            'decks'=>$request->decks,
+            'nop'=>$request->nop,
+            'no_crew'=>$request->no_crew,
+            'no_cabins'=>$request->no_cabins,
+            'wa'=>$request->wa,
+
+
+
+
+
+        ]);
     }
 
     /**
