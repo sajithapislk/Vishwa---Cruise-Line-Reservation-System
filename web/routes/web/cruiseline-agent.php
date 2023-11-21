@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CruiseLineAgent\PackageController;
+use App\Http\Controllers\CruiseLineAgent\ShipController;
 use App\Http\Controllers\CruiseLineAgent\ShipRoomController;
 use App\Http\Controllers\CruiseLineAgent\UpcomingDealController;
 use Illuminate\Foundation\Application;
@@ -19,7 +20,8 @@ Route::middleware('auth:cruise-line-agent')->group(function () {
     Route::resources([
         'package' => PackageController::class,
         'upcoming-deal' => UpcomingDealController::class,
-        'ship-room' => ShipRoomController::class
+        'ship-room' => ShipRoomController::class,
+        'ship' => ShipController::class,
     ]);
 
     Route::get('/select-ship/{ship}',[ShipRoomController::class,'select_ship'])->name('ship-room.select-ship');
