@@ -17,7 +17,6 @@ defineProps({
     list: Array,
 });
 
-
 let img = ref("");
 
 const Img_drop = (e) => {
@@ -32,21 +31,36 @@ const selectedFile = (e) => {
 };
 
 const submitForm = useForm({
-    name: "test",
-    description: "test",
-    img: null
+    cl_id: "",
+    type_id: "",
+    name: "",
+    description: "",
+    img: "",
+    style: "",
+    size: "",
+    type: "",
+    launch_at: "",
+    last_refit_at: "",
+    gt: "",
+    length: "",
+    width: "",
+    speed: "",
+    decks: "",
+    nop: "",
+    no_crew: "",
+    no_cabins: "",
+    wa: ""
 });
 
 const submit = () => {
     submitForm
         .post(route("admin.port.store"))
         .then((res) => {
-            console.log('success');
+            console.log("success");
             submitForm.reset();
         })
         .catch((error) => console.log(error));
 };
-
 </script>
 
 <template>
@@ -92,116 +106,96 @@ const submit = () => {
                                 </div>
                             </div>
                             <div class="px-5 pb-5">
-
                                 <div class="flex">
                                     <div class="flex-grow w-1/4 mr-2">
                                         <input
-                                            v-model="form.style"
+                                            v-model="submitForm.style"
                                             placeholder="Style"
-                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transsubmitForm border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
                                         />
                                     </div>
                                     <div class="flex-grow w-1/4">
                                         <input
-                                            v-model="form.size"
+                                            v-model="submitForm.size"
                                             placeholder="Size"
-                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transsubmitForm border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
                                         />
                                     </div>
-
                                 </div>
                                 <div class="flex">
                                     <div class="flex-grow w-1/4 mr-2">
                                         <input
-                                            v-model="form.type"
+                                            v-model="submitForm.type"
                                             placeholder="Type"
-                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transsubmitForm border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
                                         />
                                     </div>
                                     <div class="flex-grow w-1/4">
                                         <input
-                                            v-model="form.gt"
+                                            v-model="submitForm.gt"
                                             placeholder="Gt"
-                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transsubmitForm border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
                                         />
                                     </div>
-
                                 </div>
                                 <div class="flex">
                                     <div class="flex-grow w-1/4 mr-2">
                                         <input
-                                            v-model="form.length"
+                                            v-model="submitForm.length"
                                             placeholder="Length"
-                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transsubmitForm border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
                                         />
                                     </div>
                                     <div class="flex-grow w-1/4">
                                         <input
-                                            v-model="form.width"
+                                            v-model="submitForm.width"
                                             placeholder="Width"
-                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transsubmitForm border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
                                         />
                                     </div>
-
                                 </div>
                                 <div class="flex">
                                     <div class="flex-grow w-1/4 mr-2">
                                         <input
-                                            v-model="form.speed"
+                                            v-model="submitForm.speed"
                                             placeholder="Speed"
-                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transsubmitForm border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
                                         />
                                     </div>
                                     <div class="flex-grow w-1/4">
                                         <input
-                                            v-model="form.decks"
+                                            v-model="submitForm.decks"
                                             placeholder="Decks"
-                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transsubmitForm border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
                                         />
                                     </div>
-
                                 </div>
                                 <div class="flex">
                                     <div class="flex-grow w-1/4 mr-2">
                                         <input
-                                            v-model="form.nop"
+                                            v-model="submitForm.nop"
                                             placeholder="Nop"
-                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transsubmitForm border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
                                         />
                                     </div>
                                     <div class="flex-grow w-1/4">
                                         <input
-                                            v-model="form.no_crew"
+                                            v-model="submitForm.no_crew"
                                             placeholder="No_crew"
-                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transsubmitForm border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
                                         />
                                     </div>
-
                                 </div>
                                 <div class="flex">
                                     <div class="flex-grow w-1/4 mr-2">
                                         <input
-                                            v-model="form.wa"
+                                            v-model="submitForm.wa"
                                             placeholder="Wa"
-                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transsubmitForm border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
                                         />
                                     </div>
-
-
                                 </div>
 
-
-
-                                <div class="flex">
-                                    <div class="flex-grow w-1/4 mr-2">
-                                        <input
-                                            v-model="length.name"
-                                            placeholder="Name"
-                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
-                                        />
-                                    </div>
-
-                                </div>
 
                                 <div class="mt-4">
                                     <InputLabel
