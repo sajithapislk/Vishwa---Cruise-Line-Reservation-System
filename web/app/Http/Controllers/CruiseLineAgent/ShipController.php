@@ -5,6 +5,7 @@ namespace App\Http\Controllers\CruiseLineAgent;
 use App\Http\Controllers\Controller;
 use App\Models\CruiseLine;
 use App\Models\Ship;
+use App\Models\ShipType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -26,9 +27,9 @@ class ShipController extends Controller
      */
     public function create()
     {
-        $cruiseAgent = Auth::user();
-        $cruiseLines = CruiseLine::where('id',$cruiseAgent->cl_id)->get();
-        return Inertia::render('CruiseLineAgent/Ship/Create',compact('cruiseLines'));
+        $shipTypes = ShipType::all();
+        // return $shipTypes;
+        return Inertia::render('CruiseLineAgent/Ship/Create',compact('shipTypes'));
     }
 
 
@@ -37,8 +38,9 @@ class ShipController extends Controller
      */
     public function store(Request $request)
     {
+        $cruiseAgent = Auth::user();
         $ship = Ship::create([
-            'cl_id' => $request->cl_id,
+            'cl_id' => $cruiseAgent->cl_id,
             'type_id' => $request->type_id,
             'name' => $request->name,
             'description' => $request->description,

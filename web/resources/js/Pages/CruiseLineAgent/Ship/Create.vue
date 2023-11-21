@@ -14,7 +14,7 @@ const editorConfig = ref({
 });
 
 defineProps({
-    list: Array,
+    shipTypes: Array,
 });
 
 let img = ref("");
@@ -31,7 +31,6 @@ const selectedFile = (e) => {
 };
 
 const submitForm = useForm({
-    cl_id: "",
     type_id: "",
     name: "",
     description: "",
@@ -49,12 +48,14 @@ const submitForm = useForm({
     nop: "",
     no_crew: "",
     no_cabins: "",
-    wa: ""
+    wa: "",
+    launch_at: "2024",
+    last_refit_at: "2024",
 });
 
 const submit = () => {
     submitForm
-        .post(route("admin.port.store"))
+        .post(route("cruise-line-agent.ship.store"))
         .then((res) => {
             console.log("success");
             submitForm.reset();
@@ -106,6 +107,47 @@ const submit = () => {
                                 </div>
                             </div>
                             <div class="px-5 pb-5">
+                                <div class="flex">
+                                    <div class="flex-grow w-1/4 mr-2">
+                                        <label
+                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                            for="grid-password"
+                                        >
+                                            Name
+                                        </label>
+
+                                        <input
+                                            v-model="submitForm.name"
+                                            placeholder="Style"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 text-base transition duration-500 ease-in-out transsubmitForm border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                        />
+                                    </div>
+                                    <div class="flex-grow w-1/4 mr-2">
+                                        <label
+                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                            for="grid-password"
+                                        >
+                                            Ship Type
+                                        </label>
+                                        <select
+                                            name="s_id"
+                                            v-model="submitForm.type_id"
+                                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                            aria-label="Default select example"
+                                            required
+                                        >
+                                            <option selected disabled>
+                                                Open this select field
+                                            </option>
+                                            <option
+                                                v-for="row in shipTypes"
+                                                :value="row.id"
+                                            >
+                                                {{ row.name }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="flex">
                                     <div class="flex-grow w-1/4 mr-2">
                                         <input
@@ -194,8 +236,14 @@ const submit = () => {
                                             class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transsubmitForm border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
                                         />
                                     </div>
+                                    <div class="flex-grow w-1/4 mr-2">
+                                        <input
+                                            v-model="submitForm.no_cabins"
+                                            placeholder="no_cabins"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transsubmitForm border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                        />
+                                    </div>
                                 </div>
-
 
                                 <div class="mt-4">
                                     <InputLabel
@@ -226,6 +274,30 @@ const submit = () => {
                                         class="mt-2"
                                         :message="submitForm.errors.img"
                                     />
+                                </div>
+                                <div class="flex">
+                                    <div class="flex-grow w-1/4 mr-2">
+                                        <input
+                                            v-model="submitForm.launch_at"
+                                            placeholder="launch_at"
+                                            type="number"
+                                            min="1900"
+                                            max="2035"
+                                            step="1"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transsubmitForm border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                        />
+                                    </div>
+                                    <div class="flex-grow w-1/4">
+                                        <input
+                                            v-model="submitForm.last_refit_at"
+                                            placeholder="last_refit_at"
+                                            type="number"
+                                            min="1900"
+                                            max="2035"
+                                            step="1"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transsubmitForm border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                        />
+                                    </div>
                                 </div>
                             </div>
                             <hr class="mt-4" />
