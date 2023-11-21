@@ -15,6 +15,7 @@ class ShipController extends Controller
     public function index()
     {
         $list = Ship::all();
+        // return $list;
         return Inertia::render('Admin/Ship/Index',compact('list'));
     }
 
