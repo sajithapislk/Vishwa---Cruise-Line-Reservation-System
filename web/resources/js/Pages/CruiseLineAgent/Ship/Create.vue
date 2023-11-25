@@ -150,6 +150,12 @@ const submit = () => {
                                 </div>
                                 <div class="flex">
                                     <div class="flex-grow w-1/4 mr-2">
+                                        <label
+                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                            for="grid-password"
+                                        >
+                                        Style
+                                        </label>
                                         <input
                                             v-model="submitForm.style"
                                             placeholder="Style"

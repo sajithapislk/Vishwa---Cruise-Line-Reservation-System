@@ -140,7 +140,7 @@ class PaypalController extends Controller
                 'credit' => $payment->amount,
             ]);
 
-            return "done";
+            return Inertia::render("User/PaymentSuccess");
         } else {
             return "error";
         }

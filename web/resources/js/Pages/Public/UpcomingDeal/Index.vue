@@ -655,7 +655,7 @@ function bookPayment() {
                                 >
                                     <img
                                         alt="..."
-                                        src="./img/map/1_to_1.jpg"
+                                        :src="'./img/map/' + row.dp_id + '_to_' + row.ap_id + '.jpg'"
                                         class="rounded-lg w-auto align-middle border-none"
                                         style="max-height: 350px"
                                     />
