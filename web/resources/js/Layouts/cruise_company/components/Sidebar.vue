@@ -114,7 +114,7 @@ export default {
                     </li>
                     <li class="items-center">
                         <Link
-                            :href="route('cruise-company-agent.ship.index')"
+                            :href="route('cruise-company-agent.cruise-line.index')"
                             class="text-blueGray-500 hover:text-blue-600 text-xs uppercase py-3 font-bold block"
                         >
                             <i class="fas fa-tv opacity-75 mr-2 text-sm"></i>

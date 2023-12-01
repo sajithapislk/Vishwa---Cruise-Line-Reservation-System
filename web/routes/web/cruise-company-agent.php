@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\CruiseLineAgent\PackageController;
-use App\Http\Controllers\CruiseLineAgent\CruiseLineController;
-use App\Http\Controllers\CruiseLineAgent\CruiseLineRoomController;
-use App\Http\Controllers\CruiseLineAgent\UpcomingDealController;
+use App\Http\Controllers\CruiseCompanyAgent\PackageController;
+use App\Http\Controllers\CruiseCompanyAgent\CruiseLineController;
+use App\Http\Controllers\CruiseCompanyAgent\CruiseLineRoomController;
+use App\Http\Controllers\CruiseCompanyAgent\DashboardController;
+use App\Http\Controllers\CruiseCompanyAgent\UpcomingDealController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -13,15 +14,13 @@ require __DIR__.'/auth/cruise-company-agent.php';
 
 Route::middleware('auth:cruise-company-agent')->group(function () {
 
-    Route::get('/dashboard', function () {
-        return Inertia::render('CruiseCompanyAgent/Dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard',DashboardController::class)->name('dashboard');
 
     Route::resources([
         'package' => PackageController::class,
         'upcoming-deal' => UpcomingDealController::class,
-        'ship-room' => CruiseLineRoomController::class,
-        'ship' => CruiseLineController::class,
+        'cruise-line-room' => CruiseLineRoomController::class,
+        'cruise-line' => CruiseLineController::class,
     ]);
 
     Route::get('/select-ship/{ship}',[CruiseLineRoomController::class,'select_ship'])->name('ship-room.select-ship');

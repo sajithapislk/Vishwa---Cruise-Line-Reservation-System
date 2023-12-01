@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\CruiseLineAgent;
+namespace App\Http\Controllers\CruiseCompanyAgent;
 
 use App\Http\Controllers\Controller;
 use App\Models\CruiseCompany;
