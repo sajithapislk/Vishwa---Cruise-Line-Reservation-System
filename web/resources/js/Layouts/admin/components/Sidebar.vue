@@ -82,7 +82,7 @@
             <ul class="md:flex-col md:min-w-full flex flex-col list-none">
                 <li class="items-center">
                     <Link
-                        :href="route('cruise-line-agent.dashboard')"
+                        :href="route('admin.dashboard')"
                         class="text-blueGray-500 hover:text-blue-600 text-xs uppercase py-3 font-bold block"
                     >
                         <i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
