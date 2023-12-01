@@ -32,10 +32,10 @@ const selectedFile = (e) => {
 };
 
 const cruiseLineForm = useForm({
-    name: "test",
-    description: "test",
+    name: "",
+    description: "",
     img: null,
-    tp: "test",
+    tp: "",
 });
 
 const agentForm = useForm({
@@ -109,7 +109,7 @@ const agentSubmit = () => {
                                 <h3
                                     class="font-semibold text-2xl text-blueGray-700"
                                 >
-                                    Cruise Line Create
+                                    Cruise Company Create
                                 </h3>
                             </div>
                             <div
@@ -124,7 +124,7 @@ const agentSubmit = () => {
                                     <h1
                                         class="inline text-lg font-semibold leading-none"
                                     >
-                                        Cruise Line Information
+                                        Cruise Company Information
                                     </h1>
                                 </div>
                             </div>
@@ -161,7 +161,7 @@ const agentSubmit = () => {
                                 <div class="mt-4">
                                     <InputLabel
                                         for="img"
-                                        value="Verify Address"
+                                        value="Company LOGO"
                                     />
                                     <DropFile
                                         name="img"
