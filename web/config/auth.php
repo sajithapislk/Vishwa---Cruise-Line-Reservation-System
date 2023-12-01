@@ -46,7 +46,7 @@ return [
         ],
         'cruise-company-agent' => [
             'driver' => 'session',
-            'provider' => 'cruise_line_agents',
+            'provider' => 'cruise_company_agents',
         ],
         'customer-supporter' => [
             'driver' => 'session',
@@ -80,7 +80,7 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],
-        'cruise_line_agents' => [
+        'cruise_company_agents' => [
             'driver' => 'eloquent',
             'model' => App\Models\CruiseCompanyAgent::class,
         ],

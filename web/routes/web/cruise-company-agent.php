@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 
-require __DIR__.'/auth/cruiseline-agent.php';
+require __DIR__.'/auth/cruise-company-agent.php';
 
 Route::middleware('auth:cruise-company-agent')->group(function () {
 
