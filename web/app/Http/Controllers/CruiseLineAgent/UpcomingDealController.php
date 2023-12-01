@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\CruiseLineAgent;
 
 use App\Http\Controllers\Controller;
+use App\Models\Package;
 use App\Models\Port;
 use App\Models\Ship;
+use App\Models\ShipRoom;
 use App\Models\UpcomingDeal;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -56,6 +58,8 @@ class UpcomingDealController extends Controller
             $upcomingDeal->img = $image;
             $upcomingDeal->save();
         }
+
+        return back()->with('success', 'successful inserted');
     }
 
     /**
@@ -63,7 +67,10 @@ class UpcomingDealController extends Controller
      */
     public function show(UpcomingDeal $upcomingDeal)
     {
-        //
+        $ports = Port::all();
+        $packages = Package::all();
+        $rooms = ShipRoom::all();
+        return Inertia::render('CruiseLineAgent/UpcomingDeal/Edit',compact('upcomingDeal','ports','packages','rooms'));
     }
 
     /**
@@ -79,7 +86,28 @@ class UpcomingDealController extends Controller
      */
     public function update(Request $request, UpcomingDeal $upcomingDeal)
     {
-        //
+        $upcomingDeal->update([
+            'sr_id'=>$request->sr_id,
+            'dp_id'=>$request->dp_id,
+            'ap_id'=>$request->ap_id,
+            'p_id'=>$request->p_id,
+            'name'=>$request->name,
+            'description'=>$request->description,
+            'img'=>'_',
+            'tax'=>$request->tax,
+            'price'=>$request->price,
+            'depart_at'=>$request->depart_at,
+            'arrive_at'=>$request->arrive_at,
+        ]);
+        
+        // if (!is_null($request->img)) {
+        //     $image = time() . '-l' . '.' . $request->img->extension();
+        //     $request->file('img')->storeAs('upcoming-deal/', $image);
+
+        //     $upcomingDeal->img = $image;
+        //     $upcomingDeal->save();
+        // }
+        return back()->with('success', 'successful updated');
     }
 
     /**

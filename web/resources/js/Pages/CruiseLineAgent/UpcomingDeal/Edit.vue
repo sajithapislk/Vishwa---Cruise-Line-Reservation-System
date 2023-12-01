@@ -8,26 +8,26 @@ import { Head, Link, useForm } from "@inertiajs/vue3";
 import TextInput from "@/Components/TextInput.vue";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
-defineProps({
-    cruises: Array,
+const props = defineProps({
     ports: Array,
-    packages:Array
+    upcomingDeal: Array,
+    packages:Array,
+    rooms:Array
 });
 
 const editor = ref(ClassicEditor);
 const editorConfig = ref({});
 
 const cruiseLineForm = useForm({
-    s_id: "",
-    sr_id: "",
-    dp_id: "",
-    ap_id: "",
-    p_id: "",
-    name: "",
-    description: "",
-    img: null,
-    tax: "",
-    price: "",
+    sr_id: props.upcomingDeal.sr_id,
+    dp_id: props.upcomingDeal.dp_id,
+    ap_id: props.upcomingDeal.ap_id,
+    p_id: props.upcomingDeal.p_id,
+    name: props.upcomingDeal.name,
+    description: props.upcomingDeal.description,
+    img: props.upcomingDeal.img,
+    tax: props.upcomingDeal.tax,
+    price: props.upcomingDeal.price,
     depart_at: "",
     arrive_at: "",
 });
@@ -46,15 +46,13 @@ const selectedFile = (e) => {
 };
 
 const save = () => {
-    cruiseLineForm.post(route("cruise-line-agent.upcoming-deal.store"), {
+    cruiseLineForm.put(route("cruise-line-agent.upcoming-deal.update",props.upcomingDeal.id), {
         preserveScroll: true,
         onSuccess: () => console.log(res),
         onFinish: () => cruiseLineForm.reset(),
     });
 };
 
-let packages = ref([]);
-let rooms = ref([]);
 
 const changeCruise = (event) => {
     console.log(event.target.value);
@@ -113,27 +111,7 @@ const changeCruise = (event) => {
                                 </div>
                             </div>
                             <div class="px-5 pb-5">
-                                <div class="w-full mr-2">
-                                    <InputLabel for="s_id" value="s_id" />
-                                    <select
-                                        name="s_id"
-                                        v-model="cruiseLineForm.s_id"
-                                        @change="changeCruise($event)"
-                                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                        aria-label="Default select example"
-                                        required
-                                    >
-                                        <option selected disabled>
-                                            Open this select field
-                                        </option>
-                                        <option
-                                            v-for="cruise in cruises"
-                                            :value="cruise.id"
-                                        >
-                                            {{ cruise.name }}
-                                        </option>
-                                    </select>
-                                </div>
+
                                 <div class="flex">
                                     <div class="flex-grow w-1/4 mr-2">
                                         <InputLabel for="p_id" value="p_id" />

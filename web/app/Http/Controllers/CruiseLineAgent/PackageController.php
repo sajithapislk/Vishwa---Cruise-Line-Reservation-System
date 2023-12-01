@@ -46,7 +46,7 @@ class PackageController extends Controller
             'is_w'=>$request->is_w,
             'is_s'=>$request->is_s,
         ]);
-        return back()->with('status', 'verification-link-sent');
+        return back()->with('success', 'verification-link-sent');
     }
 
     /**
