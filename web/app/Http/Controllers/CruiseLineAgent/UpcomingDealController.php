@@ -5,8 +5,8 @@ namespace App\Http\Controllers\CruiseLineAgent;
 use App\Http\Controllers\Controller;
 use App\Models\Package;
 use App\Models\Port;
-use App\Models\Ship;
-use App\Models\ShipRoom;
+use App\Models\CruiseLine;
+use App\Models\CruiseLineRoom;
 use App\Models\UpcomingDeal;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -19,7 +19,7 @@ class UpcomingDealController extends Controller
     public function index()
     {
         $list = UpcomingDeal::all();
-        return Inertia::render('CruiseLineAgent/UpcomingDeal/Index',compact('list'));
+        return Inertia::render('CruiseCompanyAgent/UpcomingDeal/Index',compact('list'));
     }
 
     /**
@@ -27,9 +27,9 @@ class UpcomingDealController extends Controller
      */
     public function create()
     {
-        $cruises = Ship::all();
+        $cruises = CruiseLine::all();
         $ports = Port::all();
-        return Inertia::render('CruiseLineAgent/UpcomingDeal/Insert',compact('cruises','ports'));
+        return Inertia::render('CruiseCompanyAgent/UpcomingDeal/Insert',compact('cruises','ports'));
     }
 
     /**
@@ -69,8 +69,8 @@ class UpcomingDealController extends Controller
     {
         $ports = Port::all();
         $packages = Package::all();
-        $rooms = ShipRoom::all();
-        return Inertia::render('CruiseLineAgent/UpcomingDeal/Edit',compact('upcomingDeal','ports','packages','rooms'));
+        $rooms = CruiseLineRoom::all();
+        return Inertia::render('CruiseCompanyAgent/UpcomingDeal/Edit',compact('upcomingDeal','ports','packages','rooms'));
     }
 
     /**
@@ -99,7 +99,7 @@ class UpcomingDealController extends Controller
             'depart_at'=>$request->depart_at,
             'arrive_at'=>$request->arrive_at,
         ]);
-        
+
         // if (!is_null($request->img)) {
         //     $image = time() . '-l' . '.' . $request->img->extension();
         //     $request->file('img')->storeAs('upcoming-deal/', $image);

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\CruiseLineAgent;
 
 use App\Http\Controllers\Controller;
 use App\Models\Package;
-use App\Models\Ship;
+use App\Models\CruiseLine;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -16,8 +16,8 @@ class PackageController extends Controller
     public function index()
     {
         $list = Package::all();
-        $ships = Ship::all();
-        return Inertia::render('CruiseLineAgent/Package',compact('list','ships'));
+        $ships = CruiseLine::all();
+        return Inertia::render('CruiseCompanyAgent/Package',compact('list','ships'));
     }
 
     /**

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\CompanyWallet;
 use App\Models\CruiseDeal;
-use App\Models\CruiseLineWallet;
+use App\Models\CruiseCompanyWallet;
 use App\Models\Payment;
 use App\Models\TempDeal;
 use App\Models\UpcomingDeal;
@@ -134,7 +134,7 @@ class PaypalController extends Controller
                 'debit' => $payment->amount,
             ]);
 
-            CruiseLineWallet::create([
+            CruiseCompanyWallet::create([
                 'ref' => $cruiseLine->id,
                 'name' => 'cruise_deals',
                 'credit' => $payment->amount,

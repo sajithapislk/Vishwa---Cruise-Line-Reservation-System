@@ -3,23 +3,23 @@
 namespace App\Http\Controllers\CruiseLineAgent;
 
 use App\Http\Controllers\Controller;
+use App\Models\CruiseCompany;
 use App\Models\CruiseLine;
-use App\Models\Ship;
-use App\Models\ShipType;
+use App\Models\CruiseLineType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
-class ShipController extends Controller
+class CruiseLineController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $list = Ship::all();
+        $list = CruiseLine::all();
         // return $list;
-        return Inertia::render('CruiseLineAgent/Ship/Index', compact('list'));
+        return Inertia::render('CruiseCompanyAgent/CruiseLine/Index', compact('list'));
     }
 
     /**
@@ -27,9 +27,9 @@ class ShipController extends Controller
      */
     public function create()
     {
-        $shipTypes = ShipType::all();
+        $shipTypes = CruiseLineType::all();
         // return $shipTypes;
-        return Inertia::render('CruiseLineAgent/Ship/Create',compact('shipTypes'));
+        return Inertia::render('CruiseCompanyAgent/CruiseLine/Create',compact('shipTypes'));
     }
 
 
@@ -39,7 +39,7 @@ class ShipController extends Controller
     public function store(Request $request)
     {
         $cruiseAgent = Auth::user();
-        $ship = Ship::create([
+        $ship = CruiseLine::create([
             'cl_id' => $cruiseAgent->cl_id,
             'type_id' => $request->type_id,
             'name' => $request->name,
@@ -73,7 +73,7 @@ class ShipController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Ship $ship)
+    public function show(CruiseLine $ship)
     {
         //
     }
@@ -81,7 +81,7 @@ class ShipController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Ship $ship)
+    public function edit(CruiseLine $ship)
     {
         //
     }
@@ -89,7 +89,7 @@ class ShipController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Ship $ship)
+    public function update(Request $request, CruiseLine $ship)
     {
         //
     }
@@ -97,7 +97,7 @@ class ShipController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Ship $ship)
+    public function destroy(CruiseLine $ship)
     {
         //
     }

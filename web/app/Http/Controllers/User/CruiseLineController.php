@@ -14,22 +14,23 @@ class CruiseLineController extends Controller
      */
     public function index()
     {
-        $list = CruiseLine::all();
-        return Inertia::render('Public/CruiseLine/Index', compact('list'));
+        $ships = CruiseLine::all();
+        return Inertia::render('Public/CruiseLine/Index', compact('ships'));
     }
 
 
     /**
      * Display the specified resource.
      */
-    public function show(CruiseLine $cruiseLine)
+    public function show(CruiseLine $ship)
     {
-        $cruiseLine = $cruiseLine->with('ships')->first();
-        return Inertia::render('Public/CruiseLine/Show', compact('cruiseLine'));
+        $ship=$ship->with('packages')->first();
+        return Inertia::render('Public/CruiseLine/Show', compact('ship'));
     }
+
     public function img($name){
         try {
-            $path = "app/cruise-lines/$name";
+            $path = "app/ships/$name";
             return response()->file(storage_path($path));
         } catch (\Throwable $th) {
             return "error";

@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\CruiseLineAgent;
 
 use App\Http\Controllers\Controller;
-use App\Models\Ship;
-use App\Models\ShipRoom;
+use App\Models\CruiseLine;
+use App\Models\CruiseLineRoom;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class ShipRoomController extends Controller
+class CruiseLineRoomController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $list = ShipRoom::all();
-        return Inertia::render('CruiseLineAgent/ShipRoom/Index',compact('list'));
+        $list = CruiseLineRoom::all();
+        return Inertia::render('CruiseCompanyAgent/CruiseLineRoom/Index',compact('list'));
     }
 
     /**
@@ -24,8 +24,8 @@ class ShipRoomController extends Controller
      */
     public function create()
     {
-        $ships = Ship::all();
-        return Inertia::render('CruiseLineAgent/ShipRoom/Select',compact('ships'));
+        $ships = CruiseLine::all();
+        return Inertia::render('CruiseCompanyAgent/CruiseLineRoom/Select',compact('ships'));
     }
 
     /**
@@ -35,7 +35,7 @@ class ShipRoomController extends Controller
     {
         // return dd($request->all());
         foreach ($request->all() as $key => $row) {
-            $shipRoom = ShipRoom::create([
+            $shipRoom = CruiseLineRoom::create([
                 's_id'=>$row["s_id"],
                 'room_view'=>$row["room_view"],
                 'img'=>'',
@@ -54,7 +54,7 @@ class ShipRoomController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ShipRoom $shipRoom)
+    public function show(CruiseLineRoom $shipRoom)
     {
         //
     }
@@ -62,7 +62,7 @@ class ShipRoomController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ShipRoom $shipRoom)
+    public function edit(CruiseLineRoom $shipRoom)
     {
         //
     }
@@ -70,7 +70,7 @@ class ShipRoomController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ShipRoom $shipRoom)
+    public function update(Request $request, CruiseLineRoom $shipRoom)
     {
         //
     }
@@ -78,17 +78,17 @@ class ShipRoomController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ShipRoom $shipRoom)
+    public function destroy(CruiseLineRoom $shipRoom)
     {
         //
     }
 
-    function select_ship(Ship $ship) {
-        return Inertia::render('CruiseLineAgent/ShipRoom/Insert',compact('ship'));
+    function select_ship(CruiseLine $ship) {
+        return Inertia::render('CruiseCompanyAgent/CruiseLineRoom/Insert',compact('ship'));
     }
 
     function cruiseRoom($cruise_id) {
-        return ShipRoom::where('s_id',$cruise_id)->get();
+        return CruiseLineRoom::where('s_id',$cruise_id)->get();
     }
 
 }

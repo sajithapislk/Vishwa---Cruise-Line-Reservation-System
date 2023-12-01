@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\CompanyWalletController;
-use App\Http\Controllers\Admin\CruiseLineAgentController;
-use App\Http\Controllers\Admin\CruiseLineController;
+use App\Http\Controllers\Admin\CruiseCompanyAgentController;
+use App\Http\Controllers\Admin\CruiseCompanyController;
 use App\Http\Controllers\Admin\PortController;
-use App\Http\Controllers\Admin\ShipController;
+use App\Http\Controllers\Admin\CruiseLineController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -19,9 +19,9 @@ Route::middleware('auth:admin')->group(function () {
     })->name('dashboard');
 
     Route::resources([
-        'cruise-line' => CruiseLineController::class,
-        'ship' => ShipController::class,
-        'cruise-line-agent' => CruiseLineAgentController::class,
+        'cruise-line' => CruiseCompanyController::class,
+        'ship' => CruiseLineController::class,
+        'cruise-line-agent' => CruiseCompanyAgentController::class,
         'company-wallet' => CompanyWalletController::class,
         'port' => PortController::class,
     ]);

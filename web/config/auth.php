@@ -82,7 +82,7 @@ return [
         ],
         'cruise_line_agents' => [
             'driver' => 'eloquent',
-            'model' => App\Models\CruiseLineAgent::class,
+            'model' => App\Models\CruiseCompanyAgent::class,
         ],
         'customer_supporters' => [
             'driver' => 'eloquent',

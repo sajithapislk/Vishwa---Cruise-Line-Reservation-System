@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\CruiseCompany;
 use App\Models\CruiseLine;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class CruiseLineController extends Controller
@@ -15,7 +17,8 @@ class CruiseLineController extends Controller
     public function index()
     {
         $list = CruiseLine::all();
-        return Inertia::render('Admin/CruiseLine/Index',compact('list'));
+        // return $list;
+        return Inertia::render('Admin/CruiseLine', compact('list'));
     }
 
     /**
@@ -23,44 +26,30 @@ class CruiseLineController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/CruiseLine/Create');
+        //
     }
+
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        $cruiseLine = CruiseLine::create([
-            'name'=>$request->name,
-            'tp'=>$request->tp,
-            'description'=>$request->description,
-            'img'=>''
-        ]);
-
-        if (!is_null($request->img)) {
-            $image = time() . '-l' . '.' . $request->img->extension();
-            $request->file('img')->storeAs('cruise-lines/', $image);
-
-            $cruiseLine->img = $image;
-            $cruiseLine->save();
-        }
-        return $cruiseLine;
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(CruiseLine $cruiseLine)
+    public function show(CruiseLine $ship)
     {
         //
-        return Inertia::render('Admin/CruiseLine/Edit',compact('cruiseLine'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CruiseLine $cruiseLine)
+    public function edit(CruiseLine $ship)
     {
         //
     }
@@ -68,31 +57,16 @@ class CruiseLineController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CruiseLine $cruiseLine)
+    public function update(Request $request, CruiseLine $ship)
     {
-        $cruiseLine->update([
-            'name'=>$request->name,
-            'tp'=>$request->tp,
-            'description'=>$request->description
-        ]);
-
-        // if (!is_null($request->img)) {
-        //     $image = time() . '-l' . '.' . $request->img->extension();
-        //     $request->file('img')->storeAs('cruise-lines/', $image);
-
-        //     $cruiseLine->img = $image;
-        //     $cruiseLine->save();
-        // }
-        return back()->with('success', 'insert successful');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CruiseLine $cruiseLine)
+    public function destroy(CruiseLine $ship)
     {
-        $cruiseLine->delete();
-        return back()->with('success', 'delete successful');
+        //
     }
 }
-

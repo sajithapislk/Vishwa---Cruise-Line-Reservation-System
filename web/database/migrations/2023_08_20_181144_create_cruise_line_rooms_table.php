@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cruise_line_wallets', function (Blueprint $table) {
+        Schema::create('cruise_line_rooms', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('ref')->nullable();
-            $table->string('name');
-            $table->double('debit',8,2)->nullable();
-            $table->double('credit',8,2)->nullable();
+            $table->unsignedBigInteger('s_id');
+            $table->string('room_view');
+            $table->string('img');
+            $table->integer('room_count');
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('s_id')->references('id')->on('cruise_lines');
         });
     }
 
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cruise_line_wallets');
+        Schema::dropIfExists('ship_rooms');
     }
 };

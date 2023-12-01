@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Port;
 use App\Models\Package;
-use App\Models\Ship;
+use App\Models\CruiseLine;
 use App\Models\UpcomingDeal;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -17,7 +17,7 @@ class UpcomingDealController extends Controller
      */
     public function index()
     {
-        $ships = Ship::all();
+        $ships = CruiseLine::all();
         $ports = Port::all();
         $packages = Package::all();
 
@@ -58,7 +58,7 @@ class UpcomingDealController extends Controller
 
         return $list;
 
-        // $ships = Ship::all();
+        // $ships = CruiseLine::all();
         // $ports = Port::all();
         // $packages = Package::all();
 

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cruise_line_agents', function (Blueprint $table) {
+        Schema::create('cruise_company_agents', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('cl_id');
             $table->string('name');
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('cl_id')->references('id')->on('cruise_lines');
+            $table->foreign('cl_id')->references('id')->on('cruise_companies');
         });
     }
 

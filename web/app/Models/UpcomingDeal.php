@@ -26,7 +26,7 @@ class UpcomingDeal extends Model
     ];
     public function ship(): HasOne
     {
-        return $this->hasOne(Ship::class,'id','s_id');
+        return $this->hasOne(CruiseLine::class,'id','s_id');
     }
     public function package(): HasOne
     {
@@ -42,7 +42,7 @@ class UpcomingDeal extends Model
     }
     public function room(): HasOne
     {
-        return $this->hasOne(ShipRoom::class,'id','sr_id');
+        return $this->hasOne(CruiseLineRoom::class,'id','sr_id');
     }
 
     public function deals(): HasMany

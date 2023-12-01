@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ship_rooms', function (Blueprint $table) {
+        Schema::create('cruise_company_payments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('s_id');
-            $table->string('room_view');
+            $table->string('method');
+            $table->string('ref');
+            $table->double('amount');
             $table->string('img');
-            $table->integer('room_count');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('s_id')->references('id')->on('ships');
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ship_rooms');
+        Schema::dropIfExists('cruise_line_payments');
     }
 };

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ships', function (Blueprint $table) {
+        Schema::create('cruise_lines', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('cl_id');
             $table->unsignedBigInteger('type_id');
@@ -34,8 +34,8 @@ return new class extends Migration
             $table->integer('wa');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('cl_id')->references('id')->on('cruise_lines');
-            $table->foreign('type_id')->references('id')->on('ship_types');
+            $table->foreign('cl_id')->references('id')->on('cruise_companies');
+            $table->foreign('type_id')->references('id')->on('cruise_line_types');
         });
     }
 

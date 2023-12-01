@@ -3,34 +3,33 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Ship;
+use App\Models\CruiseCompany;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class ShipController extends Controller
+class CruiseCompanyController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $ships = Ship::all();
-        return Inertia::render('Public/Ship/Index', compact('ships'));
+        $list = CruiseCompany::all();
+        return Inertia::render('Public/CruiseLine/Index', compact('list'));
     }
 
 
     /**
      * Display the specified resource.
      */
-    public function show(Ship $ship)
+    public function show(CruiseCompany $cruiseLine)
     {
-        $ship=$ship->with('packages')->first();
-        return Inertia::render('Public/Ship/Show', compact('ship'));
+        $cruiseLine = $cruiseLine->with('ships')->first();
+        return Inertia::render('Public/CruiseLine/Show', compact('cruiseLine'));
     }
-
     public function img($name){
         try {
-            $path = "app/ships/$name";
+            $path = "app/cruise-lines/$name";
             return response()->file(storage_path($path));
         } catch (\Throwable $th) {
             return "error";

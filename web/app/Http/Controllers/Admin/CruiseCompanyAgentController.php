@@ -3,22 +3,22 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\CruiseCompany;
+use App\Models\CruiseCompanyAgent;
 use App\Models\CruiseLine;
-use App\Models\CruiseLineAgent;
-use App\Models\Ship;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class CruiseLineAgentController extends Controller
+class CruiseCompanyAgentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $list = CruiseLineAgent::all();
-        $cruiseLines = CruiseLine::all();
-        return Inertia::render('Admin/CruiseLineAgent',compact('list','cruiseLines'));
+        $list = CruiseCompanyAgent::all();
+        $cruiseLines = CruiseCompany::all();
+        return Inertia::render('Admin/CruiseCompanyAgent',compact('list','cruiseLines'));
     }
 
     /**
@@ -34,7 +34,7 @@ class CruiseLineAgentController extends Controller
      */
     public function store(Request $request)
     {
-        $cruiseLineAgent = CruiseLineAgent::create([
+        $cruiseLineAgent = CruiseCompanyAgent::create([
             'cl_id'=>$request->cl_id,
             'name'=>$request->name,
             'email'=>$request->email,
@@ -47,7 +47,7 @@ class CruiseLineAgentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CruiseLineAgent $cruiseLineAgent)
+    public function show(CruiseCompanyAgent $cruiseLineAgent)
     {
         //
     }
@@ -55,7 +55,7 @@ class CruiseLineAgentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CruiseLineAgent $cruiseLineAgent)
+    public function edit(CruiseCompanyAgent $cruiseLineAgent)
     {
         //
     }
@@ -63,7 +63,7 @@ class CruiseLineAgentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CruiseLineAgent $cruiseLineAgent)
+    public function update(Request $request, CruiseCompanyAgent $cruiseLineAgent)
     {
         return $cruiseLineAgent->update([
             'name'=>$request->name,
@@ -75,7 +75,7 @@ class CruiseLineAgentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CruiseLineAgent $cruiseLineAgent)
+    public function destroy(CruiseCompanyAgent $cruiseLineAgent)
     {
         $cruiseLineAgent->delete();
         return back()->with('success', 'delete successful');

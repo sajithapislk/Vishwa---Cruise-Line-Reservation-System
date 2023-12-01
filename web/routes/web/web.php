@@ -2,12 +2,12 @@
 
 use App\Events\NewMessage;
 use App\Http\Controllers\User\CruiseDealController;
-use App\Http\Controllers\User\CruiseLineController;
+use App\Http\Controllers\User\CruiseCompanyController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\LiveChatController;
 use App\Http\Controllers\User\PaypalController;
 use App\Http\Controllers\User\ProfileController;
-use App\Http\Controllers\User\ShipController;
+use App\Http\Controllers\User\CruiseLineController;
 use App\Http\Controllers\User\UpcomingDealController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
@@ -33,12 +33,12 @@ Route::get('/', function () {
     return Inertia::render('Welcome',compact('user_id'));
 });
 
-Route::controller(CruiseLineController::class)->group(function () {
+Route::controller(CruiseCompanyController::class)->group(function () {
     Route::get('/cruise-lines','index')->name('cruise-lines.index');
     Route::get('/cruise-lines/{cruiseLine}','show')->name('cruise-lines.show');
     Route::get('/cruise-lines-img/{name}', 'img')->name('cruise-lines.img');
 });
-Route::controller(ShipController::class)->group(function () {
+Route::controller(CruiseLineController::class)->group(function () {
     Route::get('/ship','index')->name('ship.index');
     Route::get('/ship/{ship}','show')->name('ship.show');
     Route::get('/ship-img/{name}', 'img')->name('ship.img');
