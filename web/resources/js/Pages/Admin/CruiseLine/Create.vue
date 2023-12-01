@@ -17,8 +17,8 @@ defineProps({
     list: Array,
 });
 
-
 let img = ref("");
+const showErrorMessage = ref(false);
 
 const Img_drop = (e) => {
     console.log("drop1");
@@ -39,7 +39,7 @@ const cruiseLineForm = useForm({
 });
 
 const agentForm = useForm({
-    cl_id : "",
+    cl_id: "",
     name: "",
     email: "",
     password: "",
@@ -48,6 +48,7 @@ const agentForm = useForm({
 const cruiseline_id = ref("");
 
 const submit = () => {
+
     console.log(cruiseLineForm);
     axios
         .post(route("admin.cruise-line.store"), cruiseLineForm, {
@@ -56,8 +57,10 @@ const submit = () => {
             },
         })
         .then((res) => {
+            console.log(res);
             cruiseline_id.value = res.data.id;
-            agentForm.cl_id=cruiseline_id.value;
+            agentForm.cl_id = cruiseline_id.value;
+            console.log(agentForm.cl_id);
             agentSubmit();
         })
         .catch((error) => console.log(error));
@@ -68,9 +71,10 @@ const agentSubmit = () => {
         .post(route("admin.cruise-line-agent.store"), agentForm)
         .then((res) => {
             console.log(res);
+            showErrorMessage.value = true;
         })
         .catch((error) => console.log(error));
-}
+};
 </script>
 
 <template>
@@ -82,6 +86,15 @@ const agentSubmit = () => {
                 </div>
             </div>
         </template>
+
+        <div
+            v-if="showErrorMessage"
+            class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
+            role="alert"
+        >
+            <strong class="font-bold">Success</strong>
+            <span class="block sm:inline">Insert Successful</span>
+        </div>
 
         <div class="w-full xl:w-full mb-12 xl:mb-0 px-4">
             <div

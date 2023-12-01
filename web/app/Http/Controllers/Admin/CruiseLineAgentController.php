@@ -41,7 +41,7 @@ class CruiseLineAgentController extends Controller
             'password'=>$request->password,
         ]);
 
-        return back()->with('status', 'verification-link-sent');
+        return back()->with('success', 'insert successful');
     }
 
     /**

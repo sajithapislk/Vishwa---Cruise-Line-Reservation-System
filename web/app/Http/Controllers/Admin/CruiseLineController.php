@@ -23,7 +23,7 @@ class CruiseLineController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/CruiseLine/Create');
+        return Inertia::render('Admin/CruiseLine/Create')->with('success', 'insert successful');
     }
 
     /**

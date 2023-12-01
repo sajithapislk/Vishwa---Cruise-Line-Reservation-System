@@ -6,6 +6,27 @@
             <slot name="header" />
 
             <div class="px-4 md:px-10 mx-auto w-full -m-24">
+                <div
+                    v-if="$page.props.flash.success"
+                    class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
+                    role="alert"
+                >
+                    <strong class="font-bold">Success</strong>
+                    <span class="block sm:inline">{{
+                        $page.props.flash.success
+                    }}</span>
+                </div>
+                <div
+                    v-if="$page.props.flash.fail"
+                    class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                    role="alert"
+                >
+                    <strong class="font-bold">fail</strong>
+                    <span class="block sm:inline">{{
+                        $page.props.flash.fail
+                    }}</span>
+                </div>
+
                 <slot />
 
                 <footer class="block py-4">
@@ -35,6 +56,7 @@
     </div>
 </template>
 <script setup>
+import { ref } from "vue";
 import NavbarComponent from "./admin/components/Navbar.vue";
 import SidebarComponent from "./admin/components/Sidebar.vue";
 // import LineChartComponent from "./components/LineChart.vue";
