@@ -19,7 +19,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/dashboard';
     public const ADMIN_HOME = '/admin/dashboard';
-    public const CRUISELINE_AGENT_HOME = '/cruiseline-agent/dashboard';
+    public const CRUISELINE_AGENT_HOME = '/cruise-company-agent/dashboard';
     public const CUSTOMER_SUPPORTER_HOME = '/customer-supporter/dashboard';
 
     /**
