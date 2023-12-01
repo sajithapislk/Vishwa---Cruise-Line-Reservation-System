@@ -13,6 +13,10 @@ const editorConfig = ref({
     // The configuration of the editor.
 });
 
+const props = defineProps({
+    cruiseLine: Array,
+});
+
 let img = ref("");
 const showErrorMessage = ref(false);
 
@@ -28,49 +32,23 @@ const selectedFile = (e) => {
 };
 
 const cruiseLineForm = useForm({
-    name: "",
-    description: "",
-    img: null,
-    tp: "",
+    name: props.cruiseLine.name,
+    description: props.cruiseLine.description,
+    img: props.cruiseLine.img,
+    tp: props.cruiseLine.tp,
 });
-
-const agentForm = useForm({
-    cl_id: "",
-    name: "",
-    email: "",
-    password: "",
-});
-
-const cruiseline_id = ref("");
 
 const submit = () => {
 
     console.log(cruiseLineForm);
-    axios
-        .post(route("admin.cruise-line.store"), cruiseLineForm, {
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
-        })
+    cruiseLineForm
+        .put(route("admin.cruise-line.update",props.cruiseLine.id))
         .then((res) => {
             console.log(res);
-            cruiseline_id.value = res.data.id;
-            agentForm.cl_id = cruiseline_id.value;
-            console.log(agentForm.cl_id);
-            agentSubmit();
         })
         .catch((error) => console.log(error));
 };
 
-const agentSubmit = () => {
-    axios
-        .post(route("admin.cruise-line-agent.store"), agentForm)
-        .then((res) => {
-            console.log(res);
-            showErrorMessage.value = true;
-        })
-        .catch((error) => console.log(error));
-};
 </script>
 
 <template>
@@ -82,16 +60,6 @@ const agentSubmit = () => {
                 </div>
             </div>
         </template>
-
-        <div
-            v-if="showErrorMessage"
-            class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
-            role="alert"
-        >
-            <strong class="font-bold">Success</strong>
-            <span class="block sm:inline">Insert Successful</span>
-        </div>
-
         <div class="w-full xl:w-full mb-12 xl:mb-0 px-4">
             <div
                 class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded"
@@ -105,7 +73,7 @@ const agentSubmit = () => {
                                 <h3
                                     class="font-semibold text-2xl text-blueGray-700"
                                 >
-                                    Cruise Company Create
+                                    Cruise Company Edit
                                 </h3>
                             </div>
                             <div
@@ -171,41 +139,6 @@ const agentSubmit = () => {
                                         class="mt-2"
                                         :message="cruiseLineForm.errors.img"
                                     />
-                                </div>
-                            </div>
-                            <div class="flex">
-                                <div class="flex-1 py-5 pl-5 overflow-hidden">
-                                    <h1
-                                        class="inline text-lg font-semibold leading-none"
-                                    >
-                                        Agent Information
-                                    </h1>
-                                </div>
-                                <div class="flex-none pt-2.5 pr-2.5 pl-1"></div>
-                            </div>
-                            <div class="px-5 pb-5">
-                                <input
-                                    v-model="agentForm.name"
-                                    placeholder="Name"
-                                    class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
-                                />
-                                <div class="flex">
-                                    <div class="flex-grow w-1/4 mr-2">
-                                        <input
-                                            v-model="agentForm.email"
-                                            type="text"
-                                            placeholder="Email"
-                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
-                                        />
-                                    </div>
-                                    <div class="flex-grow w-1/4">
-                                        <input
-                                            v-model="agentForm.password"
-                                            type="password"
-                                            placeholder="Password"
-                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
-                                        />
-                                    </div>
                                 </div>
                             </div>
                             <hr class="mt-4" />

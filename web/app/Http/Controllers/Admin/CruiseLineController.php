@@ -23,7 +23,7 @@ class CruiseLineController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/CruiseLine/Create')->with('success', 'insert successful');
+        return Inertia::render('Admin/CruiseLine/Create');
     }
 
     /**
@@ -54,6 +54,7 @@ class CruiseLineController extends Controller
     public function show(CruiseLine $cruiseLine)
     {
         //
+        return Inertia::render('Admin/CruiseLine/Edit',compact('cruiseLine'));
     }
 
     /**
@@ -69,11 +70,20 @@ class CruiseLineController extends Controller
      */
     public function update(Request $request, CruiseLine $cruiseLine)
     {
-        return $cruiseLine->update([
+        $cruiseLine->update([
             'name'=>$request->name,
             'tp'=>$request->tp,
             'description'=>$request->description
         ]);
+
+        // if (!is_null($request->img)) {
+        //     $image = time() . '-l' . '.' . $request->img->extension();
+        //     $request->file('img')->storeAs('cruise-lines/', $image);
+
+        //     $cruiseLine->img = $image;
+        //     $cruiseLine->save();
+        // }
+        return back()->with('success', 'insert successful');
     }
 
     /**
@@ -82,6 +92,7 @@ class CruiseLineController extends Controller
     public function destroy(CruiseLine $cruiseLine)
     {
         $cruiseLine->delete();
+        return back()->with('success', 'delete successful');
     }
 }
 
