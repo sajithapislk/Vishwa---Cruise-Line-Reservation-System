@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import CruiseLineLayout from "@/Layouts/CruiseLineLayout.vue";
+import CruiseLineLayout from "@/Layouts/CruiseCompanyLayout.vue";
 import CardLink from "@/Components/CardLink.vue";
 import img1 from "@/assets/public/img/ship.jpeg";
 const date = new Date().getFullYear();

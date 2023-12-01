@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
-import CruiseLineLayout from "@/Layouts/CruiseLineLayout.vue";
+import CruiseLineLayout from "@/Layouts/CruiseCompanyLayout.vue";
 import Modal from "@/Components/Modal.vue";
 import CheckBoxColor from "@/Components/CheckBoxColor.vue";
 import SecondaryButton from '@/Components/SecondaryButton.vue';

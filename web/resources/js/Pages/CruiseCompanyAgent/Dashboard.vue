@@ -402,6 +402,6 @@
   <script setup>
   // import LineChartComponent from "./components/LineChart.vue";
   // import BarChartComponent from "./components/BarChart.vue";
-  import CruiseLineLayout from '@/Layouts/CruiseLineLayout.vue';
+  import CruiseLineLayout from '@/Layouts/CruiseCompanyLayout.vue';
   const date = new Date().getFullYear();
   </script>

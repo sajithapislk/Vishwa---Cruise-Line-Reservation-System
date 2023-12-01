@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import CruiseLineLayout from "@/Layouts/CruiseLineLayout.vue";
+import CruiseLineLayout from "@/Layouts/CruiseCompanyLayout.vue";
 const date = new Date().getFullYear();
 
 defineProps({

@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import axios from "axios";
-import CruiseLineLayout from "@/Layouts/CruiseLineLayout.vue";
+import CruiseLineLayout from "@/Layouts/CruiseCompanyLayout.vue";
 const date = new Date().getFullYear();
 import DropFile from "@/Components/DropFile.vue";
 import InputError from "@/Components/InputError.vue";

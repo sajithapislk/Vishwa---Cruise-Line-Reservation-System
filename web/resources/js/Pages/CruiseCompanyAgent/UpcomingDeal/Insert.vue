@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import CruiseLineLayout from "@/Layouts/CruiseLineLayout.vue";
+import CruiseLineLayout from "@/Layouts/CruiseCompanyLayout.vue";
 import DropFile from "@/Components/DropFile.vue";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";

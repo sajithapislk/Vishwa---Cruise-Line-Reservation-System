@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { useForm,Link } from "@inertiajs/vue3";
-import CruiseLineLayout from "@/Layouts/CruiseLineLayout.vue";
+import CruiseLineLayout from "@/Layouts/CruiseCompanyLayout.vue";
 const date = new Date().getFullYear();
 import Modal from "@/Components/Modal.vue";
 import CheckBoxColor from "@/Components/CheckBoxColor.vue";

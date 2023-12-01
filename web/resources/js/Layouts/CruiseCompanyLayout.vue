@@ -35,8 +35,8 @@
     </div>
 </template>
 <script setup>
-import NavbarComponent from "./cruise_line/components/Navbar.vue";
-import SidebarComponent from "./cruise_line/components/Sidebar.vue";
+import NavbarComponent from "@/Layouts/cruise_company/components/Navbar.vue";
+import SidebarComponent from "@/Layouts/cruise_company/components/Sidebar.vue";
 // import LineChartComponent from "./components/LineChart.vue";
 // import BarChartComponent from "./components/BarChart.vue";
 const date = new Date().getFullYear();

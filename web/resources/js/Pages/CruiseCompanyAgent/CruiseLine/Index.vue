@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import CruiseLineLayout from "@/Layouts/CruiseLineLayout.vue";
+import CruiseLineLayout from "@/Layouts/CruiseCompanyLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 
 const date = new Date().getFullYear();
