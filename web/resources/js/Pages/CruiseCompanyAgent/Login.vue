@@ -23,7 +23,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('cruise-line-agent.login'), {
+    form.post(route('cruise-company-agent.login'), {
         onFinish: () => form.reset('password'),
     });
 };

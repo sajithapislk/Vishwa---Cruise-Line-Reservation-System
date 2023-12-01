@@ -46,14 +46,14 @@ function ModalRefund(id) {
 };
 
 const feedbackSave = () => {
-    feedbackFrom.post(route("cruise-line-agent.package.store"), {
+    feedbackFrom.post(route("cruise-company-agent.package.store"), {
         preserveScroll: true,
         onSuccess: () => ModalFeedback(),
         onFinish: () => feedbackFrom.reset(),
     });
 };
 const refundSave = () => {
-    refundForm.post(route("cruise-line-agent.package.store"), {
+    refundForm.post(route("cruise-company-agent.package.store"), {
         preserveScroll: true,
         onSuccess: () => ModalRefund(),
         onFinish: () => refundForm.reset(),

@@ -44,7 +44,7 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
-        'cruise-line-agent' => [
+        'cruise-company-agent' => [
             'driver' => 'session',
             'provider' => 'cruise_line_agents',
         ],
@@ -127,7 +127,7 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
-        'cruise-line-agent' => [
+        'cruise-company-agent' => [
             'provider' => 'cruise_line_agents',
             'table' => 'password_reset_tokens',
             'expire' => 60,

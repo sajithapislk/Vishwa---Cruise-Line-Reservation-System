@@ -64,7 +64,7 @@ const submit = () => {
 
 const agentSubmit = () => {
     axios
-        .post(route("admin.cruise-line-agent.store"), agentForm)
+        .post(route("admin.cruise-company-agent.store"), agentForm)
         .then((res) => {
             console.log(res);
             showErrorMessage.value = true;

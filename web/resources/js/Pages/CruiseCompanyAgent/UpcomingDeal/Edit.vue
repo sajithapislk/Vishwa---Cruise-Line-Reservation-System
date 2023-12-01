@@ -46,7 +46,7 @@ const selectedFile = (e) => {
 };
 
 const save = () => {
-    cruiseLineForm.put(route("cruise-line-agent.upcoming-deal.update",props.upcomingDeal.id), {
+    cruiseLineForm.put(route("cruise-company-agent.upcoming-deal.update",props.upcomingDeal.id), {
         preserveScroll: true,
         onSuccess: () => console.log(res),
         onFinish: () => cruiseLineForm.reset(),
@@ -57,12 +57,12 @@ const save = () => {
 const changeCruise = (event) => {
     console.log(event.target.value);
     axios
-        .get(route("cruise-line-agent.cruise-package.list", event.target.value))
+        .get(route("cruise-company-agent.cruise-package.list", event.target.value))
         .then((res) => (packages.value = res.data))
         .catch((error) => console.log(error));
 
     axios
-        .get(route("cruise-line-agent.cruise-room.list", event.target.value))
+        .get(route("cruise-company-agent.cruise-room.list", event.target.value))
         .then((res) => (rooms.value = res.data))
         .catch((error) => console.log(error));
 };

@@ -46,7 +46,7 @@ const selectedFile = (e) => {
 };
 
 const submit = () => {
-    router.post(route("cruise-line-agent.ship-room.store"), tempList.value);
+    router.post(route("cruise-company-agent.ship-room.store"), tempList.value);
     // cruiseLineForm.reset();
     console.log(tempList);
 };

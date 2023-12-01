@@ -11,7 +11,7 @@ use Inertia\Inertia;
 
 require __DIR__.'/auth/cruiseline-agent.php';
 
-Route::middleware('auth:cruise-line-agent')->group(function () {
+Route::middleware('auth:cruise-company-agent')->group(function () {
 
     Route::get('/dashboard', function () {
         return Inertia::render('CruiseCompanyAgent/Dashboard');

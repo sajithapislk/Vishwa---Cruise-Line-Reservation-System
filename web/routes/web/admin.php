@@ -19,9 +19,9 @@ Route::middleware('auth:admin')->group(function () {
     })->name('dashboard');
 
     Route::resources([
-        'cruise-line' => CruiseCompanyController::class,
-        'ship' => CruiseLineController::class,
-        'cruise-line-agent' => CruiseCompanyAgentController::class,
+        'cruise-company' => CruiseCompanyController::class,
+        'cruise-line' => CruiseLineController::class,
+        'cruise-company-agent' => CruiseCompanyAgentController::class,
         'company-wallet' => CompanyWalletController::class,
         'port' => PortController::class,
     ]);

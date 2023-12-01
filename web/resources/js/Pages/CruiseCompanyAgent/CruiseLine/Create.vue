@@ -55,7 +55,7 @@ const submitForm = useForm({
 
 const submit = () => {
     submitForm
-        .post(route("cruise-line-agent.ship.store"))
+        .post(route("cruise-company-agent.ship.store"))
         .then((res) => {
             console.log("success");
             submitForm.reset();

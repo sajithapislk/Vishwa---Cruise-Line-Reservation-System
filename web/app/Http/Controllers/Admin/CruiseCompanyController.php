@@ -15,7 +15,7 @@ class CruiseCompanyController extends Controller
     public function index()
     {
         $list = CruiseCompany::all();
-        return Inertia::render('Admin/CruiseLine/Index',compact('list'));
+        return Inertia::render('Admin/CruiseCompany/Index',compact('list'));
     }
 
     /**
@@ -23,7 +23,7 @@ class CruiseCompanyController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/CruiseLine/Create');
+        return Inertia::render('Admin/CruiseCompany/Create');
     }
 
     /**
@@ -54,7 +54,7 @@ class CruiseCompanyController extends Controller
     public function show(CruiseCompany $cruiseLine)
     {
         //
-        return Inertia::render('Admin/CruiseLine/Edit',compact('cruiseLine'));
+        return Inertia::render('Admin/CruiseCompany/Edit',compact('cruiseLine'));
     }
 
     /**

@@ -29,7 +29,7 @@ const saveform = useForm({
 
 });
 const save = () => {
-    saveform.post(route("cruise-line-agent.package.store"), {
+    saveform.post(route("cruise-company-agent.package.store"), {
         preserveScroll: true,
         onSuccess: () => ModalFun(),
         onFinish: () => saveform.reset(),

@@ -8,7 +8,7 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 defineProps({
     list: Array,
-    cruiseLines: Array,
+    cruiseCompany: Array,
 });
 
 const insertModal = ref(false);
@@ -20,7 +20,7 @@ const saveform = useForm({
     password: "",
 });
 const save = () => {
-    saveform.post(route("admin.cruise-line-agent.store"), {
+    saveform.post(route("admin.cruise-company-agent.store"), {
         preserveScroll: true,
         onSuccess: () => ModalFun(),
         onFinish: () => saveform.reset(),
@@ -34,7 +34,7 @@ const ModalFun = () => {
 };
 const rowDelete = (id) => {
     useForm({ id: id })
-        .delete(route("admin.cruise-line-agent.destroy", id))
+        .delete(route("admin.cruise-company-agent.destroy", id))
         .then((res) => {
             console.log(res);
         })

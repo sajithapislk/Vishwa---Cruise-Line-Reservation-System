@@ -91,7 +91,7 @@
                 </li>
                 <li class="items-center">
                     <Link
-                        :href="route('admin.cruise-line.index')"
+                        :href="route('admin.cruise-company.index')"
                         class="text-blueGray-500 hover:text-blue-600 text-xs uppercase py-3 font-bold block"
                     >
                         <i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
@@ -101,7 +101,7 @@
                 <li class="items-center">
                     <Link
                         :href="
-                            route('admin.cruise-line-agent.index')
+                            route('admin.cruise-company-agent.index')
                         "
                         class="text-blueGray-500 hover:text-blue-600 text-xs uppercase py-3 font-bold block"
                     >
@@ -112,7 +112,7 @@
                 <li class="items-center">
                     <Link
                         :href="
-                            route('admin.ship.index')
+                            route('admin.cruise-line.index')
                         "
                         class="text-blueGray-500 hover:text-blue-600 text-xs uppercase py-3 font-bold block"
                     >

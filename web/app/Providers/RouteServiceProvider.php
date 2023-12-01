@@ -46,7 +46,7 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->prefix('cruiseline-agent')
-                ->name('cruise-line-agent.')
+                ->name('cruise-company-agent.')
                 ->group(base_path('routes/web/cruiseline-agent.php'));
 
             Route::middleware('web')

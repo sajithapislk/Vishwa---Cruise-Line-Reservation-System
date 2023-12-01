@@ -35,7 +35,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => Auth::guard('web')->user(),
                 'customer-supporter' => Auth::guard('customer-supporter')->user(),
-                'cruise-line-agent' => Auth::guard('cruise-line-agent')->user(),
+                'cruise-company-agent' => Auth::guard('cruise-company-agent')->user(),
                 'admin' => Auth::guard('admin')->user(),
             ],
             'ziggy' => function () use ($request) {

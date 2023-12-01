@@ -17,8 +17,8 @@ class CruiseCompanyAgentController extends Controller
     public function index()
     {
         $list = CruiseCompanyAgent::all();
-        $cruiseLines = CruiseCompany::all();
-        return Inertia::render('Admin/CruiseCompanyAgent',compact('list','cruiseLines'));
+        $cruiseCompany = CruiseCompany::all();
+        return Inertia::render('Admin/CruiseCompanyAgent',compact('list','cruiseCompany'));
     }
 
     /**
