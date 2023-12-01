@@ -147,9 +147,7 @@ const rowDelete = (id) =>{
                                     </Link>
                                     <Link
                                         class="bg-blue-500 text-white active:bg-blue-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1"
-                                        :href="
-                                            route('admin.cruise-line.create')
-                                        "
+
                                         @click="rowDelete(row.id)"
                                         style="transition: all 0.15s ease"
                                     >

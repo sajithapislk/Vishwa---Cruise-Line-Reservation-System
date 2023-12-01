@@ -3,12 +3,12 @@ import { ref } from "vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import Modal from "@/Components/Modal.vue";
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 defineProps({
     list: Array,
-    cruiseLines : Array
+    cruiseLines: Array,
 });
 
 const insertModal = ref(false);
@@ -22,7 +22,7 @@ const saveform = useForm({
 const save = () => {
     saveform.post(route("admin.cruise-line-agent.store"), {
         preserveScroll: true,
-        onSuccess: () =>  ModalFun(),
+        onSuccess: () => ModalFun(),
         onFinish: () => saveform.reset(),
     });
 };
@@ -31,6 +31,14 @@ const ModalFun = () => {
     insertModal.value = !insertModal.value;
 
     saveform.reset();
+};
+const rowDelete = (id) => {
+    useForm({ id: id })
+        .delete(route("admin.cruise-line-agent.destroy", id))
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((error) => console.log(error));
 };
 </script>
 
@@ -109,6 +117,9 @@ const ModalFun = () => {
                                 >
                                     Created At
                                 </th>
+                                <th
+                                    class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                                ></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -143,6 +154,18 @@ const ModalFun = () => {
                                 >
                                     {{ row.created_at }}
                                 </td>
+                                <td
+                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
+                                >
+                                    <Link
+                                        class="bg-blue-500 text-white active:bg-blue-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1"
+
+                                        @click="rowDelete(row.id)"
+                                        style="transition: all 0.15s ease"
+                                    >
+                                        Delete
+                                    </Link>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -172,7 +195,10 @@ const ModalFun = () => {
                             <option selected disabled>
                                 Open this select field
                             </option>
-                            <option v-for="cruiseLine in cruiseLines" :value="cruiseLine.id">
+                            <option
+                                v-for="cruiseLine in cruiseLines"
+                                :value="cruiseLine.id"
+                            >
                                 {{ cruiseLine.name }}
                             </option>
                         </select>

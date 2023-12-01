@@ -78,5 +78,6 @@ class CruiseLineAgentController extends Controller
     public function destroy(CruiseLineAgent $cruiseLineAgent)
     {
         $cruiseLineAgent->delete();
+        return back()->with('success', 'delete successful');
     }
 }
