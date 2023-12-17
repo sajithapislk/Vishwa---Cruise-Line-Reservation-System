@@ -15,7 +15,7 @@ class CruiseCompanyController extends Controller
     public function index()
     {
         $list = CruiseCompany::all();
-        return Inertia::render('Public/CruiseLine/Index', compact('list'));
+        return Inertia::render('Public/CruiseCompany/Index', compact('list'));
     }
 
 
@@ -25,11 +25,11 @@ class CruiseCompanyController extends Controller
     public function show(CruiseCompany $cruiseLine)
     {
         $cruiseLine = $cruiseLine->with('ships')->first();
-        return Inertia::render('Public/CruiseLine/Show', compact('cruiseLine'));
+        return Inertia::render('Public/CruiseCompany/Show', compact('cruiseLine'));
     }
     public function img($name){
         try {
-            $path = "app/cruise-lines/$name";
+            $path = "app/cruise-company/$name";
             return response()->file(storage_path($path));
         } catch (\Throwable $th) {
             return "error";

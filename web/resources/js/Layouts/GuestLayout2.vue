@@ -12,7 +12,7 @@ import { Link } from "@inertiajs/vue3";
                         <!-- logo -->
                         <div>
                             <Link
-                                href="#"
+                                href="/"
                                 class="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900"
                             >
                                 <span class="font-bold"
