@@ -76,7 +76,7 @@ const maxWidthClass = computed(() => {
                     </div>
                 </Transition>
 
-                <Transition
+                <Transition         
                     enter-active-class="ease-out duration-300"
                     enter-from-class="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     enter-to-class="opacity-100 translate-y-0 sm:scale-100"

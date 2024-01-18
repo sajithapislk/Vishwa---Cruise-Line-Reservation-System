@@ -7,7 +7,7 @@ import arrow_right from "@/assets/svg/arrow-right.svg";
 import GuestLayout from "@/Layouts/GuestLayout2.vue";
 
 defineProps({
-    ships: Object,
+    list: Array,
 });
 </script>
 <template>
@@ -50,7 +50,7 @@ defineProps({
                     <div
                         class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 pb-5"
                         style="cursor: auto"
-                        v-for="row in ships"
+                        v-for="row in list"
                     >
                         <div class="max-w-lg mx-auto overflow-hidden rounded-lg shadow-lg lg:max-w-none">
                             <div

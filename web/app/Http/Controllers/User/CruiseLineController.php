@@ -14,8 +14,8 @@ class CruiseLineController extends Controller
      */
     public function index()
     {
-        $ships = CruiseLine::all();
-        return Inertia::render('Public/CruiseLine/Index', compact('ships'));
+        $list = CruiseLine::all();
+        return Inertia::render('Public/CruiseLine/Index', compact('list'));
     }
 
 
