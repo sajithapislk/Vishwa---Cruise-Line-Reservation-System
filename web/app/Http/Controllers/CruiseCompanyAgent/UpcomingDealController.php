@@ -5,9 +5,9 @@ namespace App\Http\Controllers\CruiseCompanyAgent;
 use App\Http\Controllers\Controller;
 use App\Models\Package;
 use App\Models\Port;
-use App\Models\CruiseLine;
-use App\Models\CruiseLineRoom;
-use App\Models\UpcomingDeal;
+use App\Models\CruiseShip;
+use App\Models\CruiseShipRoom;
+use App\Models\UpcomingReservations;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -18,8 +18,8 @@ class UpcomingDealController extends Controller
      */
     public function index()
     {
-        $list = UpcomingDeal::all();
-        return Inertia::render('CruiseCompanyAgent/UpcomingDeal/Index',compact('list'));
+        $list = UpcomingReservations::all();
+        return Inertia::render('CruiseCompanyAgent/UpcomingReservations/Index',compact('list'));
     }
 
     /**
@@ -27,9 +27,9 @@ class UpcomingDealController extends Controller
      */
     public function create()
     {
-        $cruises = CruiseLine::all();
+        $cruises = CruiseShip::all();
         $ports = Port::all();
-        return Inertia::render('CruiseCompanyAgent/UpcomingDeal/Insert',compact('cruises','ports'));
+        return Inertia::render('CruiseCompanyAgent/UpcomingReservations/Insert',compact('cruises','ports'));
     }
 
     /**
@@ -37,7 +37,7 @@ class UpcomingDealController extends Controller
      */
     public function store(Request $request)
     {
-        $upcomingDeal = UpcomingDeal::create([
+        $upcomingDeal = UpcomingReservations::create([
             's_id'=>$request->s_id,
             'sr_id'=>$request->sr_id,
             'dp_id'=>$request->dp_id,
@@ -65,18 +65,18 @@ class UpcomingDealController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(UpcomingDeal $upcomingDeal)
+    public function show(UpcomingReservations $upcomingDeal)
     {
         $ports = Port::all();
         $packages = Package::all();
-        $rooms = CruiseLineRoom::all();
-        return Inertia::render('CruiseCompanyAgent/UpcomingDeal/Edit',compact('upcomingDeal','ports','packages','rooms'));
+        $rooms = CruiseShipRoom::all();
+        return Inertia::render('CruiseCompanyAgent/UpcomingReservations/Edit',compact('upcomingDeal','ports','packages','rooms'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(UpcomingDeal $upcomingDeal)
+    public function edit(UpcomingReservations $upcomingDeal)
     {
         //
     }
@@ -84,7 +84,7 @@ class UpcomingDealController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, UpcomingDeal $upcomingDeal)
+    public function update(Request $request, UpcomingReservations $upcomingDeal)
     {
         $upcomingDeal->update([
             'sr_id'=>$request->sr_id,
@@ -113,7 +113,7 @@ class UpcomingDealController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UpcomingDeal $upcomingDeal)
+    public function destroy(UpcomingReservations $upcomingDeal)
     {
         //
     }

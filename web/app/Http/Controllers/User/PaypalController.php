@@ -4,11 +4,11 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\CompanyWallet;
-use App\Models\CruiseDeal;
+use App\Models\Bookeds;
 use App\Models\CruiseCompanyWallet;
 use App\Models\Payment;
 use App\Models\TempDeal;
-use App\Models\UpcomingDeal;
+use App\Models\UpcomingReservations;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -44,7 +44,7 @@ class PaypalController extends Controller
     public function processTransaction(Request $request)
     {
         $uniqueCode = $this->generateRandomString();
-        $upcomingDeal = UpcomingDeal::find($request->id);
+        $upcomingDeal = UpcomingReservations::find($request->id);
 
         $price = $request->qty * $upcomingDeal->price;
 
@@ -121,7 +121,7 @@ class PaypalController extends Controller
 
             $tempDeal = TempDeal::where('payment_id', $payment->id)->first();
 
-            $cruiseLine = CruiseDeal::create([
+            $cruiseLine = Bookeds::create([
                 'ud_id'=>$tempDeal->ud_id,
                 'user_id'=>$userId,
                 'payment_id'=> $payment->id,
@@ -158,12 +158,12 @@ class PaypalController extends Controller
     }
 
     function pdf($id) {
-        $cruiseDeal = CruiseDeal::with(['deal','available_room','user','payment'])->find($id);
+        $cruiseDeal = Bookeds::with(['deal','available_room','user','payment'])->find($id);
         // return $cruiseDeal;
         return view('PDF.invoice',compact('cruiseDeal'));
     }
     function pdf_download($id) {
-        $cruiseDeal = CruiseDeal::with(['deal','available_room','user','payment'])->find($id);
+        $cruiseDeal = Bookeds::with(['deal','available_room','user','payment'])->find($id);
         // return $cruiseDeal;
         // return view('PDF.invoice',compact('cruiseDeal'));
         $pdf = Pdf::loadview('pdf.invoice', [

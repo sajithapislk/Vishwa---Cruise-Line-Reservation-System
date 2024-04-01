@@ -5,8 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Port;
 use App\Models\Package;
-use App\Models\CruiseLine;
-use App\Models\UpcomingDeal;
+use App\Models\CruiseShip;
+use App\Models\UpcomingReservations;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -17,28 +17,28 @@ class UpcomingDealController extends Controller
      */
     public function index()
     {
-        $ships = CruiseLine::all();
+        $ships = CruiseShip::all();
         $ports = Port::all();
         $packages = Package::all();
 
-        $upcomingDeals = UpcomingDeal::with('package','ship','arrival_port','departure_port','room','deals')->get();
+        $upcomingDeals = UpcomingReservations::with('package','ship','arrival_port','departure_port','room','deals')->get();
         // return $upcomingDeals;
 
-        return Inertia::render('Public/UpcomingDeal/Index',compact('ships','ports','packages','upcomingDeals'));
+        return Inertia::render('Public/UpcomingReservations/Index',compact('ships','ports','packages','upcomingDeals'));
     }
 
 
     /**
      * Display the specified resource.
      */
-    public function show(UpcomingDeal $upcomingDeal)
+    public function show(UpcomingReservations $upcomingDeal)
     {
         //
     }
 
     public function filter(Request $request) {
         // dd($request);
-        $list = UpcomingDeal::with('package','ship','arrival_port','departure_port','room','deals')
+        $list = UpcomingReservations::with('package','ship','arrival_port','departure_port','room','deals')
         ->when($request->ship_id, function ($query) use ($request) {
             return $query->Where('s_id', $request->ship_id);
         })
@@ -58,10 +58,10 @@ class UpcomingDealController extends Controller
 
         return $list;
 
-        // $ships = CruiseLine::all();
+        // $ships = CruiseShip::all();
         // $ports = Port::all();
         // $packages = Package::all();
 
-        // return Inertia::render('Public/UpcomingDeal/Filter',compact('ships','departurePorts','packages','list','request'));
+        // return Inertia::render('Public/UpcomingReservations/Filter',compact('ships','departurePorts','packages','list','request'));
     }
 }

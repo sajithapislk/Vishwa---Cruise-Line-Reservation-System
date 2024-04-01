@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\CruiseLineType;
+use App\Models\CruiseShipType;
 use Illuminate\Http\Request;
 
 class ShipTypeController extends Controller
@@ -29,7 +29,7 @@ class ShipTypeController extends Controller
      */
     public function store(Request $request)
     {
-        return CruiseLineType::create([
+        return CruiseShipType::create([
             'name'=>$request->name
         ]);
     }
@@ -37,7 +37,7 @@ class ShipTypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CruiseLineType $shipType)
+    public function show(CruiseShipType $shipType)
     {
         //
     }
@@ -45,7 +45,7 @@ class ShipTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CruiseLineType $shipType)
+    public function edit(CruiseShipType $shipType)
     {
         //
     }
@@ -53,7 +53,7 @@ class ShipTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CruiseLineType $shipType)
+    public function update(Request $request, CruiseShipType $shipType)
     {
         return $shipType->update([
             'name'=>$request->name
@@ -63,7 +63,7 @@ class ShipTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CruiseLineType $shipType)
+    public function destroy(CruiseShipType $shipType)
     {
         return $shipType->delete();
     }

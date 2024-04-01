@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cruise_company_agents', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('cl_id');
+            $table->unsignedBigInteger('cc_id');
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('cl_id')->references('id')->on('cruise_companies');
+            $table->foreign('cc_id')->references('id')->on('cruise_companies');
         });
     }
 

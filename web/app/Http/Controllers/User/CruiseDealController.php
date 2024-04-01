@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\CruiseDeal;
+use App\Models\Bookeds;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -14,7 +14,7 @@ class CruiseDealController extends Controller
      */
     public function index()
     {
-        $list = CruiseDeal::all();
-        return Inertia::render('User/CruiseDeal', compact('list'));
+        $list = Bookeds::all();
+        return Inertia::render('User/Bookeds', compact('list'));
     }
 }

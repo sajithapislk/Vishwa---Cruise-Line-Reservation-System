@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('temp_deals', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('ud_id');
+            $table->unsignedBigInteger('ur_id');
             $table->unsignedBigInteger('payment_id');
             $table->timestamps();
-            $table->foreign('ud_id')->references('id')->on('upcoming_deals');
+            $table->foreign('ur_id')->references('id')->on('upcoming_reservations');
             $table->foreign('payment_id')->references('id')->on('payments');
         });
     }

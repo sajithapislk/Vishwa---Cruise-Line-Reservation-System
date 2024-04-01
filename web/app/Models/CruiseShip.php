@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class CruiseLine extends Model
+class CruiseShip extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'cl_id',
+        'cc_id',
         'type_id',
         'name',
         'description',

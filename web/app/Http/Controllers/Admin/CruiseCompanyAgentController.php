@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\CruiseCompany;
 use App\Models\CruiseCompanyAgent;
-use App\Models\CruiseLine;
+use App\Models\CruiseShip;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 

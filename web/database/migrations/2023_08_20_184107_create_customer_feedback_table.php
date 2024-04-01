@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('customer_feedback', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('cd_id');
+            $table->unsignedBigInteger('b_id');
             $table->unsignedBigInteger('user_id');
             $table->integer('rate');
             $table->timestamps();
-            $table->foreign('cd_id')->references('id')->on('cruise_deals');
+            $table->foreign('b_id')->references('id')->on('bookeds');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('upcoming_deals', function (Blueprint $table) {
+        Schema::create('upcoming_reservations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('s_id');
             $table->unsignedBigInteger('sr_id');
@@ -27,8 +27,8 @@ return new class extends Migration
             $table->dateTime('arrive_at');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('s_id')->references('id')->on('cruise_lines');
-            $table->foreign('sr_id')->references('id')->on('cruise_line_rooms');
+            $table->foreign('s_id')->references('id')->on('cruise_ships');
+            $table->foreign('sr_id')->references('id')->on('cruise_ship_rooms');
             $table->foreign('dp_id')->references('id')->on('ports');
             $table->foreign('ap_id')->references('id')->on('ports');
             $table->foreign('p_id')->references('id')->on('packages');

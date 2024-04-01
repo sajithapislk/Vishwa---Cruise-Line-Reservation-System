@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cruise_deals', function (Blueprint $table) {
+        Schema::create('bookeds', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('ud_id');
+            $table->unsignedBigInteger('ur_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('payment_id')->nullable();
             $table->string('status');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('ud_id')->references('id')->on('upcoming_deals');
+            $table->foreign('ur_id')->references('id')->on('upcoming_reservations');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

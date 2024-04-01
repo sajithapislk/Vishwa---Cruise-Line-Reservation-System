@@ -26,7 +26,7 @@ return new class extends Migration
             $table->boolean('is_s');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('s_id')->references('id')->on('cruise_lines');
+            $table->foreign('s_id')->references('id')->on('cruise_ships');
         });
     }
 

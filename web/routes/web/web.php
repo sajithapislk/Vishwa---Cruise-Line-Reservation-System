@@ -7,7 +7,7 @@ use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\LiveChatController;
 use App\Http\Controllers\User\PaypalController;
 use App\Http\Controllers\User\ProfileController;
-use App\Http\Controllers\User\CruiseLineController;
+use App\Http\Controllers\User\CruiseShipController;
 use App\Http\Controllers\User\UpcomingDealController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +38,7 @@ Route::controller(CruiseCompanyController::class)->group(function () {
     Route::get('/cruise-lines/{cruiseLine}','show')->name('cruise-lines.show');
     Route::get('/cruise-lines-img/{name}', 'img')->name('cruise-lines.img');
 });
-Route::controller(CruiseLineController::class)->group(function () {
+Route::controller(CruiseShipController::class)->group(function () {
     Route::get('/ship','index')->name('ship.index');
     Route::get('/ship/{ship}','show')->name('ship.show');
     Route::get('/ship-img/{name}', 'img')->name('ship.img');

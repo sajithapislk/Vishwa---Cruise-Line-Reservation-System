@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class UpcomingDeal extends Model
+class UpcomingReservations extends Model
 {
     use HasFactory;
     protected $fillable = [
@@ -26,7 +26,7 @@ class UpcomingDeal extends Model
     ];
     public function ship(): HasOne
     {
-        return $this->hasOne(CruiseLine::class,'id','s_id');
+        return $this->hasOne(CruiseShip::class,'id','s_id');
     }
     public function package(): HasOne
     {
@@ -42,11 +42,11 @@ class UpcomingDeal extends Model
     }
     public function room(): HasOne
     {
-        return $this->hasOne(CruiseLineRoom::class,'id','sr_id');
+        return $this->hasOne(CruiseShipRoom::class,'id','sr_id');
     }
 
     public function deals(): HasMany
     {
-        return $this->hasMany(CruiseDeal::class,'ud_id','id');
+        return $this->hasMany(Bookeds::class,'ur_id','id');
     }
 }

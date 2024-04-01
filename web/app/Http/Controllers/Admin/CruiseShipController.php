@@ -4,21 +4,21 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CruiseCompany;
-use App\Models\CruiseLine;
+use App\Models\CruiseShip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
-class CruiseLineController extends Controller
+class CruiseShipController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $list = CruiseLine::all();
+        $list = CruiseShip::all();
         // return $list;
-        return Inertia::render('Admin/CruiseLine', compact('list'));
+        return Inertia::render('Admin/CruiseShip', compact('list'));
     }
 
     /**
@@ -41,7 +41,7 @@ class CruiseLineController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CruiseLine $ship)
+    public function show(CruiseShip $ship)
     {
         //
     }
@@ -49,7 +49,7 @@ class CruiseLineController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CruiseLine $ship)
+    public function edit(CruiseShip $ship)
     {
         //
     }
@@ -57,7 +57,7 @@ class CruiseLineController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CruiseLine $ship)
+    public function update(Request $request, CruiseShip $ship)
     {
         //
     }
@@ -65,7 +65,7 @@ class CruiseLineController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CruiseLine $ship)
+    public function destroy(CruiseShip $ship)
     {
         //
     }

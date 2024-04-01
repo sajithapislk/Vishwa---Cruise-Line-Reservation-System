@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\CompanyWalletController;
 use App\Http\Controllers\Admin\CruiseCompanyAgentController;
 use App\Http\Controllers\Admin\CruiseCompanyController;
 use App\Http\Controllers\Admin\PortController;
-use App\Http\Controllers\Admin\CruiseLineController;
+use App\Http\Controllers\Admin\CruiseShipController;
 use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -19,7 +19,7 @@ Route::middleware('auth:admin')->group(function () {
 
     Route::resources([
         'cruise-company' => CruiseCompanyController::class,
-        'cruise-line' => CruiseLineController::class,
+        'cruise-line' => CruiseShipController::class,
         'cruise-company-agent' => CruiseCompanyAgentController::class,
         'company-wallet' => CompanyWalletController::class,
         'port' => PortController::class,

@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class CruiseDeal extends Model
+class Bookeds extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'ud_id',
+        'ur_id',
         'ar_id',
         'user_id',
         'payment_id',
@@ -19,7 +19,7 @@ class CruiseDeal extends Model
     ];
     public function deal(): HasOne
     {
-        return $this->hasOne(UpcomingDeal::class,'id','ud_id');
+        return $this->hasOne(UpcomingReservations::class,'id','ur_id');
     }
     public function available_room(): HasOne
     {

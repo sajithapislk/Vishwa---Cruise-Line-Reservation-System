@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cruise_line_rooms', function (Blueprint $table) {
+        Schema::create('cruise_ship_rooms', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('s_id');
             $table->string('room_view');
@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('room_count');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('s_id')->references('id')->on('cruise_lines');
+            $table->foreign('s_id')->references('id')->on('cruise_ships');
         });
     }
 

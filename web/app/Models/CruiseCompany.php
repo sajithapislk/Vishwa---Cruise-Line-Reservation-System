@@ -18,6 +18,6 @@ class CruiseCompany extends Model
 
     public function ships(): HasMany
     {
-        return $this->hasMany(CruiseLine::class,'cl_id','id');
+        return $this->hasMany(CruiseShip::class,'cs_id','id');
     }
 }
