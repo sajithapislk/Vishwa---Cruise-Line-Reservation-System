@@ -74,7 +74,20 @@ function bookPayment() {
         .catch((error) => {
             console.error(error);
         });
+}
 
+function getImagePath(dp_id, ap_id) {
+    const images = import.meta.globEager("./img/map/*.jpg");
+    const imageKey = `./img/map/${dp_id}_to_${ap_id}.jpg`;
+
+    const image = images[imageKey];
+
+    if (!image) {
+        console.error(`Image ${imageKey} not found.`);
+        return ""; // or a default image path
+    }
+
+    return image.default;
 }
 </script>
 <template>
@@ -655,7 +668,9 @@ function bookPayment() {
                                 >
                                     <img
                                         alt="..."
-                                        :src="'./img/map/' + row.dp_id + '_to_' + row.ap_id + '.jpg'"
+                                        :src="
+                                            getImagePath(row.dp_id, row.ap_id)
+                                        "
                                         class="rounded-lg w-auto align-middle border-none"
                                         style="max-height: 350px"
                                     />
