@@ -17,7 +17,7 @@ class CruiseShipRoomSeeder extends Seeder
             [
                 's_id' => '1',
                 'room_view' => 'a view',
-                'img' => 'view1.jpg',
+                'img' => 'view1.png',
                 'room_count' => '10'
             ],
             [

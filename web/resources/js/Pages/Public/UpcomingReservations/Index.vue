@@ -19,7 +19,9 @@ const list = ref(props.upcomingDeals);
 
 const bookModal = ref(false);
 const roomModal = ref(false);
+const shipModal = ref(false);
 
+const shipImg = ref("");
 const roomImg = ref("");
 const total = ref(0.0);
 const price = ref(0.0);
@@ -62,6 +64,12 @@ const ModalRoom = (img) => {
         roomImg.value = img;
     }
     roomModal.value = !roomModal.value;
+};
+const ModalShip = (img) => {
+    if (typeof img !== "undefined" && !(img instanceof PointerEvent)) {
+        shipImg.value = img;
+    }
+    shipModal.value = !shipModal.value;
 };
 function bookPayment() {
     axios
@@ -571,11 +579,23 @@ function getImagePath(dp_id, ap_id) {
                                             <p
                                                 class="ml-3 text-sm text-gray-700"
                                             >
-                                                Room Details :
+                                                Room View :
                                                 {{ row.room.room_view }}
                                                 <PrimaryButton
                                                     @click="
                                                         ModalRoom(row.room.img)
+                                                    "
+                                                    >View</PrimaryButton
+                                                >
+                                            </p>
+                                            <p
+                                                class="ml-3 text-sm text-gray-700"
+                                            >
+                                                Ship View :
+                                                {{ row.ship.name }}
+                                                <PrimaryButton
+                                                    @click="
+                                                        ModalShip(row.ship.img)
                                                     "
                                                     >View</PrimaryButton
                                                 >
@@ -778,7 +798,14 @@ function getImagePath(dp_id, ap_id) {
     <Modal :show="roomModal" @close="ModalRoom">
         <img
             alt="..."
-            :src="route('ship.img', roomImg)"
+            :src="route('ship.room_img', roomImg)"
+            class="rounded-lg h-auto max-w-full align-middle border-none"
+        />
+    </Modal>
+    <Modal :show="shipModal" @close="ModalShip">
+        <img
+            alt="..."
+            :src="route('ship.img', shipImg)"
             class="rounded-lg h-auto max-w-full align-middle border-none"
         />
     </Modal>

@@ -37,4 +37,13 @@ class CruiseShipController extends Controller
         }
 
     }
+    public function room_img($name){
+        try {
+            $path = "app/ship-room/$name";
+            return response()->file(storage_path($path));
+        } catch (\Throwable $th) {
+            return "error";
+        }
+
+    }
 }
