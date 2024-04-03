@@ -80,7 +80,7 @@ function bookPayment() {
             // window.location.href = response.data;
         })
         .catch((error) => {
-            console.error(error);
+            window.location.href = route('login');
         });
 }
 
