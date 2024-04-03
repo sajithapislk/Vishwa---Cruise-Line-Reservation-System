@@ -13,7 +13,7 @@ defineProps({
             <section class="relative block" style="height: 500px">
                 <div class="absolute top-0 w-full h-full">
                     <img
-                        src="./img/train-travel-srilanka-848x440.jpg"
+                        src="./img/photo-1499336315816-097655dcfbda.jpeg"
                         alt="Background Image"
                         class="w-full h-full object-cover"
                     />
@@ -50,7 +50,7 @@ defineProps({
                         v-for="row in list"
                     >
 
-                        <Link :href="route('cruise-lines.show', row.id)">
+                        <Link :href="route('cruise-company.show', row.id)">
                             <div
                                 class="max-w-lg mx-auto overflow-hidden rounded-lg shadow-lg lg:max-w-none"
                             >
@@ -65,8 +65,8 @@ defineProps({
                                         >
                                             {{ row.name }}
                                         </h3>
-                                        <p class="text-base text-gray-500">
-                                            {{ row.description }}
+                                        <p class="text-base text-gray-500"  v-html="row.description">
+
                                         </p>
                                     </div>
                                     <div
@@ -75,7 +75,7 @@ defineProps({
                                     >
                                         <img
                                             alt="..."
-                                            :src="route('cruise-lines.img',row.img)"
+                                            :src="route('cruise-company.img',row.img)"
                                             class="rounded-lg w-auto align-middle border-none"
                                             style="
                                                 max-height: 350px;

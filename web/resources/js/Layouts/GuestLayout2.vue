@@ -29,7 +29,7 @@ import { Link } from "@inertiajs/vue3";
                                 >Ship</Link
                             >
                             <Link
-                                :href="route('cruise-lines.index')"
+                                :href="route('cruise-company.index')"
                                 class="py-5 px-3 text-gray-700 hover:text-gray-900"
                                 >Cruise Line</Link
                             >

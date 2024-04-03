@@ -34,9 +34,9 @@ Route::get('/', function () {
 });
 
 Route::controller(CruiseCompanyController::class)->group(function () {
-    Route::get('/cruise-lines','index')->name('cruise-lines.index');
-    Route::get('/cruise-lines/{cruiseLine}','show')->name('cruise-lines.show');
-    Route::get('/cruise-lines-img/{name}', 'img')->name('cruise-lines.img');
+    Route::get('/cruise-company','index')->name('cruise-company.index');
+    Route::get('/cruise-company/{cruiseLine}','show')->name('cruise-company.show');
+    Route::get('/cruise-company-img/{name}', 'img')->name('cruise-company.img');
 });
 Route::controller(CruiseShipController::class)->group(function () {
     Route::get('/ship','index')->name('ship.index');

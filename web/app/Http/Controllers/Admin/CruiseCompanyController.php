@@ -40,7 +40,7 @@ class CruiseCompanyController extends Controller
 
         if (!is_null($request->img)) {
             $image = time() . '-l' . '.' . $request->img->extension();
-            $request->file('img')->storeAs('cruise-lines/', $image);
+            $request->file('img')->storeAs('cruise-company/', $image);
 
             $cruiseLine->img = $image;
             $cruiseLine->save();
@@ -78,7 +78,7 @@ class CruiseCompanyController extends Controller
 
         // if (!is_null($request->img)) {
         //     $image = time() . '-l' . '.' . $request->img->extension();
-        //     $request->file('img')->storeAs('cruise-lines/', $image);
+        //     $request->file('img')->storeAs('cruise-company/', $image);
 
         //     $cruiseLine->img = $image;
         //     $cruiseLine->save();
