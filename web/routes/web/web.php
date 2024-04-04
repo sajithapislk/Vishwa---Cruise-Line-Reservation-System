@@ -8,6 +8,8 @@ use App\Http\Controllers\User\LiveChatController;
 use App\Http\Controllers\User\PaypalController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\CruiseShipController;
+use App\Http\Controllers\User\FeedbackController;
+use App\Http\Controllers\User\RefundController;
 use App\Http\Controllers\User\UpcomingReservationsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
@@ -25,29 +27,29 @@ use Inertia\Inertia;
 |
 */
 
-require __DIR__.'/auth/user.php';
+require __DIR__ . '/auth/user.php';
 
 Route::get('/', function () {
     $user_id = Auth::id();
     // return $user_id ;
-    return Inertia::render('Welcome',compact('user_id'));
+    return Inertia::render('Welcome', compact('user_id'));
 });
 
 Route::controller(CruiseCompanyController::class)->group(function () {
-    Route::get('/cruise-company','index')->name('cruise-company.index');
-    Route::get('/cruise-company/{cruiseLine}','show')->name('cruise-company.show');
+    Route::get('/cruise-company', 'index')->name('cruise-company.index');
+    Route::get('/cruise-company/{cruiseLine}', 'show')->name('cruise-company.show');
     Route::get('/cruise-company-img/{name}', 'img')->name('cruise-company.img');
 });
 Route::controller(CruiseShipController::class)->group(function () {
-    Route::get('/ship','index')->name('ship.index');
-    Route::get('/ship/{ship}','show')->name('ship.show');
+    Route::get('/ship', 'index')->name('ship.index');
+    Route::get('/ship/{ship}', 'show')->name('ship.show');
     Route::get('/ship-img/{name}', 'img')->name('ship.img');
     Route::get('/ship-room-img/{name}', 'room_img')->name('ship.room_img');
 });
 Route::controller(UpcomingReservationsController::class)->group(function () {
-    Route::get('/upcoming-deal','index')->name('upcoming-deal.index');
-    Route::get('/upcoming-deal/{upcomingDeal}','show')->name('upcoming-deal.show');
-    Route::post('/upcoming-deal','filter')->name('upcoming-deal.filter');
+    Route::get('/upcoming-deal', 'index')->name('upcoming-deal.index');
+    Route::get('/upcoming-deal/{upcomingDeal}', 'show')->name('upcoming-deal.show');
+    Route::post('/upcoming-deal', 'filter')->name('upcoming-deal.filter');
 });
 Route::controller(PayPalController::class)->middleware(['auth'])->group(function () {
     Route::get('process-transaction', 'processTransaction')->name('processTransaction');
@@ -66,5 +68,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::get('pdf/{id}',[PayPalController::class,'pdf']);
-Route::get('pdf-download/{id}',[PayPalController::class,'pdf_download']);
+Route::get('pdf/{id}', [PayPalController::class, 'pdf']);
+Route::get('pdf-download/{id}', [PayPalController::class, 'pdf_download']);
+
+Route::post('/feedback', [FeedbackController::class, 'store'])->name('user.feedback');
+Route::post('/refund', [RefundController::class, 'store'])->name('user.refund');

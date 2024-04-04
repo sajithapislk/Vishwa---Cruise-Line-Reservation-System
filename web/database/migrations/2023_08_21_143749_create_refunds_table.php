@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('refunds', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('b_id');
-            $table->string('ref')->nullable();
+            $table->string('user_id');
             $table->string('method')->nullable();
             $table->string('status')->default('REQUESTED');
             $table->double('amount');
             $table->timestamps();
             $table->foreign('b_id')->references('id')->on('books');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

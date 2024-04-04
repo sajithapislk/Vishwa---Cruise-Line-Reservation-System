@@ -45,14 +45,14 @@ function ModalRefund(id) {
 }
 
 const feedbackSave = () => {
-    feedbackFrom.post(route("user..store"), {
+    feedbackFrom.post(route("user.feedback.store"), {
         preserveScroll: true,
         onSuccess: () => ModalFeedback(),
         onFinish: () => feedbackFrom.reset(),
     });
 };
 const refundSave = () => {
-    refundForm.post(route("user..store"), {
+    refundForm.post(route("user.refund.store"), {
         preserveScroll: true,
         onSuccess: () => ModalRefund(),
         onFinish: () => refundForm.reset(),
