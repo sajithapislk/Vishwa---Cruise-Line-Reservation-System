@@ -14,7 +14,7 @@ defineProps({
 const insertModal = ref(false);
 
 const saveform = useForm({
-    cl_id: "",
+    cc_id: "",
     name: "",
     email: "",
     password: "",
@@ -95,7 +95,7 @@ const rowDelete = (id) => {
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                                 >
-                                    cl_id
+                                    cc_id
                                 </th>
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -132,7 +132,7 @@ const rowDelete = (id) => {
                                 <td
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                                 >
-                                    {{ row.cl_id }}
+                                    {{ row.cc_id }}
                                 </td>
                                 <td
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
@@ -186,8 +186,8 @@ const rowDelete = (id) => {
                             Cruise Line
                         </label>
                         <select
-                            name="cl_id"
-                            v-model="saveform.cl_id"
+                            name="cc_id"
+                            v-model="saveform.cc_id"
                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             aria-label="Default select example"
                             required

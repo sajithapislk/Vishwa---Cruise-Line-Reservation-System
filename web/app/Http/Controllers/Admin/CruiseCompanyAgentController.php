@@ -35,7 +35,7 @@ class CruiseCompanyAgentController extends Controller
     public function store(Request $request)
     {
         $cruiseLineAgent = CruiseCompanyAgent::create([
-            'cl_id'=>$request->cl_id,
+            'cc_id'=>$request->cc_id,
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>$request->password,

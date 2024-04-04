@@ -27,36 +27,20 @@
       }"
       style="min-width: 12rem"
     >
-      <a
-        href="#pablo"
-        class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-      >
-        Action
-      </a>
-      <a
-        href="#pablo"
-        class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-      >
-        Another action
-      </a>
-      <a
-        href="#pablo"
-        class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-      >
-        Something else here
-      </a>
-      <div class="h-0 my-2 border border-solid border-blueGray-100" />
-      <a
-        href="#pablo"
-        class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-      >
-        Seprated link
-      </a>
+
+    <DropdownLink
+                :href="route('admin.logout')"
+                method="post"
+                as="button"
+            >
+                Log Out
+            </DropdownLink>
     </div>
   </div>
 </template>
 <script>
 import { createPopper } from "@popperjs/core";
+import DropdownLink from '@/Components/DropdownLink.vue';
 
 export default {
   data() {
@@ -76,6 +60,9 @@ export default {
         });
       }
     }
+  },
+  components: {
+    DropdownLink
   }
 };
 </script>

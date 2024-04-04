@@ -35,7 +35,7 @@ const cruiseLineForm = useForm({
 });
 
 const agentForm = useForm({
-    cl_id: "",
+    cc_id: "",
     name: "",
     email: "",
     password: "",
@@ -55,8 +55,8 @@ const submit = () => {
         .then((res) => {
             console.log(res);
             cruiseline_id.value = res.data.id;
-            agentForm.cl_id = cruiseline_id.value;
-            console.log(agentForm.cl_id);
+            agentForm.cc_id = cruiseline_id.value;
+            console.log(agentForm.cc_id);
             agentSubmit();
         })
         .catch((error) => console.log(error));

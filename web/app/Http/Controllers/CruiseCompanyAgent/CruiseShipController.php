@@ -40,7 +40,7 @@ class CruiseShipController extends Controller
     {
         $cruiseAgent = Auth::user();
         $ship = CruiseShip::create([
-            'cl_id' => $cruiseAgent->cl_id,
+            'cc_id' => $cruiseAgent->cc_id,
             'type_id' => $request->type_id,
             'name' => $request->name,
             'description' => $request->description,

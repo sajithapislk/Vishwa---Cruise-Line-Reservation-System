@@ -17,7 +17,7 @@ class DashboardController extends Controller
     public function __invoke(Request $request)
     {
         $user = Auth::user();
-        $cruiseLines = CruiseShip::where('cl_id',$user->cl_id)->get();
+        $cruiseLines = CruiseShip::where('cc_id',$user->cc_id)->get();
         $cruiseLineIDs = array();
         foreach ($cruiseLines as $key => $row) {
             array_push($cruiseLineIDs,$row->id);
