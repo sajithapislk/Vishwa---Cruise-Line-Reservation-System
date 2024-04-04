@@ -17,7 +17,7 @@ class Books extends Model
         'payment_id',
         'status'
     ];
-    public function deal(): HasOne
+    public function reservation(): HasOne
     {
         return $this->hasOne(UpcomingReservations::class,'id','ur_id');
     }

@@ -59,7 +59,7 @@ class PaypalController extends Controller
             'token'=>$uniqueCode,
         ]);
         TempDeal::create([
-            'ud_id'=>$upcomingDeal->id,
+            'ur_id'=>$upcomingDeal->id,
             'payment_id'=>$payment->id
         ]);
 
@@ -122,7 +122,7 @@ class PaypalController extends Controller
             $tempDeal = TempDeal::where('payment_id', $payment->id)->first();
 
             $cruiseLine = Books::create([
-                'ud_id'=>$tempDeal->ud_id,
+                'ur_id'=>$tempDeal->ur_id,
                 'user_id'=>$userId,
                 'payment_id'=> $payment->id,
                 'status'=>"PAYMENT DONE"

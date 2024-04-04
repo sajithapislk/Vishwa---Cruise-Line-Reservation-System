@@ -11,7 +11,8 @@ class DashboardController extends Controller
 {
     public function __invoke()
     {
-        $list = Books::all();
+        $list = Books::with('payment','reservation')->get();
+        // return $list;
         return Inertia::render('User/Dashboard',compact('list'));
     }
 }

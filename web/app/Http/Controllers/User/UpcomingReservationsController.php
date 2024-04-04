@@ -10,7 +10,7 @@ use App\Models\UpcomingReservations;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class UpcomingDealController extends Controller
+class UpcomingReservationsController extends Controller
 {
     /**
      * Display a listing of the resource.

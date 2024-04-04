@@ -5,8 +5,8 @@ import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import { ref } from "vue";
 import Modal from "@/Components/Modal.vue";
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 defineProps({
     list: Array,
@@ -16,22 +16,21 @@ const feedbackModal = ref(false);
 const refundModal = ref(false);
 
 const feedbackFrom = useForm({
-    cd_id: "",
+    b_id: "",
     rate: 0,
     processing: false,
 });
 const refundForm = useForm({
-    cd_id: null,
+    b_id: null,
     reason: "",
     processing: false,
 });
 
-
 const ModalFeedback = (id) => {
     feedbackFrom.reset();
     if (typeof id !== "undefined" && !(id instanceof PointerEvent)) {
-        feedbackFrom.cd_id = id;
-        console.log(feedbackFrom.cd_id);
+        feedbackFrom.b_id = id;
+        console.log(feedbackFrom.b_id);
     }
     feedbackModal.value = !feedbackModal.value;
 };
@@ -39,21 +38,21 @@ const ModalFeedback = (id) => {
 function ModalRefund(id) {
     refundForm.reset();
     if (typeof id !== "undefined" && !(id instanceof PointerEvent)) {
-        refundForm.cd_id = id;
-        console.log(refundForm.cd_id);
+        refundForm.b_id = id;
+        console.log(refundForm.b_id);
     }
     refundModal.value = !refundModal.value;
-};
+}
 
 const feedbackSave = () => {
-    feedbackFrom.post(route("cruise-company-agent.package.store"), {
+    feedbackFrom.post(route("user..store"), {
         preserveScroll: true,
         onSuccess: () => ModalFeedback(),
         onFinish: () => feedbackFrom.reset(),
     });
 };
 const refundSave = () => {
-    refundForm.post(route("cruise-company-agent.package.store"), {
+    refundForm.post(route("user..store"), {
         preserveScroll: true,
         onSuccess: () => ModalRefund(),
         onFinish: () => refundForm.reset(),
@@ -89,17 +88,12 @@ const refundSave = () => {
                                     <th
                                         class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                                     >
-                                        ud_id
+                                        reservation
                                     </th>
                                     <th
                                         class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                                     >
-                                        ar_id
-                                    </th>
-                                    <th
-                                        class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
-                                    >
-                                        payment_id
+                                        payment
                                     </th>
                                     <th
                                         class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -129,17 +123,16 @@ const refundSave = () => {
                                     <th
                                         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
                                     >
-                                        {{ row.ud_id }}
+                                        {{ row.reservation.name }}(#{{
+                                            row.reservation.id
+                                        }})
                                     </th>
                                     <td
                                         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                                     >
-                                        {{ row.ar_id }}
-                                    </td>
-                                    <td
-                                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-                                    >
-                                        {{ row.payment_id }}
+                                        {{ row.payment.method }}(#{{
+                                            row.payment.id
+                                        }})
                                     </td>
                                     <td
                                         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
@@ -149,7 +142,7 @@ const refundSave = () => {
                                     <td
                                         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                                     >
-                                        {{ row.price }}
+                                        {{ row.payment.amount }}
                                     </td>
                                     <td
                                         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
@@ -193,7 +186,7 @@ const refundSave = () => {
                                                                 )
                                                             "
                                                         >
-                                                       {{ row.id }} Feedback
+                                                            Feedback
                                                         </button>
                                                     </div>
                                                     <div>
@@ -204,7 +197,7 @@ const refundSave = () => {
                                                                 )
                                                             "
                                                         >
-                                                        {{ row.id }} Refund
+                                                            Refund
                                                         </button>
                                                     </div>
                                                 </template>
@@ -241,7 +234,7 @@ const refundSave = () => {
                                 }
                             }
                         "
-                        v-model="feedbackFrom.cd_id"
+                        v-model="feedbackFrom.b_id"
                     />
                 </div>
             </form>
@@ -277,7 +270,7 @@ const refundSave = () => {
                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                         id="grid-email"
                         type="boolean"
-                        v-model="refundForm.cd_id"
+                        v-model="refundForm.b_id"
                     />
                 </div>
             </form>

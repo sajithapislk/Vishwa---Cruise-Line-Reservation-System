@@ -9,7 +9,7 @@ class TempDeal extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'ud_id',
+        'ur_id',
         'payment_id'
     ];
 }

@@ -10,7 +10,7 @@ class Refund extends Model
     use HasFactory;
 
     protected $fillable = [
-        'cd_id',
+        'b_id',
         'ref',
         'method',
         'status',

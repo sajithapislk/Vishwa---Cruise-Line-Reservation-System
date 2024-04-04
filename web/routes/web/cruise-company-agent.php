@@ -4,7 +4,7 @@ use App\Http\Controllers\CruiseCompanyAgent\PackageController;
 use App\Http\Controllers\CruiseCompanyAgent\CruiseShipController;
 use App\Http\Controllers\CruiseCompanyAgent\CruiseLineRoomController;
 use App\Http\Controllers\CruiseCompanyAgent\DashboardController;
-use App\Http\Controllers\CruiseCompanyAgent\UpcomingDealController;
+use App\Http\Controllers\CruiseCompanyAgent\UpcomingReservationsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -18,7 +18,7 @@ Route::middleware('auth:cruise-company-agent')->group(function () {
 
     Route::resources([
         'package' => PackageController::class,
-        'upcoming-deal' => UpcomingDealController::class,
+        'upcoming-deal' => UpcomingReservationsController::class,
         'cruise-line-room' => CruiseLineRoomController::class,
         'cruise-line' => CruiseShipController::class,
     ]);

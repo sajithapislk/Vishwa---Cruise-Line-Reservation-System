@@ -10,7 +10,7 @@ class CustomerFeedback extends Model
     use HasFactory;
 
     protected $fillable = [
-        'cd_id',
+        'b_id',
         'user_id',
         'rate',
     ];

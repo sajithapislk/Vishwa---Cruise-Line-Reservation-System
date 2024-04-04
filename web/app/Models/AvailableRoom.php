@@ -9,7 +9,7 @@ class AvailableRoom extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'ud_id',
+        'ur_id',
         'is_booked',
     ];
 }

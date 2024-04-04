@@ -8,7 +8,7 @@ use App\Http\Controllers\User\LiveChatController;
 use App\Http\Controllers\User\PaypalController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\CruiseShipController;
-use App\Http\Controllers\User\UpcomingDealController;
+use App\Http\Controllers\User\UpcomingReservationsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -44,7 +44,7 @@ Route::controller(CruiseShipController::class)->group(function () {
     Route::get('/ship-img/{name}', 'img')->name('ship.img');
     Route::get('/ship-room-img/{name}', 'room_img')->name('ship.room_img');
 });
-Route::controller(UpcomingDealController::class)->group(function () {
+Route::controller(UpcomingReservationsController::class)->group(function () {
     Route::get('/upcoming-deal','index')->name('upcoming-deal.index');
     Route::get('/upcoming-deal/{upcomingDeal}','show')->name('upcoming-deal.show');
     Route::post('/upcoming-deal','filter')->name('upcoming-deal.filter');

@@ -55,7 +55,7 @@ const ModalBook = (data) => {
     if (typeof data !== "undefined" && !(data instanceof PointerEvent)) {
         paypalFrom.id = data.id;
         price.value = data.price;
-        console.log(paypalFrom.cd_id);
+        console.log(paypalFrom.b_id);
     }
     bookModal.value = !bookModal.value;
 };
