@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->integer('rate');
             $table->timestamps();
-            $table->foreign('b_id')->references('id')->on('bookeds');
+            $table->foreign('b_id')->references('id')->on('books');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

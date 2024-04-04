@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\CompanyWallet;
-use App\Models\Bookeds;
+use App\Models\Books;
 use App\Models\CruiseCompanyWallet;
 use App\Models\Payment;
 use App\Models\TempDeal;
@@ -121,7 +121,7 @@ class PaypalController extends Controller
 
             $tempDeal = TempDeal::where('payment_id', $payment->id)->first();
 
-            $cruiseLine = Bookeds::create([
+            $cruiseLine = Books::create([
                 'ud_id'=>$tempDeal->ud_id,
                 'user_id'=>$userId,
                 'payment_id'=> $payment->id,
@@ -158,12 +158,12 @@ class PaypalController extends Controller
     }
 
     function pdf($id) {
-        $cruiseDeal = Bookeds::with(['deal','available_room','user','payment'])->find($id);
+        $cruiseDeal = Books::with(['deal','available_room','user','payment'])->find($id);
         // return $cruiseDeal;
         return view('PDF.invoice',compact('cruiseDeal'));
     }
     function pdf_download($id) {
-        $cruiseDeal = Bookeds::with(['deal','available_room','user','payment'])->find($id);
+        $cruiseDeal = Books::with(['deal','available_room','user','payment'])->find($id);
         // return $cruiseDeal;
         // return view('PDF.invoice',compact('cruiseDeal'));
         $pdf = Pdf::loadview('pdf.invoice', [

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('status')->default('REQUESTED');
             $table->double('amount');
             $table->timestamps();
-            $table->foreign('b_id')->references('id')->on('bookeds');
+            $table->foreign('b_id')->references('id')->on('books');
         });
     }
 

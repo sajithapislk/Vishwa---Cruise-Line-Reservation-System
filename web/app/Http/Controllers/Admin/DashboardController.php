@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Bookeds;
+use App\Models\Books;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -14,7 +14,7 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $list = Bookeds::all();
+        $list = Books::all();
         return Inertia::render('Admin/Dashboard',compact('list'));
     }
 }
