@@ -34,7 +34,7 @@ import { Link } from "@inertiajs/vue3";
                                 >Cruise Company</Link
                             >
                             <Link
-                                :href="route('upcoming-deal.index')"
+                                :href="route('upcoming-reservations.index')"
                                 class="py-5 px-3 text-gray-700 hover:text-gray-900"
                                 >Search</Link
                             >

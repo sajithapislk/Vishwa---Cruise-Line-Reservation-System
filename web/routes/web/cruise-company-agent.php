@@ -18,7 +18,7 @@ Route::middleware('auth:cruise-company-agent')->group(function () {
 
     Route::resources([
         'package' => PackageController::class,
-        'upcoming-deal' => UpcomingReservationsController::class,
+        'upcoming-reservations' => UpcomingReservationsController::class,
         'cruise-ship-room' => CruiseLineRoomController::class,
         'cruise-ship' => CruiseShipController::class,
     ]);

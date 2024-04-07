@@ -47,9 +47,9 @@ Route::controller(CruiseShipController::class)->group(function () {
     Route::get('/ship-room-img/{name}', 'room_img')->name('ship.room_img');
 });
 Route::controller(UpcomingReservationsController::class)->group(function () {
-    Route::get('/upcoming-deal', 'index')->name('upcoming-deal.index');
-    Route::get('/upcoming-deal/{upcomingDeal}', 'show')->name('upcoming-deal.show');
-    Route::post('/upcoming-deal', 'filter')->name('upcoming-deal.filter');
+    Route::get('/upcoming-reservations', 'index')->name('upcoming-reservations.index');
+    Route::get('/upcoming-reservations/{upcomingDeal}', 'show')->name('upcoming-reservations.show');
+    Route::post('/upcoming-reservations', 'filter')->name('upcoming-reservations.filter');
 });
 Route::controller(PayPalController::class)->middleware(['auth'])->group(function () {
     Route::get('process-transaction', 'processTransaction')->name('processTransaction');

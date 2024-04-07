@@ -53,7 +53,7 @@ class UpcomingReservationsController extends Controller
         ]);
         if (!is_null($request->img)) {
             $image = time() . '-l' . '.' . $request->img->extension();
-            $request->file('img')->storeAs('upcoming-deal/', $image);
+            $request->file('img')->storeAs('upcoming-reservations/', $image);
 
             $upcomingDeal->img = $image;
             $upcomingDeal->save();
@@ -102,7 +102,7 @@ class UpcomingReservationsController extends Controller
 
         // if (!is_null($request->img)) {
         //     $image = time() . '-l' . '.' . $request->img->extension();
-        //     $request->file('img')->storeAs('upcoming-deal/', $image);
+        //     $request->file('img')->storeAs('upcoming-reservations/', $image);
 
         //     $upcomingDeal->img = $image;
         //     $upcomingDeal->save();

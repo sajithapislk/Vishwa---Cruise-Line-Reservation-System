@@ -36,7 +36,7 @@ const filterForm = useForm({
 
 const filter = () => {
     axios
-        .post(route("upcoming-deal.filter"), filterForm)
+        .post(route("upcoming-reservations.filter"), filterForm)
         .then((res) => {
             list.value = res.data;
             console.log(res.data);

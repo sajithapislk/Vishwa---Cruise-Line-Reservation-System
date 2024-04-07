@@ -46,7 +46,7 @@ const selectedFile = (e) => {
 };
 
 const save = () => {
-    cruiseLineForm.put(route("cruise-company-agent.upcoming-deal.update",props.upcomingDeal.id), {
+    cruiseLineForm.put(route("cruise-company-agent.upcoming-reservations.update",props.upcomingDeal.id), {
         preserveScroll: true,
         onSuccess: () => console.log(res),
         onFinish: () => cruiseLineForm.reset(),

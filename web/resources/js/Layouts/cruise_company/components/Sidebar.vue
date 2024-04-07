@@ -114,11 +114,11 @@ export default {
                     </li>
                     <li class="items-center">
                         <Link
-                            :href="route('cruise-company-agent.cruise-company.index')"
+                            :href="route('cruise-company-agent.cruise-ship.index')"
                             class="text-blueGray-500 hover:text-blue-600 text-xs uppercase py-3 font-bold block"
                         >
                             <i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
-                            Cruise Company
+                            Cruise Ship
                         </Link>
                     </li>
                     <li class="items-center">
@@ -133,12 +133,12 @@ export default {
                     <li class="items-center">
                         <Link
                             :href="
-                                route('cruise-company-agent.upcoming-deal.index')
+                                route('cruise-company-agent.upcoming-reservations.index')
                             "
                             class="text-blueGray-500 hover:text-blue-600 text-xs uppercase py-3 font-bold block"
                         >
                             <i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
-                            Upcoming Deal
+                            Upcoming Reservation
                         </Link>
                     </li>
                 </ul>

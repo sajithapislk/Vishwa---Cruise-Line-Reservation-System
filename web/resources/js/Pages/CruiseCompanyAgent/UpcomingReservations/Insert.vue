@@ -46,7 +46,7 @@ const selectedFile = (e) => {
 };
 
 const save = () => {
-    cruiseLineForm.post(route("cruise-company-agent.upcoming-deal.store"), {
+    cruiseLineForm.post(route("cruise-company-agent.upcoming-reservations.store"), {
         preserveScroll: true,
         onSuccess: () => console.log(res),
         onFinish: () => cruiseLineForm.reset(),
