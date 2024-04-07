@@ -23,7 +23,7 @@ class DashboardController extends Controller
             array_push($cruiseLineIDs,$row->id);
         }
         // return  $cruiseLineIDs;
-        $list = Books::with('deal')->whereHas('deal', function ($query) use($cruiseLineIDs) {
+        $list = Books::with('reservation')->whereHas('reservation', function ($query) use($cruiseLineIDs) {
             return $query->whereIn('s_id', $cruiseLineIDs);
         })->get();
         return Inertia::render('CruiseCompanyAgent/Dashboard',compact('list'));
