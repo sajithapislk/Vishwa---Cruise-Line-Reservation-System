@@ -205,6 +205,9 @@ const refundSave = () => {
                                         </div>
                                     </td>
                                 </tr>
+                                <tr v-if="list.length == 0">
+                                    <td colspan="5">no recode</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
