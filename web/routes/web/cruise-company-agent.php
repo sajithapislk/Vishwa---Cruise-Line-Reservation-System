@@ -19,8 +19,8 @@ Route::middleware('auth:cruise-company-agent')->group(function () {
     Route::resources([
         'package' => PackageController::class,
         'upcoming-deal' => UpcomingReservationsController::class,
-        'cruise-line-room' => CruiseLineRoomController::class,
-        'cruise-line' => CruiseShipController::class,
+        'cruise-company-room' => CruiseLineRoomController::class,
+        'cruise-company' => CruiseShipController::class,
     ]);
 
     Route::get('/select-ship/{ship}',[CruiseLineRoomController::class,'select_ship'])->name('ship-room.select-ship');

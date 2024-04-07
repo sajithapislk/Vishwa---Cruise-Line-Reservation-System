@@ -42,7 +42,7 @@ const submit = () => {
 
     console.log(cruiseLineForm);
     cruiseLineForm
-        .put(route("admin.cruise-line.update",props.cruiseLine.id))
+        .put(route("admin.cruise-company.update",props.cruiseLine.id))
         .then((res) => {
             console.log(res);
         })

@@ -72,7 +72,7 @@ const submit = () => {
                                 <h3
                                     class="font-semibold text-2xl text-blueGray-700"
                                 >
-                                    Cruise Line Create
+                                    Cruise Company Create
                                 </h3>
                             </div>
                             <div
@@ -87,7 +87,7 @@ const submit = () => {
                                     <h1
                                         class="inline text-lg font-semibold leading-none"
                                     >
-                                        Cruise Line Information
+                                        Cruise Company Information
                                     </h1>
                                 </div>
                             </div>

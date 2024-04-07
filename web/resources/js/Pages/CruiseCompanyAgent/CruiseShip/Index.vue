@@ -33,7 +33,7 @@ defineProps({
                             <h3
                                 class="font-semibold text-base text-blueGray-700"
                             >
-                                Cruise Line Insert
+                                Cruise Company Insert
                             </h3>
                         </div>
                         <div
@@ -41,7 +41,7 @@ defineProps({
                         >
                             <Link
                                 class="bg-blue-500 text-white active:bg-blue-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1"
-                                :href="route('cruise-company-agent.cruise-line.create')"
+                                :href="route('cruise-company-agent.cruise-company.create')"
                                 style="transition: all 0.15s ease"
                             >
                                 Create

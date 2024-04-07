@@ -10,7 +10,7 @@ defineProps({
 
 const rowDelete = (id) =>{
     useForm({id:id})
-        .delete(route("admin.cruise-line.destroy",id))
+        .delete(route("admin.cruise-company.destroy",id))
         .then((res) => {
             console.log(res);
         })
@@ -137,7 +137,7 @@ const rowDelete = (id) =>{
                                         class="bg-blue-500 text-white active:bg-blue-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1"
                                         :href="
                                             route(
-                                                'admin.cruise-line.show',
+                                                'admin.cruise-company.show',
                                                 row.id
                                             )
                                         "

@@ -16,7 +16,7 @@ import { Link } from "@inertiajs/vue3";
                                 class="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900"
                             >
                                 <span class="font-bold"
-                                    >Cruise Line Reservation System</span
+                                    >Cruise Company Reservation System</span
                                 >
                             </Link>
                         </div>
@@ -31,7 +31,7 @@ import { Link } from "@inertiajs/vue3";
                             <Link
                                 :href="route('cruise-company.index')"
                                 class="py-5 px-3 text-gray-700 hover:text-gray-900"
-                                >Cruise Line</Link
+                                >Cruise Company</Link
                             >
                             <Link
                                 :href="route('upcoming-deal.index')"
@@ -92,7 +92,7 @@ import { Link } from "@inertiajs/vue3";
                     >Ship</Link
                 >
                 <Link href="#" class="block py-2 px-4 text-sm hover:bg-gray-200"
-                    >Cruise Line</Link
+                    >Cruise Company</Link
                 >
                 <Link href="#" class="block py-2 px-4 text-sm hover:bg-gray-200"
                     >Search</Link
@@ -155,7 +155,7 @@ import { Link } from "@inertiajs/vue3";
                         :href="route('cruise-company-agent.login')"
                         class="text-base leading-6 text-gray-500 hover:text-gray-900"
                     >
-                    Cruise Line Agent Login
+                    Cruise Company Agent Login
                     </Link>
                 </div>
                 <div class="px-5 py-2">

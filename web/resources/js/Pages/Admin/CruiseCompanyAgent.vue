@@ -64,7 +64,7 @@ const rowDelete = (id) => {
                             <h3
                                 class="font-semibold text-base text-blueGray-700"
                             >
-                                Cruise Line Agent
+                                Cruise Company Agent
                             </h3>
                         </div>
                         <div
@@ -183,7 +183,7 @@ const rowDelete = (id) => {
                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                             for="grid-password"
                         >
-                            Cruise Line
+                            Cruise Company
                         </label>
                         <select
                             name="cc_id"

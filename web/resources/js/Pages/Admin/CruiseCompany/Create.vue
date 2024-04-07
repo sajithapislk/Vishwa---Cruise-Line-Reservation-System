@@ -47,7 +47,7 @@ const submit = () => {
 
     console.log(cruiseLineForm);
     axios
-        .post(route("admin.cruise-line.store"), cruiseLineForm, {
+        .post(route("admin.cruise-company.store"), cruiseLineForm, {
             headers: {
                 "Content-Type": "multipart/form-data",
             },

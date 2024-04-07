@@ -92,7 +92,7 @@ const changeCruise = (event) => {
                             <h3
                                 class="font-semibold text-2xl text-blueGray-700"
                             >
-                                Cruise Line Insert
+                                Cruise Company Insert
                             </h3>
                         </div>
                         <div
@@ -108,7 +108,7 @@ const changeCruise = (event) => {
                                     <h1
                                         class="inline text-lg font-semibold leading-none"
                                     >
-                                        Cruise Line Information
+                                        Cruise Company Information
                                     </h1>
                                 </div>
                             </div>

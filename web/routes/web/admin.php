@@ -19,7 +19,7 @@ Route::middleware('auth:admin')->group(function () {
 
     Route::resources([
         'cruise-company' => CruiseCompanyController::class,
-        'cruise-line' => CruiseShipController::class,
+        'cruise-company' => CruiseShipController::class,
         'cruise-company-agent' => CruiseCompanyAgentController::class,
         'company-wallet' => CompanyWalletController::class,
         'port' => PortController::class,
