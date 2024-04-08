@@ -44,7 +44,6 @@ const agentForm = useForm({
 const cruiseline_id = ref("");
 
 const submit = () => {
-
     console.log(cruiseLineForm);
     axios
         .post(route("admin.cruise-company.store"), cruiseLineForm, {
@@ -58,6 +57,8 @@ const submit = () => {
             agentForm.cc_id = cruiseline_id.value;
             console.log(agentForm.cc_id);
             agentSubmit();
+            cruiseLineForm.reset();
+            agentForm.reset();
         })
         .catch((error) => console.log(error));
 };
@@ -130,14 +131,14 @@ const agentSubmit = () => {
                                         <input
                                             v-model="cruiseLineForm.name"
                                             placeholder="Name"
-                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:text-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
                                         />
                                     </div>
                                     <div class="flex-grow w-1/4">
                                         <input
                                             v-model="cruiseLineForm.tp"
                                             placeholder="TP"
-                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:text-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
                                         />
                                     </div>
                                 </div>
