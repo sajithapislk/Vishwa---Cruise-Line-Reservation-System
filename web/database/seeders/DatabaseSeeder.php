@@ -32,7 +32,11 @@ class DatabaseSeeder extends Seeder
             CruiseShipRoomSeeder::class,
             PackageSeeder::class,
             PortSeeder::class,
-            UpcomingReservationsSeeder::class,
+            UpcomingReservationSeeder::class,
+            PaymentSeeder::class,
+            BookSeeder::class,
+            CompanyWalletSeeder::class,
+            CruiseCompanyWalletSeeder::class,
         ]);
     }
 }

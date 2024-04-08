@@ -16,7 +16,7 @@ class CustomerSupporterSeeder extends Seeder
     {
         CustomerSupporter::create([
             'name' => 'Admin',
-            'email' => 'customer_supporter@test.test',
+            'email' => 'customer_supporter@test.com',
             'password' => Hash::make('12345678'),
         ]);
     }

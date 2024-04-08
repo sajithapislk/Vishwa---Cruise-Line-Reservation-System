@@ -6,13 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Books extends Model
+class Book extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'ur_id',
-        'ar_id',
         'user_id',
         'payment_id',
         'status'
@@ -20,10 +19,6 @@ class Books extends Model
     public function reservation(): HasOne
     {
         return $this->hasOne(UpcomingReservations::class,'id','ur_id');
-    }
-    public function available_room(): HasOne
-    {
-        return $this->hasOne(AvailableRoom::class,'id','ar_id');
     }
     public function user(): HasOne
     {

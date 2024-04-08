@@ -17,7 +17,7 @@ class CruiseCompanyAgentSeeder extends Seeder
         CruiseCompanyAgent::create([
             'cc_id'=>'1',
             'name' => 'Admin',
-            'email' => 'cruise_company@test.test',
+            'email' => 'cruise_company@test.com',
             'password' => Hash::make('12345678'),
         ]);
     }

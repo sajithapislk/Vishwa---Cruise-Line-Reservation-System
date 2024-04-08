@@ -47,6 +47,6 @@ class UpcomingReservations extends Model
 
     public function deals(): HasMany
     {
-        return $this->hasMany(Books::class,'ur_id','id');
+        return $this->hasMany(Book::class,'ur_id','id');
     }
 }

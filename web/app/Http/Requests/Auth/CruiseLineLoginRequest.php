@@ -45,7 +45,7 @@ class CruiseLineLoginRequest extends FormRequest
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('admin.auth.failed'),
+                'email' => trans('cruise-company-agent.auth.failed'),
             ]);
         }
 

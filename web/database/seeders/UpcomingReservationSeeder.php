@@ -6,7 +6,7 @@ use App\Models\UpcomingReservations;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class UpcomingReservationsSeeder extends Seeder
+class UpcomingReservationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
