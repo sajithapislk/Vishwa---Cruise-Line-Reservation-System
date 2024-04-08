@@ -14,5 +14,6 @@ class CruiseCompanyWallet extends Model
         'name',
         'debit',
         'credit',
+        'cc_id'
     ];
 }

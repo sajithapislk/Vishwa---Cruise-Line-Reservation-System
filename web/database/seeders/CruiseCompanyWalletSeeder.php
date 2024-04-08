@@ -14,9 +14,10 @@ class CruiseCompanyWalletSeeder extends Seeder
     public function run(): void
     {
         CruiseCompanyWallet::create([
-            'ref'=>'1',
-            'name'=>'BOOK',
-            'credit'=>'1000'
+            'ref' => '1',
+            'name' => 'BOOK',
+            'credit' => '1000',
+            'cc_id' => '1'
         ]);
     }
 }
