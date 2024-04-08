@@ -14,7 +14,7 @@ const editorConfig = ref({
 });
 
 const props = defineProps({
-    cruiseLine: Array,
+    cruiseCompany: Object,
 });
 
 let img = ref("");
@@ -32,17 +32,17 @@ const selectedFile = (e) => {
 };
 
 const cruiseLineForm = useForm({
-    name: props.cruiseLine.name,
-    description: props.cruiseLine.description,
-    img: props.cruiseLine.img,
-    tp: props.cruiseLine.tp,
+    name: props.cruiseCompany.name,
+    description: props.cruiseCompany.description,
+    img: props.cruiseCompany.img,
+    tp: props.cruiseCompany.tp,
 });
 
 const submit = () => {
 
     console.log(cruiseLineForm);
     cruiseLineForm
-        .put(route("admin.cruise-company.update",props.cruiseLine.id))
+        .put(route("admin.cruise-company.update",props.cruiseCompany.id))
         .then((res) => {
             console.log(res);
         })

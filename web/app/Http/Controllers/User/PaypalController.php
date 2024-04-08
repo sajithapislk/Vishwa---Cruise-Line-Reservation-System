@@ -121,7 +121,7 @@ class PaypalController extends Controller
 
             $tempDeal = TempDeal::where('payment_id', $payment->id)->first();
 
-            $cruiseLine = Book::create([
+            $cruiseCompany = Book::create([
                 'ur_id'=>$tempDeal->ur_id,
                 'user_id'=>$userId,
                 'payment_id'=> $payment->id,
@@ -129,13 +129,13 @@ class PaypalController extends Controller
             ]);
 
             CompanyWallet::create([
-                'ref' => $cruiseLine->id,
+                'ref' => $cruiseCompany->id,
                 'name' => 'cruise_deals',
                 'debit' => $payment->amount,
             ]);
 
             CruiseCompanyWallet::create([
-                'ref' => $cruiseLine->id,
+                'ref' => $cruiseCompany->id,
                 'name' => 'cruise_deals',
                 'credit' => $payment->amount,
             ]);

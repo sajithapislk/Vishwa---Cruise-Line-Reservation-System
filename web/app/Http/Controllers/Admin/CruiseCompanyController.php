@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CruiseCompany;
+use App\Models\CruiseCompanyAgent;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -31,7 +32,7 @@ class CruiseCompanyController extends Controller
      */
     public function store(Request $request)
     {
-        $cruiseLine = CruiseCompany::create([
+        $cruiseCompany = CruiseCompany::create([
             'name'=>$request->name,
             'tp'=>$request->tp,
             'description'=>$request->description,
@@ -42,25 +43,25 @@ class CruiseCompanyController extends Controller
             $image = time() . '-l' . '.' . $request->img->extension();
             $request->file('img')->storeAs('cruise-company/', $image);
 
-            $cruiseLine->img = $image;
-            $cruiseLine->save();
+            $cruiseCompany->img = $image;
+            $cruiseCompany->save();
         }
-        return $cruiseLine;
+        return $cruiseCompany;
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(CruiseCompany $cruiseLine)
+    public function show(CruiseCompany $cruiseCompany)
     {
         //
-        return Inertia::render('Admin/CruiseCompany/Edit',compact('cruiseLine'));
+        return Inertia::render('Admin/CruiseCompany/Edit',compact('cruiseCompany'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CruiseCompany $cruiseLine)
+    public function edit(CruiseCompany $cruiseCompany)
     {
         //
     }
@@ -68,9 +69,9 @@ class CruiseCompanyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CruiseCompany $cruiseLine)
+    public function update(Request $request, CruiseCompany $cruiseCompany)
     {
-        $cruiseLine->update([
+        $cruiseCompany->update([
             'name'=>$request->name,
             'tp'=>$request->tp,
             'description'=>$request->description
@@ -80,8 +81,8 @@ class CruiseCompanyController extends Controller
         //     $image = time() . '-l' . '.' . $request->img->extension();
         //     $request->file('img')->storeAs('cruise-company/', $image);
 
-        //     $cruiseLine->img = $image;
-        //     $cruiseLine->save();
+        //     $cruiseCompany->img = $image;
+        //     $cruiseCompany->save();
         // }
         return back()->with('success', 'insert successful');
     }
@@ -89,9 +90,10 @@ class CruiseCompanyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CruiseCompany $cruiseLine)
+    public function destroy(CruiseCompany $cruiseCompany)
     {
-        $cruiseLine->delete();
+        CruiseCompanyAgent::where('cc_id',$cruiseCompany->id)->delete();
+        $cruiseCompany->delete();
         return back()->with('success', 'delete successful');
     }
 }

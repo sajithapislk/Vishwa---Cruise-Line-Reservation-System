@@ -38,7 +38,7 @@ Route::get('/', function () {
 
 Route::controller(CruiseCompanyController::class)->group(function () {
     Route::get('/cruise-company', 'index')->name('cruise-company.index');
-    Route::get('/cruise-company/{cruiseLine}', 'show')->name('cruise-company.show');
+    Route::get('/cruise-company/{cruiseCompany}', 'show')->name('cruise-company.show');
     Route::get('/cruise-company-img/{name}', 'img')->name('cruise-company.img');
 });
 Route::controller(CruiseShipController::class)->group(function () {

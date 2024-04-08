@@ -196,10 +196,10 @@ const rowDelete = (id) => {
                                 Open this select field
                             </option>
                             <option
-                                v-for="cruiseLine in cruiseLines"
-                                :value="cruiseLine.id"
+                                v-for="cruiseCompany in cruiseLines"
+                                :value="cruiseCompany.id"
                             >
-                                {{ cruiseLine.name }}
+                                {{ cruiseCompany.name }}
                             </option>
                         </select>
                     </div>

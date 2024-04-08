@@ -22,10 +22,10 @@ class CruiseCompanyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CruiseCompany $cruiseLine)
+    public function show(CruiseCompany $cruiseCompany)
     {
-        $cruiseLine = $cruiseLine->with('ships')->first();
-        return Inertia::render('Public/CruiseCompany/Show', compact('cruiseLine'));
+        $cruiseCompany = $cruiseCompany->with('ships')->first();
+        return Inertia::render('Public/CruiseCompany/Show', compact('cruiseCompany'));
     }
     public function img($name){
         try {

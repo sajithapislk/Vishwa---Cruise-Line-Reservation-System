@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import GuestLayout from "@/Layouts/GuestLayout2.vue";
 defineProps({
-    cruiseLine: Array,
+    cruiseCompany: Array,
 });
 
 const onSwiper = (swiper) => {
@@ -81,7 +81,7 @@ const onSlideChange = () => {
                                 <h3
                                     class="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2"
                                 >
-                                    {{ cruiseLine.name }}
+                                    {{ cruiseCompany.name }}
                                 </h3>
                             </div>
                             <div
@@ -92,7 +92,7 @@ const onSlideChange = () => {
                                         <p
                                             class="mb-4 text-lg leading-relaxed text-gray-800"
                                         >
-                                        {{ cruiseLine.description }}
+                                        {{ cruiseCompany.description }}
                                         </p>
                                     </div>
                                 </div>
@@ -106,7 +106,7 @@ const onSlideChange = () => {
                                     @slideChange="onSlideChange"
                                 >
                                     <SwiperSlide
-                                        v-for="row in cruiseLine.ships"
+                                        v-for="row in cruiseCompany.ships"
                                         :key="row.id"
                                     >
                                         <div
