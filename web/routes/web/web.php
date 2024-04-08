@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\NewMessage;
+use App\Http\Controllers\LoginRoleCheckController;
 use App\Http\Controllers\User\CruiseDealController;
 use App\Http\Controllers\User\CruiseCompanyController;
 use App\Http\Controllers\User\DashboardController;
@@ -28,7 +29,7 @@ use Inertia\Inertia;
 */
 
 require __DIR__ . '/auth/user.php';
-
+Route::post('login-role-check', LoginRoleCheckController::class)->name('loginRole.check');
 Route::get('/', function () {
     $user_id = Auth::id();
     // return $user_id ;
