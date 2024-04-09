@@ -8,7 +8,7 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 defineProps({
     list: Array,
-    cruiseCompany: Array,
+    cruiseCompanies: Array,
 });
 
 const insertModal = ref(false);
@@ -196,10 +196,10 @@ const rowDelete = (id) => {
                                 Open this select field
                             </option>
                             <option
-                                v-for="cruiseCompany in cruiseLines"
-                                :value="cruiseCompany.id"
+                                v-for="row in cruiseCompanies"
+                                :value="row.id"
                             >
-                                {{ cruiseCompany.name }}
+                                {{ row.name }}
                             </option>
                         </select>
                     </div>
