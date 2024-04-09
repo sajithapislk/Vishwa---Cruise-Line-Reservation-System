@@ -33,11 +33,20 @@ class PortController extends Controller
     public function store(Request $request)
     {
         // imge store doesnt have code
-        return Port::create([
+        $ports = Port::create([
             'name'=>$request->name,
             'description'=>$request->description,
-            'img'=>$request->img,
+            'img'=>'',
         ]);
+
+        if (!is_null($request->img)) {
+            $image = time() . '-l' . '.' . $request->img->extension();
+            $request->file('img')->storeAs('port/', $image);
+
+            $ports->img = $image;
+            $ports->save();
+        }
+        return back()->with('success','create port');
     }
 
     /**
@@ -61,11 +70,20 @@ class PortController extends Controller
      */
     public function update(Request $request, Port $port)
     {
-        return $port->update([
+        $port->update([
             'name'=>$request->name,
-            'description'=>$request->description,
-            'img'=>$request->img,
+            'description'=>$request->description
         ]);
+
+        if (!is_null($request->img)) {
+            $image = time() . '-l' . '.' . $request->img->extension();
+            $request->file('img')->storeAs('cruise-company/', $image);
+
+            $port->img = $image;
+            $port->save();
+        }
+
+        return back()->with('success','update port');
     }
 
     /**
@@ -74,5 +92,6 @@ class PortController extends Controller
     public function destroy(Port $port)
     {
         $port->delete();
+        return back()->with('success','delete port');
     }
 }

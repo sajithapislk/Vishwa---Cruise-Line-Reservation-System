@@ -76,14 +76,6 @@ class CruiseCompanyController extends Controller
             'tp'=>$request->tp,
             'description'=>$request->description
         ]);
-
-        // if (!is_null($request->img)) {
-        //     $image = time() . '-l' . '.' . $request->img->extension();
-        //     $request->file('img')->storeAs('cruise-company/', $image);
-
-        //     $cruiseCompany->img = $image;
-        //     $cruiseCompany->save();
-        // }
         return back()->with('success', 'insert successful');
     }
 
