@@ -112,12 +112,23 @@
                 <li class="items-center">
                     <Link
                         :href="
-                            route('admin.cruise-company.index')
+                            route('admin.cruise-ship.index')
                         "
                         class="text-blueGray-500 hover:text-blue-600 text-xs uppercase py-3 font-bold block"
                     >
                         <i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
-                        Cruise Company
+                        Cruise ship
+                    </Link>
+                </li>
+                <li class="items-center">
+                    <Link
+                        :href="
+                            route('admin.port.index')
+                        "
+                        class="text-blueGray-500 hover:text-blue-600 text-xs uppercase py-3 font-bold block"
+                    >
+                        <i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
+                        Port
                     </Link>
                 </li>
                 <li class="items-center">
