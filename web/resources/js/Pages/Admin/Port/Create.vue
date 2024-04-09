@@ -72,7 +72,7 @@ const submit = () => {
                                 <h3
                                     class="font-semibold text-2xl text-blueGray-700"
                                 >
-                                    Cruise Company Create
+                                    Port create
                                 </h3>
                             </div>
                             <div
@@ -82,15 +82,6 @@ const submit = () => {
                     </div>
                     <div class="block w-full overflow-x-auto">
                         <div class="mb-0 px-4 py-3">
-                            <div class="flex">
-                                <div class="flex-1 py-5 pl-5 overflow-hidden">
-                                    <h1
-                                        class="inline text-lg font-semibold leading-none"
-                                    >
-                                        Cruise Company Information
-                                    </h1>
-                                </div>
-                            </div>
                             <div class="px-5 pb-5">
                                 <div class="flex">
                                     <div class="flex-grow w-1/4 mr-2">
@@ -118,7 +109,7 @@ const submit = () => {
                                 <div class="mt-4">
                                     <InputLabel
                                         for="img"
-                                        value="Verify Address"
+                                        value="Image"
                                     />
                                     <DropFile
                                         name="img"
