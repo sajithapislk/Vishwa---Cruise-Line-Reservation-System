@@ -15,6 +15,25 @@ class DashboardController extends Controller
     public function __invoke(Request $request)
     {
         $list = Book::all();
-        return Inertia::render('Admin/Dashboard',compact('list'));
+
+        $booksWithPayments = Book::where('status', 'SUCCESS')
+            ->with('payment')
+            ->get();
+
+        $paymentSummary = $booksWithPayments->groupBy(function ($item) {
+            return $item->payment->created_at->format('Y-m-d');
+        })->map(function ($group) {
+            return [
+                'total_amount' => $group->sum(function ($book) {
+                    return $book->payment->amount;
+                }),
+                'count' =>  $group->count(),
+                'date' => $group->first()->payment->created_at->format('Y-m-d')
+            ];
+        })->values();
+
+        // return $paymentSummary;
+
+        return Inertia::render('Admin/Dashboard', compact('list','paymentSummary'));
     }
 }
