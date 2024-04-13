@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
@@ -21,7 +22,7 @@ class DashboardController extends Controller
             ->get();
 
         $paymentSummary = $booksWithPayments->groupBy(function ($item) {
-            return $item->payment->created_at->format('Y-m-d');
+            return $item->created_at->format('Y-m-d');
         })->map(function ($group) {
             return [
                 'total_amount' => $group->sum(function ($book) {

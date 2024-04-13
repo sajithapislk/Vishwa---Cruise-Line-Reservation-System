@@ -14,25 +14,47 @@ import {
     LinearScale,
 } from "chart.js";
 
+ChartJS.register(
+    Title,
+    Tooltip,
+    Legend,
+    BarElement,
+    CategoryScale,
+    LinearScale
+);
 
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
+const props = defineProps({
+    list: Array,
+    paymentSummary: Array,
+});
 
 const chartData = {
-  labels: ['January', 'February', 'March'],
-  datasets: [{ data: [40, 20, 12] }],
+    labels: props.paymentSummary.map((e) => e.date),
+    datasets: [
+        {
+            label: "income Amount",
+            backgroundColor: "#f87979",
+            data: props.paymentSummary.map((e) => e.total_amount),
+        },
+    ],
 };
+const chartData1 = {
+    labels: props.paymentSummary.map((e) => e.date),
+    datasets: [
+        {
+            label: "Income Count",
+            backgroundColor: "#32a4a8",
+            data: props.paymentSummary.map((e) => e.count),
+        },
+    ],
+};
+
 
 const chartOptions = {
-  responsive: true,
-  backgroundColor: '#f87979',
+    responsive: true,
+
 };
 
-
-const date = new Date().getFullYear();
-
-defineProps({
-    list: Array,
-});
 </script>
 <template>
     <AdminLayout>
@@ -44,59 +66,26 @@ defineProps({
                         <div class="flex flex-wrap">
                             <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
                                 <div
-                                    class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg"
+                                    class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0  shadow-lg"
                                 >
-                                <Bar
-                                            id="my-chart-id"
-                                            :options="chartOptions"
-                                            :data="chartData"
-                                        />
+                                    <Bar
+                                        id="my-chart-id"
+                                        :options="chartOptions"
+                                        :data="chartData"
+                                        :height="250"
+                                    />
                                 </div>
                             </div>
                             <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
                                 <div
                                     class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg"
                                 >
-                                    <div class="flex-auto p-4">
-                                        <div class="flex flex-wrap">
-                                            <div
-                                                class="relative w-full pr-4 max-w-full flex-grow flex-1"
-                                            >
-                                                <h5
-                                                    class="text-blueGray-400 uppercase font-bold text-xs"
-                                                >
-                                                    Performance
-                                                </h5>
-                                                <span
-                                                    class="font-semibold text-xl text-blueGray-700"
-                                                >
-                                                    49,65%
-                                                </span>
-                                            </div>
-                                            <div
-                                                class="relative w-auto pl-4 flex-initial"
-                                            >
-                                                <div
-                                                    class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-lightBlue-500"
-                                                >
-                                                    <i
-                                                        class="fas fa-percent"
-                                                    ></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p
-                                            class="text-sm text-blueGray-400 mt-4"
-                                        >
-                                            <span class="text-emerald-500 mr-2">
-                                                <i class="fas fa-arrow-up"></i>
-                                                12%
-                                            </span>
-                                            <span class="whitespace-nowrap">
-                                                Since last month
-                                            </span>
-                                        </p>
-                                    </div>
+                                <Bar
+                                        id="my-chart-id2"
+                                        :options="chartOptions"
+                                        :data="chartData1"
+                                        :height="250"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -166,7 +155,7 @@ defineProps({
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="row in list">
+                            <tr v-for="row in props.list">
                                 <th
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
                                 >
