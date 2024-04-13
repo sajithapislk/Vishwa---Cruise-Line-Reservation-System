@@ -69,7 +69,6 @@ const chartOptions = {
                                     class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0  shadow-lg"
                                 >
                                     <Bar
-                                        id="my-chart-id"
                                         :options="chartOptions"
                                         :data="chartData"
                                         :height="250"
@@ -81,7 +80,6 @@ const chartOptions = {
                                     class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg"
                                 >
                                 <Bar
-                                        id="my-chart-id2"
                                         :options="chartOptions"
                                         :data="chartData1"
                                         :height="250"
