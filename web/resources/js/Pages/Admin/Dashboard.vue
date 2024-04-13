@@ -109,7 +109,14 @@ const chartOptions = {
                         </div>
                         <div
                             class="relative w-full px-4 max-w-full flex-grow flex-1 text-right"
-                        ></div>
+                        >
+                            <Link
+                                class="bg-blue-500 text-white active:bg-blue-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1"
+                                :href="route('admin.pdf.bookedList')"
+                            >
+                                Report
+                            </Link>
+                        </div>
                     </div>
                 </div>
                 <div class="block w-full overflow-x-auto">
