@@ -54,6 +54,51 @@ class UpcomingReservationsController extends Controller
         ->when($request->depart_at, function ($query) use ($request) {
             return $query->WhereDate('depart_at', $request->depart_at);
         })
+        ->when($request->is_d, function ($query) {
+            return $query->whereHas('package', function($query) {
+                return $query->where('is_d', 1);
+            });
+        })
+        ->when($request->is_bl, function ($query) {
+            return $query->whereHas('package', function($query) {
+                return $query->where('is_bl', 1);
+            });
+        })
+        ->when($request->is_en, function ($query) {
+            return $query->whereHas('package', function($query) {
+                return $query->where('is_en', 1);
+            });
+        })
+        ->when($request->is_c, function ($query) {
+            return $query->whereHas('package', function($query) {
+                return $query->where('is_c', 1);
+            });
+        })
+        ->when($request->is_ona, function ($query) {
+            return $query->whereHas('package', function($query) {
+                return $query->where('is_ona', 1);
+            });
+        })
+        ->when($request->is_outa, function ($query) {
+            return $query->whereHas('package', function($query) {
+                return $query->where('is_outa', 1);
+            });
+        })
+        ->when($request->is_kt, function ($query) {
+            return $query->whereHas('package', function($query) {
+                return $query->where('is_kt', 1);
+            });
+        })
+        ->when($request->is_w, function ($query) {
+            return $query->whereHas('package', function($query) {
+                return $query->where('is_w', 1);
+            });
+        })
+        ->when($request->is_s, function ($query) {
+            return $query->whereHas('package', function($query) {
+                return $query->where('is_s', 1);
+            });
+        })
         ->get();
 
         return $list;

@@ -7,6 +7,7 @@ import GuestLayout from "@/Layouts/GuestLayout2.vue";
 import Modal from "@/Components/Modal.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
+import CheckBoxColor from "@/Components/CheckBoxColor.vue";
 
 import "swiper/css";
 const props = defineProps({
@@ -28,10 +29,18 @@ const price = ref(0.0);
 
 const filterForm = useForm({
     ship_id: "",
-    p_id: "",
     depart_id: "",
     arrive_id: "",
     depart_at: "",
+    is_d: false,
+    is_bl: false,
+    is_en: false,
+    is_c: false,
+    is_ona: false,
+    is_outa: false,
+    is_kt: false,
+    is_w: false,
+    is_s: false,
 });
 
 const filter = () => {
@@ -80,7 +89,7 @@ function bookPayment() {
             // window.location.href = response.data;
         })
         .catch((error) => {
-            window.location.href = route('login');
+            window.location.href = route("login");
         });
 }
 
@@ -207,27 +216,6 @@ function getImagePath(dp_id, ap_id) {
                                                 </option>
                                             </select>
                                         </div>
-                                        <div class="flex flex-col">
-                                            <label
-                                                for="status"
-                                                class="font-medium text-sm text-stone-600"
-                                                >package</label
-                                            >
-
-                                            <select
-                                                v-model="filterForm.p_id"
-                                                id="status"
-                                                class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-                                            >
-                                                <option value="">All</option>
-                                                <option
-                                                    v-for="row in packages"
-                                                    :value="row.id"
-                                                >
-                                                    {{ row.name }}
-                                                </option>
-                                            </select>
-                                        </div>
 
                                         <div class="flex flex-col">
                                             <label
@@ -241,6 +229,78 @@ function getImagePath(dp_id, ap_id) {
                                                 id="depart_at"
                                                 class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
                                             />
+                                        </div>
+                                        <div class="flex flex-col col-span-4">
+                                            <label
+                                                for="depart_at"
+                                                class="font-medium text-sm text-stone-600"
+                                                >Select facilities you want</label
+                                            >
+                                            <ul>
+                                                <CheckBoxColor
+                                                    id="is_d"
+                                                    name="Dining"
+                                                    v-model:checked="
+                                                        filterForm.is_d
+                                                    "
+                                                />
+                                                <CheckBoxColor
+                                                    id="is_bl"
+                                                    name="Bars & Lounges"
+                                                    v-model:checked="
+                                                        filterForm.is_bl
+                                                    "
+                                                />
+                                                <CheckBoxColor
+                                                    id="is_en"
+                                                    name="Entertainment & Nightlife"
+                                                    v-model:checked="
+                                                        filterForm.is_en
+                                                    "
+                                                />
+                                                <CheckBoxColor
+                                                    id="is_c"
+                                                    name="Casino"
+                                                    v-model:checked="
+                                                        filterForm.is_c
+                                                    "
+                                                />
+                                                <CheckBoxColor
+                                                    id="is_ona"
+                                                    name="Onboard Activities"
+                                                    v-model:checked="
+                                                        filterForm.is_ona
+                                                    "
+                                                />
+                                                <CheckBoxColor
+                                                    id="is_outa"
+                                                    name="Outdoor Activities"
+                                                    v-model:checked="
+                                                        filterForm.is_outa
+                                                    "
+                                                />
+                                                <CheckBoxColor
+                                                    id="is_kt"
+                                                    name="Kids & Teens"
+                                                    v-model:checked="
+                                                        filterForm.is_kt
+                                                    "
+                                                />
+                                                <CheckBoxColor
+                                                    id="is_w"
+                                                    name="Wellness"
+                                                    v-model:checked="
+                                                        filterForm.is_w
+                                                    "
+                                                />
+                                                <CheckBoxColor
+                                                    id="is_s"
+                                                    name="Shopping"
+                                                    v-model:checked="
+                                                        filterForm.is_s
+                                                    "
+                                                />
+                                            </ul>
                                         </div>
                                     </div>
 
