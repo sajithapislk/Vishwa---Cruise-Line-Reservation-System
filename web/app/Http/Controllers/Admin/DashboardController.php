@@ -15,7 +15,7 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $list = Book::all();
+        $list = Book::with('payment','user','reservation')->get();
 
         $booksWithPayments = Book::where('status', 'SUCCESS')
             ->with('payment')
@@ -33,7 +33,7 @@ class DashboardController extends Controller
             ];
         })->values();
 
-        // return $paymentSummary;
+        // return $list;
 
         return Inertia::render('Admin/Dashboard', compact('list','paymentSummary'));
     }
