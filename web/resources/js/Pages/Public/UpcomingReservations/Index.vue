@@ -55,7 +55,7 @@ const filter = () => {
 
 const paypalFrom = useForm({
     id: "",
-    qty: 1,
+    qty: 0,
     processing: false,
 });
 
@@ -812,7 +812,7 @@ function getImagePath(dp_id, ap_id) {
                         class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                         for="grid-password"
                     >
-                        Qty
+                        No of people
                     </label>
 
                     <input
