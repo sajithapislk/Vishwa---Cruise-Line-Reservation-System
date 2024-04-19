@@ -46,7 +46,7 @@ class PaypalController extends Controller
         $uniqueCode = $this->generateRandomString();
         $upcomingDeal = UpcomingReservations::find($request->id);
 
-        $price = $request->qty * $upcomingDeal->price;
+        $price = ($request->qty * $upcomingDeal->price) + ($request->qty * $upcomingDeal->tax);
 
         $provider = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
@@ -121,7 +121,7 @@ class PaypalController extends Controller
 
             $tempDeal = TempDeal::where('payment_id', $payment->id)->first();
 
-            $cruiseCompany = Book::create([
+            $book = Book::create([
                 'ur_id'=>$tempDeal->ur_id,
                 'user_id'=>$userId,
                 'payment_id'=> $payment->id,
@@ -129,18 +129,20 @@ class PaypalController extends Controller
             ]);
 
             CompanyWallet::create([
-                'ref' => $cruiseCompany->id,
+                'ref' => $book->id,
                 'name' => 'cruise_deals',
                 'debit' => $payment->amount,
             ]);
 
             CruiseCompanyWallet::create([
-                'ref' => $cruiseCompany->id,
+                'ref' => $book->id,
                 'name' => 'cruise_deals',
                 'credit' => $payment->amount,
             ]);
 
-            return Inertia::render("User/PaymentSuccess");
+            return Inertia::render("User/PaymentSuccess",[
+                'id'=>$book->id
+            ]);
         } else {
             return "error";
         }
@@ -157,13 +159,13 @@ class PaypalController extends Controller
             ->with('error', $response['message'] ?? 'You have canceled the transaction.');
     }
 
-    function pdf($id) {
-        $cruiseDeal = Book::with(['deal','available_room','user','payment'])->find($id);
+    public function pdf($id) {
+        $cruiseDeal = Book::with(['reservation','user','payment'])->find($id);
         // return $cruiseDeal;
         return view('PDF.invoice',compact('cruiseDeal'));
     }
-    function pdf_download($id) {
-        $cruiseDeal = Book::with(['deal','available_room','user','payment'])->find($id);
+    public function pdf_download($id) {
+        $cruiseDeal = Book::with(['reservation','available_room','user','payment'])->find($id);
         // return $cruiseDeal;
         // return view('PDF.invoice',compact('cruiseDeal'));
         $pdf = Pdf::loadview('pdf.invoice', [

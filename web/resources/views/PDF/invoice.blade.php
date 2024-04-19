@@ -130,8 +130,7 @@
                         <tr>
                             <td style="width: 60%;">
                                 <h5>Deal DETAILS</h5>
-                                deal ID : {{ $cruiseDeal->deal->id }}<br>
-                                room id : {{ $cruiseDeal->available_room->id }}
+                                deal ID : {{ $cruiseDeal->reservation->id }}
 
                             </td>
 
@@ -150,7 +149,7 @@
                     Amount
                 </td>
                 <td>
-                    {{ $cruiseDeal->deal->tax }} USD
+                    {{ $cruiseDeal->reservation->price }} USD
                 </td>
             </tr>
 
@@ -159,7 +158,7 @@
                     TAX
                 </td>
                 <td>
-                    {{ $cruiseDeal->deal->price }} USD
+                    {{ $cruiseDeal->reservation->tax }} USD
                 </td>
             </tr>
 
@@ -168,7 +167,7 @@
                     Total
                 </td>
                 <td>
-                    {{ $cruiseDeal->deal->price+$cruiseDeal->deal->tax }} USD
+                    {{ $cruiseDeal->reservation->price+$cruiseDeal->reservation->tax }} USD
                 </td>
             </tr>
         </table>

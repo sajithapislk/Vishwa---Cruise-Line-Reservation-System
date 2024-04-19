@@ -26,6 +26,7 @@ const shipImg = ref("");
 const roomImg = ref("");
 const total = ref(0.0);
 const price = ref(0.0);
+const tax = ref(0.0);
 
 const filterForm = useForm({
     ship_id: "",
@@ -64,6 +65,7 @@ const ModalBook = (data) => {
     if (typeof data !== "undefined" && !(data instanceof PointerEvent)) {
         paypalFrom.id = data.id;
         price.value = data.price;
+        tax.value = data.tax;
         console.log(paypalFrom.cd_id);
     }
     bookModal.value = !bookModal.value;
@@ -778,10 +780,6 @@ function getImagePath(dp_id, ap_id) {
                                     </div> -->
                                     <p
                                         class="mt-4 text-gray-500"
-                                        style="
-                                            text-decoration-line: line-through;
-                                            text-decoration-style: solid;
-                                        "
                                     >
                                         TAX : ${{ row.tax }}
                                     </p>
@@ -824,7 +822,7 @@ function getImagePath(dp_id, ap_id) {
                                 if (paypalFrom.qty > 5 || paypalFrom.qty < 0) {
                                     paypalFrom.qty = 5;
                                 }
-                                total = price * paypalFrom.qty;
+                                total = (price * paypalFrom.qty) + tax * paypalFrom.qty;
                                 console.log(total);
                             }
                         "
