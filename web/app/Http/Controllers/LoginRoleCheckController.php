@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Models\Admin;
 use App\Models\CruiseCompanyAgent;
 use App\Models\CustomerSupporter;
@@ -14,7 +15,7 @@ class LoginRoleCheckController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request)
+    public function __invoke(LoginRequest $request)
     {
         $loginEmail = $request->email;
 
