@@ -18,7 +18,6 @@ class CruiseShip extends Model
         'img',
         'style',
         'size',
-        'type',
         'launch_at',
         'last_refit_at',
         'gt',

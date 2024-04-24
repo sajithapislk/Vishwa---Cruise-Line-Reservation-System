@@ -37,7 +37,6 @@ const submitForm = useForm({
     img: "",
     style: "",
     size: "",
-    type: "",
     launch_at: "",
     last_refit_at: "",
     gt: "",
@@ -55,7 +54,7 @@ const submitForm = useForm({
 
 const submit = () => {
     submitForm
-        .post(route("cruise-company-agent.ship.store"))
+        .post(route("cruise-company-agent.cruise-ship.store"))
         .then((res) => {
             console.log("success");
             submitForm.reset();
@@ -148,13 +147,13 @@ const submit = () => {
                                         </select>
                                     </div>
                                 </div>
-                                <div class="flex">
+                                <div class="flex mt-2">
                                     <div class="flex-grow w-1/4 mr-2">
                                         <label
                                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                             for="grid-password"
                                         >
-                                        Style
+                                            Style
                                         </label>
                                         <input
                                             v-model="submitForm.style"
@@ -163,6 +162,12 @@ const submit = () => {
                                         />
                                     </div>
                                     <div class="flex-grow w-1/4">
+                                        <label
+                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                            for="grid-password"
+                                        >
+                                            Size
+                                        </label>
                                         <input
                                             v-model="submitForm.size"
                                             placeholder="Size"
@@ -170,24 +175,15 @@ const submit = () => {
                                         />
                                     </div>
                                 </div>
-                                <div class="flex">
+
+                                <div class="flex mt-2">
                                     <div class="flex-grow w-1/4 mr-2">
-                                        <input
-                                            v-model="submitForm.type"
-                                            placeholder="Type"
-                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transsubmitForm border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
-                                        />
-                                    </div>
-                                    <div class="flex-grow w-1/4">
-                                        <input
-                                            v-model="submitForm.gt"
-                                            placeholder="Gt"
-                                            class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transsubmitForm border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
-                                        />
-                                    </div>
-                                </div>
-                                <div class="flex">
-                                    <div class="flex-grow w-1/4 mr-2">
+                                        <label
+                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                            for="grid-password"
+                                        >
+                                            Length
+                                        </label>
                                         <input
                                             v-model="submitForm.length"
                                             placeholder="Length"
@@ -195,6 +191,12 @@ const submit = () => {
                                         />
                                     </div>
                                     <div class="flex-grow w-1/4">
+                                        <label
+                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                            for="grid-password"
+                                        >
+                                            Width
+                                        </label>
                                         <input
                                             v-model="submitForm.width"
                                             placeholder="Width"
@@ -202,8 +204,14 @@ const submit = () => {
                                         />
                                     </div>
                                 </div>
-                                <div class="flex">
+                                <div class="flex mt-2">
                                     <div class="flex-grow w-1/4 mr-2">
+                                        <label
+                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                            for="grid-password"
+                                        >
+                                            Speed
+                                        </label>
                                         <input
                                             v-model="submitForm.speed"
                                             placeholder="Speed"
@@ -211,6 +219,12 @@ const submit = () => {
                                         />
                                     </div>
                                     <div class="flex-grow w-1/4">
+                                        <label
+                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                            for="grid-password"
+                                        >
+                                            Decks
+                                        </label>
                                         <input
                                             v-model="submitForm.decks"
                                             placeholder="Decks"
@@ -218,8 +232,14 @@ const submit = () => {
                                         />
                                     </div>
                                 </div>
-                                <div class="flex">
+                                <div class="flex mt-2">
                                     <div class="flex-grow w-1/4 mr-2">
+                                        <label
+                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                            for="grid-password"
+                                        >
+                                            Nop
+                                        </label>
                                         <input
                                             v-model="submitForm.nop"
                                             placeholder="Nop"
@@ -227,6 +247,12 @@ const submit = () => {
                                         />
                                     </div>
                                     <div class="flex-grow w-1/4">
+                                        <label
+                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                            for="grid-password"
+                                        >
+                                            No_crew
+                                        </label>
                                         <input
                                             v-model="submitForm.no_crew"
                                             placeholder="No_crew"
@@ -234,8 +260,14 @@ const submit = () => {
                                         />
                                     </div>
                                 </div>
-                                <div class="flex">
+                                <div class="flex mt-2">
                                     <div class="flex-grow w-1/4 mr-2">
+                                        <label
+                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                            for="grid-password"
+                                        >
+                                            Wa
+                                        </label>
                                         <input
                                             v-model="submitForm.wa"
                                             placeholder="Wa"
@@ -243,12 +275,31 @@ const submit = () => {
                                         />
                                     </div>
                                     <div class="flex-grow w-1/4 mr-2">
+                                        <label
+                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                            for="grid-password"
+                                        >
+                                            no_cabins
+                                        </label>
                                         <input
                                             v-model="submitForm.no_cabins"
                                             placeholder="no_cabins"
                                             class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transsubmitForm border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
                                         />
                                     </div>
+                                </div>
+                                <div class="flex-grow w-1/4 mr-2">
+                                    <label
+                                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                        for="grid-password"
+                                    >
+                                        GT
+                                    </label>
+                                    <input
+                                        v-model="submitForm.gt"
+                                        placeholder="GT"
+                                        class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transsubmitForm border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                                    />
                                 </div>
 
                                 <div class="mt-4">
@@ -281,8 +332,14 @@ const submit = () => {
                                         :message="submitForm.errors.img"
                                     />
                                 </div>
-                                <div class="flex">
+                                <div class="flex mt-3">
                                     <div class="flex-grow w-1/4 mr-2">
+                                        <label
+                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                            for="grid-password"
+                                        >
+                                            launch_at
+                                        </label>
                                         <input
                                             v-model="submitForm.launch_at"
                                             placeholder="launch_at"
@@ -294,6 +351,12 @@ const submit = () => {
                                         />
                                     </div>
                                     <div class="flex-grow w-1/4">
+                                        <label
+                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                            for="grid-password"
+                                        >
+                                            last_refit_at
+                                        </label>
                                         <input
                                             v-model="submitForm.last_refit_at"
                                             placeholder="last_refit_at"

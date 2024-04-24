@@ -47,7 +47,6 @@ class CruiseShipController extends Controller
             'img' => '',
             'style' => $request->style,
             'size' => $request->size,
-            'type' => $request->type,
             'launch_at' => $request->launch_at,
             'last_refit_at' => $request->last_refit_at,
             'gt' => $request->gt,
@@ -68,6 +67,7 @@ class CruiseShipController extends Controller
             $ship->img = $image;
             $ship->save();
         }
+        return redirect()->route('cruise-company-agent.cruise-ship.index')->with('success','Cruise Ship Successfully Inserted');
     }
 
     /**

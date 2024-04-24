@@ -21,7 +21,6 @@ class CruiseShipSeeder extends Seeder
             'img' => 'ship.jpg',
             'style'=> 'test',
             'size' => 'test',
-            'type' => 'type',
             'launch_at' => '2004',
             'last_refit_at' => '2004',
             'gt' => '1',
