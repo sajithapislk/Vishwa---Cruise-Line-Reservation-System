@@ -62,7 +62,7 @@ class CruiseShipController extends Controller
 
         if (!is_null($request->img)) {
             $image = time() . '-l' . '.' . $request->img->extension();
-            $request->file('img')->storeAs('cruise-company/', $image);
+            $request->file('img')->storeAs('ships/', $image);
 
             $ship->img = $image;
             $ship->save();

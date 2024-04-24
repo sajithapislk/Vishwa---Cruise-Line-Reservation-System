@@ -62,7 +62,12 @@ const onSlideChange = () => {
                                     <div class="relative">
                                         <img
                                             alt="..."
-                                            src="./img/team-2-800x800.jpg"
+                                            :src="
+                                                route(
+                                                    'cruise-company.img',
+                                                    cruiseCompany.img
+                                                )
+                                            "
                                             class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16"
                                             style="max-width: 150px"
                                         />
@@ -91,8 +96,8 @@ const onSlideChange = () => {
                                     <div class="w-full lg:w-9/12 px-4">
                                         <p
                                             class="mb-4 text-lg leading-relaxed text-gray-800"
+                                            v-html="cruiseCompany.description"
                                         >
-                                        {{ cruiseCompany.description }}
                                         </p>
                                     </div>
                                 </div>
@@ -117,15 +122,19 @@ const onSlideChange = () => {
                                             >
                                                 <img
                                                     class="w-full h-full object-cover transition group-hover:scale-125"
-                                                    :src="route('ship.img',row.img)"
+                                                    :src="
+                                                        route(
+                                                            'ship.img',
+                                                            row.img
+                                                        )
+                                                    "
                                                 />
                                             </figure>
                                             <div class="p-4">
                                                 <h3 class="text-xl font-bold">
-                                                   {{ row.name }}
+                                                    {{ row.name }}
                                                 </h3>
                                             </div>
-
                                         </div>
                                     </SwiperSlide>
                                 </Swiper>
