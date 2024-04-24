@@ -16,8 +16,7 @@ class CruiseCompanyWalletSeeder extends Seeder
         CruiseCompanyWallet::create([
             'ref' => '1',
             'name' => 'BOOK',
-            'credit' => '1000',
-            'cc_id' => '1'
+            'credit' => '1000'
         ]);
     }
 }

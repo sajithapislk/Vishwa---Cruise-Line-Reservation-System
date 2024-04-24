@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('img');
             $table->string('style',10);
             $table->string('size',10);
-            $table->string('type',10);
             $table->year('launch_at');
             $table->year('last_refit_at');
             $table->integer('gt');
