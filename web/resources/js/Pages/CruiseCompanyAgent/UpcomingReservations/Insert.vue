@@ -92,7 +92,7 @@ const changeCruise = (event) => {
                             <h3
                                 class="font-semibold text-2xl text-blueGray-700"
                             >
-                                Cruise Company Insert
+                                Add Upcoming Reservation
                             </h3>
                         </div>
                         <div
@@ -108,13 +108,13 @@ const changeCruise = (event) => {
                                     <h1
                                         class="inline text-lg font-semibold leading-none"
                                     >
-                                        Cruise Company Information
+                                    Reservation Details
                                     </h1>
                                 </div>
                             </div>
                             <div class="px-5 pb-5">
                                 <div class="w-full mr-2">
-                                    <InputLabel for="s_id" value="s_id" />
+                                    <InputLabel for="s_id" value="Cruise Line Name" />
                                     <select
                                         name="s_id"
                                         v-model="cruiseLineForm.s_id"
@@ -136,7 +136,7 @@ const changeCruise = (event) => {
                                 </div>
                                 <div class="flex">
                                     <div class="flex-grow w-1/4 mr-2">
-                                        <InputLabel for="p_id" value="p_id" />
+                                        <InputLabel for="p_id" value="Package ID" />
                                         <select
                                             name="p_id"
                                             v-model="cruiseLineForm.p_id"
@@ -182,7 +182,7 @@ const changeCruise = (event) => {
                                     <div class="flex-grow w-1/4 mr-2">
                                         <InputLabel
                                             for="dp_id"
-                                            value="dp_id "
+                                            value="Departure Port"
                                         />
                                         <select
                                             name="dp_id"
@@ -204,7 +204,7 @@ const changeCruise = (event) => {
                                         </select>
                                     </div>
                                     <div class="flex-grow w-1/4 mr-2">
-                                        <InputLabel for="dp_id" value="ap_id" />
+                                        <InputLabel for="dp_id" value="Arrival Port" />
                                         <select
                                             name="ap_id"
                                             v-model="cruiseLineForm.ap_id"
@@ -226,7 +226,7 @@ const changeCruise = (event) => {
                                     </div>
                                 </div>
                                 <div class="mt-4">
-                                    <InputLabel for="name" value="name" />
+                                    <InputLabel for="name" value="Package Name " />
                                     <TextInput
                                         v-model="cruiseLineForm.name"
                                         placeholder="name"
@@ -235,7 +235,7 @@ const changeCruise = (event) => {
                                 </div>
                                 <div class="flex">
                                     <div class="flex-grow w-1/4 mr-2">
-                                        <InputLabel for="tax" value="tax" />
+                                        <InputLabel for="tax" value="Tax" />
                                         <TextInput
                                             v-model="cruiseLineForm.tax"
                                             placeholder="tax"
@@ -243,7 +243,7 @@ const changeCruise = (event) => {
                                         />
                                     </div>
                                     <div class="flex-grow w-1/4 mr-2">
-                                        <InputLabel for="price" value="price" />
+                                        <InputLabel for="price" value="Package Price" />
                                         <TextInput
                                             v-model="cruiseLineForm.price"
                                             placeholder="price"
@@ -256,7 +256,7 @@ const changeCruise = (event) => {
                                     <div class="flex-grow w-1/4 mr-2">
                                         <InputLabel
                                             for="depart_at"
-                                            value="depart_at"
+                                            value="Departure Date"
                                         />
                                         <TextInput
                                             type="datetime-local"
@@ -266,7 +266,7 @@ const changeCruise = (event) => {
                                         />
                                     </div>
                                     <div class="flex-grow w-1/4 mr-2">
-                                        <InputLabel for="arrive_at" value="arrive_at" />
+                                        <InputLabel for="arrive_at" value="Arrival Date" />
                                         <TextInput
                                             type="datetime-local"
                                             v-model="cruiseLineForm.arrive_at"
