@@ -136,7 +136,7 @@ const changeCruise = (event) => {
                                 </div>
                                 <div class="flex">
                                     <div class="flex-grow w-1/4 mr-2">
-                                        <InputLabel for="p_id" value="Package ID" />
+                                        <InputLabel for="p_id" value="Package Type" />
                                         <select
                                             name="p_id"
                                             v-model="cruiseLineForm.p_id"
@@ -156,11 +156,10 @@ const changeCruise = (event) => {
                                         </select>
                                     </div>
                                     <div class="flex-grow w-1/4 mr-2">
-                                        <InputLabel for="sr_id" value="sr_id" />
+                                        <InputLabel for="sr_id" value="Room View" />
                                         <select
                                             name="sr_id"
                                             v-model="cruiseLineForm.sr_id"
-                                            @change="changePackage($event)"
                                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                             aria-label="Default select example"
                                             required
@@ -187,7 +186,6 @@ const changeCruise = (event) => {
                                         <select
                                             name="dp_id"
                                             v-model="cruiseLineForm.dp_id"
-                                            @change="changeCruise($event)"
                                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                             aria-label="Default select example"
                                             required
@@ -208,7 +206,6 @@ const changeCruise = (event) => {
                                         <select
                                             name="ap_id"
                                             v-model="cruiseLineForm.ap_id"
-                                            @change="changeCruise($event)"
                                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                             aria-label="Default select example"
                                             required

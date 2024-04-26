@@ -16,7 +16,6 @@ const cruiseLineForm = useForm({
     s_id: props.ship.id,
     room_view: "",
     img: null,
-    flow: "",
     room_count: "",
 });
 
@@ -26,11 +25,10 @@ const tempSave = () => {
         s_id: cruiseLineForm.s_id,
         room_view: cruiseLineForm.room_view,
         img: cruiseLineForm.img,
-        flow: cruiseLineForm.flow,
         room_count: cruiseLineForm.room_count,
     });
     console.log(tempList);
-    cruiseLineForm.reset("room_view", "img", "flow", "room_count");
+    cruiseLineForm.reset("room_view", "img","room_count");
 };
 let img = ref("");
 
@@ -46,7 +44,7 @@ const selectedFile = (e) => {
 };
 
 const submit = () => {
-    router.post(route("cruise-company-agent.ship-room.store"), tempList.value);
+    router.post(route("cruise-company-agent.cruise-ship-room.store"), tempList.value);
     // cruiseLineForm.reset();
     console.log(tempList);
 };
@@ -104,16 +102,6 @@ const submit = () => {
                                         <TextInput
                                             v-model="cruiseLineForm.room_view"
                                             placeholder="Room View"
-                                            class="w-full"
-                                            required
-                                        />
-                                    </div>
-                                    <div class="flex-grow w-1/4 mr-2">
-                                        <InputLabel for="img" value="Flow" />
-                                        <TextInput
-                                            type="number"
-                                            v-model="cruiseLineForm.flow"
-                                            placeholder="Flow"
                                             class="w-full"
                                             required
                                         />
@@ -247,11 +235,6 @@ const submit = () => {
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                                 >
-                                    Flow
-                                </th>
-                                <th
-                                    class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
-                                >
                                     Count
                                 </th>
                             </tr>
@@ -272,11 +255,6 @@ const submit = () => {
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                                 >
                                     {{ row.img }}
-                                </td>
-                                <td
-                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-                                >
-                                    {{ row.flow }}
                                 </td>
                                 <td
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"

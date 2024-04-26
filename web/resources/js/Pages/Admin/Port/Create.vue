@@ -17,7 +17,6 @@ defineProps({
     list: Array,
 });
 
-
 let img = ref("");
 
 const Img_drop = (e) => {
@@ -32,21 +31,16 @@ const selectedFile = (e) => {
 };
 
 const submitForm = useForm({
-    name: "test",
-    description: "test",
-    img: null
+    name: "",
+    description: "",
+    img: null,
 });
 
 const submit = () => {
-    submitForm
-        .post(route("admin.port.store"))
-        .then((res) => {
-            console.log('success');
-            submitForm.reset();
-        })
-        .catch((error) => console.log(error));
+    submitForm.post(route("admin.port.store"), {
+        onFinish: () => submitForm.reset(),
+    });
 };
-
 </script>
 
 <template>
@@ -63,7 +57,7 @@ const submit = () => {
             <div
                 class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded"
             >
-                <form @submit.prevent="submit">
+                <form @submit="submit">
                     <div class="rounded-t mb-0 px-4 py-3 border-0">
                         <div class="flex flex-wrap items-center">
                             <div
@@ -91,7 +85,6 @@ const submit = () => {
                                             class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
                                         />
                                     </div>
-
                                 </div>
 
                                 <div class="mt-4">
@@ -107,10 +100,7 @@ const submit = () => {
                                 </div>
 
                                 <div class="mt-4">
-                                    <InputLabel
-                                        for="img"
-                                        value="Image"
-                                    />
+                                    <InputLabel for="img" value="Image" />
                                     <DropFile
                                         name="img"
                                         @drop.prevent="Img_drop"

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CruiseShip;
 use App\Models\CruiseShipRoom;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class CruiseLineRoomController extends Controller
@@ -24,8 +25,9 @@ class CruiseLineRoomController extends Controller
      */
     public function create()
     {
-        $ships = CruiseShip::all();
-        return Inertia::render('CruiseCompanyAgent/CruiseShipRoom/Select',compact('ships'));
+        $user = Auth::User();
+        $ship = CruiseShip::where('cc_id',$user->cc_id)->first();
+        return Inertia::render('CruiseCompanyAgent/CruiseShipRoom/Insert',compact('ship'));
     }
 
     /**
@@ -40,15 +42,16 @@ class CruiseLineRoomController extends Controller
                 'room_view'=>$row["room_view"],
                 'img'=>'',
                 'room_count'=>$row["room_count"],
-                'flow'=>$row["flow"],
             ]);
             if (!is_null($row["img"])) {
                 $image = time() . '-sr' . '.' . $row["img"]->extension();
-                $row["img"]->storeAs('ship-room/'.$shipRoom->s_id, $image);
+                $row["img"]->storeAs('ship-room', $image);
                 $shipRoom->img = $image;
                 $shipRoom->save();
             }
         }
+
+        return back()->with('success','room insert successfully');
     }
 
     /**
