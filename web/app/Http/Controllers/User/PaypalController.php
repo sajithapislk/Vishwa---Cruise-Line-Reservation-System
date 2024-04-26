@@ -169,7 +169,7 @@ class PaypalController extends Controller
         return view('PDF.invoice',compact('cruiseDeal'));
     }
     public function pdf_download($id) {
-        $cruiseDeal = Book::with(['reservation','available_room','user','payment'])->find($id);
+        $cruiseDeal = Book::with(['reservation','user','payment'])->find($id);
         // return $cruiseDeal;
         // return view('PDF.invoice',compact('cruiseDeal'));
         $pdf = Pdf::loadview('pdf.invoice', [
