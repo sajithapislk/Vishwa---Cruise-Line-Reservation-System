@@ -46,7 +46,7 @@ class PortController extends Controller
             $ports->img = $image;
             $ports->save();
         }
-        return back()->with('success','create port');
+        return back()->with('success',' Port Added');
     }
 
     /**
