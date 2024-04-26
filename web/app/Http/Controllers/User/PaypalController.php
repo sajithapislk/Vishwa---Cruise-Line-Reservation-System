@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Mail\PaymentInvoice;
 use App\Models\CompanyWallet;
 use App\Models\Book;
 use App\Models\CruiseCompanyWallet;
@@ -13,6 +14,7 @@ use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 
 class PaypalController extends Controller
@@ -104,7 +106,7 @@ class PaypalController extends Controller
      */
     public function successTransaction(Request $request)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
 
         $provider = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
@@ -123,7 +125,7 @@ class PaypalController extends Controller
 
             $book = Book::create([
                 'ur_id'=>$tempDeal->ur_id,
-                'user_id'=>$userId,
+                'user_id'=>$user->id,
                 'payment_id'=> $payment->id,
                 'status'=>"PAYMENT DONE"
             ]);
@@ -139,6 +141,8 @@ class PaypalController extends Controller
                 'name' => 'cruise_deals',
                 'credit' => $payment->amount,
             ]);
+            $bookWithInfo = $book->with(['reservation','user','payment'])->first();
+            Mail::to($user->email)->send(new PaymentInvoice($bookWithInfo));
 
             return Inertia::render("User/PaymentSuccess",[
                 'id'=>$book->id
