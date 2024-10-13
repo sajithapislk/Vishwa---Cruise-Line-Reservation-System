@@ -27,6 +27,20 @@ class UpcomingReservationSeeder extends Seeder
                 'price' => '100',
                 'depart_at' => '2024-04-02 22:16:11',
                 'arrive_at' => '2024-04-03 22:16:11',
+            ],
+            [
+                's_id' => '1',
+                'sr_id' => '1',
+                'dp_id' => '1',
+                'ap_id' => '1',
+                'p_id' => '2',
+                'name' => 'Test',
+                'description' => 'Test Description',
+                'img' => 'reservation',
+                'tax' => '9',
+                'price' => '90',
+                'depart_at' => '2024-04-02 22:16:11',
+                'arrive_at' => '2024-04-03 22:16:11',
             ]
         ];
 
