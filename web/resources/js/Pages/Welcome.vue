@@ -72,43 +72,38 @@ function submitForm() {
 
     <GuestLayout>
         <main class="bg-gray">
-            <section class="section--hero relative">
-                <div class="flex mb-4 absolute top-0 left-0 h-full w-full z-1">
-                    <div
-                        class="w-1/3 hidden lg:block bg-main-blue section--hero__height"
-                    ></div>
-                    <div
-                        class="hero--image w-full lg:w-2/3 bg-gray-500 section--hero__height bg-cover relative"
-                    >
-                        <div
-                            class="absolute top-0 left-0 w-full h-full bg-hero-gradient"
-                        ></div>
+              <section class="section--hero relative">
+        <div class="flex mb-4 absolute top-0 left-0 h-full w-full z-1">
+            <div class="w-1/3 hidden lg:block bg-main-blue section--hero__height"></div>
+            <div class="hero--image w-full lg:w-2/3 bg-gray-500 section--hero__height bg-cover relative">
+                <div class="absolute top-0 left-0 w-full h-full bg-hero-gradient"></div>
+            </div>
+        </div>
+        <div class="absolute top-0 left-0 h-full w-full z-2">
+            <div class="container mx-auto h-full sm:px-4 px-3">
+                <div class="flex mb-4 h-full items-center">
+                    <div class="w-full lg:w-1/2 text-white font-roboto">
+                        <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-wide leading-tight mb-4 text-shadow">
+                            World’s Largest Online Cruise Reservation
+                        </h1>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-wide leading-tight mb-12 text-shadow">
+Experience Your Dream Vacation at Unbeatable Prices
+                        </h2>
+                        <p class="font-light text-lg bg-black bg-opacity-50 p-4 rounded-lg shadow-lg">
+Cruiselinereservation.com offers a wide variety of cruise options tailored to meet the diverse needs of travelers with different preferences and budgets. Whether you're a solo traveler, a family, or seeking luxury or affordable cruise experiences, we have something for everyone. Choose from over 20 cruise lines, including Carnival Cruises, Royal Caribbean, MSC Cruises, Celebrity Cruises, Disney Cruises, and more, ensuring a comprehensive selection for your next getaway.                        </p>
                     </div>
                 </div>
-                <div class="absolute top-0 left-0 h-full w-full z-2">
-                    <div class="container mx-auto h-full sm:px-4 px-3">
-                        <div class="flex mb-4 h-full items-center">
-                            <div class="w-full lg:w-1/2 text-white font-roboto">
-                                <h1
-                                    class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-wide leading-tight mb-12"
-                                >
-                                    World Largest Online Cruise Reservation
-                                                    <br>Enjoy Your Vacation With Best Deals
-                                </h1>
-                                <p class="font-light text-lg">
-                                    Cruiselinereservation.com provides a diverse range of cruise options to cater to a wide variety of travelers with varying preferences and financial constraints. Their offerings are suitable for solo adventurers, families, and those interested in both luxurious and more budget-friendly cruise experiences. With over 20 different cruise lines to choose from, including Carnival Cruises, Royal Caribbean Cruises, MSC Cruises, Celebrity Cruises, Disney Cruises, and more, they offer a comprehensive selection.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            </div>
+        </div>
+    </section>
+            <!--
             <section class="section--services py-16 sm:my-8">
                 <div class="container mx-auto h-full px-3 sm:px-4">
                     <h2
                         class="mb-4 font-roboto font-semibold text-lg text-gray-700"
                     >
-                    CRUISE DESTINATIONS
+
+                   CRUISE DESTINATIONS
                     </h2>
                     <div
                         class="flex mb-4 flex-wrap shadow-2xl border-light-gray text-main-blue text-center"
@@ -206,6 +201,7 @@ function submitForm() {
                     </div>
                 </div>
             </section>
+            -->
             <section class="section--latest-news w-full py-8 sm:my-8">
                 <div class="container mx-auto px-3 sm:px-4 h-full">
                     <div class="flex mb-4 h-full w-full flex-col sm:flex-row">
