@@ -101,12 +101,6 @@ class UpcomingReservationsController extends Controller
         })
         ->get();
 
-        // return $list;
-
-        $ships = CruiseShip::all();
-        $ports = Port::all();
-        $packages = Package::all();
-
-        return Inertia::render('Public/UpcomingReservations/Filter',compact('ships','departurePorts','packages','list','request'));
+        return $list;
     }
 }
