@@ -71,7 +71,7 @@ function submitForm() {
     <Head title="Welcome" />
 
     <GuestLayout>
-        <main class="bg-gray">
+        <main class="bg-red">
               <section class="section--hero relative">
         <div class="flex mb-4 absolute top-0 left-0 h-full w-full z-1">
             <div class="w-1/3 hidden lg:block bg-main-blue section--hero__height"></div>
@@ -90,7 +90,8 @@ function submitForm() {
 Experience Your Dream Vacation at Unbeatable Prices
                         </h2>
                         <p class="font-light text-lg bg-black bg-opacity-50 p-4 rounded-lg shadow-lg">
-Cruiselinereservation.com offers a wide variety of cruise options tailored to meet the diverse needs of travelers with different preferences and budgets. Whether you're a solo traveler, a family, or seeking luxury or affordable cruise experiences, we have something for everyone. Choose from over 20 cruise lines, including Carnival Cruises, Royal Caribbean, MSC Cruises, Celebrity Cruises, Disney Cruises, and more, ensuring a comprehensive selection for your next getaway.                        </p>
+                            Cruiselinereservation.com provides a diverse range of cruise options to cater to a wide variety of travelers with varying preferences and financial constraints. Their offerings are suitable for solo adventurers, families, and those interested in both luxurious and more budget-friendly cruise experiences. With over 20 different cruise lines to choose from, including Carnival Cruises, Royal Caribbean Cruises, MSC Cruises, Celebrity Cruises, Disney Cruises, and more, they offer a comprehensive selection.
+                        </p>
                     </div>
                 </div>
             </div>
