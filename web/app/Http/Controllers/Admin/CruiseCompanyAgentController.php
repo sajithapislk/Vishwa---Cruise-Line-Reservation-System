@@ -75,9 +75,9 @@ class CruiseCompanyAgentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CruiseCompanyAgent $cruiseLineAgent)
+    public function destroy($id)
     {
-        $cruiseLineAgent->delete();
+        CruiseCompanyAgent::find($id)->delete();
         return back()->with('success', 'delete successful');
     }
 }
