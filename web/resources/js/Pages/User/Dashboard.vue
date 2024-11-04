@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, useForm } from "@inertiajs/vue3";
+import { Head, Link, useForm } from "@inertiajs/vue3";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import { ref } from "vue";
@@ -199,6 +199,11 @@ const refundSave = () => {
                                                         >
                                                             Refund
                                                         </button>
+                                                    </div>
+                                                    <div>
+                                                        <Link :href="route('paypal.pdf',row.id)">
+                                                            view slip
+                                                        </Link>
                                                     </div>
                                                 </template>
                                             </Dropdown>
