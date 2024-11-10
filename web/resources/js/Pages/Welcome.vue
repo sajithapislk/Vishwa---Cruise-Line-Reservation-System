@@ -1,5 +1,5 @@
 <script setup>
-import { Head, Link } from "@inertiajs/vue3";
+import { Head, Link, useForm } from "@inertiajs/vue3";
 import registryEditor from "@/Assets/public/icon/registry-editor.png";
 import warehouse from "@/Assets/public/icon/warehouse-1.png";
 import project from "@/Assets/public/icon/project.png";
@@ -15,7 +15,10 @@ import GuestLayout from "@/Layouts/GuestLayout2.vue";
 import clickSound from "@/Assets/sound/new_message.wav";
 
 const props = defineProps({
-    user_id:String
+    user_id: String,
+    ships: Array,
+    ports: Array,
+    packages: Array,
 });
 
 const btn = ref(null);
@@ -42,7 +45,7 @@ const form = {
     message: "",
 };
 
-if(props.user_id){
+if (props.user_id) {
     window.Echo.channel(`chat.${props.user_id}`).listen(
         ".customer-supporter-new-message",
         (data) => {
@@ -65,39 +68,241 @@ function submitForm() {
             console.log(error);
         });
 }
+
+const filterForm = useForm({
+    ship_id: "",
+    depart_id: "",
+    arrive_id: "",
+    depart_at: "",
+    is_d: false,
+    is_bl: false,
+    is_en: false,
+    is_c: false,
+    is_ona: false,
+    is_outa: false,
+    is_kt: false,
+    is_w: false,
+    is_s: false,
+});
+
+const filter = () => {
+    filterForm.post(route("upcoming-reservations.index"));
+};
 </script>
 
 <template>
     <Head title="Welcome" />
 
     <GuestLayout>
-        <main class="bg-red">
-              <section class="section--hero relative">
-        <div class="flex mb-4 absolute top-0 left-0 h-full w-full z-1">
-            <div class="w-1/3 hidden lg:block bg-main-blue section--hero__height"></div>
-            <div class="hero--image w-full lg:w-2/3 bg-gray-500 section--hero__height bg-cover relative">
-                <div class="absolute top-0 left-0 w-full h-full bg-hero-gradient"></div>
-            </div>
-        </div>
-        <div class="absolute top-0 left-0 h-full w-full z-2">
-            <div class="container mx-auto h-full sm:px-4 px-3">
-                <div class="flex mb-4 h-full items-center">
-                    <div class="w-full lg:w-1/2 text-white font-roboto">
-                        <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-wide leading-tight mb-4 text-shadow">
-                            World’s Largest Online Cruise Reservation
-                        </h1>
-                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-wide leading-tight mb-12 text-shadow">
-Experience Your Dream Vacation at Unbeatable Prices
-                        </h2>
-                        <p class="font-light text-lg bg-black bg-opacity-50 p-4 rounded-lg shadow-lg">
-                            Cruiselinereservation.com provides a diverse range of cruise options to cater to a wide variety of travelers with varying preferences and financial constraints. Their offerings are suitable for solo adventurers, families, and those interested in both luxurious and more budget-friendly cruise experiences. With over 20 different cruise lines to choose from, including Carnival Cruises, Royal Caribbean Cruises, MSC Cruises, Celebrity Cruises, Disney Cruises, and more, they offer a comprehensive selection.
-                        </p>
+        <main class="bg-red ">
+            <section class="section--hero relative">
+                <div class="flex mb-4 absolute top-0 left-0 h-full w-full z-1">
+                    <div
+                        class="w-1/3 hidden lg:block bg-main-blue section--hero__height"
+                    ></div>
+                    <div
+                        class="hero--image w-full lg:w-2/3 bg-gray-500 section--hero__height bg-cover relative"
+                    >
+                        <div
+                            class="absolute top-0 left-0 w-full h-full bg-hero-gradient"
+                        ></div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-            <!--
+                <div class="absolute top-0 left-0 h-full w-full z-2">
+                    <div class="container mx-auto h-full sm:px-4 px-3">
+                        <div class="flex mb-4 h-full items-center">
+                            <div class="w-full lg:w-1/2 text-white font-roboto">
+                                <h1
+                                    class="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-wide leading-tight mb-4 text-shadow"
+                                >
+                                    World’s Largest Online Cruise Reservation
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Filter Section -->
+            <section class="relative py-16 bg-gray-300 mt-16">
+                <div class="container mx-auto px-4 max-w-5xl">
+                    <div
+                        class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64"
+                    >
+                        <div class="flex flex-col">
+                            <div class="bg-white p-6 rounded-xl shadow-lg">
+                                <form @submit.prevent="filter">
+                                    <div
+                                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+                                    >
+                                        <div class="flex flex-col">
+                                            <label
+                                                for="ship"
+                                                class="font-medium text-sm text-stone-600"
+                                                >Ship</label
+                                            >
+                                            <select
+                                                v-model="filterForm.ship_id"
+                                                id="ship"
+                                                class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+                                            >
+                                                <option value="">All</option>
+                                                <option
+                                                    v-for="row in ships"
+                                                    :key="row.id"
+                                                    :value="row.id"
+                                                >
+                                                    {{ row.name }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="flex flex-col">
+                                            <label
+                                                for="depart_id"
+                                                class="font-medium text-sm text-stone-600"
+                                                >Departure port</label
+                                            >
+                                            <select
+                                                v-model="filterForm.depart_id"
+                                                id="depart_id"
+                                                class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+                                            >
+                                                <option value="">All</option>
+                                                <option
+                                                    v-for="row in ports"
+                                                    :key="row.id"
+                                                    :value="row.id"
+                                                >
+                                                    {{ row.name }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="flex flex-col">
+                                            <label
+                                                for="arrive_id"
+                                                class="font-medium text-sm text-stone-600"
+                                                >Arrive port</label
+                                            >
+                                            <select
+                                                v-model="filterForm.arrive_id"
+                                                id="arrive_id"
+                                                class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+                                            >
+                                                <option value="">All</option>
+                                                <option
+                                                    v-for="row in ports"
+                                                    :key="row.id"
+                                                    :value="row.id"
+                                                >
+                                                    {{ row.name }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="flex flex-col">
+                                            <label
+                                                for="depart_at"
+                                                class="font-medium text-sm text-stone-600"
+                                                >Date</label
+                                            >
+                                            <input
+                                                v-model="filterForm.depart_at"
+                                                type="date"
+                                                id="depart_at"
+                                                class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+                                            />
+                                        </div>
+                                        <div class="flex flex-col col-span-4">
+                                            <label
+                                                for="facilities"
+                                                class="font-medium text-sm text-stone-600"
+                                                >Select facilities you
+                                                want</label
+                                            >
+                                            <ul>
+                                                <CheckBoxColor
+                                                    id="is_d"
+                                                    name="Dining"
+                                                    v-model:checked="
+                                                        filterForm.is_d
+                                                    "
+                                                />
+                                                <CheckBoxColor
+                                                    id="is_bl"
+                                                    name="Bars & Lounges"
+                                                    v-model:checked="
+                                                        filterForm.is_bl
+                                                    "
+                                                />
+                                                <CheckBoxColor
+                                                    id="is_en"
+                                                    name="Entertainment & Nightlife"
+                                                    v-model:checked="
+                                                        filterForm.is_en
+                                                    "
+                                                />
+                                                <CheckBoxColor
+                                                    id="is_c"
+                                                    name="Casino"
+                                                    v-model:checked="
+                                                        filterForm.is_c
+                                                    "
+                                                />
+                                                <CheckBoxColor
+                                                    id="is_ona"
+                                                    name="Onboard Activities"
+                                                    v-model:checked="
+                                                        filterForm.is_ona
+                                                    "
+                                                />
+                                                <CheckBoxColor
+                                                    id="is_outa"
+                                                    name="Outdoor Activities"
+                                                    v-model:checked="
+                                                        filterForm.is_outa
+                                                    "
+                                                />
+                                                <CheckBoxColor
+                                                    id="is_kt"
+                                                    name="Kids & Teens"
+                                                    v-model:checked="
+                                                        filterForm.is_kt
+                                                    "
+                                                />
+                                                <CheckBoxColor
+                                                    id="is_w"
+                                                    name="Wellness"
+                                                    v-model:checked="
+                                                        filterForm.is_w
+                                                    "
+                                                />
+                                                <CheckBoxColor
+                                                    id="is_s"
+                                                    name="Shopping"
+                                                    v-model:checked="
+                                                        filterForm.is_s
+                                                    "
+                                                />
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="grid md:flex grid-cols-2 justify-end space-x-4 w-full mt-6"
+                                    >
+                                        <button
+                                            type="submit"
+                                            class="flex items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize bg-black rounded-md hover:bg-gray-800 focus:outline-none focus:bg-gray-900 transition duration-300 transform active:scale-95 ease-in-out"
+                                        >
+                                            <span class="pl-2 mx-1"
+                                                >Search</span
+                                            >
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <section class="section--services py-16 sm:my-8">
                 <div class="container mx-auto h-full px-3 sm:px-4">
                     <h2
@@ -202,7 +407,7 @@ Experience Your Dream Vacation at Unbeatable Prices
                     </div>
                 </div>
             </section>
-            -->
+
             <section class="section--latest-news w-full py-8 sm:my-8">
                 <div class="container mx-auto px-3 sm:px-4 h-full">
                     <div class="flex mb-4 h-full w-full flex-col sm:flex-row">
@@ -217,11 +422,23 @@ Experience Your Dream Vacation at Unbeatable Prices
                                     <h3
                                         class="font-semibold text-main-blue text-2xl mb-4 font-regular"
                                     >
-                                    TOP CRUISE LINES
+                                        TOP CRUISE LINES
                                     </h3>
 
                                     <p class="text-gray-700">
-                                        Experience the pinnacle of cruise travel with our top cruise lines. From the elegance of luxury liners to the family-friendly fun of well-known names, our curated selection ensures the perfect cruise for every traveler. Unwind in opulent staterooms, savor gourmet cuisine, and enjoy world-class entertainment as you embark on a journey with cruise lines renowned for exceptional service and unforgettable experiences.                                  </p>
+                                        Experience the pinnacle of cruise travel
+                                        with our top cruise lines. From the
+                                        elegance of luxury liners to the
+                                        family-friendly fun of well-known names,
+                                        our curated selection ensures the
+                                        perfect cruise for every traveler.
+                                        Unwind in opulent staterooms, savor
+                                        gourmet cuisine, and enjoy world-class
+                                        entertainment as you embark on a journey
+                                        with cruise lines renowned for
+                                        exceptional service and unforgettable
+                                        experiences.
+                                    </p>
                                 </div>
                             </Link>
                         </div>
@@ -241,11 +458,23 @@ Experience Your Dream Vacation at Unbeatable Prices
                                     <h3
                                         class="font-semibold text-main-blue text-2xl mb-4 font-regular"
                                     >
-                                    TOP CRUISE DESTINATIONS
+                                        TOP CRUISE DESTINATIONS
                                     </h3>
 
                                     <p class="text-gray-700 mb-4">
-                                        Explore the world's most enticing cruise destinations with us. From the idyllic Caribbean beaches and breathtaking Alaskan wilderness to the historic charm of the Mediterranean and the exotic allure of the South Pacific, our cruises offer an unforgettable blend of adventure and relaxation. Discover stunning landscapes, vibrant cultures, and unique experiences on every voyage. Join us as we set sail to these top cruise destinations, where your dream vacation becomes a reality.
+                                        Explore the world's most enticing cruise
+                                        destinations with us. From the idyllic
+                                        Caribbean beaches and breathtaking
+                                        Alaskan wilderness to the historic charm
+                                        of the Mediterranean and the exotic
+                                        allure of the South Pacific, our cruises
+                                        offer an unforgettable blend of
+                                        adventure and relaxation. Discover
+                                        stunning landscapes, vibrant cultures,
+                                        and unique experiences on every voyage.
+                                        Join us as we set sail to these top
+                                        cruise destinations, where your dream
+                                        vacation becomes a reality.
                                     </p>
                                     <p
                                         class="text-teal-400 font-semibold text-lg"
@@ -277,11 +506,23 @@ Experience Your Dream Vacation at Unbeatable Prices
                                 <h3
                                     class="font-semibold text-main-blue text-2xl mb-4 font-regular"
                                 >
-                                SPECIAL OFFERS AND DISCOUNTS
+                                    SPECIAL OFFERS AND DISCOUNTS
                                 </h3>
 
                                 <p class="text-gray-700 mb-4">
-                                    Unlock incredible savings on special cruise deals with our exclusive offers and discounts. Whether you're seeking a romantic getaway, a family adventure, or a luxurious escape, our special cruise deals cater to every traveler. From last-minute offers to early booking discounts, we make dream cruises more accessible than ever. Don't miss the chance to embark on an extraordinary journey while keeping your budget in check. Explore our special cruise offers today and set sail on an unforgettable voyage at an unbeatable value.
+                                    Unlock incredible savings on special cruise
+                                    deals with our exclusive offers and
+                                    discounts. Whether you're seeking a romantic
+                                    getaway, a family adventure, or a luxurious
+                                    escape, our special cruise deals cater to
+                                    every traveler. From last-minute offers to
+                                    early booking discounts, we make dream
+                                    cruises more accessible than ever. Don't
+                                    miss the chance to embark on an
+                                    extraordinary journey while keeping your
+                                    budget in check. Explore our special cruise
+                                    offers today and set sail on an
+                                    unforgettable voyage at an unbeatable value.
                                 </p>
                                 <p class="text-teal-400 font-semibold text-lg">
                                     More information
@@ -328,14 +569,16 @@ Experience Your Dream Vacation at Unbeatable Prices
         >
             <!-- Heading -->
             <div class="flex flex-col space-y-1.5 pb-6">
-                <h2 class="font-semibold text-lg tracking-tight">Customer Support</h2>
+                <h2 class="font-semibold text-lg tracking-tight">
+                    Customer Support
+                </h2>
             </div>
 
             <!-- Chat Container -->
             <div class="pr-4 h-[474px]" style="min-width: 100%; display: table">
-                <h1  v-if="!$page.props.auth.user">Sign in first</h1>
+                <h1 v-if="!$page.props.auth.user">Sign in first</h1>
 
-                <template  v-for="(row, index) in chat">
+                <template v-for="(row, index) in chat">
                     <template v-if="row.who_inserted === 'User'">
                         <SenderMessage :value="row.msg" />
                     </template>
@@ -345,15 +588,17 @@ Experience Your Dream Vacation at Unbeatable Prices
                 </template>
             </div>
             <!-- Input box  -->
-            <div  v-if="$page.props.auth.user" class="flex items-center pt-0">
-                <form @submit.prevent="submitForm" class="flex items-center justify-center w-full space-x-2">
+            <div v-if="$page.props.auth.user" class="flex items-center pt-0">
+                <form
+                    @submit.prevent="submitForm"
+                    class="flex items-center justify-center w-full space-x-2"
+                >
                     <input
                         class="flex h-10 w-full rounded-md border border-[#e5e7eb] px-3 py-2 text-sm placeholder-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[#9ca3af] disabled:cursor-not-allowed disabled:opacity-50 text-[#030712] focus-visible:ring-offset-2"
                         placeholder="Type your message"
                         v-model="form.message"
                     />
                     <button
-
                         class="inline-flex items-center justify-center rounded-md text-sm font-medium text-[#f9fafb] disabled:pointer-events-none disabled:opacity-50 bg-black hover:bg-[#111827E6] h-10 px-4 py-2"
                     >
                         Send
@@ -409,7 +654,7 @@ Experience Your Dream Vacation at Unbeatable Prices
 
 .bg-hero-gradient {
     /*background: #c4c4c4; /* fallback for old browsers */
-   /* background: -webkit-linear-gradient(
+    /* background: -webkit-linear-gradient(
         to right,
         rgba(2, 28, 121, 0.8),
         rgba(5, 118, 230, 0.5)
@@ -422,7 +667,7 @@ Experience Your Dream Vacation at Unbeatable Prices
 }
 
 .bg-gray-200 {
-   background-color: #ffffff;/* */
+    background-color: #ffffff; /* */
 }
 
 .border-light-gray {

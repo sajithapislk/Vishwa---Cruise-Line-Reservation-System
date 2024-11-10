@@ -12,6 +12,7 @@ use App\Http\Controllers\User\CruiseShipController;
 use App\Http\Controllers\User\FeedbackController;
 use App\Http\Controllers\User\RefundController;
 use App\Http\Controllers\User\UpcomingReservationsController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -30,11 +31,7 @@ use Inertia\Inertia;
 
 require __DIR__ . '/auth/user.php';
 Route::post('login-role-check', LoginRoleCheckController::class)->name('loginRole.check');
-Route::get('/', function () {
-    $user_id = Auth::id();
-    // return $user_id ;
-    return Inertia::render('Welcome', compact('user_id'));
-});
+Route::get('/', WelcomeController::class)->name('welcome');
 
 Route::controller(CruiseCompanyController::class)->group(function () {
     Route::get('/cruise-company', 'index')->name('cruise-company.index');
