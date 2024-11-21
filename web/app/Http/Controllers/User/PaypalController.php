@@ -181,4 +181,75 @@ class PaypalController extends Controller
         return $pdf->stream();
 
     }
+     /**
+     * Refund a PayPal payment.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function refundTransaction(Request $request)
+    {
+        // Validate incoming request
+        $request->validate([
+            'transaction_id' => 'required|string', // Capture ID or Order ID
+            'amount' => 'nullable|numeric',        // Optional for partial refund
+            'currency' => 'nullable|string',       // Optional, defaults to USD
+        ]);
+
+        // Get the PayPal Client
+        $provider = new PayPalClient;
+
+        // Set PayPal API credentials
+        $provider->setApiCredentials(config('paypal'));
+
+        // Get Access Token
+        $provider->getAccessToken();
+
+        // Retrieve the transaction ID and other relevant data from the request
+        $transactionId = $request->input('transaction_id'); // Capture ID
+        $amount = $request->input('amount');                // Optional for partial refund
+        $currency = $request->input('currency', 'USD');     // Default is USD
+
+        // Prepare refund data
+        $refundData = [
+            'amount' => [
+                'value' => $amount ?? '0.00',  // If no amount is provided, it refunds the full transaction
+                'currency_code' => $currency,
+            ],
+        ];
+
+        try {
+            // Call the refund API
+            $response = $provider->refundCapturedPayment($transactionId, $refundData);
+
+            // Check if the refund was completed successfully
+            if (isset($response['status']) && $response['status'] == 'COMPLETED') {
+                // Update payment record in the database (if applicable)
+                $payment = Payment::where('transaction_id', $transactionId)->first();
+                if ($payment) {
+                    $payment->update([
+                        'status' => 'REFUNDED',
+                        'refund_response' => $response,
+                    ]);
+                }
+
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Payment refunded successfully',
+                    'response' => $response,
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Refund failed',
+                    'response' => $response,
+                ], 400);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }

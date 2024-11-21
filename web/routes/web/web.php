@@ -53,6 +53,7 @@ Route::controller(PayPalController::class)->middleware(['auth'])->group(function
     Route::get('process-transaction', 'processTransaction')->name('processTransaction');
     Route::get('success-transaction', 'successTransaction')->name('successTransaction');
     Route::get('cancel-transaction', 'cancelTransaction')->name('cancelTransaction');
+    Route::post('/paypal/refund', 'refundTransaction')->name('paypal.refund');
 });
 Route::controller(CruiseDealController::class)->middleware('auth')->group(function () {
     Route::get('cruise-deal', 'index');
