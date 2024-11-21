@@ -86,7 +86,7 @@ const filterForm = useForm({
 });
 
 const filter = () => {
-    filterForm.post(route("upcoming-reservations.index"));
+    filterForm.get(route("upcoming-reservations.index"));
 };
 </script>
 

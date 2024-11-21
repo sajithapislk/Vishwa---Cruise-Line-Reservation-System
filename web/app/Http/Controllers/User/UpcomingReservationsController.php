@@ -8,6 +8,7 @@ use App\Models\Package;
 use App\Models\CruiseShip;
 use App\Models\UpcomingReservations;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class UpcomingReservationsController extends Controller
@@ -21,70 +22,43 @@ class UpcomingReservationsController extends Controller
         $ports = Port::all();
         $packages = Package::all();
 
-        $upcomingDeals = UpcomingReservations::with('package','ship','arrival_port','departure_port','room','deals')
-        ->when($request->ship_id, function ($query) use ($request) {
-            return $query->Where('s_id', $request->ship_id);
-        })
-        ->when($request->dp_id, function ($query) use ($request) {
-            return $query->Where('dp_id', $request->dp_id);
-        })
-        ->when($request->dp_id, function ($query) use ($request) {
-            return $query->Where('dp_id', $request->depart_id);
-        })
-        ->when($request->ap_id, function ($query) use ($request) {
-            return $query->Where('ap_id', $request->arrive_id);
-        })
-        ->when($request->depart_at, function ($query) use ($request) {
-            return $query->WhereDate('depart_at', $request->depart_at);
-        })
-        ->when($request->is_d, function ($query) {
-            return $query->whereHas('package', function($query) {
-                return $query->where('is_d', 1);
-            });
-        })
-        ->when($request->is_bl, function ($query) {
-            return $query->whereHas('package', function($query) {
-                return $query->where('is_bl', 1);
-            });
-        })
-        ->when($request->is_en, function ($query) {
-            return $query->whereHas('package', function($query) {
-                return $query->where('is_en', 1);
-            });
-        })
-        ->when($request->is_c, function ($query) {
-            return $query->whereHas('package', function($query) {
-                return $query->where('is_c', 1);
-            });
-        })
-        ->when($request->is_ona, function ($query) {
-            return $query->whereHas('package', function($query) {
-                return $query->where('is_ona', 1);
-            });
-        })
-        ->when($request->is_outa, function ($query) {
-            return $query->whereHas('package', function($query) {
-                return $query->where('is_outa', 1);
-            });
-        })
-        ->when($request->is_kt, function ($query) {
-            return $query->whereHas('package', function($query) {
-                return $query->where('is_kt', 1);
-            });
-        })
-        ->when($request->is_w, function ($query) {
-            return $query->whereHas('package', function($query) {
-                return $query->where('is_w', 1);
-            });
-        })
-        ->when($request->is_s, function ($query) {
-            return $query->whereHas('package', function($query) {
-                return $query->where('is_s', 1);
-            });
-        })
-        ->get();
+        $upcomingDeals = UpcomingReservations::with('package', 'ship', 'arrival_port', 'departure_port', 'room', 'deals')
+            ->when($request->ship_id, function ($query) use ($request) {
+                return $query->where('s_id', $request->ship_id);
+            })
+            ->when($request->dp_id, function ($query) use ($request) {
+                return $query->where('dp_id', $request->dp_id);
+            })
+            ->when($request->ap_id, function ($query) use ($request) {
+                return $query->where('ap_id', $request->ap_id);
+            })
+            ->when($request->depart_at, function ($query) use ($request) {
+                return $query->whereDate('depart_at', $request->depart_at);
+            })
+            ->when(filter_var($request->is_d, FILTER_VALIDATE_BOOLEAN), function ($query) {
+                return $query->whereHas('package', function ($query) {
+                    return $query->where('is_d', 1);
+                });
+            })
+            ->when(filter_var($request->is_bl, FILTER_VALIDATE_BOOLEAN), function ($query) {
+                return $query->whereHas('package', function ($query) {
+                    return $query->where('is_bl', 1);
+                });
+            })
+            ->when(filter_var($request->is_en, FILTER_VALIDATE_BOOLEAN), function ($query) {
+                return $query->whereHas('package', function ($query) {
+                    return $query->where('is_en', 1);
+                });
+            })
+            ->when(filter_var($request->is_c, FILTER_VALIDATE_BOOLEAN), function ($query) {
+                return $query->whereHas('package', function ($query) {
+                    return $query->where('is_c', 1);
+                });
+            })
+            ->get();
 
-        return Inertia::render('Public/UpcomingReservations/Index',compact('ships','ports','packages','upcomingDeals'));
+        // return $request->is_c;
+        return Inertia::render('Public/UpcomingReservations/Index', compact('ships', 'ports', 'packages', 'upcomingDeals','request'));
     }
 
 
@@ -96,67 +70,40 @@ class UpcomingReservationsController extends Controller
         //
     }
 
-    public function filter(Request $request) {
+    public function filter(Request $request)
+    {
         // dd($request);
-        $list = UpcomingReservations::with('package','ship','arrival_port','departure_port','room','deals')
+        $list = UpcomingReservations::with('package', 'ship', 'arrival_port', 'departure_port', 'room', 'deals')
         ->when($request->ship_id, function ($query) use ($request) {
-            return $query->Where('s_id', $request->ship_id);
+            return $query->where('s_id', $request->ship_id);
         })
         ->when($request->dp_id, function ($query) use ($request) {
-            return $query->Where('dp_id', $request->dp_id);
-        })
-        ->when($request->dp_id, function ($query) use ($request) {
-            return $query->Where('dp_id', $request->depart_id);
+            return $query->where('dp_id', $request->dp_id);
         })
         ->when($request->ap_id, function ($query) use ($request) {
-            return $query->Where('ap_id', $request->arrive_id);
+            return $query->where('ap_id', $request->ap_id);
         })
         ->when($request->depart_at, function ($query) use ($request) {
-            return $query->WhereDate('depart_at', $request->depart_at);
+            return $query->whereDate('depart_at', $request->depart_at);
         })
-        ->when($request->is_d, function ($query) {
-            return $query->whereHas('package', function($query) {
+        ->when(filter_var($request->is_d, FILTER_VALIDATE_BOOLEAN), function ($query) {
+            return $query->whereHas('package', function ($query) {
                 return $query->where('is_d', 1);
             });
         })
-        ->when($request->is_bl, function ($query) {
-            return $query->whereHas('package', function($query) {
+        ->when(filter_var($request->is_bl, FILTER_VALIDATE_BOOLEAN), function ($query) {
+            return $query->whereHas('package', function ($query) {
                 return $query->where('is_bl', 1);
             });
         })
-        ->when($request->is_en, function ($query) {
-            return $query->whereHas('package', function($query) {
+        ->when(filter_var($request->is_en, FILTER_VALIDATE_BOOLEAN), function ($query) {
+            return $query->whereHas('package', function ($query) {
                 return $query->where('is_en', 1);
             });
         })
-        ->when($request->is_c, function ($query) {
-            return $query->whereHas('package', function($query) {
+        ->when(filter_var($request->is_c, FILTER_VALIDATE_BOOLEAN), function ($query) {
+            return $query->whereHas('package', function ($query) {
                 return $query->where('is_c', 1);
-            });
-        })
-        ->when($request->is_ona, function ($query) {
-            return $query->whereHas('package', function($query) {
-                return $query->where('is_ona', 1);
-            });
-        })
-        ->when($request->is_outa, function ($query) {
-            return $query->whereHas('package', function($query) {
-                return $query->where('is_outa', 1);
-            });
-        })
-        ->when($request->is_kt, function ($query) {
-            return $query->whereHas('package', function($query) {
-                return $query->where('is_kt', 1);
-            });
-        })
-        ->when($request->is_w, function ($query) {
-            return $query->whereHas('package', function($query) {
-                return $query->where('is_w', 1);
-            });
-        })
-        ->when($request->is_s, function ($query) {
-            return $query->whereHas('package', function($query) {
-                return $query->where('is_s', 1);
             });
         })
         ->get();

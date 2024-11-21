@@ -15,6 +15,7 @@ const props = defineProps({
     ships: Array,
     ports: Array,
     packages: Array,
+    request:Array
 });
 const list = ref(props.upcomingDeals);
 
@@ -29,10 +30,10 @@ const price = ref(0.0);
 const tax = ref(0.0);
 
 const filterForm = useForm({
-    ship_id: "",
-    depart_id: "",
-    arrive_id: "",
-    depart_at: "",
+    ship_id: props.request.ship_id,
+    depart_id: props.request.depart_id,
+    arrive_id: props.request.arrive_id,
+    depart_at: props.request.depart_at,
     is_d: false,
     is_bl: false,
     is_en: false,
