@@ -17,7 +17,7 @@ class WalletController extends Controller
     {
         $user = Auth::user();
 
-        $list = CruiseCompanyWallet::where('cc_id',$user->cc_id)->get();
+        $list = CruiseCompanyWallet::where('ref',$user->cc_id)->get();
         return Inertia::render('CruiseCompanyAgent/Wallet',compact('list'));
     }
 }
