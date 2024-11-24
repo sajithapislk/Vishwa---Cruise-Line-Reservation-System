@@ -1,0 +1,247 @@
+{
+  "intents": [
+    {
+      "tag": "Where_Can_I_Cruise",
+      "patterns": [
+        "Where can I cruise to?",
+        "What are the ports I can go to?",
+        "What destinations are available?",
+        "Where can I travel on this cruise?",
+        "What places can I visit?"
+      ],
+      "responses": [
+        "We offer exciting cruise ports like Miami, Barcelona, and Amsterdam! Check our Ports Page for more options."
+      ]
+    },
+    {
+      "tag": "When_To_Book",
+      "patterns": [
+        "When should I book my departure date for the cruise?",
+        "What are the available departure dates?",
+        "When can I start my trip?",
+        "What is the best time to book my cruise?"
+      ],
+      "responses": [
+        "You can select your departure and arrival dates before confirming your booking. Visit our Search and Explore Page for details!"
+      ]
+    },
+    {
+      "tag": "Cruise_Duration",
+      "patterns": [
+        "How long can my cruise be?",
+        "What’s the duration of the cruise?",
+        "How many days can I book the cruise for?",
+        "Can I decide how long my trip will be?",
+        "How many days is the cruise?"
+      ],
+      "responses": [
+        "The cruise length varies by trip, so check the number of nights available before confirming!"
+      ]
+    },
+    {
+      "tag": "Filter_Cruises",
+      "patterns": [
+        "Can I filter the available cruises?",
+        "What are my options?",
+        "How can I narrow down my cruise options?",
+        "Can I search for specific cruises?",
+        "What filters can I use to find cruises?"
+      ],
+      "responses": [
+        "Yes! You can filter by destinations and ports. More info is on our Search and Explore Page."
+      ]
+    },
+    {
+      "tag": "Cruise_Lines",
+      "patterns": [
+        "Are there different cruise lines available?",
+        "Which cruise companies are included?",
+        "What cruise lines can I choose from?",
+        "Can I see the list of available cruise operators?"
+      ],
+      "responses": [
+        "Yes! Visit our Cruise Ships Page to explore the various cruise lines we offer."
+      ]
+    },
+    {
+      "tag": "Cabin_Types",
+      "patterns": [
+        "What cabin types are available?",
+        "What are the room options on the cruise?",
+        "What kinds of cabins can I book?",
+        "Are there different types of accommodations on the ship?",
+        "What rooms can I book?"
+      ],
+      "responses": [
+        "You can choose from Interior, Ocean View, Balcony, or Suite. Check the package details for your options!"
+      ]
+    },
+    {
+      "tag": "Travel_Guests",
+      "patterns": [
+        "How many people can travel with me?",
+        "What’s the maximum number of guests I can bring?",
+        "How many passengers can I include in one booking?",
+        "Can I add my family and friends to the same reservation?",
+        "How many guests can I bring?"
+      ],
+      "responses": [
+        "You can add up to 5 guests in one booking, and all payments will be processed together."
+      ]
+    },
+    {
+      "tag": "Cruise_Amenities",
+      "patterns": [
+        "What amenities can I choose from?",
+        "What facilities are available on the cruise?",
+        "Are there any special features included in the package?",
+        "What onboard amenities can I select?",
+        "What facilities are on the cruise?"
+      ],
+      "responses": [
+        "All available amenities are included in the package details!"
+      ]
+    },
+    {
+      "tag": "Travel_Insurance",
+      "patterns": [
+        "Is travel insurance available?",
+        "Can I add insurance to my booking?",
+        "Do you offer travel insurance for the trip?",
+        "Is insurance included in the package?",
+        "Do I need to get travel insurance for my trip?"
+      ],
+      "responses": [
+        "Yes! We offer travel insurance for all members."
+      ]
+    },
+    {
+      "tag": "Make_Payment",
+      "patterns": [
+        "How do I make a payment?",
+        "What payment methods can I use?",
+        "How can I pay for my cruise?",
+        "Is there an option to pay online?",
+        "How can I pay?"
+      ],
+      "responses": [
+        "Payments can be made using PayPal!"
+      ]
+    },
+    {
+      "tag": "Promotional_Codes",
+      "patterns": [
+        "Are there promotional codes I can apply?",
+        "Can I use discount codes during booking?",
+        "Are there any offers or deals available?",
+        "Do you have vouchers I can redeem?",
+        "Can I use a discount?"
+      ],
+      "responses": [
+        "If you've booked with us before, check your email for any promotional codes you can use!"
+      ]
+    },
+    {
+      "tag": "Review_Booking",
+      "patterns": [
+        "Can I review my booking details before confirming?",
+        "Can I double-check my booking before finalizing?",
+        "Where can I see the summary of my reservation?",
+        "Is it possible to verify my details before confirmation?",
+        "Can I check my booking before confirming?"
+      ],
+      "responses": [
+        "Yes, you'll have the chance to review everything before finalizing your booking!"
+      ]
+    },
+    {
+      "tag": "Current_Bookings",
+      "patterns": [
+        "Where can I see my current bookings?",
+        "How can I check my reservations?",
+        "Where are my bookings displayed?",
+        "Can I view my trips on the website?",
+        "Where are my bookings?"
+      ],
+      "responses": [
+        "You can view your bookings by clicking on your profile in the upper right corner."
+      ]
+    },
+    {
+      "tag": "Modify_Booking",
+      "patterns": [
+        "Can I make changes to my booking?",
+        "How do I modify my reservation?",
+        "Can I update my booking details?",
+        "Is it possible to adjust my trip after booking?",
+        "How can I update my booking?"
+      ],
+      "responses": [
+        "Yes! You can email us at booking@Cruiselinereservation.com or contact customer support for help."
+      ]
+    },
+    {
+      "tag": "Cancel_Booking",
+      "patterns": [
+        "Can I cancel a reservation?",
+        "How do I cancel my booking?",
+        "Is there an option to cancel my trip?",
+        "What’s the process to cancel a reservation?",
+        "How do I cancel my trip?"
+      ],
+      "responses": [
+        "Yes, you can cancel through your profile!"
+      ]
+    },
+    {
+      "tag": "Customer_Assistance",
+      "patterns": [
+        "Who do I contact for assistance?",
+        "How can I reach customer support?",
+        "Who should I call for help?",
+        "Is there a contact number for assistance?",
+        "Who can I ask for help?"
+      ],
+      "responses": [
+        "You can reach out via email or contact our customer service team for support!"
+      ]
+    },
+    {
+      "tag": "Download_Confirmation",
+      "patterns": [
+        "Can I download my booking confirmation?",
+        "How do I get a copy of my ticket?",
+        "Can I print my booking confirmation?",
+        "Where can I download my reservation details?",
+        "How can I get my ticket?"
+      ],
+      "responses": [
+        "Absolutely! You can download it from your profile at the time of payment."
+      ]
+    },
+    {
+      "tag": "Itinerary",
+      "patterns": [
+        "Where can I view the detailed itinerary for my cruise?",
+        "Where can I see my cruise schedule?",
+        "Can I check the stops and activities planned for my trip?",
+        "Where is my trip schedule?"
+      ],
+      "responses": [
+        "You can get details about all the cruises by going to the cruise ships page in the top bar of the website."
+      ]
+    },
+    {
+      "tag": "Onboard_Activities",
+      "patterns": [
+        "Can I see which onboard activities and dining options are available?",
+        "What entertainment and dining options are offered on the cruise?",
+        "Where can I explore onboard facilities and menus?",
+        "What activities and food are available?"
+      ],
+      "responses": [
+        "You can get details about all the onboard activities by going to the Search and Exploration page in the top bar of the website."
+      ]
+    }
+  ]
+}

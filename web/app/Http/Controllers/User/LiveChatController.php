@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\LiveChat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class LiveChatController extends Controller
 {
@@ -27,5 +28,31 @@ class LiveChatController extends Controller
         event(new UserNewMessage($chat));
 
         return $chat;
+    }
+
+    public function handleUserMessage(Request $request)
+    {
+        // Load intents.json
+        $intents = json_decode(Storage::get('intents.json'), true);
+
+        $userMessage = strtolower($request->input('message'));
+        $response = null;
+
+        // Match user message with patterns
+        foreach ($intents['intents'] as $intent) {
+            foreach ($intent['patterns'] as $pattern) {
+                if (stripos($userMessage, strtolower($pattern)) !== false) {
+                    $response = $intent['responses'][array_rand($intent['responses'])];
+                    break 2; // Stop loop if a match is found
+                }
+            }
+        }
+
+        // Return response or escalate to live support
+        if ($response) {
+            return response()->json(['response' => $response, 'is_bot' => true]);
+        } else {
+            return response()->json(['response' => 'Connecting you to live support...', 'is_bot' => false]);
+        }
     }
 }

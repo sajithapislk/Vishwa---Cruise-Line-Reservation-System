@@ -58,7 +58,8 @@ Route::controller(PayPalController::class)->middleware(['auth'])->group(function
 Route::controller(CruiseDealController::class)->middleware('auth')->group(function () {
     Route::get('cruise-deal', 'index');
 });
-Route::controller(LiveChatController::class)->middleware('auth')->group(function () {
+Route::post('chatbot', [LiveChatController::class,'handleUserMessage'])->name('chatbot.handle');
+Route::controller()->middleware('auth')->group(function () {
     Route::post('chat', 'store')->name('chat.store');
 });
 Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
