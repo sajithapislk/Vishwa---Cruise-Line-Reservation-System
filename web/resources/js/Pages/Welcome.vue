@@ -57,9 +57,13 @@ if (props.user_id) {
         }
     );
 }
+
 function submitForm() {
+    // Determine which endpoint to hit based on user authentication
+    const routeName = props.user_id ? "chat.store" : "chatbot.handle";
+
     axios
-        .post(route("chat.store"), form)
+        .post(route(routeName), form)
         .then((response) => {
             chat.value.push(response.data);
             form.message = "";
@@ -94,7 +98,7 @@ const filter = () => {
     <Head title="Welcome" />
 
     <GuestLayout>
-        <main class="bg-red ">
+        <main class="bg-red">
             <section class="section--hero relative">
                 <div class="flex mb-4 absolute top-0 left-0 h-full w-full z-1">
                     <div
@@ -308,8 +312,7 @@ const filter = () => {
                     <h2
                         class="mb-4 font-roboto font-semibold text-lg text-gray-700"
                     >
-
-                   CRUISE DESTINATIONS
+                        CRUISE DESTINATIONS
                     </h2>
                     <div
                         class="flex mb-4 flex-wrap shadow-2xl border-light-gray text-main-blue text-center"
@@ -575,10 +578,16 @@ const filter = () => {
             </div>
 
             <!-- Chat Container -->
-            <div class="pr-4 h-[474px]" style="min-width: 100%; display: table">
-                <h1 v-if="!$page.props.auth.user">Sign in first</h1>
+            <div
+                class="pr-4 h-[474px]"
+                style="min-width: 100%; display: table; overflow-y: auto"
+            >
+                <h1 v-if="!$page.props.auth.user">
+                    Chatbot Mode: Ask me anything!
+                </h1>
+                <h1 v-else>Live Chat Mode: Chat with our support team!</h1>
 
-                <template v-for="(row, index) in chat">
+                <template v-for="(row, index) in chat" :key="index">
                     <template v-if="row.who_inserted === 'User'">
                         <SenderMessage :value="row.msg" />
                     </template>
@@ -588,7 +597,10 @@ const filter = () => {
                 </template>
             </div>
             <!-- Input box  -->
-            <div v-if="$page.props.auth.user" class="flex items-center pt-0">
+            <div
+                v-if="$page.props.auth.user || !$page.props.auth.user"
+                class="flex items-center pt-0"
+            >
                 <form
                     @submit.prevent="submitForm"
                     class="flex items-center justify-center w-full space-x-2"
@@ -599,6 +611,7 @@ const filter = () => {
                         v-model="form.message"
                     />
                     <button
+                        type="submit"
                         class="inline-flex items-center justify-center rounded-md text-sm font-medium text-[#f9fafb] disabled:pointer-events-none disabled:opacity-50 bg-black hover:bg-[#111827E6] h-10 px-4 py-2"
                     >
                         Send

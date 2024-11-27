@@ -18,7 +18,7 @@ class LiveChatController extends Controller
 
     public function store(Request $request)
     {
-        $chat = new LiveChat;
+        $chat = new LiveChat();
 
         $chat->msg = $request->message;
         $chat->user_id = Auth::id();
@@ -50,9 +50,19 @@ class LiveChatController extends Controller
 
         // Return response or escalate to live support
         if ($response) {
-            return response()->json(['response' => $response, 'is_bot' => true]);
+            return response()->json([
+                'msg' => $response,
+                'who_inserted' => 'BOT',
+                'updated_at' => now(),
+                'created_at' => now(),
+            ]);
         } else {
-            return response()->json(['response' => 'Connecting you to live support...', 'is_bot' => false]);
+            return response()->json([
+                'msg' => 'Connecting you to live support...',
+                'who_inserted' => 'BOT',
+                'updated_at' => now(),
+                'created_at' => now(),
+            ]);
         }
     }
 }
