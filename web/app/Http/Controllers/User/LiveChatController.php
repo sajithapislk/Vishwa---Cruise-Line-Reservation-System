@@ -11,8 +11,9 @@ use Illuminate\Support\Facades\Storage;
 
 class LiveChatController extends Controller
 {
-    public function index($id) {
-        $list = LiveChat::where('user_id',$id)->get();
+    public function index($id)
+    {
+        $list = LiveChat::where('user_id', $id)->get();
         return response()->json($list);
     }
 
@@ -37,21 +38,30 @@ class LiveChatController extends Controller
 
         $userMessage = strtolower($request->input('message'));
         $response = null;
+        $bestMatchScore = PHP_INT_MAX; // Initialize with a high value
+        $bestResponse = null;
 
-        // Match user message with patterns
+        // Match user message with patterns using fuzzy logic
         foreach ($intents['intents'] as $intent) {
             foreach ($intent['patterns'] as $pattern) {
-                if (stripos($userMessage, strtolower($pattern)) !== false) {
-                    $response = $intent['responses'][array_rand($intent['responses'])];
-                    break 2; // Stop loop if a match is found
+                // Calculate the Levenshtein distance
+                $levenshteinDistance = levenshtein($userMessage, strtolower($pattern));
+
+                // Check if this pattern is a better match
+                if ($levenshteinDistance < $bestMatchScore) {
+                    $bestMatchScore = $levenshteinDistance;
+                    $bestResponse = $intent['responses'][array_rand($intent['responses'])];
                 }
             }
         }
 
+        // Define a threshold for fuzzy matching
+        $threshold = 5; // You can adjust this value based on your needs
+
         // Return response or escalate to live support
-        if ($response) {
+        if ($bestMatchScore <= $threshold && $bestResponse) {
             return response()->json([
-                'msg' => $response,
+                'msg' => $bestResponse,
                 'who_inserted' => 'BOT',
                 'updated_at' => now(),
                 'created_at' => now(),

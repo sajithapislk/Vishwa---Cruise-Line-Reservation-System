@@ -568,7 +568,7 @@ const filter = () => {
             style="
                 box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgb(0 0 0 / 0.05);
             "
-            class="fixed bottom-[calc(4rem+1.5rem)] right-0 mr-4 bg-white p-6 rounded-lg border border-[#e5e7eb] w-[440px] h-[634px]"
+            class="fixed bottom-[calc(4rem+1.5rem)] right-0 mr-4 bg-white p-6 rounded-lg border border-[#e5e7eb] w-[440px] h-[634px] flex flex-col"
         >
             <!-- Heading -->
             <div class="flex flex-col space-y-1.5 pb-6">
@@ -578,10 +578,7 @@ const filter = () => {
             </div>
 
             <!-- Chat Container -->
-            <div
-                class="pr-4 h-[474px]"
-                style="min-width: 100%; display: table; overflow-y: auto"
-            >
+            <div class="flex-grow pr-4 overflow-y-auto" style="min-width: 100%">
                 <h1 v-if="!$page.props.auth.user">
                     Chatbot Mode: Ask me anything!
                 </h1>
@@ -596,10 +593,11 @@ const filter = () => {
                     </template>
                 </template>
             </div>
-            <!-- Input box  -->
+
+            <!-- Input box -->
             <div
                 v-if="$page.props.auth.user || !$page.props.auth.user"
-                class="flex items-center pt-0"
+                class="flex items-center pt-4"
             >
                 <form
                     @submit.prevent="submitForm"
