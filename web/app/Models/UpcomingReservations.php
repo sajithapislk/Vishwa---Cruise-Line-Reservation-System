@@ -23,6 +23,10 @@ class UpcomingReservations extends Model
         'price',
         'depart_at',
         'arrive_at',
+        'booked_rooms'
+    ];
+    protected $casts = [
+        'booked_rooms' => 'array'
     ];
     public function ship(): HasOne
     {

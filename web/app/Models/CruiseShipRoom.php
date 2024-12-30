@@ -14,5 +14,6 @@ class CruiseShipRoom extends Model
         'img',
         'flow',
         'room_count',
+        'list'
     ];
 }
