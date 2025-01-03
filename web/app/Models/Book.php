@@ -14,7 +14,8 @@ class Book extends Model
         'ur_id',
         'user_id',
         'payment_id',
-        'status'
+        'status',
+        'booked_rooms'
     ];
     public function reservation(): HasOne
     {

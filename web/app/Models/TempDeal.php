@@ -10,6 +10,10 @@ class TempDeal extends Model
     use HasFactory;
     protected $fillable = [
         'ur_id',
-        'payment_id'
+        'payment_id',
+        'selected_rooms'
+    ];
+    protected $casts = [
+        'selected_rooms' => 'array'
     ];
 }

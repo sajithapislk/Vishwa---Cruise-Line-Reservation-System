@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 
@@ -45,58 +46,70 @@ class PaypalController extends Controller
      */
     public function processTransaction(Request $request)
     {
-        $uniqueCode = $this->generateRandomString();
-        $upcomingDeal = UpcomingReservations::find($request->id);
+        DB::beginTransaction();
+        try {
 
-        $price = ($request->qty * $upcomingDeal->price) + ($request->qty * $upcomingDeal->tax);
+            $uniqueCode = $this->generateRandomString();
+            $upcomingDeal = UpcomingReservations::find($request->id);
 
-        $provider = new PayPalClient;
-        $provider->setApiCredentials(config('paypal'));
-        $paypalToken = $provider->getAccessToken()['access_token'];
+            $price = ($request->qty * $upcomingDeal->price) + (count($request->selectedRooms) * $upcomingDeal->tax);
 
-        $payment = Payment::create([
-            'method'=>'paypal',
-            'status'=>'PENDING',
-            'amount'=>$price,
-            'token'=>$uniqueCode,
-        ]);
-        TempDeal::create([
-            'ur_id'=>$upcomingDeal->id,
-            'payment_id'=>$payment->id
-        ]);
+            $provider = new PayPalClient;
+            $provider->setApiCredentials(config('paypal'));
+            $paypalToken = $provider->getAccessToken()['access_token'];
 
-        $response = $provider->createOrder([
-            "intent" => "CAPTURE",
-            "application_context" => [
-                "return_url" => route('successTransaction'),
-                "cancel_url" => route('cancelTransaction'),
-            ],
-            "purchase_units" => [
-                0 => [
-                    "reference_id" => $uniqueCode,
-                    "amount" => [
-                        "currency_code" => "USD",
-                        "value" => $price
+            $payment = Payment::create([
+                'method' => 'paypal',
+                'status' => 'PENDING',
+                'amount' => $price,
+                'token' => $uniqueCode,
+            ]);
+            TempDeal::create([
+                'ur_id' => $upcomingDeal->id,
+                'payment_id' => $payment->id,
+                'selected_rooms' => $request->selectedRooms
+            ]);
+
+            $response = $provider->createOrder([
+                "intent" => "CAPTURE",
+                "application_context" => [
+                    "return_url" => route('successTransaction'),
+                    "cancel_url" => route('cancelTransaction'),
+                ],
+                "purchase_units" => [
+                    0 => [
+                        "reference_id" => $uniqueCode,
+                        "amount" => [
+                            "currency_code" => "USD",
+                            "value" => $price
+                        ]
                     ]
                 ]
-            ]
-        ]);
-        // dd($response);
-        if (isset($response['id']) && $response['id'] != null) {
+            ]);
+            // dd($response);
+            if (isset($response['id']) && $response['id'] != null) {
 
-            // redirect to approve href
-            foreach ($response['links'] as $links) {
-                if ($links['rel'] == 'approve') {
-                    return $links['href'];
+                // redirect to approve href
+                foreach ($response['links'] as $links) {
+                    if ($links['rel'] == 'approve') {
+                        DB::commit();
+                        return $links['href'];
+                    }
                 }
+                DB::rollBack();
+                return redirect()
+                    ->route('cancelTransaction')
+                    ->with('error', 'Something went wrong.');
+            } else {
+                DB::rollBack();
+                return redirect()
+                    ->route('cancelTransaction')
+                    ->with('error', $response['message'] ?? 'Something went wrong.');
             }
-            return redirect()
-                ->route('patient.booking.paypal.cancel_transaction')
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('patient.booking.paypal.cancel_transaction')
                 ->with('error', 'Something went wrong.');
-        } else {
-            return redirect()
-                ->route('patient.booking.paypal.cancel_transaction')
-                ->with('error', $response['message'] ?? 'Something went wrong.');
         }
     }
     /**
@@ -114,21 +127,23 @@ class PaypalController extends Controller
         $response = $provider->capturePaymentOrder($request['token']);
         $token = $response['purchase_units'][0]['reference_id'];
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
-            $payment = Payment::where('token',$token)->first();
+            $payment = Payment::where('token', $token)->first();
 
             $payment->update([
-                'status'=>'SUCCESS',
-                'response'=>$response
+                'status' => 'SUCCESS',
+                'response' => $response
             ]);
 
             $tempDeal = TempDeal::where('payment_id', $payment->id)->first();
 
             $book = Book::create([
-                'ur_id'=>$tempDeal->ur_id,
-                'user_id'=>$user->id,
-                'payment_id'=> $payment->id,
-                'status'=>"PAYMENT DONE"
+                'ur_id' => $tempDeal->ur_id,
+                'user_id' => $user->id,
+                'payment_id' => $payment->id,
+                'status' => "PAYMENT DONE",
+                'booked_rooms' => json_encode($tempDeal->selected_rooms)
             ]);
+
 
             CompanyWallet::create([
                 'ref' => $book->id,
@@ -141,11 +156,11 @@ class PaypalController extends Controller
                 'name' => 'cruise_deals',
                 'credit' => $payment->amount,
             ]);
-            $bookWithInfo = $book->with(['reservation','user','payment'])->first();
+            $bookWithInfo = $book->with(['reservation', 'user', 'payment'])->first();
             Mail::to($user->email)->send(new PaymentInvoice($bookWithInfo));
 
-            return Inertia::render("User/PaymentSuccess",[
-                'id'=>$book->id
+            return Inertia::render("User/PaymentSuccess", [
+                'id' => $book->id
             ]);
         } else {
             return "error";
@@ -163,25 +178,26 @@ class PaypalController extends Controller
             ->with('error', $response['message'] ?? 'You have canceled the transaction.');
     }
 
-    public function pdf($id) {
-        $cruiseDeal = Book::with(['reservation','user','payment'])->find($id);
+    public function pdf($id)
+    {
+        $cruiseDeal = Book::with(['reservation', 'user', 'payment'])->find($id);
         // return $cruiseDeal;
-        return view('PDF.invoice',compact('cruiseDeal'));
+        return view('PDF.invoice', compact('cruiseDeal'));
     }
-    public function pdf_download($id) {
-        $cruiseDeal = Book::with(['reservation','user','payment'])->find($id);
+    public function pdf_download($id)
+    {
+        $cruiseDeal = Book::with(['reservation', 'user', 'payment'])->find($id);
         // return $cruiseDeal;
         // return view('PDF.invoice',compact('cruiseDeal'));
         $pdf = Pdf::loadview('pdf.invoice', [
             'cruiseDeal' => $cruiseDeal
         ]);
         $orientation = 'landscape';
-        $customPaper = array(0,0,950,950);
+        $customPaper = array(0, 0, 950, 950);
         $pdf->setPaper($customPaper, $orientation);
         return $pdf->stream();
-
     }
-     /**
+    /**
      * Refund a PayPal payment.
      *
      * @param Request $request

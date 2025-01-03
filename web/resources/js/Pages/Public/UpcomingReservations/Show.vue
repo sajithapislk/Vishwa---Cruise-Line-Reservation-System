@@ -310,12 +310,20 @@
 <script setup>
 import { computed, ref } from "vue";
 import GuestLayout from "@/Layouts/GuestLayout2.vue";
+import axios from "axios";
+import { Head, Link, useForm } from "@inertiajs/vue3";
 
 const props = defineProps({
     upcomingReservations: {
         type: Object,
         required: true,
     },
+});
+
+const paypalFrom = useForm({
+    id: props.upcomingReservations.id,
+    selectedRooms: [],
+    processing: false,
 });
 
 const formatDate = (dateString) => {
@@ -367,6 +375,17 @@ const selectedRoomCountTotal = computed(() => {
 function handlePayment() {
     // Add your payment logic here
     console.log("Handling payment for", selectedRooms.value, "rooms");
+    paypalFrom.selectedRooms = selectedRooms.value;
+    axios
+        .get(route("processTransaction", paypalFrom))
+        .then((response) => {
+            // Redirect the user to the PayPal payment page
+            window.location.href = response.data;
+            // window.location.href = response.data;
+        })
+        .catch((error) => {
+            window.location.href = route("login");
+        });
 }
 
 function toggleRoom(room) {
