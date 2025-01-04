@@ -14,10 +14,8 @@ class CruiseShipTypeSeeder extends Seeder
     public function run(): void
     {
         $data = [
-            ['name' => 'A Type'],
-            ['name' => 'B Type'],
-            ['name' => 'C Type'],
-            ['name' => 'D Type']
+            ['name' => 'Ocean Cruise'],
+            ['name' => 'River Cruise']
         ];
 
         CruiseShipType::insert($data);

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('img');
-            $table->string('style',10);
-            $table->string('size',10);
+            $table->string('style',20);
+            $table->string('size',20);
             $table->year('launch_at');
             $table->year('last_refit_at');
             $table->integer('gt');
