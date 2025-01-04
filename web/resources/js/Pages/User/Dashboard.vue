@@ -59,7 +59,11 @@ const refundSave = () => {
     });
 };
 </script>
-
+<style>
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+</style>
 <template>
     <Head title="Dashboard" />
 
@@ -152,61 +156,55 @@ const refundSave = () => {
                                     <td
                                         class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
                                     >
-                                        <div class="grid grid-cols-2">
-                                            <Dropdown align="right" width="48">
-                                                <template v-slot:trigger>
-                                                    <span
-                                                        class="inline-flex rounded-md"
-                                                    >
-                                                        <button
-                                                            type="button"
-                                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
-                                                        >
-                                                            <svg
-                                                                class="ml-2 -mr-0.5 h-4 w-4"
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                viewBox="0 0 20 20"
-                                                                fill="currentColor"
-                                                            >
-                                                                <path
-                                                                    fill-rule="evenodd"
-                                                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                                    clip-rule="evenodd"
-                                                                />
-                                                            </svg>
-                                                        </button>
-                                                    </span>
-                                                </template>
-                                                <template v-slot:content>
-                                                    <div>
-                                                        <button
-                                                            @click="
+                                        <div
+                                            class="dropdown inline-block relative"
+                                        >
+                                            <button
+                                                class="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center"
+                                            >
+                                                <span class="mr-1"
+                                                    >Dropdown</span
+                                                >
+                                                <svg
+                                                    class="fill-current h-4 w-4"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 20 20"
+                                                >
+                                                    <path
+                                                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                                                    />
+                                                </svg>
+                                            </button>
+                                            <ul
+                                                class="dropdown-menu absolute hidden text-gray-700 pt-1 z-50 bg-white"
+                                            >
+                                                <li class="">
+                                                    <a
+                                                        class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                                                        href="#"
+                                                        @click="
                                                                 ModalFeedback(
                                                                     row.id
                                                                 )
                                                             "
-                                                        >
-                                                            Feedback
-                                                        </button>
-                                                    </div>
-                                                    <div>
-                                                        <button
-                                                            @click="
-                                                                ModalRefund(
-                                                                    row.id
-                                                                )
-                                                            "
-                                                        >
-                                                            Refund
-                                                        </button>
-                                                    </div>
-                                                    <div>
-                                                        <Link :href="route('paypal.pdf',row.id)">
-                                                            view slip
-                                                        </Link>
-                                                    </div>
-                                                </template>
-                                            </Dropdown>
+                                                        >Feedback</a
+                                                    >
+                                                </li>
+                                                <li class="">
+                                                    <a
+                                                        class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                                                        href="#"
+                                                        >Order Cancel</a
+                                                    >
+                                                </li>
+                                                <li class="">
+                                                    <a
+                                                        class="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                                                        :href="route('paypal.pdf',row.id)"
+                                                        >View slip</a
+                                                    >
+                                                </li>
+                                            </ul>
                                         </div>
                                     </td>
                                 </tr>

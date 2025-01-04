@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('payment_id')->nullable();
             $table->string('status');
+            $table->json('booked_rooms')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('ur_id')->references('id')->on('upcoming_reservations');

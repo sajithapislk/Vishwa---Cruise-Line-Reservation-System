@@ -65,9 +65,11 @@ class UpcomingReservationsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(UpcomingReservations $upcomingDeal)
+    public function show(UpcomingReservations $upcomingReservations)
     {
-        //
+        $upcomingReservations->load('package', 'ship', 'arrival_port', 'departure_port', 'room', 'deals');
+        // return $upcomingReservations;
+        return Inertia::render('Public/UpcomingReservations/Show', compact('upcomingReservations'));
     }
 
     public function filter(Request $request)

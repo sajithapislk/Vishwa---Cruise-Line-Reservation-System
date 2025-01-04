@@ -25,6 +25,7 @@ return new class extends Migration
             $table->double('price',8,2);
             $table->dateTime('depart_at');
             $table->dateTime('arrive_at');
+            $table->json('booked_rooms')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('s_id')->references('id')->on('cruise_ships');

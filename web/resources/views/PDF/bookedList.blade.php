@@ -136,6 +136,7 @@
                 <th>ur_id </th>
                 <th>user_id </th>
                 <th>payment_id</th>
+                <th>booked_rooms</th>
                 <th>status</th>
                 <th>created_at</th>
             </tr>
@@ -144,6 +145,7 @@
                     <td>{{ $row->ur_id }}</td>
                     <td>{{ $row->user_id }}</td>
                     <td>{{ $row->payment_id }}</td>
+                    <td>{{ $row->booked_rooms }}</td>
                     <td>{{ $row->status }}</td>
                     <td>{{ $row->created_at }}</td>
                 </tr>

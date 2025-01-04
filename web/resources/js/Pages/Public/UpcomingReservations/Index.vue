@@ -6,7 +6,6 @@ import axios from "axios";
 import GuestLayout from "@/Layouts/GuestLayout2.vue";
 import Modal from "@/Components/Modal.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import SecondaryButton from "@/Components/SecondaryButton.vue";
 import CheckBoxColor from "@/Components/CheckBoxColor.vue";
 
 import "swiper/css";
@@ -15,19 +14,15 @@ const props = defineProps({
     ships: Array,
     ports: Array,
     packages: Array,
-    request:Array
+    request: Array,
 });
 const list = ref(props.upcomingDeals);
 
-const bookModal = ref(false);
 const roomModal = ref(false);
 const shipModal = ref(false);
 
 const shipImg = ref("");
 const roomImg = ref("");
-const total = ref(0.0);
-const price = ref(0.0);
-const tax = ref(0.0);
 
 const filterForm = useForm({
     ship_id: props.request.ship_id,
@@ -55,22 +50,6 @@ const filter = () => {
         .catch((error) => console.log(error));
 };
 
-const paypalFrom = useForm({
-    id: "",
-    qty: 0,
-    processing: false,
-});
-
-const ModalBook = (data) => {
-    paypalFrom.reset();
-    if (typeof data !== "undefined" && !(data instanceof PointerEvent)) {
-        paypalFrom.id = data.id;
-        price.value = data.price;
-        tax.value = data.tax;
-        console.log(paypalFrom.cd_id);
-    }
-    bookModal.value = !bookModal.value;
-};
 const ModalRoom = (img) => {
     if (typeof img !== "undefined" && !(img instanceof PointerEvent)) {
         roomImg.value = img;
@@ -83,18 +62,6 @@ const ModalShip = (img) => {
     }
     shipModal.value = !shipModal.value;
 };
-function bookPayment() {
-    axios
-        .get(route("processTransaction", paypalFrom))
-        .then((response) => {
-            // Redirect the user to the PayPal payment page
-            window.location.href = response.data;
-            // window.location.href = response.data;
-        })
-        .catch((error) => {
-            window.location.href = route("login");
-        });
-}
 
 function getImagePath(dp_id, ap_id) {
     const images = import.meta.globEager("./img/map/*.jpg");
@@ -237,7 +204,8 @@ function getImagePath(dp_id, ap_id) {
                                             <label
                                                 for="depart_at"
                                                 class="font-medium text-sm text-stone-600"
-                                                >Select facilities you want</label
+                                                >Select facilities you
+                                                want</label
                                             >
                                             <ul>
                                                 <CheckBoxColor
@@ -779,9 +747,7 @@ function getImagePath(dp_id, ap_id) {
                                         </div>
                                         <div class="text-gray-600 ml-2 text-sm md:text-base mt-1">28 reviews</div>
                                     </div> -->
-                                    <p
-                                        class="mt-4 text-gray-500"
-                                    >
+                                    <p class="mt-4 text-gray-500">
                                         TAX : ${{ row.tax }}
                                     </p>
                                     <div
@@ -790,12 +756,40 @@ function getImagePath(dp_id, ap_id) {
                                         <span>${{ row.price }}</span>
                                     </div>
                                 </div>
-                                <button
-                                    @click="ModalBook(row)"
+                                <a
                                     class="mt-3 sm:mt-0 py-2 px-5 md:py-3 md:px-6 bg-indigo-700 hover:bg-indigo-600 font-bold text-white md:text-lg rounded-lg shadow-md"
+                                    :href="route('upcoming-reservations.show', row.id)"
+                                    >
+                                    View
+                                </a>
+                            </div>
+                            <div class="antialiased mx-auto max-w-screen-sm">
+                                <h3
+                                    class="mb-4 text-lg font-semibold text-gray-900"
                                 >
-                                    Book now
-                                </button>
+                                    Comments
+                                </h3>
+
+                                <div class="space-y-4">
+                                    <div class="flex">
+                                        <div
+                                            class="flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed"
+                                        >
+                                            <strong>Sarah</strong>
+                                            <span class="text-xs text-gray-400"
+                                                >3:34 PM</span
+                                            >
+                                            <p class="text-sm">
+                                                Lorem ipsum dolor sit amet,
+                                                consetetur sadipscing elitr, sed
+                                                diam nonumy eirmod tempor
+                                                invidunt ut labore et dolore
+                                                magna aliquyam erat, sed diam
+                                                voluptua.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -803,57 +797,7 @@ function getImagePath(dp_id, ap_id) {
             </section>
         </main>
     </GuestLayout>
-    <Modal :show="bookModal" @close="ModalBook">
-        <div class="p-6">
-            <form @submit.prevent="bookPayment">
-                <div class="w-full px-3">
-                    <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-password"
-                    >
-                        No of people
-                    </label>
 
-                    <input
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        id="grid-email"
-                        type="boolean"
-                        @input="
-                            () => {
-                                if (paypalFrom.qty > 5 || paypalFrom.qty < 0) {
-                                    paypalFrom.qty = 5;
-                                }
-                                total = (price * paypalFrom.qty) + tax * paypalFrom.qty;
-                                console.log(total);
-                            }
-                        "
-                        v-model="paypalFrom.qty"
-                    />
-                    <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-password"
-                    >
-                        Total: {{ total }}
-                    </label>
-                </div>
-
-                <div class="mt-6 flex justify-end">
-                    <SecondaryButton @click="ModalBook">
-                        Cancel
-                    </SecondaryButton>
-
-                    <PrimaryButton
-                        class="ml-3"
-                        :class="{ 'opacity-25': paypalFrom.processing }"
-                        :disabled="paypalFrom.processing"
-                        @click="bookPayment"
-                    >
-                        Payment
-                    </PrimaryButton>
-                </div>
-            </form>
-        </div>
-    </Modal>
     <Modal :show="roomModal" @close="ModalRoom">
         <img
             alt="..."

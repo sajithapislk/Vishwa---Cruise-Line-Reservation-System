@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('room_view');
             $table->string('img');
             $table->integer('room_count');
+            $table->json('list');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('s_id')->references('id')->on('cruise_ships');

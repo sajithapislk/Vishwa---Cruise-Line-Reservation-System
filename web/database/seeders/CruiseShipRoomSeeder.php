@@ -18,25 +18,37 @@ class CruiseShipRoomSeeder extends Seeder
                 's_id' => '1',
                 'room_view' => 'a view',
                 'img' => 'view1.png',
-                'room_count' => '10'
+                'room_count' => '10',
+                'list'=>json_encode([
+                    'T1','T2'
+                ])
             ],
             [
                 's_id' => '1',
                 'room_view' => 'b view',
                 'img' => 'view2.jpg',
-                'room_count' => '10'
+                'room_count' => '10',
+                'list'=>json_encode([
+                    'T1','T2'
+                ])
             ],
             [
                 's_id' => '1',
                 'room_view' => 'c view',
                 'img' => 'view3.jpg',
-                'room_count' => '10'
+                'room_count' => '10',
+                'list'=>json_encode([
+                    'T1','T2'
+                ])
             ],
             [
                 's_id' => '1',
                 'room_view' => 'a view',
                 'img' => 'view4.jpg',
-                'room_count' => '10'
+                'room_count' => '10',
+                'list'=>json_encode([
+                    'T1','T2'
+                ])
             ]
         ];
 
