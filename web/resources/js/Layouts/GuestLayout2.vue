@@ -41,6 +41,12 @@ import { Link } from "@inertiajs/vue3";
                             >
                                 Search and Exploration
                             </Link>
+                            <Link
+                                :href="route('port.index')"
+                                class="py-5 px-3 text-gray-600 hover:text-blue-500 transition-colors duration-200"
+                            >
+                                Port
+                            </Link>
                         </div>
                     </div>
 

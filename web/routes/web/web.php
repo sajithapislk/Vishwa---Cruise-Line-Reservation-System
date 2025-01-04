@@ -10,6 +10,7 @@ use App\Http\Controllers\User\PaypalController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\CruiseShipController;
 use App\Http\Controllers\User\FeedbackController;
+use App\Http\Controllers\User\PortsController;
 use App\Http\Controllers\User\RefundController;
 use App\Http\Controllers\User\UpcomingReservationsController;
 use App\Http\Controllers\WelcomeController;
@@ -37,6 +38,11 @@ Route::controller(CruiseCompanyController::class)->group(function () {
     Route::get('/cruise-company', 'index')->name('cruise-company.index');
     Route::get('/cruise-company/{cruiseCompany}', 'show')->name('cruise-company.show');
     Route::get('/cruise-company-img/{name}', 'img')->name('cruise-company.img');
+});
+Route::controller(PortsController::class)->group(function () {
+    Route::get('/port', 'index')->name('port.index');
+    Route::get('/port/{text}', 'show')->name('port.search');
+    Route::get('/port-img/{name}', 'img')->name('port.img');
 });
 Route::controller(CruiseShipController::class)->group(function () {
     Route::get('/ship', 'index')->name('ship.index');
