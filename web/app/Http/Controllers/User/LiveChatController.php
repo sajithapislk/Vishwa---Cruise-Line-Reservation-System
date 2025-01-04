@@ -68,7 +68,7 @@ class LiveChatController extends Controller
             ]);
         } else {
             return response()->json([
-                'msg' => 'Connecting you to live support...',
+                'msg' => 'Connecting you to Customer supporter... Please Login',
                 'who_inserted' => 'BOT',
                 'updated_at' => now(),
                 'created_at' => now(),
