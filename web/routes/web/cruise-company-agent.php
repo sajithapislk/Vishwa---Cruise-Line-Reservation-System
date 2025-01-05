@@ -3,6 +3,7 @@
 use App\Http\Controllers\CruiseCompanyAgent\PackageController;
 use App\Http\Controllers\CruiseCompanyAgent\CruiseShipController;
 use App\Http\Controllers\CruiseCompanyAgent\CruiseLineRoomController;
+use App\Http\Controllers\CruiseCompanyAgent\CruiseShipRoomController;
 use App\Http\Controllers\CruiseCompanyAgent\DashboardController;
 use App\Http\Controllers\CruiseCompanyAgent\UpcomingReservationsController;
 use App\Http\Controllers\CruiseCompanyAgent\WalletController;
@@ -20,8 +21,9 @@ Route::middleware('auth:cruise-company-agent')->group(function () {
     Route::resources([
         'package' => PackageController::class,
         'upcoming-reservations' => UpcomingReservationsController::class,
-        'cruise-ship-room' => CruiseLineRoomController::class,
+        // 'cruise-ship-room' => CruiseLineRoomController::class,
         'cruise-ship' => CruiseShipController::class,
+        'cruise-ship-room' => CruiseShipRoomController::class,
     ]);
     Route::get('/wallet',WalletController::class)->name('wallet');
 

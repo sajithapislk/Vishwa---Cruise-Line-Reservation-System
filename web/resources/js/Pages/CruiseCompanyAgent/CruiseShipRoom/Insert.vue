@@ -8,15 +8,19 @@ import { Head, Link, useForm, router } from "@inertiajs/vue3";
 import TextInput from "@/Components/TextInput.vue";
 
 const props = defineProps({
-    ship: Array,
+    ships: Array,
 });
 
 let tempList = ref([]);
+let numbers = ref([]);
+const inputValue=ref('');
+
 const cruiseLineForm = useForm({
-    s_id: props.ship.id,
+    s_id: props.ships[0].id,
     room_view: "",
     img: null,
     room_count: "",
+    list:[]
 });
 
 const tempSave = () => {
@@ -26,9 +30,10 @@ const tempSave = () => {
         room_view: cruiseLineForm.room_view,
         img: cruiseLineForm.img,
         room_count: cruiseLineForm.room_count,
+        list: numbers
     });
     console.log(tempList);
-    cruiseLineForm.reset("room_view", "img","room_count");
+    cruiseLineForm.reset("room_view", "img", "room_count");
 };
 let img = ref("");
 
@@ -44,9 +49,24 @@ const selectedFile = (e) => {
 };
 
 const submit = () => {
-    router.post(route("cruise-company-agent.cruise-ship-room.store"), tempList.value);
+    router.post(
+        route("cruise-company-agent.cruise-ship-room.store"),
+        tempList.value
+    );
     // cruiseLineForm.reset();
     console.log(tempList);
+};
+
+const addNumber = (event) => {
+    // Use optional chaining and check if key is 'Enter'
+    if (event.key === 'Enter') {
+        const trimmedValue = inputValue.value.trim();
+        if (trimmedValue !== '') {
+            numbers.value.push(trimmedValue);
+            inputValue.value = ''; // Clear input
+            event.preventDefault(); // Prevent form submission
+        }
+    }
 };
 </script>
 
@@ -72,7 +92,7 @@ const submit = () => {
                             <h3
                                 class="font-semibold text-2xl text-blueGray-700"
                             >
-                                Cruise Company Insert
+                                Cruise Ship Room Insert
                             </h3>
                         </div>
                         <div
@@ -91,7 +111,7 @@ const submit = () => {
                                 </h1>
                             </div>
                         </div>
-                        <form  @submit.prevent="tempSave">
+                        <form @submit.prevent="tempSave">
                             <div class="px-5 pb-5">
                                 <div class="flex">
                                     <div class="flex-grow w-2/4 mr-2">
@@ -117,7 +137,58 @@ const submit = () => {
                                         />
                                     </div>
                                 </div>
-
+                                <div class="flex">
+                                    <div class="w-1/4 mr-2">
+                                        <InputLabel
+                                            for="s_id"
+                                            value="Cruise Line Name"
+                                        />
+                                        <select
+                                            name="s_id"
+                                            v-model="cruiseLineForm.s_id"
+                                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                            aria-label="Default select example"
+                                            required
+                                        >
+                                            <option selected disabled>
+                                                Open this select field
+                                            </option>
+                                            <option
+                                                v-for="ship in ships"
+                                                :value="ship.id"
+                                            >
+                                                {{ ship.name }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="max-w-md mx-auto p-4 w-1/4 ">
+                                        <InputLabel
+                                            for="s_id"
+                                            value="Room numbers"
+                                        />
+                                        <div class="mb-4">
+                                            <input
+                                                v-model.trim="inputValue"
+                                               @keydown="addNumber"
+                                                type="text"
+                                                class="w-full p-2 border border-gray-300 rounded"
+                                                placeholder="Type a Room number and press Enter"
+                                            />
+                                        </div>
+                                        <div class="mb-4">
+                                            <ul class="list-disc pl-5">
+                                                <li
+                                                    v-for="(
+                                                        number, index
+                                                    ) in numbers"
+                                                    :key="index"
+                                                >
+                                                    {{ number }}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="mt-4">
                                     <InputLabel for="img" value="Image" />
                                     <DropFile
@@ -220,7 +291,7 @@ const submit = () => {
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                                 >
-                                    ship id
+                                    ships id
                                 </th>
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
