@@ -76,7 +76,7 @@ class CruiseCompanyController extends Controller
             'tp'=>$request->tp,
             'description'=>$request->description
         ]);
-        return back()->with('success', 'insert successful');
+        return back()->with('Successfully Inserted Cruise Company', '');
     }
 
     /**

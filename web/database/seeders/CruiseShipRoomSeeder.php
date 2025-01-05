@@ -19,7 +19,7 @@ class CruiseShipRoomSeeder extends Seeder
             $data[] = [
                 's_id' => $i,
                 'room_view' => 'Suite',
-                'img' => "suite$i.jpg",
+                'img' => "suite.jpg",
                 'room_count' => '10',
                 'list' => json_encode([
                     '101',
@@ -37,7 +37,7 @@ class CruiseShipRoomSeeder extends Seeder
             $data[] = [
                 's_id' => $i,
                 'room_view' => 'Balcony',
-                'img' => "balcony$i.jpg",
+                'img' => "balcony.jpg",
                 'room_count' => '10',
                 'list' => json_encode([
                     '201',
@@ -55,7 +55,7 @@ class CruiseShipRoomSeeder extends Seeder
             $data[] = [
                 's_id' => $i,
                 'room_view' => 'Oceanview',
-                'img' => "oceanview$i.jpg",
+                'img' => "oceanview.jpg",
                 'room_count' => '10',
                 'list' => json_encode([
                     '301',
@@ -73,7 +73,7 @@ class CruiseShipRoomSeeder extends Seeder
             $data[] = [
                 's_id' => $i,
                 'room_view' => 'Interior',
-                'img' => "interior$i.jpg",
+                'img' => "interior.jpg",
                 'room_count' => '10',
                 'list' => json_encode([
                     '401',

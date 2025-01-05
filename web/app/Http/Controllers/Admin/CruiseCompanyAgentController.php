@@ -41,7 +41,7 @@ class CruiseCompanyAgentController extends Controller
             'password'=>$request->password,
         ]);
 
-        return back()->with('success', 'insert successful');
+        return back()->with('Successfully Inserted', 'Agent');
     }
 
     /**

@@ -47,7 +47,7 @@ import { Link } from "@inertiajs/vue3";
                             >
                                 Search and Exploration
                             </Link>
-                           
+
                         </div>
                     </div>
 
@@ -173,7 +173,7 @@ import { Link } from "@inertiajs/vue3";
                 </a>
             </div>
             <p class="mt-8 text-base leading-6 text-center text-gray-500">
-                © 2024 Cruise Company, Inc. All rights reserved.
+                © 2025 Cruise Company, Inc. All rights reserved.
             </p>
         </div>
     </section>

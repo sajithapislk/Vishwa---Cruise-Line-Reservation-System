@@ -46,8 +46,8 @@ class PackageController extends Controller
             'is_w'=>$request->is_w,
             'is_s'=>$request->is_s,
         ]);
-        return back()->with('success', 'verification-link-sent');
-    }
+        return back()->with('Package', 'Sucessfully Added');
+    }   
 
     /**
      * Display the specified resource.
