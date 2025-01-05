@@ -20,6 +20,7 @@ const cruiseLineForm = useForm({
     room_view: "",
     img: null,
     room_count: "",
+    list:[]
 });
 
 const tempSave = () => {
@@ -29,6 +30,7 @@ const tempSave = () => {
         room_view: cruiseLineForm.room_view,
         img: cruiseLineForm.img,
         room_count: cruiseLineForm.room_count,
+        list: numbers
     });
     console.log(tempList);
     cruiseLineForm.reset("room_view", "img", "room_count");
@@ -48,7 +50,7 @@ const selectedFile = (e) => {
 
 const submit = () => {
     router.post(
-        route("cruise-company-agent.cruise-ships-room.store"),
+        route("cruise-company-agent.cruise-ship-room.store"),
         tempList.value
     );
     // cruiseLineForm.reset();

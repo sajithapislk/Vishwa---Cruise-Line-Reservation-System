@@ -37,7 +37,24 @@ class CruiseShipRoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        foreach ($request->all() as $key => $row) {
+            $shipRoom = CruiseShipRoom::create([
+                's_id'=>$row["s_id"],
+                'room_view'=>$row["room_view"],
+                'img'=>'',
+                'room_count'=>$row["room_count"],
+                'list'=>json_encode($row["list"])
+            ]);
+            if (!is_null($row["img"])) {
+                $image = time() . '-sr' . '.' . $row["img"]->extension();
+                $row["img"]->storeAs('ship-room', $image);
+                $shipRoom->img = $image;
+                $shipRoom->save();
+            }
+        }
+
+        return back()->with('success','room insert successfully');
     }
 
     /**
