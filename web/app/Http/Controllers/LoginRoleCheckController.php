@@ -58,9 +58,10 @@ class LoginRoleCheckController extends Controller
         else if(CustomerSupporter::where('email', $loginEmail)->first()){
             $credentials = $request->only('email', 'password');
 
+
             if (Auth::guard('customer-supporter')->attempt($credentials)) {
                 $request->session()->regenerate();
-                return redirect()->intended('/dashboard');
+                return redirect()->route('customer-supporter.dashboard');
             }
 
             return back()->withErrors([
