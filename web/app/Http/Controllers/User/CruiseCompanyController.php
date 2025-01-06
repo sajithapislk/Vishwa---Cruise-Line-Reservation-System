@@ -24,16 +24,13 @@ class CruiseCompanyController extends Controller
      */
     public function show(CruiseCompany $cruiseCompany)
     {
-        $cruiseCompany = $cruiseCompany->with('ships')->first();
-        return Inertia::render('Public/CruiseCompany/Show', compact('cruiseCompany'));
-    }
-    public function img($name){
-        try {
-            $path = "app/cruise-company/$name";
-            return response()->file(storage_path($path));
-        } catch (\Throwable $th) {
-            return "error";
+        $cruiseCompany = CruiseCompany::with('ships')->find($cruiseCompany->id);
+
+        if (!$cruiseCompany) {
+            abort(404, 'Cruise company not found.');
         }
 
+        return Inertia::render('Public/CruiseCompany/Show', compact('cruiseCompany'));
     }
+
 }
