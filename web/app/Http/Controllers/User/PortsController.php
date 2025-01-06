@@ -13,10 +13,11 @@ class PortsController extends Controller
         $list = Port::all();
         return Inertia::render('Public/Port/Index',compact('list'));
     }
-    public function search($text){
-        $list = Port::where('name','like','%'.$text.'%')->get();
-        return Inertia::render('public/Port/Index',compact('list'));
+    public function search(Request $request){
+        $list = Port::where('name','like','%'.$request->text.'%')->get();
+        return Inertia::render('Public/Port/Index',compact('list'));
     }
+
     public function img($name){
         try {
             $path = "app/port/$name";

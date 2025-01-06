@@ -41,7 +41,7 @@ Route::controller(CruiseCompanyController::class)->group(function () {
 });
 Route::controller(PortsController::class)->group(function () {
     Route::get('/port', 'index')->name('port.index');
-    Route::get('/port/{text}', 'show')->name('port.search');
+    Route::get('/port/search', 'search')->name('port.search');
     Route::get('/port-img/{name}', 'img')->name('port.img');
 });
 Route::controller(CruiseShipController::class)->group(function () {

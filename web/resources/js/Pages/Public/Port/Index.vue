@@ -6,6 +6,12 @@ import GuestLayout from "@/Layouts/GuestLayout2.vue";
 defineProps({
     list: Array,
 });
+const filterForm = useForm({
+    text: ""
+});
+const filter = () => {
+    filterForm.get(route("port.search"));
+};
 </script>
 <template>
     <GuestLayout>
@@ -40,6 +46,48 @@ defineProps({
                             points="2560 0 2560 100 0 100"
                         ></polygon>
                     </svg>
+                </div>
+            </section>
+            <section class="relative py-16 bg-gray-300">
+                <div class="container mx-auto px-4 max-w-5xl">
+                    <div
+                        class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64"
+                    >
+                        <div class="flex flex-col">
+                            <div class="bg-white p-6 rounded-xl shadow-lg">
+                                <form @submit.prevent="filter">
+                                    <div
+                                        class=""
+                                    >
+                                        <div class="flex flex-col">
+                                            <label
+                                                for="status"
+                                                class="font-medium text-sm text-stone-600"
+                                                >Ship</label
+                                            >
+                                            <input
+                                                v-model="filterForm.text"
+                                                type="text"
+                                                class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="grid md:flex grid-cols-2 justify-end space-x-4 w-full mt-6"
+                                    >
+                                        <button
+                                            type="submit"
+                                            class="flex items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize bg-black rounded-md hover:bg-gray-800 focus:outline-none focus:bg-gray-900 transition duration-300 transform active:scale-95 ease-in-out"
+                                        >
+                                            <span class="pl-2 mx-1"
+                                                >Search</span
+                                            >
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
             <section class="relative bg-gray-300">
