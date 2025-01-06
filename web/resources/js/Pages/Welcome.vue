@@ -61,6 +61,12 @@ if (props.user_id) {
 function submitForm() {
     // Determine which endpoint to hit based on user authentication
     const routeName = props.user_id ? "chat.store" : "chatbot.handle";
+    if (!props.user_id) {
+        chat.value.push({
+            msg: form.message,
+            who_inserted: "User",
+        });
+    }
 
     axios
         .post(route(routeName), form)
