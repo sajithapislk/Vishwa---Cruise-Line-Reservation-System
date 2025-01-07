@@ -63,7 +63,7 @@ const filter = () => {
                                             <label
                                                 for="status"
                                                 class="font-medium text-sm text-stone-600"
-                                                >Ship</label
+                                                >Search Your Port</label
                                             >
                                             <input
                                                 v-model="filterForm.text"
@@ -98,7 +98,6 @@ const filter = () => {
                         v-for="row in list"
                     >
 
-                        <Link :href="route('cruise-company.show', row.id)">
                             <div
                                 class="max-w-lg mx-auto overflow-hidden rounded-lg shadow-lg lg:max-w-none"
                             >
@@ -133,7 +132,6 @@ const filter = () => {
                                     </div>
                                 </div>
                             </div>
-                        </Link>
                     </div>
                 </div>
             </section>
