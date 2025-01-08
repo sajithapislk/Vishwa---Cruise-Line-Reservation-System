@@ -9,6 +9,7 @@ use App\Models\CruiseShip;
 use App\Models\CruiseShipRoom;
 use App\Models\UpcomingReservations;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class UpcomingReservationsController extends Controller
@@ -18,7 +19,9 @@ class UpcomingReservationsController extends Controller
      */
     public function index()
     {
-        $list = UpcomingReservations::all();
+        $cruiseAgent = Auth::user();
+        $ships = CruiseShip::where('cc_id',$cruiseAgent->cc_id)->pluck('id');
+        $list = UpcomingReservations::whereIn('s_id',$ships)->get();
         return Inertia::render('CruiseCompanyAgent/UpcomingReservations/Index',compact('list'));
     }
 

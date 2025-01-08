@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Package;
 use App\Models\CruiseShip;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class PackageController extends Controller
@@ -15,8 +16,10 @@ class PackageController extends Controller
      */
     public function index()
     {
-        $list = Package::all();
-        $ships = CruiseShip::all();
+        $cruiseAgent = Auth::user();
+        $ships = CruiseShip::where('cc_id',$cruiseAgent->cc_id)->pluck('id');
+        $list = Package::whereIn('s_id',$ships)->get();
+        $ships = CruiseShip::where('cc_id',$cruiseAgent->cc_id)->get();
         return Inertia::render('CruiseCompanyAgent/Package',compact('list','ships'));
     }
 
@@ -47,7 +50,7 @@ class PackageController extends Controller
             'is_s'=>$request->is_s,
         ]);
         return back()->with('Package', 'Sucessfully Added');
-    }   
+    }
 
     /**
      * Display the specified resource.

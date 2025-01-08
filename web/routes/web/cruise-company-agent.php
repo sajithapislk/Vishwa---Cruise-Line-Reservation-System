@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\CruiseCompanyAgent\PackageController;
 use App\Http\Controllers\CruiseCompanyAgent\CruiseShipController;
-use App\Http\Controllers\CruiseCompanyAgent\CruiseLineRoomController;
 use App\Http\Controllers\CruiseCompanyAgent\CruiseShipRoomController;
 use App\Http\Controllers\CruiseCompanyAgent\DashboardController;
 use App\Http\Controllers\CruiseCompanyAgent\UpcomingReservationsController;
@@ -27,7 +26,7 @@ Route::middleware('auth:cruise-company-agent')->group(function () {
     ]);
     Route::get('/wallet',WalletController::class)->name('wallet');
 
-    Route::get('/select-ship/{ship}',[CruiseLineRoomController::class,'select_ship'])->name('ship-room.select-ship');
-    Route::get('/cruise-room-list/{cruise_id}',[CruiseLineRoomController::class,'cruiseRoom'])->name('cruise-room.list');
+    Route::get('/select-ship/{ship}',[CruiseShipRoomController::class,'select_ship'])->name('ship-room.select-ship');
+    Route::get('/cruise-room-list/{cruise_id}',[CruiseShipRoomController::class,'cruiseRoom'])->name('cruise-room.list');
     Route::get('/cruise-package-list/{cruise_id}',[PackageController::class,'cruisePackage'])->name('cruise-package.list');
 });

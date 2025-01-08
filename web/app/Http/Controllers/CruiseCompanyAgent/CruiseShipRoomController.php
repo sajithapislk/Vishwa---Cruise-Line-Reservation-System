@@ -86,6 +86,14 @@ class CruiseShipRoomController extends Controller
      */
     public function destroy(CruiseShipRoom $cruiseShipRoom)
     {
-        //
+        return $cruiseShipRoom->delete();
+    }
+
+    function select_ship(CruiseShip $ship) {
+        return Inertia::render('CruiseCompanyAgent/CruiseShipRoom/Insert',compact('ship'));
+    }
+
+    function cruiseRoom($cruise_id) {
+        return CruiseShipRoom::where('s_id',$cruise_id)->get();
     }
 }
