@@ -64,7 +64,7 @@ function submitForm() {
     if (!props.user_id) {
         chat.value.push({
             msg: form.message,
-            who_inserted: "User",
+            who_inserted: "USER",
         });
     }
 
@@ -591,7 +591,7 @@ const filter = () => {
                 <h1 v-else>Live Chat Mode: Chat with our support team!</h1>
 
                 <template v-for="(row, index) in chat" :key="index">
-                    <template v-if="row.who_inserted === 'User'">
+                    <template v-if="row.who_inserted === 'USER'">
                         <SenderMessage :value="row.msg" />
                     </template>
                     <template v-else>
