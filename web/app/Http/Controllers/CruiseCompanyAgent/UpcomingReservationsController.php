@@ -9,7 +9,9 @@ use App\Models\CruiseShip;
 use App\Models\CruiseShipRoom;
 use App\Models\UpcomingReservations;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class UpcomingReservationsController extends Controller
 {
@@ -18,8 +20,10 @@ class UpcomingReservationsController extends Controller
      */
     public function index()
     {
-        $list = UpcomingReservations::all();
-        return Inertia::render('CruiseCompanyAgent/UpcomingReservations/Index',compact('list'));
+        $cruiseAgent = Auth::user();
+        $ships = CruiseShip::where('cc_id', $cruiseAgent->cc_id)->pluck('id');
+        $list = UpcomingReservations::whereIn('s_id', $ships)->get();
+        return Inertia::render('CruiseCompanyAgent/UpcomingReservations/Index', compact('list'));
     }
 
     /**
@@ -29,7 +33,7 @@ class UpcomingReservationsController extends Controller
     {
         $cruises = CruiseShip::all();
         $ports = Port::all();
-        return Inertia::render('CruiseCompanyAgent/UpcomingReservations/Insert',compact('cruises','ports'));
+        return Inertia::render('CruiseCompanyAgent/UpcomingReservations/Insert', compact('cruises', 'ports'));
     }
 
     /**
@@ -38,18 +42,18 @@ class UpcomingReservationsController extends Controller
     public function store(Request $request)
     {
         $upcomingDeal = UpcomingReservations::create([
-            's_id'=>$request->s_id,
-            'sr_id'=>$request->sr_id,
-            'dp_id'=>$request->dp_id,
-            'ap_id'=>$request->ap_id,
-            'p_id'=>$request->p_id,
-            'name'=>$request->name,
-            'description'=>$request->description,
-            'img'=>'_',
-            'tax'=>$request->tax,
-            'price'=>$request->price,
-            'depart_at'=>$request->depart_at,
-            'arrive_at'=>$request->arrive_at,
+            's_id' => $request->s_id,
+            'sr_id' => $request->sr_id,
+            'dp_id' => $request->dp_id,
+            'ap_id' => $request->ap_id,
+            'p_id' => $request->p_id,
+            'name' => $request->name,
+            'description' => $request->description,
+            'img' => '_',
+            'tax' => $request->tax,
+            'price' => $request->price,
+            'depart_at' => $request->depart_at,
+            'arrive_at' => $request->arrive_at,
         ]);
         if (!is_null($request->img)) {
             $image = time() . '-l' . '.' . $request->img->extension();
@@ -70,7 +74,7 @@ class UpcomingReservationsController extends Controller
         $ports = Port::all();
         $packages = Package::all();
         $rooms = CruiseShipRoom::all();
-        return Inertia::render('CruiseCompanyAgent/UpcomingReservations/Edit',compact('upcomingDeal','ports','packages','rooms'));
+        return Inertia::render('CruiseCompanyAgent/UpcomingReservations/Edit', compact('upcomingDeal', 'ports', 'packages', 'rooms'));
     }
 
     /**
@@ -87,17 +91,17 @@ class UpcomingReservationsController extends Controller
     public function update(Request $request, UpcomingReservations $upcomingDeal)
     {
         $upcomingDeal->update([
-            'sr_id'=>$request->sr_id,
-            'dp_id'=>$request->dp_id,
-            'ap_id'=>$request->ap_id,
-            'p_id'=>$request->p_id,
-            'name'=>$request->name,
-            'description'=>$request->description,
-            'img'=>'_',
-            'tax'=>$request->tax,
-            'price'=>$request->price,
-            'depart_at'=>$request->depart_at,
-            'arrive_at'=>$request->arrive_at,
+            'sr_id' => $request->sr_id,
+            'dp_id' => $request->dp_id,
+            'ap_id' => $request->ap_id,
+            'p_id' => $request->p_id,
+            'name' => $request->name,
+            'description' => $request->description,
+            'img' => '_',
+            'tax' => $request->tax,
+            'price' => $request->price,
+            'depart_at' => $request->depart_at,
+            'arrive_at' => $request->arrive_at,
         ]);
 
         // if (!is_null($request->img)) {
@@ -116,5 +120,59 @@ class UpcomingReservationsController extends Controller
     public function destroy(UpcomingReservations $upcomingDeal)
     {
         //
+    }
+
+    public function filter(Request $request)
+    {
+        $cruiseAgent = Auth::user();
+        $ships = CruiseShip::where('cc_id', $cruiseAgent->cc_id)->pluck('id');
+
+        $query = UpcomingReservations::whereIn('s_id', $ships);
+
+        if ($request->filled('start_date')) {
+            $query->where('created_at', '>=', $request->input('start_date'));
+        }
+        if ($request->filled('end_date')) {
+            $query->where('created_at', '<=', $request->input('end_date'));
+        }
+        if ($request->filled('s_id')) {
+            $query->where('s_id', $request->input('s_id'));
+        }
+        if ($request->filled('name')) {
+            $query->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($request->input('name')) . '%']);
+        }
+
+        $list = $query->get();
+
+        return Inertia::render('CruiseCompanyAgent/UpcomingReservations/Index', compact('list'));
+    }
+    public function pdfDownload(Request $request) {
+        $cruiseAgent = Auth::user();
+        $ships = CruiseShip::where('cc_id', $cruiseAgent->cc_id)->pluck('id');
+
+        $query = UpcomingReservations::whereIn('s_id', $ships);
+
+        if ($request->filled('start_date')) {
+            $query->where('created_at', '>=', $request->input('start_date'));
+        }
+        if ($request->filled('end_date')) {
+            $query->where('created_at', '<=', $request->input('end_date'));
+        }
+        if ($request->filled('s_id')) {
+            $query->where('s_id', $request->input('s_id'));
+        }
+        if ($request->filled('name')) {
+            $query->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($request->input('name')) . '%']);
+        }
+
+        $list = $query->get();
+
+        $pdf = Pdf::loadview('pdf.UpcomingReservationList', [
+            'list' => $list
+        ]);
+        $orientation = 'landscape';
+        $customPaper = array(0, 0, 950, 950);
+        $pdf->setPaper($customPaper, $orientation);
+        return $pdf->stream();
     }
 }

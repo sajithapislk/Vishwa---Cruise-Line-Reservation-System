@@ -17,7 +17,7 @@ class CruiseShipController extends Controller
      */
     public function index()
     {
-        $list = CruiseShip::all();
+        $list = CruiseShip::where('cc_id',Auth::user()->cc_id)->get();
         // return $list;
         return Inertia::render('CruiseCompanyAgent/CruiseShip/Index', compact('list'));
     }
@@ -27,7 +27,7 @@ class CruiseShipController extends Controller
      */
     public function create()
     {
-        $shipTypes = CruiseShipType::all();
+        $list = CruiseShip::where('cc_id',Auth::user()->cc_id)->get();
         // return $shipTypes;
         return Inertia::render('CruiseCompanyAgent/CruiseShip/Create',compact('shipTypes'));
     }

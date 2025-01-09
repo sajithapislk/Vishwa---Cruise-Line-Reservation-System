@@ -8,6 +8,24 @@ const date = new Date().getFullYear();
 defineProps({
     list: Array,
 });
+
+const filters = useForm({
+    start_date: "",
+    end_date: "",
+    s_id: "",
+    name: ""
+});
+
+const applyFilters = () => {
+    filters.post(route("cruise-company-agent.dashboard.filter"), {
+        preserveScroll: true,
+    });
+    console.log("Filters applied:", filters.value);
+};
+const pdfDownload = () => {
+    const queryParams = new URLSearchParams(filters).toString(); // Convert filters to query params
+    window.location.href = route("cruise-company-agent.dashboard.pdf") + "?" + queryParams;
+};
 </script>
 <template>
     <CruiseCompanyLayout>
@@ -229,6 +247,72 @@ defineProps({
                         ></div>
                     </div>
                 </div>
+
+                <div class="p-4 bg-gray-50 rounded-lg shadow-md space-y-4">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                        <div>
+                            <label
+                                for="start_date"
+                                class="block text-sm font-medium text-gray-700 mb-1"
+                            >
+                                Start Date
+                            </label>
+                            <input
+                                id="start_date"
+                                type="date"
+                                v-model="filters.start_date"
+                                class="w-full rounded-lg border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                            />
+                        </div>
+                        <div>
+                            <label
+                                for="end_date"
+                                class="block text-sm font-medium text-gray-700 mb-1"
+                            >
+                                End Date
+                            </label>
+                            <input
+                                id="end_date"
+                                type="date"
+                                v-model="filters.end_date"
+                                class="w-full rounded-lg border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                            />
+                        </div>
+                        <div>
+                            <label
+                                for="s_id"
+                                class="block text-sm font-medium text-gray-700 mb-1"
+                            >
+                                S_ID
+                            </label>
+                            <input
+                                id="s_id"
+                                type="text"
+                                v-model="filters.s_id"
+                                class="w-full rounded-lg border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                            />
+                        </div>
+                    </div>
+                    <div class="flex justify-end">
+
+
+                        <button
+                            type="button"
+                            @click="applyFilters"
+                            class="bg-blue-500 hover:bg-blue-600 text-white font-medium px-6 py-2 rounded-lg shadow-md transition duration-200"
+                        >
+                            Apply Filters
+                        </button>
+                        <button
+                            type="button"
+                            @click="pdfDownload"
+                            class="bg-blue-500 hover:bg-blue-600 text-white font-medium px-6 py-2 rounded-lg shadow-md transition duration-200"
+                        >
+                            PDF
+                        </button>
+                    </div>
+                </div>
+
                 <div class="block w-full overflow-x-auto">
                     <!-- Projects table -->
                     <table
