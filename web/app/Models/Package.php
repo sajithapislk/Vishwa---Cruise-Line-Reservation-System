@@ -23,5 +23,8 @@ class Package extends Model
         'is_w',
         'is_s',
     ];
-
+    public function upcomingReservations()
+    {
+        return $this->hasMany(UpcomingReservations::class, 'p_id');
+    }
 }

@@ -70,7 +70,12 @@ class UpcomingReservationsController extends Controller
     {
         $upcomingReservations->load('package', 'ship', 'arrival_port', 'departure_port', 'room', 'deals');
         // return $upcomingReservations;
-        $feedbacks = CustomerFeedback::all();
+        $feedbacks = $upcomingReservations->books->flatMap(function ($book) {
+            return $book->feedbacks->map(function ($feedback) {
+                $feedback->user;
+                return $feedback;
+            });
+        });
         // return $feedbacks;
         return Inertia::render('Public/UpcomingReservations/Show', compact('upcomingReservations','feedbacks'));
     }

@@ -29,4 +29,8 @@ class Book extends Model
     {
         return $this->hasOne(Payment::class,'id','payment_id');
     }
+    public function feedbacks()
+    {
+        return $this->hasMany(CustomerFeedback::class, 'b_id');
+    }
 }

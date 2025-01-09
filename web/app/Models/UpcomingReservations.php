@@ -28,6 +28,10 @@ class UpcomingReservations extends Model
     protected $casts = [
         'booked_rooms' => 'array'
     ];
+    public function books()
+    {
+        return $this->hasMany(Book::class, 'ur_id');
+    }
     public function ship(): HasOne
     {
         return $this->hasOne(CruiseShip::class,'id','s_id');

@@ -315,7 +315,7 @@
                         :key="index"
                         class="border-b pb-4 mb-4"
                     >
-                        <h3 class="font-semibold">feedback.name </h3>
+                        <h3 class="font-semibold">{{ feedback.user.name }}</h3>
                         <p class="mt-2">{{ feedback.comment }}</p>
                     </div>
                 </div>

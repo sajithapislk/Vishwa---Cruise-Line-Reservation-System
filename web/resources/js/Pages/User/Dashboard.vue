@@ -17,7 +17,7 @@ const refundModal = ref(false);
 
 const feedbackFrom = useForm({
     b_id: "",
-    rate: 0,
+    comment: "",
     processing: false,
 });
 const refundForm = useForm({
@@ -45,7 +45,7 @@ function ModalRefund(id) {
 }
 
 const feedbackSave = () => {
-    feedbackFrom.post(route("user.feedback.store"), {
+    feedbackFrom.post(route("user.feedback"), {
         preserveScroll: true,
         onSuccess: () => ModalFeedback(),
         onFinish: () => feedbackFrom.reset(),
@@ -226,21 +226,14 @@ const refundSave = () => {
                         class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                         for="grid-password"
                     >
-                        Rate
+                        Comment
                     </label>
 
                     <input
                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                         id="grid-email"
-                        type="boolean"
-                        @input="
-                            () => {
-                                if (value > 5 || value < 0) {
-                                    value = 5;
-                                }
-                            }
-                        "
-                        v-model="feedbackFrom.b_id"
+                        type="text"
+                        v-model="feedbackFrom.comment"
                     />
                 </div>
             </form>

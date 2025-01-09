@@ -14,4 +14,14 @@ class CustomerFeedback extends Model
         'user_id',
         'comment',
     ];
+
+    public function book()
+    {
+        return $this->belongsTo(Book::class, 'b_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
