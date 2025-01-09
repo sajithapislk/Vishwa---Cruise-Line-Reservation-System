@@ -130,7 +130,8 @@
                         <tr>
                             <td style="width: 60%;">
                                 <h5>Deal DETAILS</h5>
-                                deal ID : {{ $cruiseDeal->reservation->id }}<br>
+                                Customer Name : {{ $cruiseDeal->user->name }}<br>
+                                Reservation Name : {{ $cruiseDeal->reservation->name }}<br>
                                 Room Selected: {{ $cruiseDeal->booked_rooms }}
 
                             </td>
