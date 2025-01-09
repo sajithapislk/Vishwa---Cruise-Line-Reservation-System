@@ -18,6 +18,10 @@ class CruiseShipController extends Controller
         return Inertia::render('Public/CruiseShip/Index', compact('list'));
     }
 
+    public function search(Request $request){
+        $list = CruiseShip::where('name','like','%'.$request->text.'%')->get();
+        return Inertia::render('Public/CruiseShip/Index',compact('list'));
+    }
 
     /**
      * Display the specified resource.
