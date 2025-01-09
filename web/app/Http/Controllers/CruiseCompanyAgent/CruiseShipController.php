@@ -27,8 +27,7 @@ class CruiseShipController extends Controller
      */
     public function create()
     {
-        $list = CruiseShip::where('cc_id',Auth::user()->cc_id)->get();
-        // return $shipTypes;
+        $shipTypes = CruiseShip::where('cc_id',Auth::user()->cc_id)->get();
         return Inertia::render('CruiseCompanyAgent/CruiseShip/Create',compact('shipTypes'));
     }
 
