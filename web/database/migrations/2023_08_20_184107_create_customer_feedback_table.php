@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('b_id');
             $table->unsignedBigInteger('user_id');
-            $table->integer('rate');
+            $table->string('comment');
             $table->timestamps();
             $table->foreign('b_id')->references('id')->on('books');
             $table->foreign('user_id')->references('id')->on('users');

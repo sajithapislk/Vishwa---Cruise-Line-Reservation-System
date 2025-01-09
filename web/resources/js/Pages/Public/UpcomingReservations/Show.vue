@@ -304,6 +304,22 @@
                     </div>
                 </div>
             </div>
+            <div class="bg-white rounded-lg shadow p-4 mt-6">
+                <h2 class="text-lg font-semibold mb-4">Customer Feedback</h2>
+                <div v-if="feedbacks.length === 0" class="text-gray-500">
+                    No feedback available.
+                </div>
+                <div v-else class="space-y-4">
+                    <div
+                     v-for="(feedback, index) in feedbacks"
+                        :key="index"
+                        class="border-b pb-4 mb-4"
+                    >
+                        <h3 class="font-semibold">feedback.name </h3>
+                        <p class="mt-2">{{ feedback.comment }}</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </GuestLayout>
 </template>
@@ -316,6 +332,10 @@ import { Head, Link, useForm } from "@inertiajs/vue3";
 const props = defineProps({
     upcomingReservations: {
         type: Object,
+        required: true,
+    },
+    feedbacks: {
+        type: Array,
         required: true,
     },
 });

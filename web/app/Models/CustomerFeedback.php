@@ -12,6 +12,6 @@ class CustomerFeedback extends Model
     protected $fillable = [
         'b_id',
         'user_id',
-        'rate',
+        'comment',
     ];
 }

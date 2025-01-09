@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Port;
 use App\Models\Package;
 use App\Models\CruiseShip;
+use App\Models\CustomerFeedback;
 use App\Models\UpcomingReservations;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -69,7 +70,9 @@ class UpcomingReservationsController extends Controller
     {
         $upcomingReservations->load('package', 'ship', 'arrival_port', 'departure_port', 'room', 'deals');
         // return $upcomingReservations;
-        return Inertia::render('Public/UpcomingReservations/Show', compact('upcomingReservations'));
+        $feedbacks = CustomerFeedback::all();
+        // return $feedbacks;
+        return Inertia::render('Public/UpcomingReservations/Show', compact('upcomingReservations','feedbacks'));
     }
 
     public function filter(Request $request)

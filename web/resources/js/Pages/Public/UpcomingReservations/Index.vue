@@ -763,7 +763,7 @@ function getImagePath(dp_id, ap_id) {
                                     View
                                 </a>
                             </div>
-                            <div class="antialiased mx-auto max-w-screen-sm">
+                            <!-- <div class="antialiased mx-auto max-w-screen-sm">
                                 <h3
                                     class="mb-4 text-lg font-semibold text-gray-900"
                                 >
@@ -790,7 +790,7 @@ function getImagePath(dp_id, ap_id) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
