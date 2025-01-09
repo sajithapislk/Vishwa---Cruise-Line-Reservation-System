@@ -17,6 +17,10 @@ class CruiseCompanyController extends Controller
         $list = CruiseCompany::all();
         return Inertia::render('Public/CruiseCompany/Index', compact('list'));
     }
+    public function search(Request $request){
+        $list = CruiseCompany::where('name','like','%'.$request->text.'%')->get();
+        return Inertia::render('Public/CruiseCompany/Index',compact('list'));
+    }
 
 
     /**
@@ -31,6 +35,16 @@ class CruiseCompanyController extends Controller
         }
 
         return Inertia::render('Public/CruiseCompany/Show', compact('cruiseCompany'));
+    }
+
+    public function img($name){
+        try {
+            $path = "app/cruise-company/$name";
+            return response()->file(storage_path($path));
+        } catch (\Throwable $th) {
+            return "error";
+        }
+
     }
 
 }

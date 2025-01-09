@@ -36,6 +36,7 @@ Route::get('/', WelcomeController::class)->name('welcome');
 
 Route::controller(CruiseCompanyController::class)->group(function () {
     Route::get('/cruise-company', 'index')->name('cruise-company.index');
+    Route::get('/cruise-company/search', 'search')->name('cruise-company.search');
     Route::get('/cruise-company/{cruiseCompany}', 'show')->name('cruise-company.show');
     Route::get('/cruise-company-img/{name}', 'img')->name('cruise-company.img');
 });
