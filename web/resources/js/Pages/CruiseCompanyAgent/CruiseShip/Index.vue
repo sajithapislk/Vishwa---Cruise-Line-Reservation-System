@@ -237,7 +237,7 @@ defineProps({
                                 <td
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                                 >
-                                    <a :href="route('cruise-company-agent.cruise-ship.edit',row.id)">update</a>
+                                    <a :href="route('cruise-company-agent.cruise-ship.edit',row.id)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">update</a>
                                 </td>
                             </tr>
                         </tbody>
