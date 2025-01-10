@@ -17,7 +17,7 @@ class CruiseShipController extends Controller
      */
     public function index()
     {
-        $list = CruiseShip::where('cc_id',Auth::user()->cc_id)->get();
+        $list = CruiseShip::where('cc_id', Auth::user()->cc_id)->get();
         // return $list;
         return Inertia::render('CruiseCompanyAgent/CruiseShip/Index', compact('list'));
     }
@@ -27,8 +27,8 @@ class CruiseShipController extends Controller
      */
     public function create()
     {
-        $shipTypes = CruiseShip::where('cc_id',Auth::user()->cc_id)->get();
-        return Inertia::render('CruiseCompanyAgent/CruiseShip/Create',compact('shipTypes'));
+        $shipTypes = CruiseShip::where('cc_id', Auth::user()->cc_id)->get();
+        return Inertia::render('CruiseCompanyAgent/CruiseShip/Create', compact('shipTypes'));
     }
 
 
@@ -66,7 +66,7 @@ class CruiseShipController extends Controller
             $ship->img = $image;
             $ship->save();
         }
-        return redirect()->route('cruise-company-agent.cruise-ship.index')->with('success','Cruise Ship Successfully Inserted');
+        return redirect()->route('cruise-company-agent.cruise-ship.index')->with('success', 'Cruise Ship Successfully Inserted');
     }
 
     /**
@@ -80,9 +80,10 @@ class CruiseShipController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CruiseShip $ship)
+    public function edit(CruiseShip $cruiseShip)
     {
-        //
+        $shipTypes = CruiseShip::where('cc_id', Auth::user()->cc_id)->get();
+        return Inertia::render('CruiseCompanyAgent/CruiseShip/Edit', compact('shipTypes', 'cruiseShip'));
     }
 
     /**
@@ -90,8 +91,12 @@ class CruiseShipController extends Controller
      */
     public function update(Request $request, CruiseShip $ship)
     {
-        //
+        dd("asdsad");
+        return $ship->update([
+            'name' => $request->name,
+        ]);
     }
+
 
     /**
      * Remove the specified resource from storage.

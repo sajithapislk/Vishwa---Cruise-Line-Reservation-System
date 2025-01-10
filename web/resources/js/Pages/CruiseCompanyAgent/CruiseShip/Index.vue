@@ -15,8 +15,7 @@ defineProps({
         <template #header>
             <div class="relative bg-blue-800 md:pt-32 pb-32 pt-12">
                 <div class="px-4 md:px-10 mx-auto w-full">
-                    <div>
-                    </div>
+                    <div></div>
                 </div>
             </div>
         </template>
@@ -41,7 +40,11 @@ defineProps({
                         >
                             <Link
                                 class="bg-blue-500 text-white active:bg-blue-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1"
-                                :href="route('cruise-company-agent.cruise-ship.create')"
+                                :href="
+                                    route(
+                                        'cruise-company-agent.cruise-ship.create'
+                                    )
+                                "
                                 style="transition: all 0.15s ease"
                             >
                                 Create
@@ -64,7 +67,7 @@ defineProps({
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                                 >
-                                cruise line id
+                                    cruise line id
                                 </th>
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -83,64 +86,69 @@ defineProps({
                                 </th>
 
                                 <th
-                                class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
-                            >
-                            launch_at
-                            </th>
-                            <th
-                            :class="'px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left'"
-                        >
-                        Style
-                        </th>
-                                <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                                 >
-                                Gross tonnage
+                                    launch_at
+                                </th>
+                                <th
+                                    :class="'px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left'"
+                                >
+                                    Style
                                 </th>
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                                 >
-                                Length
+                                    Gross tonnage
                                 </th>
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                                 >
-                                Width
+                                    Length
                                 </th>
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                                 >
-                                Speed
+                                    Width
                                 </th>
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                                 >
-                                Decks
+                                    Speed
                                 </th>
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                                 >
-                                No. of passengers
+                                    Decks
                                 </th>
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                                 >
-                                departure port id
+                                    No. of passengers
                                 </th>
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                                 >
-                                No. of crew
+                                    departure port id
                                 </th>
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                                 >
-                                No. of cabins
+                                    No. of crew
                                 </th>
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                                 >
-                                wheelchair access
+                                    No. of cabins
+                                </th>
+                                <th
+                                    class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                                >
+                                    wheelchair access
+                                </th>
+                                <th
+                                    class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                                >
+
                                 </th>
                             </tr>
                         </thead>
@@ -149,82 +157,87 @@ defineProps({
                                 <th
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
                                 >
-                                    {{row.id}}
+                                    {{ row.id }}
                                 </th>
                                 <td
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                                 >
-                                {{row.cc_id }}
+                                    {{ row.cc_id }}
                                 </td>
                                 <td
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                                 >
-                                {{row.type_id }}
+                                    {{ row.type_id }}
                                 </td>
                                 <td
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                                 >
-                                {{row.name}}
+                                    {{ row.name }}
                                 </td>
                                 <td
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                                 >
-                                {{row.img}}
+                                    {{ row.img }}
                                 </td>
                                 <td
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                                 >
-                                {{row.gt}}
+                                    {{ row.gt }}
                                 </td>
                                 <td
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                                 >
-                                {{row.style}}
+                                    {{ row.style }}
                                 </td>
                                 <td
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                                 >
-                                {{row.length}}
+                                    {{ row.length }}
                                 </td>
                                 <td
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                                 >
-                                {{row.width}}
+                                    {{ row.width }}
                                 </td>
                                 <td
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                                 >
-                                {{row.speed}}
+                                    {{ row.speed }}
                                 </td>
                                 <td
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                                 >
-                                {{row.decks}}
+                                    {{ row.decks }}
                                 </td>
                                 <td
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                                 >
-                                {{row.nop}}
+                                    {{ row.nop }}
                                 </td>
                                 <td
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                                 >
-                                {{row.no_crew}}
+                                    {{ row.no_crew }}
                                 </td>
                                 <td
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                                 >
-                                {{row.no_cabins}}
+                                    {{ row.no_cabins }}
                                 </td>
                                 <td
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                                 >
-                                {{row.wa}}
+                                    {{ row.wa }}
                                 </td>
                                 <td
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                                 >
-                                {{row.created_at}}
+                                    {{ row.created_at }}
+                                </td>
+                                <td
+                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                                >
+                                    <a :href="route('cruise-company-agent.cruise-ship.edit',row.id)">update</a>
                                 </td>
                             </tr>
                         </tbody>
