@@ -64,7 +64,7 @@ const filter = () => {
                                             <label
                                                 for="status"
                                                 class="font-medium text-sm text-stone-600"
-                                                >Search Your Port</label
+                                                >Search cruise Company</label
                                             >
                                             <input
                                                 v-model="filterForm.text"
