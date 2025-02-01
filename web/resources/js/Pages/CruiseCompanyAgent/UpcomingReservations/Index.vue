@@ -49,7 +49,7 @@ const pdfDownload = () => {
                             Upcoming Reservation
                         </h3>
                         <a
-                            href="route('cruise-company-agent.upcoming-reservations.create')"
+                            :href="route('cruise-company-agent.upcoming-reservations.create')"
                             class="bg-green-500 text-white hover:bg-green-600 text-sm font-medium uppercase px-4 py-2 rounded-lg transition duration-200"
                         >
                             Create
